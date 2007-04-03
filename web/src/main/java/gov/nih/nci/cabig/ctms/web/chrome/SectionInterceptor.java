@@ -3,6 +3,7 @@ package gov.nih.nci.cabig.ctms.web.chrome;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.util.UrlPathHelper;
 import org.springframework.util.AntPathMatcher;
+import org.springframework.beans.factory.annotation.Required;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -57,6 +58,7 @@ public class SectionInterceptor extends HandlerInterceptorAdapter {
         return sections;
     }
 
+    @Required
     public void setSections(List<Section> sections) {
         this.sections = sections;
     }
