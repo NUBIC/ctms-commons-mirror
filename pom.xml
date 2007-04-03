@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>gov.nih.nci.cabig.ctms</groupId>
+    <artifactId>ctms-commons</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>CTMS Commons</name>
+    <description>
+        Common classes, testing infrastructure, tags, and JSPs for 
+        caBIG's CTMS workspace.
+    </description>
+    <!-- TODO:
+    <licenses>
+        <license>
+            <name>LGPL</name>
+            <url>http://www.gnu.org/licenses/lgpl.txt</url>
+        </license>
+    </licenses>
+    -->
+    <scm>
+        <url>http://gforge.nci.nih.gov/svnroot/ctmscommons/trunk</url>
+        <connection>scm:svn:http://gforge.nci.nih.gov/svnroot/ctmscommons/trunk</connection>
+        <developerConnection>scm:svn:http://gforge.nci.nih.gov/svnroot/ctmscommons/trunk</developerConnection>
+    </scm>
+    <repositories>
+        <repository>
+            <id>download.bioinformatics.northwestern.edu</id>
+            <name>Northwestern RHLCCC Bioinformatics</name>
+            <url>http://download.bioinformatics.northwestern.edu/maven2</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>download.bioinformatics.northwestern.edu</id>
+            <name>Northwestern RHLCCC Bioinformatics</name>
+            <url>http://download.bioinformatics.northwestern.edu/maven2</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </pluginRepository>
+    </pluginRepositories>
+    <modules>
+        <!-- <module>testing</module> -->
+        <!-- <module>lang</module> -->
+        <module>web</module>
+        <!-- <module>acegi</module> -->
+        <!-- <module>websso</module> -->
+    </modules>
+
+    <!-- Specify versions once for commonly-used deps -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>commons-collections</groupId>
+                <artifactId>commons-collections</artifactId>
+                <version>3.2</version>
+            </dependency>
+            <dependency>
+                <groupId>net.sourceforge.collections</groupId>
+                <artifactId>collections-generic</artifactId>
+                <version>4.01</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>2.3</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+                <version>1.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring</artifactId>
+                <version>2.0.3</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-mock</artifactId>
+                <version>2.0.3</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- These dependencies are used by _all_ child projects -->
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymockclassextension</artifactId>
+            <version>2.2.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-idea-plugin</artifactId>
+                <configuration>
+                    <downloadSources>true</downloadSources>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </reporting>
+
+    <distributionManagement>
+        <repository>
+            <id>download.bioinformatics</id>
+            <name>Northwestern University RHLCCC Bioinformatics Core</name>
+            <url>scp://download.bioinformatics.northwestern.edu/var/www/html/download/maven2</url>
+        </repository>
+    </distributionManagement>
+</project>
