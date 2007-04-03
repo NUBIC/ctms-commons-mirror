@@ -4,7 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>ctms-commons-web</artifactId>
     <packaging>jar</packaging>
-    <name>CTMS workspace common web look-and-feel classes</name>
+    <name>CTMS workspace common web pieces</name>
+    <description>
+        Includes common look-and-feel implementation for CTMS applications
+        and other web application infrastructure.
+    </description>
     <parent>
         <groupId>gov.nih.nci.cabig.ctms</groupId>
         <artifactId>ctms-commons</artifactId>
