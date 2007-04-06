@@ -2,6 +2,7 @@ package gov.nih.nci.cabig.ctms.web.tabs;
 
 import org.springframework.validation.Errors;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -27,9 +28,6 @@ public class Tab<C> {
 
     ////// TEMPLATE METHODS
 
-    public void validate(C command, Errors errors) {
-    }
-
     public Map<String, Object> referenceData() {
         return new HashMap<String, Object>();
     }
@@ -38,12 +36,18 @@ public class Tab<C> {
         return referenceData();
     }
 
+    public void validate(C command, Errors errors) {
+    }
+
     public boolean isAllowDirtyForward() {
         return true;
     }
 
     public boolean isAllowDirtyBack() {
         return true;
+    }
+
+    public void postProcess(HttpServletRequest request, C command, Errors errors) {
     }
 
     public int getTargetNumber() {

@@ -61,10 +61,18 @@ public abstract class AbstractTabbedFlowFormController<C> extends AbstractWizard
         C command = (C) oCommand;
         Tab<C> tab = getFlow().getTab(page);
 
-        // TODO: this isn't threadsafe at all
+        // XXX TODO: this isn't threadsafe at all
         setAllowDirtyForward(tab.isAllowDirtyForward());
         setAllowDirtyBack(tab.isAllowDirtyBack());
 
         tab.validate(command, errors);
+    }
+
+    @Override
+    protected void postProcessPage(
+        HttpServletRequest request, Object oCommand, Errors errors, int page
+    ) throws Exception {
+        C command = (C) oCommand;
+        getFlow().getTab(page).postProcess(request, command, errors);
     }
 }

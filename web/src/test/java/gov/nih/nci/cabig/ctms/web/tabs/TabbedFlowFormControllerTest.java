@@ -91,6 +91,7 @@ public class TabbedFlowFormControllerTest extends WebTestCase {
         assertSame("Command not passed to refdata call", command, actual.get("recvdCommand"));
     }
 
+    @SuppressWarnings({ "unchecked" })
     public void testValidatePageValidatesTab() throws Exception {
         Tab<Object> mockTab = createMock(Tab.class);
 
@@ -105,6 +106,18 @@ public class TabbedFlowFormControllerTest extends WebTestCase {
         verify(mockTab);
         assertFalse(controller.isAllowDirtyBack());
         assertTrue(controller.isAllowDirtyForward());
+    }
+
+    public void testPostProcessPageDelegatesToTab() throws Exception {
+        Tab<Object> mockTab = createMock(Tab.class);
+
+        mockTab.setNumber(3);
+        mockTab.postProcess(request, command, errors);
+        replay(mockTab);
+
+        flow.addTab(mockTab);
+        controller.postProcessPage(request, command, errors, 3);
+        verify(mockTab);
     }
 
     private static class TestController extends AbstractTabbedFlowFormController<Object> {
