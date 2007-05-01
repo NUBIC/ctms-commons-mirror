@@ -108,6 +108,7 @@ public class TabbedFlowFormControllerTest extends WebTestCase {
         assertTrue(controller.isAllowDirtyForward());
     }
 
+    @SuppressWarnings({ "unchecked" })
     public void testPostProcessPageDelegatesToTab() throws Exception {
         Tab<Object> mockTab = createMock(Tab.class);
 
@@ -118,6 +119,21 @@ public class TabbedFlowFormControllerTest extends WebTestCase {
         flow.addTab(mockTab);
         controller.postProcessPage(request, command, errors, 3);
         verify(mockTab);
+    }
+
+    public void testNoExceptionIfNoTabConfigurer() throws Exception {
+        controller.afterPropertiesSet();
+    }
+
+    public void testTabConfigurerUsedIfProvided() throws Exception {
+        TabConfigurer configurer = createMock(TabConfigurer.class);
+        controller.setTabConfigurer(configurer);
+
+        configurer.injectDependencies(flow);
+        replay(configurer);
+
+        controller.afterPropertiesSet();
+        verify(configurer);
     }
 
     private static class TestController extends AbstractTabbedFlowFormController<Object> {
