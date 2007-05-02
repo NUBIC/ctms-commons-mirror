@@ -18,20 +18,19 @@ import java.util.Arrays;
 public class StaticTabConfigurer extends DefaultTabConfigurer {
     private StaticListableBeanFactory staticFactory;
 
-    public StaticTabConfigurer(Object... beans) {
-        this(new LinkedHashMap<String, Object>(), beans);
-    }
-
     @SuppressWarnings("unchecked")
-    public StaticTabConfigurer(Map<String, Object> map, Object... beans) {
+    public StaticTabConfigurer(Object... beans) {
         staticFactory = new StaticListableBeanFactory();
         ModelMap modelMap = new ModelMap();
-        modelMap.putAll(map);
         modelMap.addAllObjects(Arrays.asList(beans));
         for (Object o : modelMap.entrySet()) {
             Map.Entry<String, Object> entry = (Map.Entry<String, Object>) o;
             staticFactory.addBean(entry.getKey(), entry.getValue());
         }
+    }
+
+    public void addBean(String name, Object bean) {
+        staticFactory.addBean(name, bean);
     }
 
     @Override
