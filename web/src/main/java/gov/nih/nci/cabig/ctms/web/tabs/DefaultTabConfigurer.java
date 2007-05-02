@@ -13,12 +13,16 @@ public class DefaultTabConfigurer implements TabConfigurer, ApplicationContextAw
     private ApplicationContext applicationContext;
 
     public void injectDependencies(Flow<?> flow) {
-        AutowireCapableBeanFactory autowireer = applicationContext.getAutowireCapableBeanFactory();
+        AutowireCapableBeanFactory autowireer = getBeanFactory();
         for (Tab<?> tab : flow.getTabs()) {
             autowireer.autowireBeanProperties(tab,
                 AutowireCapableBeanFactory.AUTOWIRE_BY_NAME,
                 false /* Not all settable properties are expected to be in the context */);
         }
+    }
+
+    protected AutowireCapableBeanFactory getBeanFactory() {
+        return applicationContext.getAutowireCapableBeanFactory();
     }
 
     public void setApplicationContext(ApplicationContext applicationContext) {
