@@ -1,6 +1,7 @@
 package gov.nih.nci.cabig.ctms.collections;
 
 import org.apache.commons.collections15.Factory;
+import org.apache.commons.collections15.functors.InstantiateFactory;
 import org.apache.commons.collections15.list.LazyList;
 
 import java.util.List;
@@ -51,14 +52,23 @@ public class LazyListHelper {
     }
 
     /**
-     * Create a list whose elements are the given type and whose contents will be
-     * dynamically filled by the given factory.
+     * Creates a list whose elements are the given type and whose contents will
+     * be dynamically instantiated instances of the given class.  The provided
+     * class must have a public default constructor.  If you need more elaborate
+     * setup/initialization, use {@link #add(Class, Factory)}.
      *
-     * @param klass
-     * @param factory
+     * @see InstantiateFactory
+     */
+    public <T> void add(Class<T> klass) {
+        add(klass, new InstantiateFactory<T>(klass));
+    }
+
+    /**
+     * Create a list whose elements are the given type and whose contents will be
+     * filled on-demand using the given factory.
      */
     public <T> void add(Class<T> klass, Factory<T> factory) {
-        states.put(klass, new LazyState<T>(klass, factory));
+        states.put(klass, new LazyState<T>(factory));
     }
 
     public <T> void setInternalList(Class<T> klass, List<T> list) {
@@ -79,13 +89,11 @@ public class LazyListHelper {
     }
 
     private static class LazyState<T> {
-        private Class<T> klass;
         private List<T> lazy;
         private List<T> internal;
         private Factory<T> factory;
 
-        public LazyState(Class<T> klass, Factory<T> factory) {
-            this.klass = klass;
+        public LazyState(Factory<T> factory) {
             this.factory = factory;
             setInternal(new ArrayList<T>());
         }

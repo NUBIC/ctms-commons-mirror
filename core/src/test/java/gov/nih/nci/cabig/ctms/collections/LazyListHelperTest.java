@@ -5,6 +5,7 @@ import org.apache.commons.collections15.functors.InstantiateFactory;
 import java.util.List;
 import java.util.LinkedList;
 import java.util.Arrays;
+import java.util.Date;
 
 import junit.framework.TestCase;
 
@@ -20,6 +21,12 @@ public class LazyListHelperTest extends TestCase {
         helper = new LazyListHelper();
         helper.add(Object.class, new InstantiateFactory<Object>(Object.class));
         helper.add(String.class, new InstantiateFactory<String>(String.class));
+    }
+
+    public void testDefaultFactoryInstantiates() throws Exception {
+        helper.add(Date.class);
+        Date created = helper.getLazyList(Date.class).get(0);
+        assertNotNull(created);
     }
 
     public void testInternalListInitializedToEmpty() throws Exception {
