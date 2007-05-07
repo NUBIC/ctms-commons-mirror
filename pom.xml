@@ -53,7 +53,8 @@
     </pluginRepositories>
     <modules>
         <!-- <module>testing</module> -->
-        <!--<module>core</module> -->
+        <!-- <module>lang</module> -->
+        <module>core</module>
         <module>web</module>
         <!-- <module>acegi</module> -->
         <!-- <module>websso</module> -->
