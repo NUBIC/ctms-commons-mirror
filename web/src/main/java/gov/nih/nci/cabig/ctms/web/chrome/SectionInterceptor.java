@@ -19,7 +19,7 @@ import java.util.List;
  *   <li><kbd>sections</kbd> - the list of {@link Section}s provided to this interceptor.
  * </ul>
  *
- * @author Rhett Sutphin
+ * @author Rhett Sutphin, Priyatam
  */
 public class SectionInterceptor extends HandlerInterceptorAdapter {
     private List<Section> sections;
@@ -29,8 +29,12 @@ public class SectionInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        Section current = findSection(urlPathHelper.getPathWithinServletMapping(request));
-        request.setAttribute(prefix("currentSection"), current);
+        String controllerPath = urlPathHelper.getPathWithinServletMapping(request);
+        Section currentSection = findSection(urlPathHelper.getPathWithinServletMapping(request));
+        Task currentTask = findTask(currentSection, controllerPath);
+        
+        request.setAttribute(prefix("currentSection"), currentSection);
+        request.setAttribute(prefix("currentTask"), currentTask);        
         request.setAttribute(prefix("sections"), getSections());
         return true;
     }
@@ -45,6 +49,16 @@ public class SectionInterceptor extends HandlerInterceptorAdapter {
         }
         return null;
     }
+    
+    private Task findTask(Section section, String controllerPath){
+    	for (Task task : section.getTasks()) {
+    		if (task.getUrl().indexOf(controllerPath) > -1) {
+    			return task;  	                	
+    		}                		
+    	}
+    	 return null;
+    }
+    
 
     private String prefix(String attr) {
         if (getAttributePrefix() == null) {
