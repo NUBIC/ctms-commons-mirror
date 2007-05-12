@@ -67,7 +67,7 @@ public abstract class AbstractTabbedFlowFormController<C> extends AbstractWizard
 
     @Override
     @SuppressWarnings("unchecked")
-    protected Map<?, ?> referenceData(HttpServletRequest request, Object command, Errors errors, int page)
+    protected Map referenceData(HttpServletRequest request, Object command, Errors errors, int page)
         throws Exception {
         // The super invocation includes all refdata from #referenceData(request, page)
         Map<String, Object> refdata = super.referenceData(request, command, errors, page);
