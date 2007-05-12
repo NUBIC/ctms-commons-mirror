@@ -1,14 +1,15 @@
 package gov.nih.nci.cabig.ctms.web.tabs;
 
-import org.springframework.web.servlet.mvc.AbstractWizardFormController;
-import org.springframework.validation.Errors;
-import org.springframework.beans.factory.InitializingBean;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
-import java.util.HashMap;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.validation.Errors;
+import org.springframework.web.servlet.mvc.AbstractWizardFormController;
 
 /**
  * More object-oriented version of {@link AbstractWizardFormController}.
@@ -18,7 +19,7 @@ import java.util.HashMap;
  * The type parameter <kbd>C</kbd> is the class of the command that will be used with the
  * controller.
  *
- * @author Rhett Sutphin
+ * @author Rhett Sutphin, Priyatam
  */
 public abstract class AbstractTabbedFlowFormController<C> extends AbstractWizardFormController
     implements InitializingBean
@@ -36,18 +37,68 @@ public abstract class AbstractTabbedFlowFormController<C> extends AbstractWizard
     public void setFlow(Flow<C> flow) {
         this.flow = flow;
     }
+    
+    public String getFlowAttributeName() {
+    	return getClass().getName() + ".FLOW." + getFlow().getName();
+	}
 
+    /**
+     * Check if Alternate flow (Sub Flows
+     * @param request
+     * @return
+     */
+	public boolean isUseAlternateFlow(HttpServletRequest request) {
+		return request.getSession().getAttribute(getClass().getName() + ".FLOW." +
+			getFlow().getName()+".ALT_FLOW")!=null?true:false;
+	}
+
+	/**
+	 * Set Alternate Flow (Sub flows)
+	 * @param request
+	 */
+	public void useAlternateFlow(HttpServletRequest request) {
+		request.getSession().setAttribute(getClass().getName() + ".FLOW." + 
+			getFlow().getName()+".ALT_FLOW","true");
+	}
+    
     @Override
     @SuppressWarnings("unchecked")
-    protected Map<?, ?> referenceData(HttpServletRequest request, Object command, Errors errors, int page) throws Exception {
+    protected final Map<?, ?> referenceData(HttpServletRequest request, Object command, Errors errors, int page) 
+    	throws Exception {
         Map<String, Object> refdata = new HashMap<String, Object>();
+        Map refDataCall=referenceData(request, page);
+        
+        if(refDataCall!=null){
+        	refdata.putAll(refDataCall);
+        }
         Tab<C> current = getFlow().getTab(page);
         refdata.put("tab", current);
-        refdata.put("flow", getFlow());
+        
+        // insert current flow or alternate flow
+        if(isUseAlternateFlow(request)){
+        	Flow altFlow=(Flow)request.getSession().getAttribute(getFlowAttributeName());
+        	if(altFlow!=null)
+        		refdata.put("flow", altFlow);
+        	else
+        		refdata.put("flow", getFlow());
+        }else{
+        	refdata.put("flow", getFlow());
+        }
+        
+        // get refData from Subclasses
+        refdata.putAll(referenceDataController(request, command, errors, page));
+        
+        // get refData from the Tabs 
         refdata.putAll(current.referenceData((C) command));
-        log.debug("Returning reference data for page " + page);
-        log.debug("Command is " + command);
         return refdata;
+    }
+
+    /**
+     * Template method for individual controllers to add refdata
+     */
+    protected Map<String, Object> referenceDataController(HttpServletRequest request, Object command, Errors errors, int page) {
+    	//default implementation
+    	return new HashMap<String, Object>();
     }
 
     @Override
@@ -80,8 +131,25 @@ public abstract class AbstractTabbedFlowFormController<C> extends AbstractWizard
     ) throws Exception {
         C command = (C) oCommand;
         getFlow().getTab(page).postProcess(request, command, errors);
+        
+        afterPostProcessPage(request, command, errors, page);
     }
-
+    
+    
+    /**
+     * Template method to do custom processing post 'postProcessPage'
+     * This is useful when processing is needed by Controller rather than a Tab
+     * (like saves/updates)
+     * @param request
+     * @param oCommand
+     * @param errors
+     * @param page
+     */
+    protected void afterPostProcessPage(HttpServletRequest request, Object oCommand, 
+    	Errors errors, int page) {
+    	//default null implementation
+    }
+    
     public void afterPropertiesSet() throws Exception {
         if (getTabConfigurer() != null) {
             getTabConfigurer().injectDependencies(getFlow());
