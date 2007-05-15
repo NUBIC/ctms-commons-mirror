@@ -4,6 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>ctms-commons-lang</artifactId>
     <packaging>jar</packaging>
+    <name>ctms-commons-lang</name>
     <description>
         Utilities and extensions for standard java classes and concepts
     </description>
