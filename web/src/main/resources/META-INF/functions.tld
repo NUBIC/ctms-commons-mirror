@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-jsptaglibrary_2_0.xsd"
+  version="2.0">
+
+  <description>CTMS commons functions library</description>
+  <display-name>CTMS commons functions</display-name>
+  <tlib-version>1.1</tlib-version>
+  <short-name>ctmsfn</short-name>
+  <uri>http://gforge.nci.nih.gov/projects/ctmscommons/taglibs/functions</uri>
+
+  <function>
+    <description>
+        Capitalize the first letter in a string, returning the string if blank
+    </description>
+    <name>capitalize</name>
+    <function-class>gov.nih.nci.cabig.ctms.web.taglibs.Functions</function-class>
+    <function-signature>java.lang.String capitalize(java.lang.String)</function-signature>
+    <example>
+      ${ctmsfn:capitalize("january")}
+    </example>
+  </function>
+
+  <function>
+    <description>
+        Change an integer and a singular noun into a string starting with the integer and
+        followed by the plural noun if the integer is not one. Right now this method is very
+        stupid, it just adds an "s".
+    </description>
+    <name>countString</name>
+    <function-class>gov.nih.nci.cabig.ctms.web.taglibs.Functions</function-class>
+    <function-signature>java.lang.String countString(int, java.lang.String)</function-signature>
+    <example>
+      ${ctmsfn:pluralize(1, "president")} => "1 president",
+      but ${ctmsfn:countString(100, "senator")} => "100 senators"
+    </example>
+  </function>
+
+  <function>
+    <description>
+        Returns "even" if the argument is even, and "odd" otherwise.
+    </description>
+    <name>parity</name>
+    <function-class>gov.nih.nci.cabig.ctms.web.taglibs.Functions</function-class>
+    <function-signature>java.lang.String parity(int)</function-signature>
+    <example>
+      &lt;tr class="${ctmsfn:parity(status.index)}"&gt;&lt;td&gt;whatever&lt;/td&gt;&lt;/tr&gt;
+    </example>
+  </function>
+
+  <function>
+    <description>
+        Return a string with all the newlines preceded by HTML br tags
+    </description>
+    <name>nl2br</name>
+    <function-class>gov.nih.nci.cabig.ctms.web.taglibs.Functions</function-class>
+    <function-signature>java.lang.String newlinesToHtmlBr(java.lang.String)</function-signature>
+    <example>
+      ${ctmsfn:nl2br("one\ntwo\nthree")}
+    </example>
+  </function>
+
+  <function>
+    <description>
+        Return a string with all the newlines preceded by XHTML br tags
+    </description>
+    <name>nl2brx</name>
+    <function-class>gov.nih.nci.cabig.ctms.web.taglibs.Functions</function-class>
+    <function-signature>java.lang.String newlinesToXhtmlBr(java.lang.String)</function-signature>
+    <example>
+      ${ctmsfn:nl2brx("one\ntwo\nthree")}
+    </example>
+  </function>
+
+  <function>
+    <description>
+        Convert a collection of Integers into a string representing the smallest set
+        of disjoint ranges they cover.
+    </description>
+    <name>collapseRanges</name>
+    <function-class>gov.nih.nci.cabig.ctms.web.taglibs.Functions</function-class>
+    <function-signature>java.lang.String collapseIntoDisjointRangesString(java.util.Collection)</function-signature>
+  </function>
+
+  <function>
+    <description>
+      Pad a number on the left with zeroes if the number's length as a String
+      is less than length
+    </description>
+    <name>zeropad</name>
+    <function-class>gov.nih.nci.cabig.ctms.web.taglibs.Functions</function-class>
+    <function-signature>java.lang.String zeropad(java.lang.Number, int)</function-signature>
+  </function>
+
+  <function>
+    <description>
+      Return the classname for an object.  Gets around the different interpretations of the '.' operator
+      in EL depending on whether the object is a array, a List, or something else.
+    </description>
+    <name>classname</name>
+    <function-class>gov.nih.nci.cabig.ctms.web.taglibs.Functions</function-class>
+    <function-signature>java.lang.String classname(java.lang.Object)</function-signature>
+  </function>
+
+  <function>
+    <description>
+      Join a Collection of arbitrary objects into a string.  Objects are converted to Strings using
+      toString.  (Necessary because, for some reason, JSTL's join function only works on String[]s.)
+    </description>
+    <name>join</name>
+    <function-class>gov.nih.nci.cabig.ctms.web.taglibs.Functions</function-class>
+    <function-signature>java.lang.String join(java.util.Collection, java.lang.String)</function-signature>
+  </function>
+
+  <function>
+    <description>
+      Query collection the for the presence of an arbitrary object.  (Necessary because, for some
+      reason JSTL's contain function only works on Strings.)
+    </description>
+    <name>contains</name>
+    <function-class>gov.nih.nci.cabig.ctms.web.taglibs.Functions</function-class>
+    <function-signature>java.lang.Boolean contains(java.util.Collection, java.lang.Object)</function-signature>
+  </function>
+</taglib>
