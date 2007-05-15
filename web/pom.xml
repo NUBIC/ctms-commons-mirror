@@ -4,7 +4,6 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>ctms-commons-web</artifactId>
     <packaging>jar</packaging>
-    <name>CTMS Commons web elements</name>
     <description>
         Includes common look-and-feel implementation for CTMS applications
         and other web application infrastructure.

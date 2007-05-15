@@ -4,7 +4,6 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>ctms-commons-core</artifactId>
     <packaging>jar</packaging>
-    <name>CTMS Commons core</name>
     <description>
         Common interfaces, base classes, and utilities for domain classes,
         DAOs and services.
