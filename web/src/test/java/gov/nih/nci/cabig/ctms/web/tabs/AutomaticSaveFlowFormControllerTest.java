@@ -29,12 +29,12 @@ public class AutomaticSaveFlowFormControllerTest extends WebTestCase {
 
     public void testShouldSaveWhenSaved() throws Exception {
         command.setId(5);
-        assertTrue(controller.shouldSave(command, controller.getFlow().getTab(0)));
+        assertTrue(controller.shouldSave(request, command, controller.getFlow().getTab(0)));
     }
 
     public void testShouldNotSaveWhenNotSaved() throws Exception {
         command.setId(null);
-        assertFalse(controller.shouldSave(command, controller.getFlow().getTab(0)));
+        assertFalse(controller.shouldSave(request, command, controller.getFlow().getTab(0)));
     }
 
     public void testWillSaveFlagIncludedInRefdata() throws Exception {

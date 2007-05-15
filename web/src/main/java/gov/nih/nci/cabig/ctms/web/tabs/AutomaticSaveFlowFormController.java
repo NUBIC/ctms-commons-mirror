@@ -45,7 +45,7 @@ public abstract class AutomaticSaveFlowFormController<C, D extends MutableDomain
      * The default behavior is that there should be an automatic save if the value returned by
      * {@link #getPrimaryDomainObject} has already been saved.
      */
-    protected boolean shouldSave(C command, Tab<C> tab) {
+    protected boolean shouldSave(HttpServletRequest request, C command, Tab<C> tab) {
         return getPrimaryDomainObject(command).getId() != null;
     }
 
@@ -55,7 +55,7 @@ public abstract class AutomaticSaveFlowFormController<C, D extends MutableDomain
         HttpServletRequest request, Object oCommand, Errors errors, int page
     ) throws Exception {
         Map<String, Object> refdata = super.referenceData(request, oCommand, errors, page);
-        refdata.put("willSave", shouldSave((C) oCommand, getFlow().getTab(page)));
+        refdata.put("willSave", shouldSave(request, (C) oCommand, getFlow().getTab(page)));
         return refdata;
     }
 
@@ -81,7 +81,7 @@ public abstract class AutomaticSaveFlowFormController<C, D extends MutableDomain
     ) throws Exception {
         C command = (C) oCommand;
         super.postProcessPage(request, oCommand, errors, page);
-        if (!errors.hasErrors() && shouldSave(command, getFlow().getTab(page))) {
+        if (!errors.hasErrors() && shouldSave(request, command, getFlow().getTab(page))) {
             save(command, errors);
         }
     }
