@@ -1,7 +1,5 @@
 package gov.nih.nci.cabig.ctms.web.tabs;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * @author Rhett Sutphin
  */
