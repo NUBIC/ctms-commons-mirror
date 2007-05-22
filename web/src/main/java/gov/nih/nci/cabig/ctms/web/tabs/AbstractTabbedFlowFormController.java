@@ -92,7 +92,7 @@ public abstract class AbstractTabbedFlowFormController<C> extends AbstractWizard
         Flow<C> effective;
         if (isUseAlternateFlow(request)) {
             Flow<C> altFlow = (Flow<C>) request.getSession().getAttribute(getFlowAttributeName());
-            effective = altFlow == null ? getFlow() : getFlow();
+            effective = altFlow == null ? getFlow() : altFlow;
         } else {
             effective = getFlow();
         }
