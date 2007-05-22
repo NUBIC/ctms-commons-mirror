@@ -55,7 +55,8 @@ public abstract class AutomaticSaveFlowFormController<C, D extends MutableDomain
         HttpServletRequest request, Object oCommand, Errors errors, int page
     ) throws Exception {
         Map<String, Object> refdata = super.referenceData(request, oCommand, errors, page);
-        refdata.put("willSave", shouldSave(request, (C) oCommand, getFlow().getTab(page)));
+        C command = (C) oCommand;
+        refdata.put("willSave", shouldSave(request, command, getTab(command, page)));
         return refdata;
     }
 
@@ -76,12 +77,13 @@ public abstract class AutomaticSaveFlowFormController<C, D extends MutableDomain
     }
 
     @Override
+    @SuppressWarnings({ "unchecked" })
     protected void postProcessPage(
         HttpServletRequest request, Object oCommand, Errors errors, int page
     ) throws Exception {
         C command = (C) oCommand;
         super.postProcessPage(request, oCommand, errors, page);
-        if (!errors.hasErrors() && shouldSave(request, command, getFlow().getTab(page))) {
+        if (!errors.hasErrors() && shouldSave(request, command, getTab(command, page))) {
             save(command, errors);
         }
     }
