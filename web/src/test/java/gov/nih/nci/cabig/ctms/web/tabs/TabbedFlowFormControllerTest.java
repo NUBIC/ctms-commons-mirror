@@ -120,7 +120,7 @@ public class TabbedFlowFormControllerTest extends WebTestCase {
     }
 
     public void testNoExceptionIfNoTabConfigurer() throws Exception {
-        controller.afterPropertiesSet();
+        controller.getFlow(command);
     }
 
     public void testTabConfigurerUsedIfProvided() throws Exception {
@@ -130,7 +130,7 @@ public class TabbedFlowFormControllerTest extends WebTestCase {
         configurer.injectDependencies(flow);
         replay(configurer);
 
-        controller.afterPropertiesSet();
+        controller.getFlow(command);
         verify(configurer);
     }
 

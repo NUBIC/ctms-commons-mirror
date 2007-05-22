@@ -23,9 +23,7 @@ import gov.nih.nci.cabig.ctms.CommonsSystemException;
  * @author Rhett Sutphin
  * @author Priyatam
  */
-public abstract class AbstractTabbedFlowFormController<C> extends AbstractWizardFormController
-    implements InitializingBean
-{
+public abstract class AbstractTabbedFlowFormController<C> extends AbstractWizardFormController {
     private final Log log = LogFactory.getLog(getClass());
 
     private FlowFactory<C> flowFactory;
@@ -101,13 +99,15 @@ public abstract class AbstractTabbedFlowFormController<C> extends AbstractWizard
     }
 
     @Override
+    @SuppressWarnings({ "unchecked" })
     protected int getPageCount(HttpServletRequest request, Object command) {
         return getFlow((C) command).getTabCount();
     }
 
     @Override
+    @SuppressWarnings({ "unchecked" })
     protected String getViewName(HttpServletRequest request, Object command, int page) {
-        return getFlow((C) command).getTab(page).getViewName();
+        return getTab((C) command, page).getViewName();
     }
 
     @Override
@@ -132,15 +132,6 @@ public abstract class AbstractTabbedFlowFormController<C> extends AbstractWizard
         getFlow(command).getTab(page).postProcess(request, command, errors);
     }
 
-    public void afterPropertiesSet() throws Exception {
-        if (getTabConfigurer() != null) {
-            getTabConfigurer().injectDependencies(getFlow());
-        } else {
-            log.debug("No tab configurer for " + getClass().getName()
-                + ".  Skipping tab dependency injection.");
-        }
-    }
-
     ////// FLOW ACCESS
 
     /**
@@ -159,8 +150,24 @@ public abstract class AbstractTabbedFlowFormController<C> extends AbstractWizard
         }
     }
 
+    // TODO: this is potentially expensive.  Create a map of commands to flows (using weakrefs to prevent leaks).
     public Flow<C> getFlow(C command) {
-        return getFlowFactory().createFlow(command);
+        Flow<C> flow = getFlowFactory().createFlow(command);
+        injectDependencies(flow);
+        return flow;
+    }
+
+    protected Tab<C> getTab(C command, int page) {
+        return getFlow(command).getTab(page);
+    }
+
+    private void injectDependencies(Flow<C> flow) {
+        if (getTabConfigurer() != null) {
+            getTabConfigurer().injectDependencies(flow);
+        } else {
+            log.debug("No tab configurer for " + getClass().getName()
+                + ".  Skipping tab dependency injection.");
+        }
     }
 
     /**
