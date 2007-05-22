@@ -1,8 +1,8 @@
 package gov.nih.nci.cabig.ctms.web.tabs;
 
+import gov.nih.nci.cabig.ctms.CommonsSystemException;
 import static org.easymock.classextension.EasyMock.*;
 import org.springframework.validation.BindException;
-import org.springframework.validation.Errors;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +17,6 @@ public class TabbedFlowFormControllerTest extends WebTestCase {
     private TestController controller;
     private Flow<Object> flow;
     private Object command;
-    private Errors errors;
 
     @Override
     protected void setUp() throws Exception {
@@ -30,7 +29,6 @@ public class TabbedFlowFormControllerTest extends WebTestCase {
         controller.setFlow(flow);
 
         command = new Object();
-        errors = new BindException(command, "command");
     }
 
     public void testViewIsForSelectedTab() throws Exception {
@@ -136,6 +134,22 @@ public class TabbedFlowFormControllerTest extends WebTestCase {
         verify(configurer);
     }
 
+    public void testExceptionOnGetFlowWithNonStaticFlowFactory() throws Exception {
+        controller.setFlowFactory(new StubFlowFactory());
+        try {
+            controller.getFlow();
+            fail("Exception not thrown");
+        } catch (CommonsSystemException cse) {
+            assertEquals(
+                "getFlow() only works with StaticFlowFactory.  You are using StubFlowFactory.",
+                cse.getMessage());
+        }
+    }
+    
+    public void testGetFlowWorksWithDefaults() throws Exception {
+        assertNotNull(controller.getFlow());
+    }
+
     private static class TestController extends AbstractTabbedFlowFormController<Object> {
         private boolean finished;
 
@@ -147,6 +161,12 @@ public class TabbedFlowFormControllerTest extends WebTestCase {
         protected ModelAndView processFinish(HttpServletRequest request, HttpServletResponse response, Object command, BindException errors) throws Exception {
             finished = true;
             return null;
+        }
+    }
+
+    private static class StubFlowFactory implements FlowFactory<Object> {
+        public Flow<Object> createFlow(Object command) {
+            throw new UnsupportedOperationException("createFlow not implemented");
         }
     }
 }

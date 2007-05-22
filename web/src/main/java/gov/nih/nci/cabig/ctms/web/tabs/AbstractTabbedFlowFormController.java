@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
+import gov.nih.nci.cabig.ctms.CommonsSystemException;
+
 /**
  * More object-oriented version of {@link AbstractWizardFormController}.
  * Controller is configured with a {@link Flow} of {@link Tab}s -- most controller
@@ -26,18 +28,15 @@ public abstract class AbstractTabbedFlowFormController<C> extends AbstractWizard
 {
     private final Log log = LogFactory.getLog(getClass());
 
-    private Flow<C> flow;
+    private FlowFactory<C> flowFactory;
 
     private TabConfigurer tabConfigurer;
 
-    public Flow<C> getFlow() {
-        return flow;
+    protected AbstractTabbedFlowFormController() {
+        setFlowFactory(new StaticFlowFactory<C>());
     }
 
-    public void setFlow(Flow<C> flow) {
-        this.flow = flow;
-    }
-
+    // TODO: refactor this alternate flow stuff to use a flow factory
     public String getFlowAttributeName() {
         return getClass().getName() + ".FLOW." + getFlow().getName();
     }
@@ -67,18 +66,20 @@ public abstract class AbstractTabbedFlowFormController<C> extends AbstractWizard
 
     @Override
     @SuppressWarnings("unchecked")
-    protected Map referenceData(HttpServletRequest request, Object command, Errors errors, int page)
+    protected Map referenceData(HttpServletRequest request, Object oCommand, Errors errors, int page)
         throws Exception {
+        C command = (C) oCommand;
+
         // The super invocation includes all refdata from #referenceData(request, page)
         Map<String, Object> refdata = super.referenceData(request, command, errors, page);
         if (refdata == null) {
             refdata = new HashMap<String, Object>();
         }
 
-        Tab<C> current = getFlow().getTab(page);
+        Tab<C> current = getFlow(command).getTab(page);
         refdata.put("tab", current);
-        refdata.put("flow", getEffectiveFlow(request));
-        refdata.putAll(current.referenceData((C) command));
+        refdata.put("flow", getEffectiveFlow(request, command));
+        refdata.putAll(current.referenceData(command));
         log.debug("Returning reference data for page " + page);
         log.debug("Command is " + command);
         return refdata;
@@ -88,32 +89,32 @@ public abstract class AbstractTabbedFlowFormController<C> extends AbstractWizard
      * Select current flow or alternate
      */
     @SuppressWarnings("unchecked")
-    private Flow<C> getEffectiveFlow(HttpServletRequest request) {
+    private Flow<C> getEffectiveFlow(HttpServletRequest request, C command) {
         Flow<C> effective;
         if (isUseAlternateFlow(request)) {
             Flow<C> altFlow = (Flow<C>) request.getSession().getAttribute(getFlowAttributeName());
-            effective = altFlow == null ? getFlow() : altFlow;
+            effective = altFlow == null ? getFlow(command) : altFlow;
         } else {
-            effective = getFlow();
+            effective = getFlow(command);
         }
         return effective;
     }
 
     @Override
     protected int getPageCount(HttpServletRequest request, Object command) {
-        return getFlow().getTabCount();
+        return getFlow((C) command).getTabCount();
     }
 
     @Override
     protected String getViewName(HttpServletRequest request, Object command, int page) {
-        return getFlow().getTab(page).getViewName();
+        return getFlow((C) command).getTab(page).getViewName();
     }
 
     @Override
     @SuppressWarnings("unchecked")
     protected void validatePage(Object oCommand, Errors errors, int page, boolean finish) {
         C command = (C) oCommand;
-        Tab<C> tab = getFlow().getTab(page);
+        Tab<C> tab = getFlow(command).getTab(page);
 
         // XXX TODO: this isn't threadsafe at all
         setAllowDirtyForward(tab.isAllowDirtyForward());
@@ -128,7 +129,7 @@ public abstract class AbstractTabbedFlowFormController<C> extends AbstractWizard
         HttpServletRequest request, Object oCommand, Errors errors, int page
     ) throws Exception {
         C command = (C) oCommand;
-        getFlow().getTab(page).postProcess(request, command, errors);
+        getFlow(command).getTab(page).postProcess(request, command, errors);
     }
 
     public void afterPropertiesSet() throws Exception {
@@ -139,6 +140,40 @@ public abstract class AbstractTabbedFlowFormController<C> extends AbstractWizard
                 + ".  Skipping tab dependency injection.");
         }
     }
+
+    ////// FLOW ACCESS
+
+    /**
+     * Returns the flow for this controller, but only if this instance is using a static
+     * flow factory.  Included for backwards compatibility.
+     */
+    public Flow<C> getFlow() {
+        // XXX: best form would be to use a flag instead of instanceof, but I can't
+        // think of a situation where you'd need a static flow factory and StaticFlowFactory
+        // wouldn't work.
+        if (getFlowFactory() instanceof StaticFlowFactory) {
+            return ((StaticFlowFactory<C>) getFlowFactory()).getFlow();
+        } else {
+            throw new CommonsSystemException("getFlow() only works with StaticFlowFactory.  You are using " +
+                getFlowFactory().getClass().getSimpleName() + '.');
+        }
+    }
+
+    public Flow<C> getFlow(C command) {
+        return getFlowFactory().createFlow(command);
+    }
+
+    /**
+     * Syntactic sugar for backwards compatibility.  Equivalent to
+     * <code>setFlowFactory(new {@link StaticFlowFactory}&lt;C&gt;(flow)</code>.
+     *
+     * @param flow
+     */
+    public void setFlow(Flow<C> flow) {
+        setFlowFactory(new StaticFlowFactory<C>(flow));
+    }
+
+    ////// CONFIGURATION
 
     public TabConfigurer getTabConfigurer() {
         return tabConfigurer;
@@ -153,5 +188,14 @@ public abstract class AbstractTabbedFlowFormController<C> extends AbstractWizard
      */
     public void setTabConfigurer(TabConfigurer tabConfigurer) {
         this.tabConfigurer = tabConfigurer;
+    }
+
+    public FlowFactory<C> getFlowFactory() {
+        return flowFactory;
+    }
+
+    public void setFlowFactory(FlowFactory<C> flowFactory) {
+        if (flowFactory == null) throw new NullPointerException("FlowFactory is required");
+        this.flowFactory = flowFactory;
     }
 }
