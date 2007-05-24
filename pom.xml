@@ -1,12 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>gov.nih.nci.cabig.ctms</groupId>
     <artifactId>ctms-commons</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.1</version>
     <name>ctms-commons project root</name>
     <description>
         Common classes, testing infrastructure, tags, and JSPs for 
@@ -21,9 +18,9 @@
     </licenses>
     -->
     <scm>
-        <url>http://gforge.nci.nih.gov/svnroot/ctmscommons/trunk</url>
-        <connection>scm:svn:http://gforge.nci.nih.gov/svnroot/ctmscommons/trunk</connection>
-        <developerConnection>scm:svn:http://gforge.nci.nih.gov/svnroot/ctmscommons/trunk</developerConnection>
+        <url>http://gforge.nci.nih.gov/svnroot/ctmscommons/tags/releases/0.1</url>
+        <connection>scm:svn:http://gforge.nci.nih.gov/svnroot/ctmscommons/tags/releases/0.1</connection>
+        <developerConnection>scm:svn:http://gforge.nci.nih.gov/svnroot/ctmscommons/tags/releases/0.1</developerConnection>
     </scm>
     <repositories>
         <repository>
@@ -152,6 +149,13 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <tagBase>http://gforge.nci.nih.gov/svnroot/ctmscommons/tags/releases</tagBase>
+                </configuration>
             </plugin>
         </plugins>
     </build>
