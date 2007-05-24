@@ -153,6 +153,13 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <tagBase>http://gforge.nci.nih.gov/svnroot/ctmscommons/tags/releases</tagBase>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
     <reporting>
