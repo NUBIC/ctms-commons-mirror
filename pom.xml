@@ -53,8 +53,7 @@
         <module>lang</module> 
         <module>core</module>
         <module>web</module>
-        <!-- <module>acegi</module> -->
-        <!-- <module>websso</module> -->
+        <module>acegi</module> 
     </modules>
 
     <!-- Specify versions once for commonly-used deps -->
