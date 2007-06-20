@@ -17,6 +17,7 @@ public class Tab<C> {
     private String longTitle;
     private String shortTitle;
     private String viewName;
+    private Flow<C> flow;
 
     public Tab() { }
 
@@ -62,6 +63,14 @@ public class Tab<C> {
 
     public void setNumber(Integer number) {
         this.number = number;
+    }
+
+    public Flow<C> getFlow() {
+        return flow;
+    }
+
+    public void setFlow(Flow<C> flow) {
+        this.flow = flow;
     }
 
     public String getLongTitle() {

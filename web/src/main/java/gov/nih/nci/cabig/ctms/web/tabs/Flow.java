@@ -22,6 +22,7 @@ public class Flow<C> {
 
     public void addTab(Tab<C> tab) {
         tab.setNumber(tabs.size());
+        tab.setFlow(this);
         this.tabs.add(tab);
     }
 
