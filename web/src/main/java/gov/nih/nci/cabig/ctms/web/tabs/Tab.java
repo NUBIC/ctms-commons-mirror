@@ -51,8 +51,17 @@ public class Tab<C> {
     public void postProcess(HttpServletRequest request, C command, Errors errors) {
     }
 
-    public int getTargetNumber() {
-        return getNumber() + 1;
+    /**
+     * Retained for backwards compatibility.  Subclasses should override {@link #getTargetTab},
+     * if necessary.
+     */
+    public final int getTargetNumber() {
+        return getTargetTab().getNumber();
+    }
+
+    public Tab<C> getTargetTab() {
+        int defaultTarget = getNumber() + 1;
+        return getFlow().getTab(defaultTarget);
     }
 
     ////// BEAN PROPERTIES
