@@ -94,6 +94,7 @@ public class TabbedFlowFormControllerTest extends WebTestCase {
         Tab<Object> mockTab = createMock(Tab.class);
 
         mockTab.setNumber(3);
+        mockTab.setFlow(flow);
         mockTab.validate(command, errors);
         expect(mockTab.isAllowDirtyBack()).andReturn(false);
         expect(mockTab.isAllowDirtyForward()).andReturn(true);
@@ -111,6 +112,7 @@ public class TabbedFlowFormControllerTest extends WebTestCase {
         Tab<Object> mockTab = createMock(Tab.class);
 
         mockTab.setNumber(3);
+        mockTab.setFlow(flow);
         mockTab.postProcess(request, command, errors);
         replay(mockTab);
 
