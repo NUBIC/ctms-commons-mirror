@@ -14,9 +14,19 @@
     </parent>
     <dependencies>
         <dependency>
+            <groupId>${groupId}</groupId>
+            <artifactId>ctms-commons-base</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${groupId}</groupId>
+            <artifactId>ctms-commons-lang</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>net.sourceforge.collections</groupId>
             <artifactId>collections-generic</artifactId>
-            <!-- version is in parent pom -->
+            <!-- version is in parent -->
         </dependency>
         <dependency>
             <groupId>commons-lang</groupId>
