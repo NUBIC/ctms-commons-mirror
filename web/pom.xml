@@ -20,6 +20,11 @@
     <dependencies>
         <dependency>
             <groupId>${groupId}</groupId>
+            <artifactId>ctms-commons-base</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${groupId}</groupId>
             <artifactId>ctms-commons-core</artifactId>
             <version>${project.version}</version>
         </dependency>
