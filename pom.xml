@@ -49,6 +49,7 @@
         </pluginRepository>
     </pluginRepositories>
     <modules>
+        <module>base</module> 
         <!-- <module>testing</module> -->
         <module>lang</module> 
         <module>core</module>
