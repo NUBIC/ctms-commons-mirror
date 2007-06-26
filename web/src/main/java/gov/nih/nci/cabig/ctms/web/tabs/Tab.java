@@ -48,6 +48,15 @@ public class Tab<C> {
         return true;
     }
 
+    /**
+     * Invoked before the tab is displayed.
+     */
+    public void preProcess(HttpServletRequest request, C command) {
+    }
+
+    /**
+     * Invoked after successful binding and validation.
+     */
     public void postProcess(HttpServletRequest request, C command, Errors errors) {
     }
 

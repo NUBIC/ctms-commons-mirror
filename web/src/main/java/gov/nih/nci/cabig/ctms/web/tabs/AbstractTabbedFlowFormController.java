@@ -104,10 +104,23 @@ public abstract class AbstractTabbedFlowFormController<C> extends AbstractWizard
         return getFlow((C) command).getTabCount();
     }
 
+    /**
+     * Delegates to the tab to determine the view name.
+     *
+     * <p>
+     *   IF YOU OVERRIDE THIS METHOD, YOU MUST CALL IT WITH super.  Even if you disregard the
+     *   output.
+     *   <span class="bogus">Bogus implementation detail alert:  {@link Tab#preProcess} is invoked
+     *   from this method.  This is because {@link AbstractWizardFormController#showPage} (the
+     *   natural place to call <code>preProcess</code>) is final.
+     * </p>
+     */
     @Override
     @SuppressWarnings({ "unchecked" })
     protected String getViewName(HttpServletRequest request, Object command, int page) {
-        return getTab((C) command, page).getViewName();
+        Tab<C> tab = getTab((C) command, page);
+        tab.preProcess(request, (C) command);
+        return tab.getViewName();
     }
 
     @Override

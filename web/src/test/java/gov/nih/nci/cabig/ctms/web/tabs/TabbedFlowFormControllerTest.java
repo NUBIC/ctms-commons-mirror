@@ -121,6 +121,21 @@ public class TabbedFlowFormControllerTest extends WebTestCase {
         verify(mockTab);
     }
 
+    @SuppressWarnings({ "unchecked" })
+    public void testPreProcessInvokedBeforeDisplay() throws Exception {
+        Tab<Object> nextTab = createMock(Tab.class);
+
+        nextTab.setNumber(3);
+        nextTab.setFlow(flow);
+        nextTab.preProcess(request, command);
+        expect(nextTab.getViewName()).andReturn(null);
+        replay(nextTab);
+
+        flow.addTab(nextTab);
+        controller.getViewName(request, command, 3); // this location is lame, but you take what you can get
+        verify(nextTab);
+    }
+
     public void testNoExceptionIfNoTabConfigurer() throws Exception {
         controller.getFlow(command);
     }
