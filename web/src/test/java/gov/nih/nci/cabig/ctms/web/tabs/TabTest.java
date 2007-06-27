@@ -34,4 +34,10 @@ public class TabTest extends TestCase {
     public void testDefaultTargetTab() throws Exception {
         assertSame(flow.getTab(4), tab3.getTargetTab());
     }
+    
+    public void testTargetTabAtEndIsSelf() throws Exception {
+        assertEquals("Test setup failure -- expecting 5 tabs", 5, flow.getTabCount());
+        assertEquals("Target tab at end should be self", flow.getTab(4),
+            flow.getTab(4).getTargetTab());
+    }
 }

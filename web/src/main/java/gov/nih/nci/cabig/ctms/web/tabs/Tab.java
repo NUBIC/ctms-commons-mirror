@@ -69,7 +69,8 @@ public class Tab<C> {
     }
 
     public Tab<C> getTargetTab() {
-        int defaultTarget = getNumber() + 1;
+        // default is next (+1), unless at the end
+        int defaultTarget = Math.min(getNumber() + 1, getFlow().getTabCount() - 1);
         return getFlow().getTab(defaultTarget);
     }
 
