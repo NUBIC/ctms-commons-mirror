@@ -2,8 +2,8 @@ package gov.nih.nci.cabig.ctms.web.tabs;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.validation.Errors;
+import org.springframework.validation.BindException;
 import org.springframework.web.servlet.mvc.AbstractWizardFormController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -63,7 +63,7 @@ public abstract class AbstractTabbedFlowFormController<C> extends AbstractWizard
     }
 
     @Override
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "RawUseOfParameterizedType" })
     protected Map referenceData(HttpServletRequest request, Object oCommand, Errors errors, int page)
         throws Exception {
         C command = (C) oCommand;
@@ -104,23 +104,46 @@ public abstract class AbstractTabbedFlowFormController<C> extends AbstractWizard
         return getFlow((C) command).getTabCount();
     }
 
+    private Tab<C> getCurrentPage(HttpServletRequest request, C command) {
+        int page = getCurrentPage(request);
+        return getTab(command, page);
+    }
+
     /**
      * Delegates to the tab to determine the view name.
      *
      * <p>
      *   IF YOU OVERRIDE THIS METHOD, YOU MUST CALL IT WITH super.  Even if you disregard the
      *   output.
-     *   <span class="bogus">Bogus implementation detail alert:  {@link Tab#preProcess} is invoked
+     *   <span class="bogus">Bogus implementation detail alert:  {@link Tab#onDisplay} is invoked
      *   from this method.  This is because {@link AbstractWizardFormController#showPage} (the
-     *   natural place to call <code>preProcess</code>) is final.
+     *   natural place to call <code>onDisplay</code>) is final.
      * </p>
      */
     @Override
     @SuppressWarnings({ "unchecked" })
     protected String getViewName(HttpServletRequest request, Object command, int page) {
         Tab<C> tab = getTab((C) command, page);
-        tab.preProcess(request, (C) command);
+        log.debug("Pre-processing tab " + page + " (" + tab.getShortTitle() + ") before rendering view");
+        tab.onDisplay(request, (C) command);
         return tab.getViewName();
+    }
+
+    @Override
+    @SuppressWarnings({ "unchecked" })
+    protected Object currentFormObject(HttpServletRequest request, Object oCommand) throws Exception {
+        Tab<C> tab = getCurrentPage(request, (C) oCommand);
+        log.debug("Pre-processing tab " + tab.getNumber() + " (" + tab.getShortTitle() + ") before binding");
+        tab.beforeBind(request, (C) oCommand);
+        return oCommand;
+    }
+
+    @Override
+    @SuppressWarnings({ "unchecked" })
+    protected void onBind(HttpServletRequest request, Object oCommand, BindException errors) throws Exception {
+        Tab<C> tab = getCurrentPage(request, (C) oCommand);
+        log.debug("Invoking onBind for tab " + tab.getNumber() + " (" + tab.getShortTitle() + ')');
+        tab.onBind(request, (C) oCommand, errors);
     }
 
     @Override

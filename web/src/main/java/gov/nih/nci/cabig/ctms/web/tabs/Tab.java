@@ -51,7 +51,20 @@ public class Tab<C> {
     /**
      * Invoked before the tab is displayed.
      */
-    public void preProcess(HttpServletRequest request, C command) {
+    public void onDisplay(HttpServletRequest request, C command) {
+    }
+
+    /**
+     * Invoked post-submit, before binding.
+     * @see AbstractTabbedFlowFormController#currentFormObject
+     */
+    public void beforeBind(HttpServletRequest request, C command) {
+    }
+
+    /**
+     * Invoked after binding, before validation
+     */
+    public void onBind(HttpServletRequest request, C command, Errors errors) {
     }
 
     /**

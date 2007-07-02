@@ -123,16 +123,39 @@ public class TabbedFlowFormControllerTest extends WebTestCase {
 
     @SuppressWarnings({ "unchecked" })
     public void testPreProcessInvokedBeforeDisplay() throws Exception {
-        Tab<Object> nextTab = createMock(Tab.class);
+        Tab<Object> nextTab = createNiceMock(Tab.class);
 
-        nextTab.setNumber(3);
-        nextTab.setFlow(flow);
-        nextTab.preProcess(request, command);
-        expect(nextTab.getViewName()).andReturn(null);
+        nextTab.onDisplay(request, command);
         replay(nextTab);
 
         flow.addTab(nextTab);
         controller.getViewName(request, command, 3); // this location is lame, but you take what you can get
+        verify(nextTab);
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    public void testPreProcessInvokedBeforeBind() throws Exception {
+        Tab<Object> nextTab = createNiceMock(Tab.class);
+        request.setParameter("_page", "3");
+
+        nextTab.beforeBind(request, command);
+        replay(nextTab);
+
+        flow.addTab(nextTab);
+        controller.currentFormObject(request, command);
+        verify(nextTab);
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    public void testOnBindInvokedOnBind() throws Exception {
+        Tab<Object> nextTab = createNiceMock(Tab.class);
+        request.setParameter("_page", "3");
+
+        nextTab.onBind(request, command, errors);
+        replay(nextTab);
+
+        flow.addTab(nextTab);
+        controller.onBind(request, command, (BindException) errors);
         verify(nextTab);
     }
 
