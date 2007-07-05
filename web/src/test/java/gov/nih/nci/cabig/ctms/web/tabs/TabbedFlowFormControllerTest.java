@@ -96,15 +96,11 @@ public class TabbedFlowFormControllerTest extends WebTestCase {
         mockTab.setNumber(3);
         mockTab.setFlow(flow);
         mockTab.validate(command, errors);
-        expect(mockTab.isAllowDirtyBack()).andReturn(false);
-        expect(mockTab.isAllowDirtyForward()).andReturn(true);
         replay(mockTab);
 
         flow.addTab(mockTab);
         controller.validatePage(command, errors, 3, false);
         verify(mockTab);
-        assertFalse(controller.isAllowDirtyBack());
-        assertTrue(controller.isAllowDirtyForward());
     }
 
     @SuppressWarnings({ "unchecked" })

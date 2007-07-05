@@ -40,14 +40,6 @@ public class Tab<C> {
     public void validate(C command, Errors errors) {
     }
 
-    public boolean isAllowDirtyForward() {
-        return true;
-    }
-
-    public boolean isAllowDirtyBack() {
-        return true;
-    }
-
     /**
      * Invoked before the tab is displayed.
      */

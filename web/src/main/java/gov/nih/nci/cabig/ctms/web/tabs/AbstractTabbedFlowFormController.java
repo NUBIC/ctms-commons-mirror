@@ -151,11 +151,6 @@ public abstract class AbstractTabbedFlowFormController<C> extends AbstractWizard
     protected void validatePage(Object oCommand, Errors errors, int page, boolean finish) {
         C command = (C) oCommand;
         Tab<C> tab = getFlow(command).getTab(page);
-
-        // XXX TODO: this isn't threadsafe at all
-        setAllowDirtyForward(tab.isAllowDirtyForward());
-        setAllowDirtyBack(tab.isAllowDirtyBack());
-
         tab.validate(command, errors);
     }
 
