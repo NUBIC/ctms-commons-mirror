@@ -1,6 +1,7 @@
 package gov.nih.nci.cabig.ctms.tools.configuration;
 
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
 import java.util.Collection;
@@ -29,6 +30,7 @@ import java.util.Collection;
  * @see ConfigurationProperty
  * @author Rhett Sutphin
  */
+@Transactional(readOnly = true)
 public abstract class DatabaseBackedConfiguration extends HibernateDaoSupport {
     private java.util.Map<String, Object> map;
 
@@ -50,6 +52,7 @@ public abstract class DatabaseBackedConfiguration extends HibernateDaoSupport {
         }
     }
 
+    @Transactional(readOnly = false)
     public <V> void set(ConfigurationProperty<V> property, V value) {
         ConfigurationEntry entry
             = (ConfigurationEntry) getHibernateTemplate().get(ConfigurationEntry.class, property.getKey());
