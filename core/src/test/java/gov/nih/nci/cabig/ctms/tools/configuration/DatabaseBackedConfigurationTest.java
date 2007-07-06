@@ -3,14 +3,12 @@ package gov.nih.nci.cabig.ctms.tools.configuration;
 import gov.nih.nci.cabig.ctms.testing.CommonsTestCase;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
-import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 
-import java.sql.Connection;
-import java.sql.Statement;
-import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Map;
 
 /**
@@ -33,7 +31,8 @@ public class DatabaseBackedConfigurationTest extends CommonsTestCase {
             .buildSessionFactory();
         configuration = new ExampleConfiguration();
         configuration.setSessionFactory(sessionFactory);
-        SingleConnectionDataSource ds = new SingleConnectionDataSource(sessionFactory.openSession().connection(), false);
+        SingleConnectionDataSource ds
+            = new SingleConnectionDataSource(sessionFactory.openSession().connection(), false);
         ds.setAutoCommit(true);
         jdbc = new JdbcTemplate(ds);
 
