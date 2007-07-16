@@ -67,13 +67,18 @@ public abstract class AutomaticSaveFlowFormController<C, D extends MutableDomain
      * This method is used to implement page-to-page automatic saves.  It is not called
      * from {@link #processFinish} by default, but subclasses may find it appropriate
      * to do so.
+     * <p>
+     * If the save results in a changed command (e.g., if there's a <code>merge</code> and
+     * the command is a domain object) this method should return it.  The session
+     * command will be replaced with the returned value, so long as it is not null.
      *
      * @param command
      * @param errors An errors instance which may be used to communicate user-recoverable
-     *         errors to the view for rendering
+     *  error messages
      */
-    protected void save(C command, Errors errors) {
+    protected C save(C command, Errors errors) {
         getDao().save(getPrimaryDomainObject(command));
+        return command;
     }
 
     @Override
@@ -84,7 +89,10 @@ public abstract class AutomaticSaveFlowFormController<C, D extends MutableDomain
         C command = (C) oCommand;
         super.postProcessPage(request, oCommand, errors, page);
         if (!errors.hasErrors() && shouldSave(request, command, getTab(command, page))) {
-            save(command, errors);
+            C newCommand = save(command, errors);
+            if (newCommand != null) {
+                request.getSession().setAttribute(getFormSessionAttributeName(request), newCommand);
+            }
         }
     }
 }

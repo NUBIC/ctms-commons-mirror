@@ -2,13 +2,16 @@ package gov.nih.nci.cabig.ctms.web.tabs;
 
 import gov.nih.nci.cabig.ctms.dao.MutableDomainObjectDao;
 import gov.nih.nci.cabig.ctms.domain.AbstractMutableDomainObject;
+import gov.nih.nci.cabig.ctms.domain.DomainObject;
 import static org.easymock.classextension.EasyMock.*;
 import org.springframework.validation.BindException;
+import org.springframework.validation.Errors;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
+import java.util.Enumeration;
 
 /**
  * @author Rhett Sutphin
@@ -25,6 +28,7 @@ public class AutomaticSaveFlowFormControllerTest extends WebTestCase {
         dao = createMock(MutableDomainObjectDao.class);
         controller = new TestController();
         command = new TestObject();
+        request.getSession().setAttribute(TestController.class.getName() + ".FORM.command", command);
     }
 
     public void testShouldSaveWhenSaved() throws Exception {
@@ -76,14 +80,41 @@ public class AutomaticSaveFlowFormControllerTest extends WebTestCase {
         verify(dao);
     }
 
+    public void testPostProcessReplacesCommandIfProvided() throws Exception {
+        command.setId(8);
+        controller.setSaveResult(new TestObject(4));
+        controller.postProcessPage(request, command, errors, 0);
+
+        Object sessCmd = request.getSession().getAttribute(TestController.class.getName() + ".FORM.command");
+        assertNotNull("Command not present in session", sessCmd);
+        assertEquals("Command not replaced", 4, (int) ((DomainObject) sessCmd).getId());
+    }
+
+    public void testPostProcessDoesNotReplaceCommandIfSaveReturnsNull() throws Exception {
+        command.setId(8);
+        controller.setSaveResult(null);
+        controller.postProcessPage(request, command, errors, 0);
+
+        Object sessCmd = request.getSession().getAttribute(TestController.class.getName() + ".FORM.command");
+        assertNotNull("Command not present in session", sessCmd);
+        assertEquals("Command replaced", 8, (int) ((DomainObject) sessCmd).getId());
+    }
+
     private class TestController extends AutomaticSaveFlowFormController<TestObject, TestObject, MutableDomainObjectDao<TestObject>> {
         private boolean finished;
+        private TestObject postSaveCommand;
 
         public TestController() {
             setFlow(new Flow<TestObject>("Test flow"));
             getFlow().addTab(new SimpleTestTab<TestObject>(1));
             getFlow().addTab(new SimpleTestTab<TestObject>(2));
             getFlow().addTab(new SimpleTestTab<TestObject>(3));
+        }
+
+        @Override
+        protected TestObject save(TestObject command, Errors errors) {
+            super.save(command, errors);
+            return postSaveCommand;
         }
 
         @Override
@@ -107,8 +138,14 @@ public class AutomaticSaveFlowFormControllerTest extends WebTestCase {
         public boolean isFinished() {
             return finished;
         }
+
+        public void setSaveResult(TestObject newCommand) {
+            this.postSaveCommand = newCommand;
+        }
     }
 
     private static class TestObject extends AbstractMutableDomainObject {
+        public TestObject() { }
+        public TestObject(int id) { setId(id); }
     }
 }
