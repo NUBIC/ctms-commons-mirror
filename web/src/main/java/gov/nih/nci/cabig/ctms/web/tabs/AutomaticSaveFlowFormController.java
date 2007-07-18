@@ -3,6 +3,7 @@ package gov.nih.nci.cabig.ctms.web.tabs;
 import gov.nih.nci.cabig.ctms.dao.MutableDomainObjectDao;
 import gov.nih.nci.cabig.ctms.domain.MutableDomainObject;
 import org.springframework.validation.Errors;
+import org.springframework.validation.BindException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -81,6 +82,24 @@ public abstract class AutomaticSaveFlowFormController<C, D extends MutableDomain
         return command;
     }
 
+    /**
+     * Overridden to implement replacing the provided obj with the one returned by the last call to
+     * {@link #save}.  Subclasses need to call this method (via <code>super</code>) if they
+     * override it.
+     */
+    @Override
+    protected Object currentFormObject(HttpServletRequest request, Object oCommand) throws Exception {
+        super.currentFormObject(request, oCommand); // for side-effects
+        Object replacedCommand
+            = request.getSession().getAttribute(getReplacedCommandSessionAttributeName(request));
+        if (replacedCommand != null) {
+            request.getSession().removeAttribute(getReplacedCommandSessionAttributeName(request));
+            return replacedCommand;
+        } else {
+            return oCommand;
+        }
+    }
+
     @Override
     @SuppressWarnings({ "unchecked" })
     protected void postProcessPage(
@@ -91,8 +110,12 @@ public abstract class AutomaticSaveFlowFormController<C, D extends MutableDomain
         if (!errors.hasErrors() && shouldSave(request, command, getTab(command, page))) {
             C newCommand = save(command, errors);
             if (newCommand != null) {
-                request.getSession().setAttribute(getFormSessionAttributeName(request), newCommand);
+                request.getSession().setAttribute(getReplacedCommandSessionAttributeName(request), newCommand);
             }
         }
+    }
+
+    protected String getReplacedCommandSessionAttributeName(HttpServletRequest request) {
+        return getFormSessionAttributeName(request) + ".to-replace";
     }
 }

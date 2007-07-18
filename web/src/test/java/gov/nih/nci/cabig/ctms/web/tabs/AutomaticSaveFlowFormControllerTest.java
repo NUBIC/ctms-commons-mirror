@@ -29,6 +29,7 @@ public class AutomaticSaveFlowFormControllerTest extends WebTestCase {
         controller = new TestController();
         command = new TestObject();
         request.getSession().setAttribute(TestController.class.getName() + ".FORM.command", command);
+        request.getSession().setAttribute(TestController.class.getName() + ".PAGE.command", 0);
     }
 
     public void testShouldSaveWhenSaved() throws Exception {
@@ -85,9 +86,9 @@ public class AutomaticSaveFlowFormControllerTest extends WebTestCase {
         controller.setSaveResult(new TestObject(4));
         controller.postProcessPage(request, command, errors, 0);
 
-        Object sessCmd = request.getSession().getAttribute(TestController.class.getName() + ".FORM.command");
-        assertNotNull("Command not present in session", sessCmd);
-        assertEquals("Command not replaced", 4, (int) ((DomainObject) sessCmd).getId());
+        Object sessCmd = request.getSession().getAttribute(TestController.class.getName() + ".FORM.command.to-replace");
+        assertNotNull("Command to replace not present in session", sessCmd);
+        assertEquals("Wrong command to replace", 4, (int) ((DomainObject) sessCmd).getId());
     }
 
     public void testPostProcessDoesNotReplaceCommandIfSaveReturnsNull() throws Exception {
@@ -95,9 +96,21 @@ public class AutomaticSaveFlowFormControllerTest extends WebTestCase {
         controller.setSaveResult(null);
         controller.postProcessPage(request, command, errors, 0);
 
-        Object sessCmd = request.getSession().getAttribute(TestController.class.getName() + ".FORM.command");
-        assertNotNull("Command not present in session", sessCmd);
-        assertEquals("Command replaced", 8, (int) ((DomainObject) sessCmd).getId());
+        Object sessCmd = request.getSession().getAttribute(TestController.class.getName() + ".FORM.command.to-replace");
+        assertNull("Should not be a command to replace in the session", sessCmd);
+    }
+
+    public void testCurrentFormObjReplacesCommandIfInSession() throws Exception {
+        request.getSession().setAttribute(TestController.class.getName() + ".FORM.command.to-replace", new TestObject(7));
+        Object actual = controller.currentFormObject(request, command);
+        assertTrue("Wrong object returned: " + actual, actual instanceof TestObject);
+        assertEquals("Wrong object returned", 7, (int) ((DomainObject) actual).getId());
+    }
+
+    public void testCurrentFormObjReturnsOriginalIfNoReplacementPresent() throws Exception {
+        request.getSession().removeAttribute(TestController.class.getName() + ".FORM.command.to-replace");
+        Object actual = controller.currentFormObject(request, command);
+        assertSame("Wrong object returned", command, actual);
     }
 
     private class TestController extends AutomaticSaveFlowFormController<TestObject, TestObject, MutableDomainObjectDao<TestObject>> {
