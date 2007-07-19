@@ -51,7 +51,7 @@ public abstract class AutomaticSaveFlowFormController<C, D extends MutableDomain
     }
 
     @Override
-    @SuppressWarnings({ "unchecked" })
+    @SuppressWarnings({ "unchecked", "RawUseOfParameterizedType" })
     protected Map referenceData(
         HttpServletRequest request, Object oCommand, Errors errors, int page
     ) throws Exception {
@@ -80,6 +80,15 @@ public abstract class AutomaticSaveFlowFormController<C, D extends MutableDomain
     protected C save(C command, Errors errors) {
         getDao().save(getPrimaryDomainObject(command));
         return command;
+    }
+
+    /**
+     * Overridden to remove the replaced command session attribute for a new form
+     */
+    @Override
+    protected void onBindOnNewForm(HttpServletRequest request, Object command, BindException errors) throws Exception {
+        super.onBindOnNewForm(request, command, errors);
+        request.getSession().removeAttribute(getReplacedCommandSessionAttributeName(request));
     }
 
     /**
