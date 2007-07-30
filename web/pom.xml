@@ -4,8 +4,7 @@
     <packaging>jar</packaging>
     <name>ctms-commons-web</name>
     <description>
-        Includes common look-and-feel implementation for CTMS applications
-        and other web application infrastructure.
+        Includes common web application infrastructure for CTMS applications.
     </description>
     <parent>
         <groupId>gov.nih.nci.cabig.ctms</groupId>

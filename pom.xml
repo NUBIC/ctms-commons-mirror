@@ -54,6 +54,7 @@
         <module>lang</module> 
         <module>core</module>
         <module>web</module>
+        <module>laf</module>
         <module>acegi</module> 
     </modules>
 
