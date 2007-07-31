@@ -34,13 +34,54 @@
         <name>workflowTabs</name>
         <path>/META-INF/tags/chrome/workflowTabs.tag</path>
     </tag-file>
+    <tag-file>
+        <name>stylesheets</name>
+        <path>/META-INF/tags/chrome/stylesheets.tag</path>
+    </tag-file>
+    <tag-file>
+        <name>scripts</name>
+        <path>/META-INF/tags/chrome/scripts.tag</path>
+    </tag-file>
+    <tag-file>
+        <name>header</name>
+        <path>/META-INF/tags/chrome/header.tag</path>
+    </tag-file>
+    <tag-file>
+        <name>footer</name>
+        <path>/META-INF/tags/chrome/footer.tag</path>
+    </tag-file>
+    <tag-file>
+        <name>sectionTab</name>
+        <path>/META-INF/tags/chrome/sectionTab.tag</path>
+    </tag-file>
+    <tag-file>
+        <name>taskLink</name>
+        <path>/META-INF/tags/chrome/taskLink.tag</path>
+    </tag-file>
 
     <tag-file>
         <name>attribute</name>
         <path>/META-INF/tags/helper/attribute.tag</path>
     </tag-file>
     <tag-file>
+        <name>debugInfo</name>
+        <path>/META-INF/tags/helper/debugInfo.tag</path>
+    </tag-file>
+    <tag-file>
         <name>stylesheetLink</name>
         <path>/META-INF/tags/helper/stylesheetLink.tag</path>
+    </tag-file>
+    <tag-file>
+        <name>javascriptLink</name>
+        <path>/META-INF/tags/helper/javascriptLink.tag</path>
+    </tag-file>
+
+    <tag-file>
+        <name>tabControls</name>
+        <path>/META-INF/tags/tabbedflow/tabControls.tag</path>
+    </tag-file>
+    <tag-file>
+        <name>tabFields</name>
+        <path>/META-INF/tags/tabbedflow/tabFields.tag</path>
     </tag-file>
 </taglib>

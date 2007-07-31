@@ -42,7 +42,7 @@
                 <executions>
                     <execution>
                         <id>copy-to-demo-app</id>
-                        <phase>compile</phase>
+                        <phase>test-compile</phase>
                         <goals> <goal>run</goal> </goals>
                         <configuration>
                             <tasks>

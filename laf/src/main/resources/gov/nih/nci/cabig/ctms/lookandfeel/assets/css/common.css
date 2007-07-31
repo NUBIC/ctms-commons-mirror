@@ -33,6 +33,7 @@ p { margin: 1em 0; }
 
 #header .background-R {
   background: url(../images/chrome/header_BG_R.gif) no-repeat top right;
+  min-height: 40px;
 }
 
 #logo { vertical-align: top; }
@@ -231,7 +232,7 @@ ul.tabs li {
 }
 
 .box ul.inner.tabs li.selected div {
-  background-image: url(../images/chrome/inner-tab_R_s.gif); 
+  background-image: url(../images/chrome/inner-tab_R_s.gif);
 }
 
 .box ul.inner.tabs a {

@@ -1,2 +1,2 @@
 <%@tag%><%@attribute name="name" required="true"%><%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link rel="stylesheet" type="text/css" href="<c:url value="/ctms-laf/css/${name}.css"/>"/>
+<script type="text/javascript" src="<c:url value="/ctms-laf/js/${name}.js"/>"></script>

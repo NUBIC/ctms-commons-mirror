@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Servlet which supports serving static assets (images, stylesheets, scripts, etc.)
+ * Servlet which supports serving static assets (images, css, js, etc.)
  * off of the classpath.
  *
  * @author Rhett Sutphin
