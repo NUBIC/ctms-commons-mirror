@@ -3,6 +3,7 @@ package gov.nih.nci.cabig.ctms.web.tabs;
 import gov.nih.nci.cabig.ctms.dao.MutableDomainObjectDao;
 import gov.nih.nci.cabig.ctms.domain.AbstractMutableDomainObject;
 import gov.nih.nci.cabig.ctms.domain.DomainObject;
+import gov.nih.nci.cabig.ctms.web.WebTestCase;
 import static org.easymock.classextension.EasyMock.*;
 import org.springframework.validation.BindException;
 import org.springframework.validation.Errors;

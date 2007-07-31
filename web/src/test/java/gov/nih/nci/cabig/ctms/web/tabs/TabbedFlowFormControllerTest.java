@@ -1,6 +1,7 @@
 package gov.nih.nci.cabig.ctms.web.tabs;
 
 import gov.nih.nci.cabig.ctms.CommonsSystemException;
+import gov.nih.nci.cabig.ctms.web.WebTestCase;
 import static org.easymock.classextension.EasyMock.*;
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
