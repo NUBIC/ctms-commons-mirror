@@ -108,6 +108,13 @@
             <version>2.2.1</version>
             <scope>test</scope>
         </dependency>
+        <!-- Version 2.3 can't handle paths with spaces in them.  Seriously. -->
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>2.2</version>
+            <scope>plugin</scope>
+        </dependency>
     </dependencies>
 
     <build>
