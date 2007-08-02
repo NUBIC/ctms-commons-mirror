@@ -34,34 +34,6 @@ public abstract class AbstractTabbedFlowFormController<C> extends AbstractWizard
         setFlowFactory(new StaticFlowFactory<C>());
     }
 
-    // TODO: refactor this alternate flow stuff to use a flow factory
-    public String getFlowAttributeName() {
-        return getClass().getName() + ".FLOW." + getFlow().getName();
-    }
-
-    public String getAlternateFlowAttributeName() {
-        return getClass().getName() + ".FLOW." + getFlow().getName() + ".ALT_FLOW";
-    }
-
-    /**
-     * Check if Alternate flow (Sub Flows
-     *
-     * @param request
-     * @return
-     */
-    public boolean isUseAlternateFlow(HttpServletRequest request) {
-        return request.getSession().getAttribute(getAlternateFlowAttributeName()) != null;
-    }
-
-    /**
-     * Set Alternate Flow (Sub flows)
-     *
-     * @param request
-     */
-    public void useAlternateFlow(HttpServletRequest request) {
-        request.getSession().setAttribute(getAlternateFlowAttributeName(), "true");
-    }
-
     @Override
     @SuppressWarnings({ "unchecked", "RawUseOfParameterizedType" })
     protected Map referenceData(HttpServletRequest request, Object oCommand, Errors errors, int page)
@@ -84,18 +56,11 @@ public abstract class AbstractTabbedFlowFormController<C> extends AbstractWizard
     }
 
     /**
-     * Select current flow or alternate
+     * Allow subclasses to select alternate flows using their own logic.
      */
     @SuppressWarnings("unchecked")
-    private Flow<C> getEffectiveFlow(HttpServletRequest request, C command) {
-        Flow<C> effective;
-        if (isUseAlternateFlow(request)) {
-            Flow<C> altFlow = (Flow<C>) request.getSession().getAttribute(getFlowAttributeName());
-            effective = altFlow == null ? getFlow(command) : altFlow;
-        } else {
-            effective = getFlow(command);
-        }
-        return effective;
+    protected Flow<C> getEffectiveFlow(HttpServletRequest request, C command) {
+        return getFlow(command);
     }
 
     @Override
@@ -169,6 +134,7 @@ public abstract class AbstractTabbedFlowFormController<C> extends AbstractWizard
      * Returns the flow for this controller, but only if this instance is using a static
      * flow factory.  Included for backwards compatibility.
      */
+    @Deprecated
     public Flow<C> getFlow() {
         // XXX: best form would be to use a flag instead of instanceof, but I can't
         // think of a situation where you'd need a static flow factory and StaticFlowFactory
@@ -181,7 +147,8 @@ public abstract class AbstractTabbedFlowFormController<C> extends AbstractWizard
         }
     }
 
-    // TODO: this is potentially expensive.  Create a map of commands to flows (using weakrefs to prevent leaks).
+    // XXX: this is potentially expensive.  Create a map of commands to flows (using weakrefs to
+    // prevent leaks) if necessary.
     public Flow<C> getFlow(C command) {
         Flow<C> flow = getFlowFactory().createFlow(command);
         injectDependencies(flow);
@@ -207,6 +174,7 @@ public abstract class AbstractTabbedFlowFormController<C> extends AbstractWizard
      *
      * @param flow
      */
+    @Deprecated
     public void setFlow(Flow<C> flow) {
         setFlowFactory(new StaticFlowFactory<C>(flow));
     }
