@@ -1,0 +1,65 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>gov.nih.nci.cabig.ctms</groupId>
+    <artifactId>ctms-commons-maven-plugins</artifactId>
+    <name>ctms-commons maven plugins</name>
+    <packaging>pom</packaging>
+    <parent>
+        <groupId>gov.nih.nci.cabig.ctms</groupId>
+        <artifactId>ctms-commons</artifactId>
+        <version>0.4-SNAPSHOT</version>
+    </parent>
+    <scm>
+        <url>http://gforge.nci.nih.gov/svnroot/caaersappdev/trunk/maven</url>
+        <connection>scm:svn:http://gforge.nci.nih.gov/svnroot/caaersappdev/trunk/maven</connection>
+        <developerConnection>scm:svn:http://gforge.nci.nih.gov/svnroot/caaersappdev/trunk/maven</developerConnection>
+    </scm>
+    <repositories>
+        <repository>
+            <id>download.bioinformatics.northwestern.edu</id>
+            <name>Northwestern RHLCCC Bioinformatics</name>
+            <url>http://download.bioinformatics.northwestern.edu/maven2</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <!-- for log4j helper -->
+            <id>pyx4j.com</id>
+            <url>http://pyx4j.com/maven2</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>download.bioinformatics.northwestern.edu</id>
+            <name>Northwestern RHLCCC Bioinformatics</name>
+            <url>http://download.bioinformatics.northwestern.edu/maven2</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <!-- for log4j helper -->
+            <id>pyx4j.com</id>
+            <url>http://pyx4j.com/maven2</url>
+        </pluginRepository>
+    </pluginRepositories>
+    <modules>
+        <module>property-factory-maven-plugin</module>
+        <module>catman-maven-plugin</module>
+        <module>uctrace-maven-plugin</module>
+    </modules>
+    <build>
+        <plugins>
+         </plugins>
+    </build>
+    <dependencies>
+        <!-- BUILD ONLY -->
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-plugin-api</artifactId>
+            <version>2.0.5</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+</project>
