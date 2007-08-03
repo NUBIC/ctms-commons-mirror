@@ -26,6 +26,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.LinkedHashSet;
 
+import gov.nih.nci.cabig.ctms.testing.uctrace.UseCaseTraceabilityAnnotationProcessorFactory;
+
 /**
  * @author Rhett Sutphin
  * @goal trace
@@ -56,7 +58,7 @@ public class UseCaseTraceMavenMojo extends AbstractMojo {
     private File outputDirectory;
 
     /**
-     * The annotation class which accumulates {@link UseCase} values for
+     * The annotation class which accumulates {@link gov.nih.nci.cabig.ctms.testing.uctrace.UseCase} values for
      * each test case.
      *
      * @parameter
@@ -266,6 +268,10 @@ public class UseCaseTraceMavenMojo extends AbstractMojo {
 
     public void setArtifactFactory(ArtifactFactory artifactFactory) {
         this.artifactFactory = artifactFactory;
+    }
+
+    public void setProjectPlugins(Set<Artifact> projectPlugins) {
+        this.projectPlugins = projectPlugins;
     }
 
     public void setArtifactMetadataSource(ArtifactMetadataSource artifactMetadataSource) {

@@ -1,4 +1,4 @@
-package gov.nih.nci.cabig.ctms.maven.uctrace;
+package gov.nih.nci.cabig.ctms.testing.uctrace;
 
 import com.sun.mirror.apt.AnnotationProcessor;
 import com.sun.mirror.apt.AnnotationProcessorEnvironment;

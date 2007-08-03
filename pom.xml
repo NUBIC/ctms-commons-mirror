@@ -50,13 +50,13 @@
     </pluginRepositories>
     <modules>
         <module>base</module> 
-        <!-- <module>testing</module> -->
-        <module>lang</module> 
+        <module>lang</module>
         <module>core</module>
         <module>web</module>
         <module>laf</module>
         <module>acegi</module> 
         <module>maven</module> 
+        <module>testing-all</module>
     </modules>
 
     <!-- Specify versions once for commonly-used deps -->

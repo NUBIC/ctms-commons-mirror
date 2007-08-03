@@ -1,4 +1,4 @@
-package gov.nih.nci.cabig.ctms.maven.uctrace;
+package gov.nih.nci.cabig.ctms.testing.uctrace;
 
 /**
  * @author Rhett Sutphin

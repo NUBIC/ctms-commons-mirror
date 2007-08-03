@@ -1,4 +1,4 @@
-package gov.nih.nci.cabig.ctms.maven.uctrace;
+package gov.nih.nci.cabig.ctms.testing.uctrace;
 
 import com.sun.mirror.apt.AnnotationProcessorFactory;
 import com.sun.mirror.apt.AnnotationProcessor;
@@ -15,7 +15,7 @@ import gov.nih.nci.cabig.ctms.CommonsSystemException;
 /**
  * Central class in the automated association of use cases to unit test cases.
  * Each project that uses this system needs to provide an enum which implements
- * {@link gov.nih.nci.cabig.ctms.maven.uctrace.UseCase} and which contains values for all the
+ * {@link UseCase} and which contains values for all the
  * application's use cases.  The classname of this enum must be provided to apt
  * using the <code>useCasesAnnotationClassName</code> parameter.
  *
@@ -57,7 +57,7 @@ public class UseCaseTraceabilityAnnotationProcessorFactory implements Annotation
     /**
      * Return the class for the Annotation used to associate test cases with use cases.
      * This annotation is expected to have a method named <code>value()</code> which
-     * returns instances of an enum which implements {@link gov.nih.nci.cabig.ctms.maven.uctrace.UseCase}.
+     * returns instances of an enum which implements {@link UseCase}.
      * @return
      */
     protected Class<? extends Annotation> useCasesAnnotationClass(String name) {
