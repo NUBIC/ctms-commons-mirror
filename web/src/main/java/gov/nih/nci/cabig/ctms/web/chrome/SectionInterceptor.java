@@ -4,10 +4,14 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.util.UrlPathHelper;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.beans.factory.annotation.Required;
+import org.apache.commons.logging.LogFactory;
+import org.apache.commons.logging.Log;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+
+
 
 /**
  * Interceptor which figures out which section a requested page is from
@@ -26,13 +30,19 @@ public class SectionInterceptor extends HandlerInterceptorAdapter {
     private String attributePrefix;
     private UrlPathHelper urlPathHelper = new UrlPathHelper();
     private AntPathMatcher pathMatcher = new AntPathMatcher();
+    private Log log = LogFactory.getLog(getClass());
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        log.debug("preHandle invoked");
+        Task currentTask = null;
         String controllerPath = urlPathHelper.getPathWithinServletMapping(request);
         Section currentSection = findSection(urlPathHelper.getPathWithinServletMapping(request));
-        Task currentTask = findTask(currentSection, controllerPath);
-        
+
+        if (currentSection != null) {
+            currentTask = findTask(currentSection, controllerPath);
+        }
+
         request.setAttribute(prefix("currentSection"), currentSection);
         request.setAttribute(prefix("currentTask"), currentTask);        
         request.setAttribute(prefix("sections"), getSections());
@@ -51,12 +61,15 @@ public class SectionInterceptor extends HandlerInterceptorAdapter {
     }
     
     private Task findTask(Section section, String controllerPath){
-    	for (Task task : section.getTasks()) {
-    		if (task.getUrl().indexOf(controllerPath) > -1) {
-    			return task;  	                	
-    		}                		
-    	}
-    	 return null;
+
+        if(section.getTasks() != null) {
+            for (Task task : section.getTasks()) {
+                if (task.getUrl().indexOf(controllerPath) > -1) {
+                    return task;
+                }
+            }
+        }
+    	return null;
     }
     
 
