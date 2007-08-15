@@ -38,6 +38,11 @@ public class Flow<C> {
         return tabs;
     }
 
+    public void setTabs(List<Tab<C>> tabs) {
+        getTabs().clear();
+        for (Tab<C> tab : tabs) addTab(tab);
+    }
+
     public String getName() {
         return name;
     }
