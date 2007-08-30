@@ -25,6 +25,10 @@ public class AssetServlet extends HttpServlet {
             return;
         }
         String resource = resourcePath(req.getPathInfo());
+        String mimeType = contentType(req.getPathInfo());
+        if (mimeType != null) {
+            resp.setContentType(mimeType);
+        }
         // TODO: this is primitive.  Should add content-length at least
         InputStream resStream = getClass().getResourceAsStream(resource);
         if (resStream == null) {
@@ -32,6 +36,15 @@ public class AssetServlet extends HttpServlet {
         } else {
             IOUtils.copy(resStream, resp.getOutputStream());
         }
+    }
+
+    // visible for testing
+    String contentType(String pathInfo) {
+        // XXX: This is a quick hack; a better solution might use the MIME type support in javax.activation
+        if (pathInfo.endsWith(".css")) return "text/css";
+        if (pathInfo.endsWith(".png")) return "image/png";
+        if (pathInfo.endsWith(".gif")) return "image/gif";
+        return null;
     }
 
     private String resourcePath(String pathInfo) {

@@ -44,9 +44,16 @@ public class AssetServletTest extends TestCase {
         assertTestCssReturned();
     }
 
+    public void testMimeTypes() throws Exception {
+        assertEquals("image/png", servlet.contentType("foo.png"));
+        assertEquals("image/gif", servlet.contentType("zip/bar.gif"));
+        assertEquals("text/css", servlet.contentType("style/zero.css"));
+    }
+
     private void assertTestCssReturned() throws IOException, ServletException {
         servlet.service(request, response);
         assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+        assertEquals("text/css", response.getContentType());
         assertEquals("Content doesn't match test-only.css",
             "p { font-size: 120% }\n", response.getContentAsString());
     }
