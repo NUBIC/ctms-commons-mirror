@@ -11,7 +11,7 @@
     <parent>
         <groupId>gov.nih.nci.cabig.ctms</groupId>
         <artifactId>ctms-commons</artifactId>
-        <version>0.4-SNAPSHOT</version>
+        <version>0.4</version>
     </parent>
 
     <properties>
@@ -47,15 +47,13 @@
                         <configuration>
                             <tasks>
                                 <echo>Copy tagfiles to demo app</echo>
-                                <mkdir dir="${demo-base}/WEB-INF/tags"/>
+                                <mkdir dir="${demo-base}/WEB-INF/tags" />
                                 <copy todir="${demo-base}/WEB-INF/tags">
-                                    <fileset dir="${basedir}/src/main/resources/META-INF/tags"/>
+                                    <fileset dir="${basedir}/src/main/resources/META-INF/tags" />
                                 </copy>
-                                <copy file="${basedir}/src/main/resources/META-INF/laf.tld"
-                                      tofile="${demo-base}/WEB-INF/laf.tld"
-                                      overwrite="true">
+                                <copy file="${basedir}/src/main/resources/META-INF/laf.tld" tofile="${demo-base}/WEB-INF/laf.tld" overwrite="true">
                                     <filterset begintoken="/META" endtoken="INF">
-                                        <filter token="-" value="/WEB-INF"/>
+                                        <filter token="-" value="/WEB-INF" />
                                     </filterset>
                                 </copy>
                             </tasks>
