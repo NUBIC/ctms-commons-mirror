@@ -3,7 +3,7 @@
     <groupId>gov.nih.nci.cabig.ctms</groupId>
     <artifactId>ctms-commons</artifactId>
     <packaging>pom</packaging>
-    <version>0.4-SNAPSHOT</version>
+    <version>0.4</version>
     <name>ctms-commons project root</name>
     <description>
         Common classes, testing infrastructure, tags, and JSPs for 
@@ -18,9 +18,9 @@
     </licenses>
     -->
     <scm>
-        <url>http://gforge.nci.nih.gov/svnroot/ctmscommons/trunk</url>
-        <connection>scm:svn:http://gforge.nci.nih.gov/svnroot/ctmscommons/trunk</connection>
-        <developerConnection>scm:svn:http://gforge.nci.nih.gov/svnroot/ctmscommons/trunk</developerConnection>
+        <url>http://gforge.nci.nih.gov/svnroot/ctmscommons/tags/releases/0.4</url>
+        <connection>scm:svn:http://gforge.nci.nih.gov/svnroot/ctmscommons/tags/releases/0.4</connection>
+        <developerConnection>scm:svn:http://gforge.nci.nih.gov/svnroot/ctmscommons/tags/releases/0.4</developerConnection>
     </scm>
     <repositories>
         <repository>
