@@ -29,6 +29,7 @@ import org.springframework.beans.factory.annotation.Required;
 
 /**
  * @author Rhett Sutphin
+ * @author Saurabh Agrawal
  */
 public class AuditInterceptorImpl extends EmptyInterceptor {
 
@@ -43,9 +44,11 @@ public class AuditInterceptorImpl extends EmptyInterceptor {
 	/** The data audit dao. */
 	private DataAuditRepository dataAuditRepository;
 
-	private List<String> auditableEntities;
+	private List<String> auditableEntities = new ArrayList<String>();
 
 	private final String HIBERNATE_BACK_REF_STRING = "Backref";
+
+	private boolean auditAll = false;
 
 	private void appendEventValues(final DataAuditEvent parent, final Type propertyType, final String propertyName,
 			final Object previousState, final Object currentState) {
@@ -78,8 +81,10 @@ public class AuditInterceptorImpl extends EmptyInterceptor {
 	}
 
 	private boolean auditable(final Object entity) {
-
-		if (auditableEntities.contains(entity.getClass().getName())) {
+		if (auditAll) {
+			return true;
+		}
+		else if (auditableEntities.contains(entity.getClass().getName())) {
 			return true;
 		}
 		// auditable &= entity instanceof Object;
@@ -283,10 +288,9 @@ public class AuditInterceptorImpl extends EmptyInterceptor {
 	}
 
 	/**
-	 * Sets the auditable entities. This is a lis of full qualified class name of entities which require auditing.
-	 * @param auditableEntities the new auditable entities
+	 * Sets the auditable entities. This is the list of full qualified class name of entities which require auditing.
+	 * @param auditableEntities the auditable entities
 	 */
-	@Required
 	public void setAuditableEntities(final List<String> auditableEntities) {
 		this.auditableEntities = auditableEntities;
 	}
@@ -298,5 +302,13 @@ public class AuditInterceptorImpl extends EmptyInterceptor {
 	@Required
 	public void setDataAuditRepository(final DataAuditRepository dataAuditRepository) {
 		this.dataAuditRepository = dataAuditRepository;
+	}
+
+	/**
+	 * true if auditing is required for all objects, false otherwise
+	 * @param auditAll true if auditing is required for all objects, false otherwise
+	 */
+	public void setAuditAll(final boolean auditAll) {
+		this.auditAll = auditAll;
 	}
 }
