@@ -5,8 +5,8 @@ import gov.nih.nci.cabig.ctms.audit.domain.DataAuditEvent;
 import gov.nih.nci.cabig.ctms.audit.domain.DataReference;
 import gov.nih.nci.cabig.ctms.audit.domain.Operation;
 import gov.nih.nci.cabig.ctms.audit.exception.AuditSystemException;
+import gov.nih.nci.cabig.ctms.audit.util.AuditUtil;
 
-import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.IdentityHashMap;
 import java.util.LinkedList;
@@ -30,7 +30,7 @@ public class AuditSession {
 	 * 
 	 * @param dataAuditRepository the data audit dao
 	 */
-	public AuditSession(DataAuditRepository dataAuditRepository) {
+	public AuditSession(final DataAuditRepository dataAuditRepository) {
 		this.dataAuditRepository = dataAuditRepository;
 
 	}
@@ -40,14 +40,23 @@ public class AuditSession {
 	 * 
 	 * @param entity the entity
 	 * @param event the event
+	 * @param operation
 	 */
-	public void addEvent(Object entity, DataAuditEvent event) {
+	public void addEvent(final Object entity, final DataAuditEvent event, final Operation operation) {
+
 		if (events.containsKey(entity)) {
-			DataAuditEvent existingEvent = events.get(entity);
-			throw new AuditSystemException("There is already an event (" + existingEvent.getOperation() + ") for "
-					+ entity + ".  Cannot register a new one (" + event.getOperation() + ')');
+			if (!operation.equals(Operation.UPDATE)) {
+				// ignore the cyclic dependency if any
+				DataAuditEvent existingEvent = events.get(entity);
+				throw new AuditSystemException("There is already an event (" + existingEvent.getOperation() + ") for "
+						+ entity + ".  Cannot register a new one (" + event.getOperation() + ')');
+			}
 		}
-		events.put(entity, event);
+
+		else {
+
+			events.put(entity, event);
+		}
 	}
 
 	/**
@@ -72,40 +81,9 @@ public class AuditSession {
 	 * 
 	 * @return true, if operation is deleted; false otherwise
 	 */
-	public boolean deleted(Object entity) {
+	public boolean deleted(final Object entity) {
 		DataAuditEvent event = events.get(entity);
 		return event != null && event.getOperation() == Operation.DELETE;
-	}
-
-	/**
-	 * Gets the id of the persisted object
-	 * 
-	 * @param obj the object to get the id from
-	 * @return object Id
-	 */
-
-	private Integer getObjectId(final Object obj) {
-
-		Class objectClass = obj.getClass();
-		Method[] methods = objectClass.getMethods();
-
-		// FIXME:Saurabh make sure it works for the Long also
-		Integer persistedObjectId = null;
-		for (Method element : methods) {
-			// If the method name equals 'getId' then invoke it to get the id of
-			// the object.
-			if (element.getName().equals("getId")) {
-				try {
-					persistedObjectId = (Integer) element.invoke(obj, null);
-					break;
-				}
-				catch (Exception e) {
-					// logger.warn("Audit Log Failed - Could not get persisted
-					// object id: " + e.getMessage());
-				}
-			}
-		}
-		return persistedObjectId;
 	}
 
 	/**
@@ -113,12 +91,13 @@ public class AuditSession {
 	 * 
 	 * @param entity the entity
 	 */
-	public void saveEvent(Object entity) {
+	public void saveEvent(final Object entity) {
 		if (!events.containsKey(entity)) {
 			return;
 		}
 
-		if (getObjectId(entity) == null) {
+		if (AuditUtil.getObjectId(entity) == null) {
+			events.remove(entity);
 			throw new AuditSystemException("No ID for entity " + entity + "; cannot properly audit");
 		}
 

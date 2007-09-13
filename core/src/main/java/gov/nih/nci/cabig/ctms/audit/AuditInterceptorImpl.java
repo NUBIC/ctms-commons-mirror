@@ -257,7 +257,8 @@ public class AuditInterceptorImpl extends EmptyInterceptor {
 			throw new AuditSystemException("Cannot audit; no local audit info available");
 		}
 		DataAuditEvent event = new DataAuditEvent(entity, operation, DataAuditInfo.copy(info));
-		getAuditSession().addEvent(entity, event);
+		getAuditSession().addEvent(entity, event, operation);
+
 		return event;
 	}
 
