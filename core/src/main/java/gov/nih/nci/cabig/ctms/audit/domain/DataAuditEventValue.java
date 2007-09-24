@@ -19,7 +19,7 @@ import org.hibernate.annotations.Parameter;
  */
 @Entity
 @Table(name = "audit_event_values")
-@GenericGenerator(name = "id-generator", strategy = "native", parameters = { @Parameter(name = "sequence", value = "audit_event_values_id_seq") })
+@GenericGenerator(name = "id-generator", strategy = "native", parameters = { @Parameter(name = "sequence", value = "SEQ_AUDIT_EVENT_VALUES_ID") })
 public class DataAuditEventValue {
 
 	/** The id. */
