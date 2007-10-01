@@ -6,41 +6,45 @@ import org.aspectj.lang.ProceedingJoinPoint;
 
 public class SecurityInterceptorAspect {
 
-	private AspectJSecurityInterceptor securityInterceptor;
+    private AspectJSecurityInterceptor securityInterceptor;
 
-	public Object advise(ProceedingJoinPoint pjp) throws Throwable {
-		if (getSecurityInterceptor() != null) {
-			return getSecurityInterceptor().invoke(pjp, new Callback(pjp));
-		} else {
-			return pjp.proceed();
-		}
-	}
+    public Object advise(ProceedingJoinPoint pjp) throws Throwable {
+        if (getSecurityInterceptor() != null) {
+            return getSecurityInterceptor().invoke(pjp, new Callback(pjp));
+        } else {
+            return pjp.proceed();
+        }
+    }
 
-	private class Callback implements AspectJCallback {
-		private ProceedingJoinPoint pjp;
+    private class Callback implements AspectJCallback {
+        private ProceedingJoinPoint pjp;
 
-		public Callback(ProceedingJoinPoint pjp) {
-			this.pjp = pjp;
-		}
+        public Callback(ProceedingJoinPoint pjp) {
+            this.pjp = pjp;
+        }
 
-		public Object proceedWithObject() {
-			try {
-				return pjp.proceed();
-			} catch (Throwable t) {
-				throw new RuntimeException("Error proceeding: "
-						+ t.getMessage(), t);
-			}
-		}
+        public Object proceedWithObject() {
+            try {
+                return pjp.proceed();
+            } catch (RuntimeException re) {
+                throw re;
+            } catch (Error e) {
+                throw e;
+            } catch (Throwable t) {
+                throw new RuntimeException("Error proceeding: "
+                    + t.getMessage(), t);
+            }
+        }
 
-	}
+    }
 
-	public AspectJSecurityInterceptor getSecurityInterceptor() {
-		return securityInterceptor;
-	}
+    public AspectJSecurityInterceptor getSecurityInterceptor() {
+        return securityInterceptor;
+    }
 
-	public void setSecurityInterceptor(
-			AspectJSecurityInterceptor securityInterceptor) {
-		this.securityInterceptor = securityInterceptor;
-	}
+    public void setSecurityInterceptor(
+        AspectJSecurityInterceptor securityInterceptor) {
+        this.securityInterceptor = securityInterceptor;
+    }
 
 }
