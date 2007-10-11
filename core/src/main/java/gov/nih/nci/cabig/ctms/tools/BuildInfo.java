@@ -1,8 +1,8 @@
 package gov.nih.nci.cabig.ctms.tools;
 
-import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @author Rhett Sutphin
@@ -16,7 +16,7 @@ public class BuildInfo {
 
     private String username;
     private String hostname;
-    private Timestamp timestamp;
+    private Date timestamp;
 
     ////// LOGIC
 
@@ -102,11 +102,11 @@ public class BuildInfo {
         this.hostname = hostname;
     }
 
-    public Timestamp getTimestamp() {
+    public Date getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Timestamp timestamp) {
+    public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
     }
 }

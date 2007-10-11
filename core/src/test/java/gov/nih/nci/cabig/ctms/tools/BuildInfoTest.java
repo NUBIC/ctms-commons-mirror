@@ -32,7 +32,7 @@ public class BuildInfoTest extends TestCase {
         buildInfo.setHostname("localhost");
         buildInfo.setVersionNumber("1.22-SNAPSHOT");
         buildInfo.setUsername("builder");
-        buildInfo.setTimestamp(DateTools.createTimestamp(2007, Calendar.FEBRUARY, 5, 13, 18, 8));
+        buildInfo.setTimestamp(DateTools.createDate(2007, Calendar.FEBRUARY, 5, 13, 18, 8));
     }
 
     public void testReleaseBuildName() throws Exception {
