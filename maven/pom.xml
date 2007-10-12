@@ -7,12 +7,12 @@
     <parent>
         <groupId>gov.nih.nci.cabig.ctms</groupId>
         <artifactId>ctms-commons</artifactId>
-        <version>0.5</version>
+        <version>0.6-SNAPSHOT</version>
     </parent>
     <scm>
-        <url>http://gforge.nci.nih.gov/svnroot/ctmscommons/tags/releases/0.5</url>
-        <connection>scm:svn:http://gforge.nci.nih.gov/svnroot/ctmscommons/tags/releases/0.5</connection>
-        <developerConnection>scm:svn:http://gforge.nci.nih.gov/svnroot/ctmscommons/tags/releases/0.5</developerConnection>
+        <url>http://gforge.nci.nih.gov/svnroot/caaersappdev/trunk/maven</url>
+        <connection>scm:svn:http://gforge.nci.nih.gov/svnroot/caaersappdev/trunk/maven</connection>
+        <developerConnection>scm:svn:http://gforge.nci.nih.gov/svnroot/caaersappdev/trunk/maven</developerConnection>
     </scm>
     <repositories>
         <repository>
