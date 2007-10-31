@@ -75,6 +75,21 @@
         <name>javascriptLink</name>
         <path>/META-INF/tags/helper/javascriptLink.tag</path>
     </tag-file>
+    <tag-file>
+        <name>dateInput</name>
+        <path>/META-INF/tags/helper/dateInput.tag</path>
+    </tag-file>
+    <tag-file>
+        <!--
+        <description>
+            This tag has the same side-effects as the spring form:form tag, but does not
+            write an HTML &lt;form&gt; tag.  Useful for using spring's tags in
+            both full pages and in partial-form ajax responses.
+        </description>
+        -->
+        <name>noform</name>
+        <path>/META-INF/tags/helper/noform.tag</path>
+    </tag-file>
 
     <tag-file>
         <name>tabControls</name>

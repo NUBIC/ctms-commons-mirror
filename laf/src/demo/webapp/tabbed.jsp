@@ -2,6 +2,7 @@
 <%@ page import="gov.nih.nci.cabig.ctms.web.tabs.Tab" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.LinkedHashMap" %>
+<%@ page import="java.util.Date" %>
 
 <%
     /* Mock flow, tab, and summary.  In a real application, these will come from the controller or command */
@@ -18,6 +19,11 @@
     request.setAttribute("flow", flow);
     request.setAttribute("tab", flow.getTab(1));
     request.setAttribute("summary", summary);
+    request.setAttribute("command", new Object() {
+        private Date fermentum;
+        public Date getFermentum() { return fermentum; }
+        public void setFermentum(Date fermentum) { this.fermentum = fermentum; }
+    });
 %>
 
 <%@taglib prefix="laf" uri="http://gforge.nci.nih.gov/projects/ctmscommons/taglibs/laf" %>
@@ -31,6 +37,7 @@
 <body>
 <laf:box title="${pageHelp}${empty title ? tab.shortTitle : title}" id="${boxId}" cssClass="${boxClass}">
     <laf:flashMessage/>
+    <laf:noform>
     <form action="#">
         <laf:tabFields tab="${tab}"/>
         <laf:division>
@@ -61,6 +68,12 @@
                         <option>augue</option>
                         <option>dignissim</option>
                     </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="label">Fermentum</div>
+                <div class="value">
+                    <laf:dateInput path="fermentum"/>
                 </div>
             </div>
             <div class="row">
@@ -114,6 +127,7 @@
         </laf:division>
         <laf:tabControls tab="${tab}" flow="${flow}" willSave="${true}"/>
     </form>
+    </laf:noform>
 </laf:box>
 </body>
 </html>
