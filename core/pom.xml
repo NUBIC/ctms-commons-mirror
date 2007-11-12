@@ -49,6 +49,15 @@
             <version>3.2.1.ga</version>
         </dependency>
 
+        <!-- COMPILE ONLY -->
+        <dependency>
+            <groupId>ant</groupId>
+            <artifactId>ant</artifactId>
+            <version>1.6.5</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- TEST ONLY -->
         <dependency>
             <groupId>hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
