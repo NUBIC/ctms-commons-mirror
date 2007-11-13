@@ -1,14 +1,13 @@
 package gov.nih.nci.cabig.ctms.tools.spring;
 
-import gov.nih.nci.cabig.caaers.CaaersTestCase;
-import gov.nih.nci.cabig.ctms.tools.spring.HibernatePropertiesFactoryBean;
-
 import java.util.Properties;
+
+import junit.framework.TestCase;
 
 /**
  * @author Rhett Sutphin
  */
-public class HibernatePropertiesFactoryBeanTest extends CaaersTestCase {
+public class HibernatePropertiesFactoryBeanTest extends TestCase {
     private HibernatePropertiesFactoryBean factoryBean;
 
     @Override
