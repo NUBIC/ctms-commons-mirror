@@ -31,13 +31,16 @@ public class DataSourceSelfDiscoveringPropertiesFactoryBean extends DatabaseConf
     private String applicationDirectoryName;
     protected Properties properties;
     private Properties defaults;
+    private List<String> searchedLocations;
+    private boolean nullTolerant;
 
     public DataSourceSelfDiscoveringPropertiesFactoryBean() {
         defaults = new Properties();
+        nullTolerant = false;
     }
 
     public synchronized Properties getProperties() {
-        if (properties == null) {
+        if (properties == null && searchedLocations == null) {
             initProperties();
         }
         return properties;
@@ -45,8 +48,10 @@ public class DataSourceSelfDiscoveringPropertiesFactoryBean extends DatabaseConf
 
     private void initProperties() {
         findProperties();
-        internalComputeProperties();
-        computeProperties();
+        if (properties != null) {
+            internalComputeProperties();
+            computeProperties();
+        }
     }
 
     protected List<File> searchDirectories() {
@@ -78,7 +83,7 @@ public class DataSourceSelfDiscoveringPropertiesFactoryBean extends DatabaseConf
         }
 
         String propfileName = getDatabaseConfigurationName() + ".properties";
-        List<String> searchedLocations = new LinkedList<String>();
+        searchedLocations = new LinkedList<String>();
         for (File dir : searchDirectories()) {
             File possiblePath = new File(dir, propfileName);
             String abspath = possiblePath.getAbsolutePath();
@@ -91,7 +96,9 @@ public class DataSourceSelfDiscoveringPropertiesFactoryBean extends DatabaseConf
                 if (log.isDebugEnabled()) log.debug("Not found in " + abspath);
             }
         }
-        throw new CommonsConfigurationException("Datasource configuration not found.  Looked in " + searchedLocations + '.');
+        if (!isNullTolerant()) {
+            throw new CommonsConfigurationException("Datasource configuration not found.  Looked in " + searchedLocations + '.');
+        }
     }
 
     private void readProperties(File path) {
@@ -170,5 +177,17 @@ public class DataSourceSelfDiscoveringPropertiesFactoryBean extends DatabaseConf
 
     public void setApplicationDirectoryName(String applicationDirectoryName) {
         this.applicationDirectoryName = applicationDirectoryName;
+    }
+
+    public boolean isNullTolerant() {
+        return nullTolerant;
+    }
+
+    public void setNullTolerant(boolean nullTolerant) {
+        this.nullTolerant = nullTolerant;
+    }
+
+    public List<String> getSearchedLocations() {
+        return searchedLocations;
     }
 }

@@ -1,6 +1,7 @@
 package gov.nih.nci.cabig.ctms.tools;
 
 import static gov.nih.nci.cabig.ctms.tools.DataSourceSelfDiscoveringPropertiesFactoryBean.*;
+import gov.nih.nci.cabig.ctms.CommonsConfigurationException;
 
 import java.io.File;
 import java.util.Properties;
@@ -13,11 +14,12 @@ import junit.framework.TestCase;
  */
 public class DataSourceSelfDiscoveringPropertiesFactoryBeanTest extends TestCase {
     private DataSourceSelfDiscoveringPropertiesFactoryBean factoryBean;
+    private File thisDir;
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        File thisDir = new File(getClass().getResource("/").toURI());
+        thisDir = new File(getClass().getResource("/").toURI());
         System.setProperty("catalina.home", thisDir.getCanonicalPath());
 
         factoryBean = new TestDataSourcePropertiesFactoryBean();
@@ -56,6 +58,36 @@ public class DataSourceSelfDiscoveringPropertiesFactoryBeanTest extends TestCase
         factoryBean.getDefaults().setProperty(RDBMS_PROPERTY_NAME, "PostgreSQL");
         factoryBean.getDefaults().setProperty(HIBERNATE_DIALECT_PROPERTY_NAME, expectedDialect);
         Assert.assertEquals(expectedDialect, getActualProperties().getProperty(HIBERNATE_DIALECT_PROPERTY_NAME));
+    }
+
+    public void testExceptionIfNoDirectoryMatched() throws Exception {
+        factoryBean.setApplicationDirectoryName("vesuvius");
+        try {
+            factoryBean.getObject();
+            fail("Exception not thrown");
+        } catch (CommonsConfigurationException cce) {
+            assertTrue("Wrong exception thrown: " + cce.getMessage(),
+                cce.getMessage().startsWith("Datasource configuration not found.  Looked in ["));
+            assertTrue("Wrong exception thrown: " + cce.getMessage(),
+                cce.getMessage().contains("/etc/vesuvius/empty.properties"));
+        }
+    }
+
+    public void testExceptionNotThrownInNullTolerantMode() throws Exception {
+        factoryBean.setApplicationDirectoryName("vesuvius");
+        factoryBean.setNullTolerant(true);
+        assertNull(factoryBean.getObject());
+    }
+
+    public void testSearchLocationsPreservedInNullTolerantMode() throws Exception {
+        factoryBean.setApplicationDirectoryName("vesuvius");
+        factoryBean.setNullTolerant(true);
+        factoryBean.getObject();
+        
+        assertNotNull("Locations not preserved", factoryBean.getSearchedLocations());
+        assertEquals("Wrong number of locations", 3, factoryBean.getSearchedLocations().size());
+        assertTrue("Missing one of the expected paths",
+            factoryBean.getSearchedLocations().contains("/etc/vesuvius/empty.properties"));
     }
 
     private void assertLoadedProperties(
