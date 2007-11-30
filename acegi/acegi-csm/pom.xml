@@ -8,7 +8,7 @@
     <parent>
         <groupId>gov.nih.nci.security.acegi</groupId>
         <artifactId>acegi</artifactId>
-        <version>0.6-SNAPSHOT</version>
+        <version>0.6</version>
     </parent>
 
     <dependencies>
