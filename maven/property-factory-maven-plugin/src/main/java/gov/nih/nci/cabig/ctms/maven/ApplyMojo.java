@@ -9,6 +9,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ByteArrayResource;
 
 import java.util.Properties;
+import java.util.Collection;
 
 /**
  * @author Rhett Sutphin
@@ -52,9 +53,11 @@ public class ApplyMojo extends AbstractMojo {
     }
 
     // package-level for testing
-    Properties effectiveProperties() {
+    Properties effectiveProperties() throws MojoExecutionException {
         XmlBeanFactory beanFactory = new XmlBeanFactory(createResource());
-        return (Properties) beanFactory.getBeansOfType(Properties.class).values().iterator().next();
+	Collection beans = beanFactory.getBeansOfType(Properties.class).values();
+	if (beans.isEmpty()) throw new MojoExecutionException("Provided XML fragment does not define any bean of type Properties.");
+        return (Properties) beans.iterator().next();
     }
 
     private Resource createResource() {

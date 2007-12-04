@@ -6,6 +6,7 @@ import java.util.Properties;
 import java.util.Collection;
 
 import org.apache.maven.project.MavenProject;
+import org.apache.maven.plugin.MojoExecutionException;
 
 /**
  * @author Rhett Sutphin
@@ -39,5 +40,15 @@ public class ApplyMojoTest extends TestCase {
                 TestingFactoryBean.PROPERTIES.get(testPropName),
                 project.getProperties().get(testPropName));
         }
+    }
+
+    public void testEffectivePropertiesWhenUndefined() throws Exception {
+	mojo.setBeanXml("<bean class='" + java.util.ArrayList.class.getName() + "'/>");
+	try {
+	    mojo.effectiveProperties();
+	    fail("Exception not thrown.");
+	} catch (MojoExecutionException e) {
+	    // expected
+	}     
     }
 }
