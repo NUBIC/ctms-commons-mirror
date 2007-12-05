@@ -3,7 +3,7 @@
 body {
   margin: 0; padding: 0;
   background: url(../images/chrome/caBIG_footer.gif) no-repeat bottom right #eee;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-size: 10pt;
   color: #000000;
 }
