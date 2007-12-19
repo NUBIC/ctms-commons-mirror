@@ -52,13 +52,12 @@ public class AuditHistoryRepository extends HibernateDaoSupport {
                 "select distinct e from DataAuditEvent e  where "
                         + "e.reference.className = :className " +
                         "and e.reference.id= :id " +
-                        "and e.operation=:operation"
-                        + "and e.info.time>=:startDate and e.info.time<=:endDate order by e.id asc");
+                        "and e.operation=:operation "+
+                        "and e.info.time>=:startDate and e.info.time<=:endDate order by e.id asc");
 
         final Calendar newCalendar = (Calendar) calendar.clone();
         newCalendar.add(Calendar.MINUTE, -minutes);
-        final Date startDate = DateUtils.truncate(calendar.getTime(), Calendar.DATE);
-        final Date endDate = DateUtils.truncate(newCalendar.getTime(), Calendar.DATE);
+        //getHibernateTemplate().find(queryBuffer.toString());
 
         final List<DataAuditEvent> dataAuditEvents = (List<DataAuditEvent>) getHibernateTemplate().execute(
                 new HibernateCallback() {
@@ -67,8 +66,8 @@ public class AuditHistoryRepository extends HibernateDaoSupport {
                         final Query query = session.createQuery(queryBuffer.toString());
                         query.setParameter("className", entityClass.getName());
                         query.setParameter("id", entityId);
-                        query.setParameter("endDate", endDate);
-                        query.setParameter("startDate", startDate);
+                        query.setParameter("endDate", calendar.getTime());
+                        query.setParameter("startDate", newCalendar.getTime());
                         query.setParameter("operation", Operation.CREATE);
                         return query.list();
                     }
