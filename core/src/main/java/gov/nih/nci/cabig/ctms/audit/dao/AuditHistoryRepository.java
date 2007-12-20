@@ -1,12 +1,11 @@
 package gov.nih.nci.cabig.ctms.audit.dao;
 
 import gov.nih.nci.cabig.ctms.audit.domain.*;
+import gov.nih.nci.cabig.ctms.audit.dao.query.DataAuditEventQuery;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+import java.sql.SQLException;
 
 import org.apache.commons.lang.time.DateUtils;
 import org.hibernate.HibernateException;
@@ -48,32 +47,59 @@ public class AuditHistoryRepository extends HibernateDaoSupport {
         if (Integer.valueOf(minutes).equals(Integer.valueOf(0))) {
             minutes = 1;
         }
-        final StringBuffer queryBuffer = new StringBuffer(
-                "select distinct e from DataAuditEvent e  where "
-                        + "e.reference.className = :className " +
-                        "and e.reference.id= :id " +
-                        "and e.operation=:operation "+
-                        "and e.info.time>=:startDate and e.info.time<=:endDate order by e.id asc");
-
         final Calendar newCalendar = (Calendar) calendar.clone();
         newCalendar.add(Calendar.MINUTE, -minutes);
-        //getHibernateTemplate().find(queryBuffer.toString());
+        DataAuditEventQuery dataAuditEventQuery = new DataAuditEventQuery();
+        dataAuditEventQuery.filterByClassName(entityClass.getName());
+        dataAuditEventQuery.filterByStartDateAfter(newCalendar.getTime());
+        dataAuditEventQuery.filterByEndDateBefore(calendar.getTime());
+        dataAuditEventQuery.filterByEntityId(entityId);
+        dataAuditEventQuery.filterByOperation(Operation.CREATE);
+        final List<DataAuditEvent> dataAuditEvents = findDataAuditEvents(dataAuditEventQuery);
+        return dataAuditEvents != null && !dataAuditEvents.isEmpty();
 
-        final List<DataAuditEvent> dataAuditEvents = (List<DataAuditEvent>) getHibernateTemplate().execute(
-                new HibernateCallback() {
+    }
 
-                    public Object doInHibernate(final Session session) throws HibernateException {
-                        final Query query = session.createQuery(queryBuffer.toString());
-                        query.setParameter("className", entityClass.getName());
-                        query.setParameter("id", entityId);
-                        query.setParameter("endDate", calendar.getTime());
-                        query.setParameter("startDate", newCalendar.getTime());
-                        query.setParameter("operation", Operation.CREATE);
-                        return query.list();
-                    }
-                });
+    @SuppressWarnings("unchecked")
+    private List<DataAuditEvent> findDataAuditEvents(final DataAuditEventQuery query) {
+        String queryString = query.getQueryString();
+        logger.debug("query: " + queryString);
+        return (List<DataAuditEvent>) getHibernateTemplate().execute(new HibernateCallback() {
 
+            public Object doInHibernate(final Session session) throws HibernateException, SQLException {
+                org.hibernate.Query hiberanteQuery = session.createQuery(query.getQueryString());
+                Map<String, Object> queryParameterMap = query.getParameterMap();
+                for (String key : queryParameterMap.keySet()) {
+                    Object value = queryParameterMap.get(key);
+                    hiberanteQuery.setParameter(key, value);
 
+                }
+                return hiberanteQuery.list();
+            }
+
+        });
+    }
+
+    /**
+     * Checks if entity was created by a url.
+     *
+     * @param entityClass
+     * @param entityId
+     * @param url
+     * @return true if entity was created by the specified url; false otherwise
+     * @throws IllegalArgumentException if any of method argument is null
+     */
+    public boolean checkIfEntityWasCreatedByUrl(final Class entityClass, final Integer entityId, final String url) {
+
+        if (url == null || entityClass == null || entityId == null) {
+            throw new IllegalArgumentException("invalid uses of method. All method parameters must not be null");
+        }
+        DataAuditEventQuery dataAuditEventQuery = new DataAuditEventQuery();
+        dataAuditEventQuery.filterByClassName(entityClass.getName());
+        dataAuditEventQuery.filterByURL(url);
+        dataAuditEventQuery.filterByEntityId(entityId);
+        dataAuditEventQuery.filterByOperation(Operation.CREATE);
+        final List<DataAuditEvent> dataAuditEvents = findDataAuditEvents(dataAuditEventQuery);
         return dataAuditEvents != null && !dataAuditEvents.isEmpty();
 
     }
