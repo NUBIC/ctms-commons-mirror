@@ -29,6 +29,11 @@ public class ConfigurationPropertyEditorTest extends CommonsTestCase {
         assertEquals("Wrong value 2", "c", actual.get(2));
         assertEquals("Wrong value 3", "d", actual.get(3));
     }
+
+    public void testSetTextBlankIsNull() throws Exception {
+        editor.setAsText(" \t  \r");
+        assertNull(editor.getValue());
+    }
     
     public void testGetText() throws Exception {
         editor.setValue(Arrays.asList("g", "h", "i"));

@@ -1,5 +1,7 @@
 package gov.nih.nci.cabig.ctms.tools.configuration;
 
+import org.apache.commons.lang.StringUtils;
+
 import java.beans.PropertyEditorSupport;
 
 /**
@@ -14,7 +16,11 @@ public class ConfigurationPropertyEditor<V> extends PropertyEditorSupport {
 
     @Override
     public void setAsText(String text) throws IllegalArgumentException {
-        setValue(property.fromStorageFormat(text));
+        if (StringUtils.isBlank(text)) {
+            setValue(null);
+        } else {
+            setValue(property.fromStorageFormat(text));
+        }
     }
 
     @Override
