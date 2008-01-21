@@ -12,6 +12,7 @@
 <head>
     <style type="text/css" media="screen">@import 'css/common.css' /**/;</style>
     <style type="text/css" media="screen">@import 'css/styles.css' /**/;</style>
+    <style type="text/css" media="screen">@import 'css/fields.css' /**/;</style>
 
     <style type="text/css">
         .box {
@@ -74,9 +75,9 @@
                     <input type="hidden" name="lt" value="${flowExecutionKey}"/>
                     <input type="hidden" name="_eventId" value="submit"/>
 
-                    <input accesskey="l" value="<spring:message code="screen.welcome.button.login" />" tabindex="4"
+                    <input accesskey="l" value="Log in" tabindex="4"
                            type="submit"/>
-                    <input accesskey="c" value="<spring:message code="screen.welcome.button.clear" />" tabindex="5"
+                    <input accesskey="c" value="Clear" tabindex="5"
                            type="reset"/>
                 </div>
             </div>

@@ -12,6 +12,8 @@
 <head>
     <style type="text/css" media="screen">@import 'css/common.css' /**/;</style>
     <style type="text/css" media="screen">@import 'css/styles.css' /**/;</style>
+    <style type="text/css" media="screen">@import 'css/fields.css' /**/;</style>
+
 
 </head>
 <body>
