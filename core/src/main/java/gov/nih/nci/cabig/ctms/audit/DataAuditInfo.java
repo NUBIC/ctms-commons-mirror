@@ -9,6 +9,7 @@ import java.util.Date;
  * 
  * Last Checkin: $Author: rsutphin $ Date: $Date: 2004/09/13 23:35:12 $ Revision: $Revision: 1.11 $
  */
+@Deprecated // All access should go through domain.DataAuditInfo
 public class DataAuditInfo implements Serializable, Cloneable {
 	private volatile static ThreadLocal<DataAuditInfo> localAuditInfo = new ThreadLocal<DataAuditInfo>();
 
