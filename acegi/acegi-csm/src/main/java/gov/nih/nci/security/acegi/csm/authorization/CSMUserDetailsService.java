@@ -1,12 +1,8 @@
 package gov.nih.nci.security.acegi.csm.authorization;
 
-import java.util.Iterator;
-import java.util.Set;
-
 import gov.nih.nci.security.UserProvisioningManager;
 import gov.nih.nci.security.authorization.domainobjects.Group;
 import gov.nih.nci.security.exceptions.CSObjectNotFoundException;
-
 import org.acegisecurity.AuthenticationServiceException;
 import org.acegisecurity.GrantedAuthority;
 import org.acegisecurity.GrantedAuthorityImpl;
@@ -14,10 +10,13 @@ import org.acegisecurity.userdetails.User;
 import org.acegisecurity.userdetails.UserDetails;
 import org.acegisecurity.userdetails.UserDetailsService;
 import org.acegisecurity.userdetails.UsernameNotFoundException;
-import org.springframework.dao.DataAccessException;
-import org.springframework.beans.factory.annotation.Required;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Required;
+import org.springframework.dao.DataAccessException;
+
+import java.util.Iterator;
+import java.util.Set;
 
 public class CSMUserDetailsService implements UserDetailsService {
     private static final Log log = LogFactory.getLog(CSMUserDetailsService.class);
@@ -35,6 +34,9 @@ public class CSMUserDetailsService implements UserDetailsService {
 		Set groups;
 		try {
             gov.nih.nci.security.authorization.domainobjects.User loadedUser = mgr.getUser(userName);
+            if(loadedUser == null){
+                throw new UsernameNotFoundException("User does not exist in CSM.");
+            }
             log.debug("Retrieved user obj " + loadedUser + " with ID " + (loadedUser == null ? "<null>" : loadedUser.getUserId()));
             groups = mgr.getGroups(loadedUser.getUserId().toString());
 		} catch (CSObjectNotFoundException ex) {
