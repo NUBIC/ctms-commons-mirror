@@ -126,7 +126,10 @@ public class AuditInterceptorImpl extends EmptyInterceptor {
 	List<Integer> findDifferences(final Object[] currentState, final Object[] previousState, final Type[] types) {
 
 		List<Integer> differences = new ArrayList<Integer>();
-		if (currentState == null || previousState == null) {
+		if(currentState==null && previousState==null ){
+            return differences;
+        }
+        if (currentState == null || previousState == null) {
 			int len = currentState == null ? previousState.length : currentState.length;
 			while (differences.size() < len) {
 				differences.add(differences.size());
