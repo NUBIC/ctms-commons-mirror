@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Set;
 import java.util.Collection;
 
+import gov.nih.nci.cabig.ctms.CommonsSystemException;
+
 /**
  * Provides a base DAO class for an KV-style configuration system for an application.
  * The actual database records are modeled by {@link ConfigurationEntry}.  The database
@@ -25,6 +27,10 @@ import java.util.Collection;
  *       }
  *   }</pre> 
  *
+ * <p>
+ * If you want to call your table something besides "configuration", see
+ * {@link #getConfigurationEntryClass()}.
+ *
  * @see ConfigurationEntry
  * @see ConfigurationProperties
  * @see ConfigurationProperty
@@ -42,7 +48,7 @@ public abstract class DatabaseBackedConfiguration extends HibernateDaoSupport {
 
     public <V> V get(ConfigurationProperty<V> property) {
         ConfigurationEntry entry
-            = (ConfigurationEntry) getHibernateTemplate().get(ConfigurationEntry.class, property.getKey());
+            = (ConfigurationEntry) getHibernateTemplate().get(getConfigurationEntryClass(), property.getKey());
         if (entry == null) {
             return property.getDefault();
         } else {
@@ -55,13 +61,36 @@ public abstract class DatabaseBackedConfiguration extends HibernateDaoSupport {
     @Transactional(readOnly = false)
     public <V> void set(ConfigurationProperty<V> property, V value) {
         ConfigurationEntry entry
-            = (ConfigurationEntry) getHibernateTemplate().get(ConfigurationEntry.class, property.getKey());
+            = (ConfigurationEntry) getHibernateTemplate().get(getConfigurationEntryClass(), property.getKey());
         if (entry == null) {
-            entry = new ConfigurationEntry();
-            entry.setKey(property.getKey());
+            try {
+                entry = getConfigurationEntryClass().newInstance();
+                entry.setKey(property.getKey());
+            } catch (InstantiationException e) {
+                throw new CommonsSystemException(
+                    "Could not instantiate a new configuration entry of class %s", e,
+                    getConfigurationEntryClass().getName());
+            } catch (IllegalAccessException e) {
+                throw new CommonsSystemException(
+                    "Could not instantiate a new configuration entry of class %s", e,
+                    getConfigurationEntryClass().getName());
+            }
         }
         entry.setValue(value == null ? null : property.toStorageFormat(value));
         getHibernateTemplate().saveOrUpdate(entry);
+    }
+
+    /**
+     * Allows subclasses to specify a subclass of {@link ConfigurationEntry} to
+     * use.  The primary benefit of this would be to allow for a configuration
+     * stored in a table not called "configuration".
+     * <p>
+     * The default is {@link DefaultConfigurationEntry}, which should be fine
+     * unless you want to have more than one type of configuration in your
+     * application.
+     */
+    protected Class<? extends ConfigurationEntry> getConfigurationEntryClass() {
+        return DefaultConfigurationEntry.class;
     }
 
     public java.util.Map<String, Object> getMap() {

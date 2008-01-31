@@ -1,16 +1,17 @@
 package gov.nih.nci.cabig.ctms.tools.configuration;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 
 /**
  * @author Rhett Sutphin
  */
-@Entity
-@Table (name = "configuration")
-public class ConfigurationEntry {
+// This has to be a MappedSuperclass because hibernate doesn't have any
+// inheritance mappings that say "store everything from every class in
+// separate tables."
+@MappedSuperclass
+public abstract class ConfigurationEntry {
     private String key;
     private String value;
     private Integer version;
