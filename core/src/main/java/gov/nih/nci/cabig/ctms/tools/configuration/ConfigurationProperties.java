@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.io.IOException;
 
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.ClassPathResource;
 import gov.nih.nci.cabig.ctms.CommonsSystemException;
 
 /**
@@ -40,8 +41,6 @@ import gov.nih.nci.cabig.ctms.CommonsSystemException;
  * @see DatabaseBackedConfiguration
  */
 public class ConfigurationProperties {
-    private static final String DETAILS_RESOURCE = "details.properties";
-
     private Map<String, ConfigurationProperty<?>> props = new TreeMap<String, ConfigurationProperty<?>>();
     private Properties details;
 
@@ -59,18 +58,25 @@ public class ConfigurationProperties {
      * @see org.springframework.core.io.ClassPathResource
      */
     public ConfigurationProperties(Resource detailsProperties) {
-        loadDetails(detailsProperties);
+        this(loadDetails(detailsProperties));
     }
 
-    private void loadDetails(Resource resource) {
-        if (details == null) {
-            details = new Properties();
-            try {
-                details.load(resource.getInputStream());
-            } catch (IOException e) {
-                throw new CommonsSystemException("Failed to load property details " + DETAILS_RESOURCE, e);
-            }
+    protected ConfigurationProperties(Properties detailsProperties) {
+        this.details = detailsProperties;
+    }
+
+    private static Properties loadDetails(Resource resource) {
+        Properties details = new Properties();
+        try {
+            details.load(resource.getInputStream());
+        } catch (IOException e) {
+            throw new CommonsSystemException("Failed to load property details from " + resource, e);
         }
+        return details;
+    }
+
+    public static ConfigurationProperties empty() {
+        return new Empty();
     }
 
     public <V> ConfigurationProperty<V> add(ConfigurationProperty<V> prop) {
@@ -109,5 +115,15 @@ public class ConfigurationProperties {
 
     private Properties getDetails() {
         return details;
+    }
+
+    private static class Empty extends ConfigurationProperties {
+        public Empty() {
+            super(new Properties());
+        }
+
+        public <V> ConfigurationProperty<V> add(ConfigurationProperty<V> prop) {
+            throw new UnsupportedOperationException("add not supported for empty property list");
+        }
     }
 }
