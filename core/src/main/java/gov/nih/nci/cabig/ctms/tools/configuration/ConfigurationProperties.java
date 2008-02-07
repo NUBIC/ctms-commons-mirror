@@ -75,10 +75,6 @@ public class ConfigurationProperties {
         return details;
     }
 
-    public static ConfigurationProperties empty() {
-        return new Empty();
-    }
-
     public <V> ConfigurationProperty<V> add(ConfigurationProperty<V> prop) {
         props.put(prop.getKey(), prop);
         prop.setCollection(this);
@@ -115,6 +111,24 @@ public class ConfigurationProperties {
 
     private Properties getDetails() {
         return details;
+    }
+
+    public static ConfigurationProperties union(ConfigurationProperties... items) {
+        Properties mergedDetails = new Properties();
+        for (ConfigurationProperties collection : items) {
+            mergedDetails.putAll(collection.getDetails());
+        }
+        ConfigurationProperties union = new ConfigurationProperties(mergedDetails);
+        for (ConfigurationProperties collection : items) {
+            for (ConfigurationProperty<?> property : collection.getAll()) {
+                union.add(property.clone());
+            }
+        }
+        return union;
+    }
+
+    public static ConfigurationProperties empty() {
+        return new Empty();
     }
 
     private static class Empty extends ConfigurationProperties {
