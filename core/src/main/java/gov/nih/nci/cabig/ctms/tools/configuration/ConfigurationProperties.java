@@ -136,6 +136,7 @@ public class ConfigurationProperties {
             super(new Properties());
         }
 
+        @Override
         public <V> ConfigurationProperty<V> add(ConfigurationProperty<V> prop) {
             throw new UnsupportedOperationException("add not supported for empty property list");
         }
