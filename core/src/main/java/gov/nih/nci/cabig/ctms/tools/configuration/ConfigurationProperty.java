@@ -47,7 +47,6 @@ public abstract class ConfigurationProperty<V> implements Cloneable {
         return "text";
     }
 
-
     @Override
     @SuppressWarnings({ "unchecked" })
     public ConfigurationProperty<V> clone() {
@@ -58,6 +57,27 @@ public abstract class ConfigurationProperty<V> implements Cloneable {
         } catch (CloneNotSupportedException e) {
             throw new CommonsError("Clone is supported", e);
         }
+    }
+
+    @Override
+    @SuppressWarnings({ "RawUseOfParameterizedType" })
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ConfigurationProperty that = (ConfigurationProperty) o;
+
+        return !(key != null ? !key.equals(that.key) : that.key != null);
+    }
+
+    @Override
+    public int hashCode() {
+        return (key != null ? key.hashCode() : 0);
+    }
+
+    @Override
+    public String toString() {
+        return new StringBuilder(getClass().getSimpleName()).append('[').append(getKey()).append(']').toString();
     }
 
     /**

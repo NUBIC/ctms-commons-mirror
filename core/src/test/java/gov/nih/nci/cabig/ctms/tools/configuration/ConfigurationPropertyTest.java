@@ -20,4 +20,8 @@ public class ConfigurationPropertyTest extends CommonsTestCase {
         assertNull("properties reference retained", portClone.getDescription());
         assertEquals("key not retained", ExampleConfiguration.SMTP_PORT.getKey(), portClone.getKey());
     }
+    
+    public void testClonesEqual() throws Exception {
+        assertEquals(ExampleConfiguration.ADDRESSES, ExampleConfiguration.ADDRESSES.clone());
+    }
 }
