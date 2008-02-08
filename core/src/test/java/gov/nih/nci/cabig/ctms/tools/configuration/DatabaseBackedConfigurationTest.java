@@ -11,6 +11,7 @@ import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
+import java.util.Arrays;
 
 /**
  * @author Rhett Sutphin
@@ -22,6 +23,7 @@ public class DatabaseBackedConfigurationTest extends CommonsTestCase {
     private DatabaseBackedConfiguration configuration, altConfiguration;
     private SessionFactory sessionFactory;
     private JdbcTemplate jdbc;
+    private StubConfigurationListener stubListener;
 
     @Override
     protected void setUp() throws Exception {
@@ -34,8 +36,10 @@ public class DatabaseBackedConfigurationTest extends CommonsTestCase {
             .setProperty("hibernate.connection.username", "sa")
             .setProperty("hibernate.connection.password", "")
             .buildSessionFactory();
+        stubListener = new StubConfigurationListener();
         configuration = new ExampleConfiguration();
         configuration.setSessionFactory(sessionFactory);
+        configuration.addConfigurationListener(stubListener);
         altConfiguration = new AlternateConfiguration();
         altConfiguration.setSessionFactory(sessionFactory);
         SingleConnectionDataSource ds
@@ -146,6 +150,44 @@ public class DatabaseBackedConfigurationTest extends CommonsTestCase {
 
     public void testIsSetWhenNotSet() throws Exception {
         assertFalse(configuration.isSet(ExampleConfiguration.ADDRESSES));
+    }
+
+    public void testEventFiredForSet() throws Exception {
+        assertNull(stubListener.getLastUpdate());
+        configuration.set(ExampleConfiguration.SMTP_HOST, "zephyr");
+        assertNotNull("Event not fired", stubListener.getLastUpdate());
+        assertSame("Event has wrong source", configuration, stubListener.getLastUpdate().getSource());
+        assertSame("Event has wrong property", ExampleConfiguration.SMTP_HOST,
+            stubListener.getLastUpdate().getUpdatedProperty());
+    }
+
+    public void testEventFiredForReset() throws Exception {
+        assertNull(stubListener.getLastUpdate());
+        configuration.reset(ExampleConfiguration.SMTP_PORT);
+        assertNotNull("Event not fired", stubListener.getLastUpdate());
+        assertSame("Event has wrong source", configuration, stubListener.getLastUpdate().getSource());
+        assertSame("Event has wrong property", ExampleConfiguration.SMTP_PORT,
+            stubListener.getLastUpdate().getUpdatedProperty());
+    }
+
+    public void testEventNotFiredForGet() throws Exception {
+        assertNull(stubListener.getLastUpdate());
+        configuration.get(ExampleConfiguration.SMTP_PORT);
+        assertNull(stubListener.getLastUpdate());
+    }
+
+    public void testEventNotFiredForIsSet() throws Exception {
+        assertNull(stubListener.getLastUpdate());
+        configuration.isSet(ExampleConfiguration.SMTP_PORT);
+        assertNull(stubListener.getLastUpdate());
+    }
+
+    public void testSetConfigurationListenersWorks() throws Exception {
+        altConfiguration.setConfigurationListeners(
+            Arrays.asList((ConfigurationListener) stubListener));
+        assertNull(stubListener.getLastUpdate());
+        altConfiguration.reset(ExampleConfiguration.ADDRESSES);
+        assertNotNull("Event not fired", stubListener.getLastUpdate());
     }
 
     private <V> void assertStoredValue(final String expected, ConfigurationProperty<V> property) {

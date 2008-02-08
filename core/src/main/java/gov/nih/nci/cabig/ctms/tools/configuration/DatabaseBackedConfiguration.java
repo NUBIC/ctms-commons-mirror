@@ -1,10 +1,10 @@
 package gov.nih.nci.cabig.ctms.tools.configuration;
 
+import gov.nih.nci.cabig.ctms.CommonsSystemException;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
 
-import gov.nih.nci.cabig.ctms.CommonsSystemException;
-
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -35,10 +35,15 @@ import java.util.Map;
  * @see ConfigurationProperty
  * @author Rhett Sutphin
  */
-@Transactional(readOnly = true)
 public abstract class DatabaseBackedConfiguration extends HibernateDaoSupport implements Configuration {
     private Map<String, Object> map;
+    private ConfigurationEventDispatchSupport dispatcher;
 
+    protected DatabaseBackedConfiguration() {
+        dispatcher = new ConfigurationEventDispatchSupport(this);
+    }
+
+    @Transactional(readOnly = true)
     public <V> V get(ConfigurationProperty<V> property) {
         ConfigurationEntry entry = getEntry(property);
         if (entry == null) {
@@ -73,8 +78,10 @@ public abstract class DatabaseBackedConfiguration extends HibernateDaoSupport im
         }
         entry.setValue(value == null ? null : property.toStorageFormat(value));
         getHibernateTemplate().saveOrUpdate(entry);
+        dispatcher.dispatchUpdate(property);
     }
 
+    @Transactional(readOnly = true)
     public boolean isSet(ConfigurationProperty<?> property) {
         return getEntry(property) != null;
     }
@@ -82,8 +89,8 @@ public abstract class DatabaseBackedConfiguration extends HibernateDaoSupport im
     @Transactional(readOnly = false)
     public <V> void reset(ConfigurationProperty<V> property) {
         ConfigurationEntry entry = getEntry(property);
-        if (entry == null) return;
-        getHibernateTemplate().delete(entry);
+        if (entry != null) getHibernateTemplate().delete(entry);
+        dispatcher.dispatchUpdate(property);
     }
 
     /**
@@ -102,5 +109,19 @@ public abstract class DatabaseBackedConfiguration extends HibernateDaoSupport im
     public java.util.Map<String, Object> getMap() {
         if (map == null) map = new DefaultConfigurationMap(this);
         return map;
+    }
+
+    public synchronized void addConfigurationListener(ConfigurationListener listener) {
+        dispatcher.addListener(listener);
+    }
+
+    /**
+     * Bean-style setter for listeners.  Intended for use in a dependency injection context.
+     * Does not remove any existing listeners.
+     */
+    public synchronized void setConfigurationListeners(List<ConfigurationListener> listeners) {
+        for (ConfigurationListener listener : listeners) {
+            dispatcher.addListener(listener);
+        }
     }
 }

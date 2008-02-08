@@ -51,4 +51,9 @@ public interface Configuration {
      * @see gov.nih.nci.cabig.ctms.tools.configuration.DefaultConfigurationMap
      */
     Map<String, Object> getMap();
+
+    /**
+     * Register a configuration listener on this configuration.
+     */
+    void addConfigurationListener(ConfigurationListener listener);
 }
