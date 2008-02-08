@@ -18,7 +18,6 @@ public class ExampleConfiguration extends DatabaseBackedConfiguration {
     public static final ConfigurationProperty<List<String>> ADDRESSES
         = PROPERTIES.add(new ConfigurationProperty.Csv("addresses"));
 
-    @Override
     public ConfigurationProperties getProperties() {
         return PROPERTIES;
     }

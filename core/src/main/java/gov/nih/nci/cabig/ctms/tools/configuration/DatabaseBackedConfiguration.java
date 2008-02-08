@@ -3,11 +3,9 @@ package gov.nih.nci.cabig.ctms.tools.configuration;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Set;
-import java.util.Collection;
-import java.util.List;
-
 import gov.nih.nci.cabig.ctms.CommonsSystemException;
+
+import java.util.Map;
 
 /**
  * Provides a base DAO class for an KV-style configuration system for an application.
@@ -38,14 +36,8 @@ import gov.nih.nci.cabig.ctms.CommonsSystemException;
  * @author Rhett Sutphin
  */
 @Transactional(readOnly = true)
-public abstract class DatabaseBackedConfiguration extends HibernateDaoSupport {
-    private java.util.Map<String, Object> map;
-
-    /**
-     * Subclasses must implement this.  Most of the time, the returned
-     * instance will be <code>static</code>ly configured in the subclass.
-     */
-    public abstract ConfigurationProperties getProperties();
+public abstract class DatabaseBackedConfiguration extends HibernateDaoSupport implements Configuration {
+    private Map<String, Object> map;
 
     public <V> V get(ConfigurationProperty<V> property) {
         ConfigurationEntry entry = getEntry(property);
@@ -83,16 +75,10 @@ public abstract class DatabaseBackedConfiguration extends HibernateDaoSupport {
         getHibernateTemplate().saveOrUpdate(entry);
     }
 
-    /**
-     * @return true if the given property has been set to an explicit value
-     */
     public boolean isSet(ConfigurationProperty<?> property) {
         return getEntry(property) != null;
     }
 
-    /**
-     * Reset the selected property to its default.
-     */
     @Transactional(readOnly = false)
     public <V> void reset(ConfigurationProperty<V> property) {
         ConfigurationEntry entry = getEntry(property);
@@ -114,64 +100,7 @@ public abstract class DatabaseBackedConfiguration extends HibernateDaoSupport {
     }
 
     public java.util.Map<String, Object> getMap() {
-        if (map == null) map = new Map();
+        if (map == null) map = new DefaultConfigurationMap(this);
         return map;
-    }
-
-    private class Map implements java.util.Map<String, Object> {
-        public int size() {
-            return getProperties().size();
-        }
-
-        public boolean isEmpty() {
-            return false;
-        }
-
-        public boolean containsKey(Object key) {
-            return getProperties().containsKey((String) key);
-        }
-
-        public boolean containsValue(Object value) {
-            // if you want to actually implement this, you need to do an
-            // exhaustive search, so let's skip it for now
-            throw new UnsupportedOperationException("not implemented");
-        }
-
-        public Object get(Object key) {
-            ConfigurationProperty<?> property = getProperties().get((String) key);
-            return property == null ? null : DatabaseBackedConfiguration.this.get(property);
-        }
-
-        ////// COLLECTIVE INTERFACES NOT IMPLEMENTED //////
-
-        public Set<String> keySet() {
-            throw new UnsupportedOperationException("keySet not implemented");
-        }
-
-        public Collection<Object> values() {
-            throw new UnsupportedOperationException("values not implemented");
-        }
-
-        public Set<Entry<String, Object>> entrySet() {
-            throw new UnsupportedOperationException("entrySet not implemented");
-        }
-
-        ////// READ-ONLY //////
-
-        public Object put(String key, Object value) {
-            throw new UnsupportedOperationException("Configuration map is read-only");
-        }
-
-        public Object remove(Object key) {
-            throw new UnsupportedOperationException("Configuration map is read-only");
-        }
-
-        public void putAll(java.util.Map<? extends String, ? extends Object> t) {
-            throw new UnsupportedOperationException("Configuration map is read-only");
-        }
-
-        public void clear() {
-            throw new UnsupportedOperationException("Configuration map is read-only");
-        }
     }
 }

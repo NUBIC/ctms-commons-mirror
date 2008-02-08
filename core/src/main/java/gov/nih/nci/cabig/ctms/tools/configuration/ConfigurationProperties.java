@@ -7,7 +7,6 @@ import java.util.Collection;
 import java.io.IOException;
 
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.ClassPathResource;
 import gov.nih.nci.cabig.ctms.CommonsSystemException;
 
 /**
@@ -38,7 +37,7 @@ import gov.nih.nci.cabig.ctms.CommonsSystemException;
  * </dl>
  *
  * @author Rhett Sutphin
- * @see DatabaseBackedConfiguration
+ * @see Configuration
  */
 public class ConfigurationProperties {
     private Map<String, ConfigurationProperty<?>> props = new TreeMap<String, ConfigurationProperty<?>>();

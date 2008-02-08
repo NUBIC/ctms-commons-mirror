@@ -12,7 +12,6 @@ public class AlternateConfiguration extends DatabaseBackedConfiguration {
     public static final ConfigurationProperty<String> SMTP_HOST
         = PROPERTIES.add(new ConfigurationProperty.Text("smtpHost"));
 
-    @Override
     public ConfigurationProperties getProperties() {
         return PROPERTIES;
     }
