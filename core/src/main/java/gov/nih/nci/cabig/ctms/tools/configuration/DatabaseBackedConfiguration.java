@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
 import java.util.Collection;
+import java.util.List;
 
 import gov.nih.nci.cabig.ctms.CommonsSystemException;
 
@@ -63,8 +64,7 @@ public abstract class DatabaseBackedConfiguration extends HibernateDaoSupport {
 
     @Transactional(readOnly = false)
     public <V> void set(ConfigurationProperty<V> property, V value) {
-        ConfigurationEntry entry
-            = (ConfigurationEntry) getHibernateTemplate().get(getConfigurationEntryClass(), property.getKey());
+        ConfigurationEntry entry = getEntry(property);
         if (entry == null) {
             try {
                 entry = getConfigurationEntryClass().newInstance();
@@ -81,6 +81,13 @@ public abstract class DatabaseBackedConfiguration extends HibernateDaoSupport {
         }
         entry.setValue(value == null ? null : property.toStorageFormat(value));
         getHibernateTemplate().saveOrUpdate(entry);
+    }
+
+    /**
+     * @return true if the given property has been set to an explicit value
+     */
+    public boolean isSet(ConfigurationProperty<?> property) {
+        return getEntry(property) != null;
     }
 
     /**

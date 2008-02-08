@@ -134,6 +134,20 @@ public class DatabaseBackedConfigurationTest extends CommonsTestCase {
         assertNotSet(ExampleConfiguration.SMTP_PORT);
     }
 
+    public void testIsSetForConcreteValue() throws Exception {
+        insertPair(ExampleConfiguration.ADDRESSES.getKey(), "a");
+        assertTrue(configuration.isSet(ExampleConfiguration.ADDRESSES));
+    }
+
+    public void testIsSetForExplicitNullValue() throws Exception {
+        insertPair(ExampleConfiguration.ADDRESSES.getKey(), null);
+        assertTrue(configuration.isSet(ExampleConfiguration.ADDRESSES));
+    }
+
+    public void testIsSetWhenNotSet() throws Exception {
+        assertFalse(configuration.isSet(ExampleConfiguration.ADDRESSES));
+    }
+
     private <V> void assertStoredValue(final String expected, ConfigurationProperty<V> property) {
         assertStoredValue(expected, DEFAULT_TABLE, property);
     }
