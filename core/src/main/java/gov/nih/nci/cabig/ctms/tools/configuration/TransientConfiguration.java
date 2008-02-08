@@ -27,9 +27,10 @@ public class TransientConfiguration extends AbstractConfiguration {
      * Create a transient copy of the source configuration.
      * @param source
      */
-    public static void create(Configuration source) {
+    public static Configuration create(Configuration source) {
         TransientConfiguration copy = new TransientConfiguration(source.getProperties());
         copy.copyFrom(source);
+        return copy;
     }
 
     public void copyFrom(Configuration source) {
