@@ -1,8 +1,9 @@
 package gov.nih.nci.cabig.ctms.tools.configuration;
 
 import gov.nih.nci.cabig.ctms.CommonsSystemException;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.transaction.annotation.Transactional;
+import org.hibernate.SessionFactory;
 
 import java.util.List;
 import java.util.Map;
@@ -35,93 +36,53 @@ import java.util.Map;
  * @see ConfigurationProperty
  * @author Rhett Sutphin
  */
-public abstract class DatabaseBackedConfiguration extends HibernateDaoSupport implements Configuration {
-    private Map<String, Object> map;
-    private ConfigurationEventDispatchSupport dispatcher;
+@Transactional(readOnly = true)
+public abstract class DatabaseBackedConfiguration extends AbstractConfiguration {
+    private HibernateTemplate hibernateTemplate;
 
-    protected DatabaseBackedConfiguration() {
-        dispatcher = new ConfigurationEventDispatchSupport(this);
+    @Override
+    protected <V> ConfigurationEntry getEntry(ConfigurationProperty<V> property) {
+        return (ConfigurationEntry) getHibernateTemplate()
+            .get(getConfigurationEntryClass(), property.getKey());
     }
 
-    @Transactional(readOnly = true)
-    public <V> V get(ConfigurationProperty<V> property) {
-        ConfigurationEntry entry = getEntry(property);
-        if (entry == null) {
-            return property.getDefault();
-        } else {
-            return entry.getValue() == null
-                ? null
-                : property.fromStorageFormat(entry.getValue());
-        }
+    @Override
+    protected void store(ConfigurationEntry entry) {
+        getHibernateTemplate().saveOrUpdate(entry);
     }
 
-    private <V> ConfigurationEntry getEntry(ConfigurationProperty<V> property) {
-        return (ConfigurationEntry) getHibernateTemplate().get(getConfigurationEntryClass(), property.getKey());
+    @Override
+    protected void remove(ConfigurationEntry entry) {
+        getHibernateTemplate().delete(entry);
     }
 
+    @Override // overridden to add @Transactional
     @Transactional(readOnly = false)
     public <V> void set(ConfigurationProperty<V> property, V value) {
-        ConfigurationEntry entry = getEntry(property);
-        if (entry == null) {
-            try {
-                entry = getConfigurationEntryClass().newInstance();
-                entry.setKey(property.getKey());
-            } catch (InstantiationException e) {
-                throw new CommonsSystemException(
-                    "Could not instantiate a new configuration entry of class %s", e,
-                    getConfigurationEntryClass().getName());
-            } catch (IllegalAccessException e) {
-                throw new CommonsSystemException(
-                    "Could not instantiate a new configuration entry of class %s", e,
-                    getConfigurationEntryClass().getName());
-            }
-        }
-        entry.setValue(value == null ? null : property.toStorageFormat(value));
-        getHibernateTemplate().saveOrUpdate(entry);
-        dispatcher.dispatchUpdate(property);
+        super.set(property, value);
     }
 
-    @Transactional(readOnly = true)
-    public boolean isSet(ConfigurationProperty<?> property) {
-        return getEntry(property) != null;
-    }
-
+    @Override // overridden to add @Transactional
     @Transactional(readOnly = false)
     public <V> void reset(ConfigurationProperty<V> property) {
-        ConfigurationEntry entry = getEntry(property);
-        if (entry != null) getHibernateTemplate().delete(entry);
-        dispatcher.dispatchUpdate(property);
+        super.reset(property);
     }
 
-    /**
-     * Allows subclasses to specify a subclass of {@link ConfigurationEntry} to
-     * use.  The primary benefit of this would be to allow for a configuration
-     * stored in a table not called "configuration".
-     * <p>
-     * The default is {@link DefaultConfigurationEntry}, which should be fine
-     * unless you want to have more than one type of configuration in your
-     * application.
-     */
-    protected Class<? extends ConfigurationEntry> getConfigurationEntryClass() {
-        return DefaultConfigurationEntry.class;
+    private HibernateTemplate getHibernateTemplate() {
+        return hibernateTemplate;
     }
 
-    public java.util.Map<String, Object> getMap() {
-        if (map == null) map = new DefaultConfigurationMap(this);
-        return map;
+    ////// CONFIGURATION
+
+    // both sessionFactory and hibernateTemplate setters are included to
+    // preserve backwards compatibility (this used to be a subclass of
+    // HibernateDaoSupport)
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.hibernateTemplate = new HibernateTemplate(sessionFactory);
     }
 
-    public synchronized void addConfigurationListener(ConfigurationListener listener) {
-        dispatcher.addListener(listener);
-    }
-
-    /**
-     * Bean-style setter for listeners.  Intended for use in a dependency injection context.
-     * Does not remove any existing listeners.
-     */
-    public synchronized void setConfigurationListeners(List<ConfigurationListener> listeners) {
-        for (ConfigurationListener listener : listeners) {
-            dispatcher.addListener(listener);
-        }
+    public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+        this.hibernateTemplate = hibernateTemplate;
     }
 }

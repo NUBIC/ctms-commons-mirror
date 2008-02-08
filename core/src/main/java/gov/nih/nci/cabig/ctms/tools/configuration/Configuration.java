@@ -7,7 +7,13 @@ import java.util.Map;
  */
 public interface Configuration {
     /**
-     * @return the properties supported by this instance
+     * Returns the properties known to be supported by this instance.
+     * It is expected that <em>none</em> of the other methods will fail if given
+     * a property which is not present in this collection.  To put it another way,
+     * implementors must be able to handle properties that are not in this
+     * collection without throwing an exception.  [Ignoring them (or returning null) is
+     * acceptable.] 
+     * @return
      */
     ConfigurationProperties getProperties();
 
