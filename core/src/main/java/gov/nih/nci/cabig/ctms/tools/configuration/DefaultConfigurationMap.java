@@ -10,7 +10,7 @@ import java.util.Collection;
  * 
  * @author Rhett Sutphin
  */
-class DefaultConfigurationMap implements java.util.Map<String, Object> {
+public class DefaultConfigurationMap implements java.util.Map<String, Object> {
     private Configuration configuration;
 
     public DefaultConfigurationMap(Configuration configuration) {
