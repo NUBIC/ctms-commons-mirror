@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
+import org.springframework.jdbc.core.RowCountCallbackHandler;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 
 import java.sql.ResultSet;
@@ -121,6 +122,18 @@ public class DatabaseBackedConfigurationTest extends CommonsTestCase {
         assertEquals("Wrong value retrieved", "zebra", actual);
     }
 
+    public void testResetWhenNotSet() throws Exception {
+        assertNotSet(ExampleConfiguration.SMTP_HOST);
+        configuration.reset(ExampleConfiguration.SMTP_HOST);
+        assertNotSet(ExampleConfiguration.SMTP_HOST);
+    }
+
+    public void testResetWhenSet() throws Exception {
+        insertPair(ExampleConfiguration.SMTP_PORT.getKey(), "34");
+        configuration.reset(ExampleConfiguration.SMTP_PORT);
+        assertNotSet(ExampleConfiguration.SMTP_PORT);
+    }
+
     private <V> void assertStoredValue(final String expected, ConfigurationProperty<V> property) {
         assertStoredValue(expected, DEFAULT_TABLE, property);
     }
@@ -135,5 +148,12 @@ public class DatabaseBackedConfigurationTest extends CommonsTestCase {
             }
         } );
         assertEquals("Wrong number of values found", 1, count[0]);
+    }
+
+    private <V> void assertNotSet(ConfigurationProperty<V> property) {
+        RowCountCallbackHandler counter = new RowCountCallbackHandler();
+        jdbc.query(String.format("SELECT * FROM %s WHERE key=?", DEFAULT_TABLE),
+            new Object[] { property.getKey() }, counter);
+        assertEquals(property + " is set", 0, counter.getRowCount());
     }
 }

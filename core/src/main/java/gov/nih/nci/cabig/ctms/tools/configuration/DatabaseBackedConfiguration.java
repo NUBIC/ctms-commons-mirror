@@ -47,8 +47,7 @@ public abstract class DatabaseBackedConfiguration extends HibernateDaoSupport {
     public abstract ConfigurationProperties getProperties();
 
     public <V> V get(ConfigurationProperty<V> property) {
-        ConfigurationEntry entry
-            = (ConfigurationEntry) getHibernateTemplate().get(getConfigurationEntryClass(), property.getKey());
+        ConfigurationEntry entry = getEntry(property);
         if (entry == null) {
             return property.getDefault();
         } else {
@@ -56,6 +55,10 @@ public abstract class DatabaseBackedConfiguration extends HibernateDaoSupport {
                 ? null
                 : property.fromStorageFormat(entry.getValue());
         }
+    }
+
+    private <V> ConfigurationEntry getEntry(ConfigurationProperty<V> property) {
+        return (ConfigurationEntry) getHibernateTemplate().get(getConfigurationEntryClass(), property.getKey());
     }
 
     @Transactional(readOnly = false)
@@ -78,6 +81,16 @@ public abstract class DatabaseBackedConfiguration extends HibernateDaoSupport {
         }
         entry.setValue(value == null ? null : property.toStorageFormat(value));
         getHibernateTemplate().saveOrUpdate(entry);
+    }
+
+    /**
+     * Reset the selected property to its default.
+     */
+    @Transactional(readOnly = false)
+    public <V> void reset(ConfigurationProperty<V> property) {
+        ConfigurationEntry entry = getEntry(property);
+        if (entry == null) return;
+        getHibernateTemplate().delete(entry);
     }
 
     /**
