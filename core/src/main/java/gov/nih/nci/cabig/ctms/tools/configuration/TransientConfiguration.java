@@ -47,7 +47,7 @@ public class TransientConfiguration extends AbstractConfiguration {
      */
     public void copyTo(Configuration target) {
         for (ConfigurationProperty<?> property : target.getProperties().getAll()) {
-            if (target.isSet(property)) {
+            if (isSet(property)) {
                 target.set((ConfigurationProperty<Object>) property, this.get(property));
             } else {
                 target.reset(property);
