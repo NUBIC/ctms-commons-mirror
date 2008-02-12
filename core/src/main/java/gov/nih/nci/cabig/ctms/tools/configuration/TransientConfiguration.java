@@ -2,6 +2,7 @@ package gov.nih.nci.cabig.ctms.tools.configuration;
 
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Collection;
 
 /**
  * {@link Configuration} implementation which does not persist changes
@@ -28,13 +29,22 @@ public class TransientConfiguration extends AbstractConfiguration {
      * @param source
      */
     public static Configuration create(Configuration source) {
+        return create(source, source.getProperties());
+    }
+
+    /**
+     * Create a transient copy of the source configuration, using the specified set of properties.
+     * @param source
+     */
+    public static Configuration create(Configuration source, ConfigurationProperties props) {
         TransientConfiguration copy = new TransientConfiguration(source.getProperties());
-        copy.copyFrom(source);
+        copy.copyFrom(source, props.getAll());
         return copy;
     }
 
-    public void copyFrom(Configuration source) {
-        for (ConfigurationProperty<?> property : source.getProperties().getAll()) {
+    @SuppressWarnings({ "unchecked" })
+    public void copyFrom(Configuration source, Collection<ConfigurationProperty<?>> toCopy) {
+        for (ConfigurationProperty<?> property : toCopy) {
             if (source.isSet(property)) {
                 this.set((ConfigurationProperty<Object>) property, source.get(property));
             }
@@ -45,8 +55,9 @@ public class TransientConfiguration extends AbstractConfiguration {
      * Copies values from this configuration to the target.  The list of properties
      * to copy is taken from the target.
      */
-    public void copyTo(Configuration target) {
-        for (ConfigurationProperty<?> property : target.getProperties().getAll()) {
+    @SuppressWarnings({ "unchecked" })
+    public void copyTo(Configuration target, Collection<ConfigurationProperty<?>> toCopy) {
+        for (ConfigurationProperty<?> property : toCopy) {
             if (isSet(property)) {
                 target.set((ConfigurationProperty<Object>) property, this.get(property));
             } else {
