@@ -23,6 +23,6 @@
     -->
     <modules>
         <module>uctrace</module> 
-        <!-- <module>testing</module> -->
+        <module>testing</module>
     </modules>
 </project>

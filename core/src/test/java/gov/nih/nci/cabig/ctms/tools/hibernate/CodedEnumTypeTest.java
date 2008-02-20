@@ -1,6 +1,6 @@
 package gov.nih.nci.cabig.ctms.tools.hibernate;
 
-import gov.nih.nci.cabig.ctms.testing.CommonsTestCase;
+import gov.nih.nci.cabig.ctms.testing.CommonsCoreTestCase;
 import gov.nih.nci.cabig.ctms.domain.SampleCodedEnum;
 
 import java.sql.Types;
@@ -14,7 +14,7 @@ import static org.easymock.classextension.EasyMock.*;
 /**
  * @author Rhett Sutphin
  */
-public class CodedEnumTypeTest extends CommonsTestCase {
+public class CodedEnumTypeTest extends CommonsCoreTestCase {
     private ResultSet rs;
     private CodedEnumType type;
     private PreparedStatement stmt;

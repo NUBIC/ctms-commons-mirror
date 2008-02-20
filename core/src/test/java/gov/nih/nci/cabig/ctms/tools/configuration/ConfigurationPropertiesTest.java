@@ -1,13 +1,13 @@
 package gov.nih.nci.cabig.ctms.tools.configuration;
 
-import gov.nih.nci.cabig.ctms.testing.CommonsTestCase;
+import gov.nih.nci.cabig.ctms.testing.CommonsCoreTestCase;
 
 import java.util.Properties;
 
 /**
  * @author Rhett Sutphin
  */
-public class ConfigurationPropertiesTest extends CommonsTestCase {
+public class ConfigurationPropertiesTest extends CommonsCoreTestCase {
     public void testEmptyPropertiesIsEmptyWithoutErrors() throws Exception {
         ConfigurationProperties empty = ConfigurationProperties.empty();
         assertEquals(0, empty.size());

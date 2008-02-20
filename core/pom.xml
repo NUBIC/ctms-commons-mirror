@@ -64,11 +64,18 @@
             <version>1.8.0.7</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>${groupId}</groupId>
+            <artifactId>ctms-commons-testing</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <!-- TODO: this is temporary - need to set up a separate test module -->
+            <!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -80,6 +87,7 @@
                     </execution>
                 </executions>
             </plugin>
+            -->
         </plugins>
     </build>
 </project>

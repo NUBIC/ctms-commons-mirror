@@ -1,13 +1,13 @@
 package gov.nih.nci.cabig.ctms.editors;
 
-import gov.nih.nci.cabig.ctms.testing.CommonsTestCase;
+import gov.nih.nci.cabig.ctms.testing.CommonsCoreTestCase;
 import gov.nih.nci.cabig.ctms.testing.TestObject;
 import static org.easymock.classextension.EasyMock.expect;
 
 /**
  * @author Rhett Sutphin
  */
-public class GridIdentifiableDaoBasedEditorTest extends CommonsTestCase {
+public class GridIdentifiableDaoBasedEditorTest extends CommonsCoreTestCase {
     private static final Integer ID = 13;
     private static final String GRID_ID = "BIG-FAKE";
     private static final TestObject OBJECT = new TestObject(ID, GRID_ID);

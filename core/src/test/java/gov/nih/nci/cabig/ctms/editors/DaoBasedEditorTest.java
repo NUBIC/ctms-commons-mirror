@@ -1,13 +1,13 @@
 package gov.nih.nci.cabig.ctms.editors;
 
-import gov.nih.nci.cabig.ctms.testing.CommonsTestCase;
+import gov.nih.nci.cabig.ctms.testing.CommonsCoreTestCase;
 import gov.nih.nci.cabig.ctms.testing.TestObject;
 import static org.easymock.classextension.EasyMock.*;
 
 /**
  * @author Rhett Sutphin
  */
-public class DaoBasedEditorTest extends CommonsTestCase {
+public class DaoBasedEditorTest extends CommonsCoreTestCase {
     private static final Integer ID = 13;
     private static final TestObject OBJECT = new TestObject(ID);
 

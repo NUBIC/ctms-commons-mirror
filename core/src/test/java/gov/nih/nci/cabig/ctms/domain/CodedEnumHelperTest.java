@@ -1,11 +1,11 @@
 package gov.nih.nci.cabig.ctms.domain;
 
-import gov.nih.nci.cabig.ctms.testing.CommonsTestCase;
+import gov.nih.nci.cabig.ctms.testing.CommonsCoreTestCase;
 
 /**
  * @author Rhett Sutphin
  */
-public class CodedEnumHelperTest extends CommonsTestCase {
+public class CodedEnumHelperTest extends CommonsCoreTestCase {
     public void testGetByClassAndCode() throws Exception {
         // implicitly testing, here
         assertEquals(SampleCodedEnum.AIRSHIP, SampleCodedEnum.getByCode('A'));
