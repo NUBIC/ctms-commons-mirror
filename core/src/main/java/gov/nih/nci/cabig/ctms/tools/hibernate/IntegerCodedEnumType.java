@@ -21,6 +21,6 @@ public class IntegerCodedEnumType extends CodedEnumType {
 
     @Override
     protected Object getKeyObject(ResultSet rs, String colname) throws SQLException {
-        return rs.getInt(colname);
+        return rs.getObject(colname);
     }
 }
