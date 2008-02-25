@@ -6,7 +6,7 @@
     <parent>
         <groupId>gov.nih.nci.cabig.ctms</groupId>
         <artifactId>ctms-commons</artifactId>
-        <version>0.8-SNAPSHOT</version>
+        <version>0.8</version>
     </parent>
     <name>ctms-commons testing modules</name>
     <description>
@@ -23,6 +23,6 @@
     -->
     <modules>
         <module>uctrace</module> 
-        <!-- <module>testing</module> -->
+        <module>testing</module>
     </modules>
 </project>

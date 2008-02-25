@@ -3,12 +3,12 @@ package gov.nih.nci.cabig.ctms.tools.configuration;
 import java.util.List;
 import java.util.Arrays;
 
-import gov.nih.nci.cabig.ctms.testing.CommonsTestCase;
+import gov.nih.nci.cabig.ctms.testing.CommonsCoreTestCase;
 
 /**
  * @author Rhett Sutphin
  */
-public class ConfigurationPropertyEditorTest extends CommonsTestCase {
+public class ConfigurationPropertyEditorTest extends CommonsCoreTestCase {
     private ConfigurationPropertyEditor<List<String>> editor;
 
     @Override

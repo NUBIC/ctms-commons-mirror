@@ -1,6 +1,6 @@
 package gov.nih.nci.cabig.ctms.tools.configuration;
 
-import gov.nih.nci.cabig.ctms.testing.CommonsTestCase;
+import gov.nih.nci.cabig.ctms.testing.CommonsCoreTestCase;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -16,7 +16,7 @@ import java.util.Arrays;
 /**
  * @author Rhett Sutphin
  */
-public class DatabaseBackedConfigurationTest extends CommonsTestCase {
+public class DatabaseBackedConfigurationTest extends CommonsCoreTestCase {
     private static final String DEFAULT_TABLE = "configuration"; // the default table; used by ExampleConfiguration
     private static final String ALT_TABLE = "alt_configuration"; // the table used by AlternateConfiguration
 

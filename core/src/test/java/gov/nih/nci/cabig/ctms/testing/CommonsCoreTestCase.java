@@ -4,11 +4,15 @@ import gov.nih.nci.cabig.ctms.dao.DomainObjectDao;
 import junit.framework.TestCase;
 
 import java.lang.reflect.Method;
+import java.util.List;
+import java.util.LinkedList;
+import java.util.Arrays;
+import java.util.Iterator;
 
 /**
  * @author Rhett Sutphin
  */
-public abstract class CommonsTestCase extends TestCase {
+public abstract class CommonsCoreTestCase extends TestCase {
     private MockRegistry mockRegistry;
 
     @Override
@@ -32,7 +36,14 @@ public abstract class CommonsTestCase extends TestCase {
     }
 
     protected <T extends DomainObjectDao<?>> T registerDaoMockFor(Class<T> forClass) {
-        return mockRegistry.registerDaoMockFor(forClass);
+        List<Method> methods = new LinkedList<Method>(Arrays.asList(forClass.getMethods()));
+        for (Iterator<Method> iterator = methods.iterator(); iterator.hasNext();) {
+            Method method = iterator.next();
+            if ("domainClass".equals(method.getName())) {
+                iterator.remove();
+            }
+        }
+        return registerMockFor(forClass, methods.toArray(new Method[methods.size()]));
     }
 
     protected void replayMocks() {
