@@ -18,9 +18,9 @@
     </licenses>
     -->
     <scm>
-        <url>http://gforge.nci.nih.gov/svnroot/ctmscommons/trunk</url>
-        <connection>scm:svn:http://gforge.nci.nih.gov/svnroot/ctmscommons/trunk</connection>
-        <developerConnection>scm:svn:http://gforge.nci.nih.gov/svnroot/ctmscommons/trunk</developerConnection>
+        <url>https://gforge.nci.nih.gov/svnroot/ctmscommons/trunk</url>
+        <connection>scm:svn:https://gforge.nci.nih.gov/svnroot/ctmscommons/trunk</connection>
+        <developerConnection>scm:svn:https://gforge.nci.nih.gov/svnroot/ctmscommons/trunk</developerConnection>
     </scm>
     <repositories>
         <repository>
