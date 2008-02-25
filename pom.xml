@@ -159,6 +159,7 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <configuration>
                     <tagBase>http://gforge.nci.nih.gov/svnroot/ctmscommons/tags/releases</tagBase>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
                 </configuration>
             </plugin>
         </plugins>
