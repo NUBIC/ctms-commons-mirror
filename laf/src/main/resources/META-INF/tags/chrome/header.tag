@@ -5,6 +5,7 @@
 <%@attribute name="tagline" required="true"%>
 <%@attribute name="taglineImageUrl" required="true"%>
 <%@attribute name="logoutUrl" required="true"%>
+<%@attribute name="preLogoutHtml" required="false"%>
 
 <%-- The fragment provided for this attribute will be invoked for each section --%>
 <%@attribute name="renderSection" fragment="true" required="true"%>
@@ -22,7 +23,7 @@
     </div>
 
     <div id="login-action">
-        <a href="${logoutUrl}">Log out</a>
+        ${preLogoutHtml}<a href="${logoutUrl}">Log out</a>
     </div>
 
     <ul id="sections" class="tabs">
