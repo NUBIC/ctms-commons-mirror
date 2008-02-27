@@ -71,7 +71,7 @@ public class SectionInterceptor extends HandlerInterceptorAdapter {
     }
     
 
-    private String prefix(String attr) {
+    protected String prefix(String attr) {
         if (getAttributePrefix() == null) {
             return attr;
         } else {
