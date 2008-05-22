@@ -139,11 +139,11 @@ public class AbstractQuery {
 	 * select * from Study s left join s.identifiers as id where s.shortTitle='study'
 	 * @param objectQuery
 	 */
-	protected void leftJoin(String objectQuery){
+	public void leftJoin(String objectQuery){
 		addToJoinsList(" left join " + objectQuery);
 	}
 
-	protected void leftJoinFetch(String objectQuery){
+	public void leftJoinFetch(String objectQuery){
 		addToJoinsList(" left join fetch " + objectQuery);
 	}
 

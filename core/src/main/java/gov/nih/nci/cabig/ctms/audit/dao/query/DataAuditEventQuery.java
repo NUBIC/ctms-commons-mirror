@@ -9,7 +9,7 @@ import java.util.Date;
  */
 public class DataAuditEventQuery extends AbstractQuery {
 
-    private static String queryString = "select distinct e from DataAuditEvent e";
+    private static String queryString = "select distinct e from DataAuditEvent e order by e.id desc";
 
     private static String CLASS_NAME = "className";
 

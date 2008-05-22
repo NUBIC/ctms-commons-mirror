@@ -1,21 +1,15 @@
 package gov.nih.nci.cabig.ctms.audit.dao;
 
-import gov.nih.nci.cabig.ctms.audit.domain.*;
 import gov.nih.nci.cabig.ctms.audit.dao.query.DataAuditEventQuery;
-
-import java.lang.reflect.Field;
-import java.util.*;
-import java.sql.SQLException;
-
+import gov.nih.nci.cabig.ctms.audit.domain.*;
 import org.apache.commons.lang.time.DateUtils;
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.lang.reflect.Field;
+import java.util.*;
 
 /**
  * provide methods to retrieve audit history details for an entity
@@ -24,7 +18,10 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-public class AuditHistoryRepository extends HibernateDaoSupport {
+public class AuditHistoryRepository {
+
+    private AuditHistoryDao auditHistoryDao;
+
     /**
      * Checks if entity was created minutes before the specefied date.
      * By default method will check if entity was created one minute before the given data
@@ -32,7 +29,7 @@ public class AuditHistoryRepository extends HibernateDaoSupport {
      * @param entityClass the entity class
      * @param entityId    the primary key of entity
      * @param calendar    the date
-     * @param minutes     minutes . Default value is 1. i.e. method will check if the entity was created one minute before the given date.
+     * @param time        time before the entity was created
      * @return true if entity was created minutes before the specefied date.
      * @throws IllegalArgumentException if all the parameter except minutes is null;
      */
@@ -44,7 +41,7 @@ public class AuditHistoryRepository extends HibernateDaoSupport {
         if (calendar == null || entityClass == null || entityId == null) {
             throw new IllegalArgumentException("invalid uses of method. All method parameters must not be null");
         }
-        if (Integer.valueOf(minutes).equals(Integer.valueOf(0))) {
+       if (Integer.valueOf(minutes).equals(Integer.valueOf(0))) {
             minutes = 1;
         }
         final Calendar newCalendar = (Calendar) calendar.clone();
@@ -55,30 +52,13 @@ public class AuditHistoryRepository extends HibernateDaoSupport {
         dataAuditEventQuery.filterByEndDateBefore(calendar.getTime());
         dataAuditEventQuery.filterByEntityId(entityId);
         dataAuditEventQuery.filterByOperation(Operation.CREATE);
-        final List<DataAuditEvent> dataAuditEvents = findDataAuditEvents(dataAuditEventQuery);
+        final List<DataAuditEvent> dataAuditEvents = auditHistoryDao.findDataAuditEvents(dataAuditEventQuery);
         return dataAuditEvents != null && !dataAuditEvents.isEmpty();
 
     }
 
-    @SuppressWarnings("unchecked")
-    private List<DataAuditEvent> findDataAuditEvents(final DataAuditEventQuery query) {
-        String queryString = query.getQueryString();
-        logger.debug("query: " + queryString);
-        return (List<DataAuditEvent>) getHibernateTemplate().execute(new HibernateCallback() {
 
-            public Object doInHibernate(final Session session) throws HibernateException, SQLException {
-                org.hibernate.Query hiberanteQuery = session.createQuery(query.getQueryString());
-                Map<String, Object> queryParameterMap = query.getParameterMap();
-                for (String key : queryParameterMap.keySet()) {
-                    Object value = queryParameterMap.get(key);
-                    hiberanteQuery.setParameter(key, value);
 
-                }
-                return hiberanteQuery.list();
-            }
-
-        });
-    }
 
     /**
      * Checks if entity was created by a url.
@@ -99,7 +79,7 @@ public class AuditHistoryRepository extends HibernateDaoSupport {
         dataAuditEventQuery.filterByURL(url);
         dataAuditEventQuery.filterByEntityId(entityId);
         dataAuditEventQuery.filterByOperation(Operation.CREATE);
-        final List<DataAuditEvent> dataAuditEvents = findDataAuditEvents(dataAuditEventQuery);
+        final List<DataAuditEvent> dataAuditEvents = auditHistoryDao.findDataAuditEvents(dataAuditEventQuery);
         return dataAuditEvents != null && !dataAuditEvents.isEmpty();
 
     }
@@ -183,37 +163,13 @@ public class AuditHistoryRepository extends HibernateDaoSupport {
         }
         if (!attributeFieldsName.isEmpty()) {
             // first retrieve the nearest data audit event
-            DataAuditEvent newDataAuditEvent = getNearestAuditEvent(dataAuditEvent);
+            DataAuditEvent newDataAuditEvent = auditHistoryDao.getNearestAuditEvent(dataAuditEvent);
             auditHistoryDetails.addAll(getEventValues(attributeFieldsName, newDataAuditEvent));
         }
 
         return auditHistoryDetails;
     }
 
-    /**
-     * Returns the nearest audit event.
-     *
-     * @param dataAuditEvent the data audit event
-     * @return the nearest audit event
-     */
-    @SuppressWarnings("unchecked")
-    private DataAuditEvent getNearestAuditEvent(final DataAuditEvent dataAuditEvent) {
-
-        final StringBuffer queryBuffer = new StringBuffer(
-                "select distinct au from DataAuditEvent au left join fetch au.values where "
-                        + "au.id=(select max(e.id) from DataAuditEvent e  where e.reference.className = :className and e.id<:id) ");
-
-        DataAuditEvent event = (DataAuditEvent) getHibernateTemplate().execute(new HibernateCallback() {
-
-            public Object doInHibernate(final Session session) throws HibernateException {
-                final Query query = session.createQuery(queryBuffer.toString());
-                query.setParameter("className", dataAuditEvent.getReference().getClassName());
-                query.setParameter("id", dataAuditEvent.getId());
-                return query.uniqueResult();
-            }
-        });
-        return event;
-    }
 
     /**
      * Gets the list of data audit events for a domain object.
@@ -227,30 +183,40 @@ public class AuditHistoryRepository extends HibernateDaoSupport {
     private List<DataAuditEvent> getDataAuditEvents(final Class entityClass, final Integer entityId,
                                                     final Calendar calendar) {
 
-        final StringBuffer queryBuffer = new StringBuffer(
-                "select distinct e from DataAuditEvent e left join fetch e.values where "
-                        + "e.reference.className = :className and e.reference.id= :id "
-                        + "and e.info.time>=:startDate and e.info.time<=:endDate order by e.id asc");
+        DataAuditEventQuery dataAuditEventQuery = new DataAuditEventQuery();
+        dataAuditEventQuery.leftJoinFetch("e.values");
 
-        final Calendar newCalendar = (Calendar) calendar.clone();
-        newCalendar.add(Calendar.DAY_OF_MONTH, +1);
-        final Date startDate = DateUtils.truncate(calendar.getTime(), Calendar.DATE);
-        final Date endDate = DateUtils.truncate(newCalendar.getTime(), Calendar.DATE);
+        dataAuditEventQuery.filterByClassName(entityClass.getName());
+        dataAuditEventQuery.filterByEntityId(entityId);
 
-        final List<DataAuditEvent> dataAuditEvents = (List<DataAuditEvent>) getHibernateTemplate().execute(
-                new HibernateCallback() {
 
-                    public Object doInHibernate(final Session session) throws HibernateException {
-                        final Query query = session.createQuery(queryBuffer.toString());
-                        query.setParameter("className", entityClass.getName());
-                        query.setParameter("id", entityId);
-                        query.setParameter("endDate", endDate);
-                        query.setParameter("startDate", startDate);
-                        return query.list();
-                    }
-                });
+        if (calendar != null) {
+            final Calendar newCalendar = (Calendar) calendar.clone();
+            newCalendar.add(Calendar.DAY_OF_MONTH, +1);
+            Date startDate = DateUtils.truncate(calendar.getTime(), Calendar.DATE);
+            Date endDate = DateUtils.truncate(newCalendar.getTime(), Calendar.DATE);
+            dataAuditEventQuery.filterByStartDateAfter(startDate);
+            dataAuditEventQuery.filterByEndDateBefore(endDate);
+
+        }
+        final List<DataAuditEvent> dataAuditEvents = auditHistoryDao.findDataAuditEvents(dataAuditEventQuery);
 
         return dataAuditEvents;
 
+    }
+        @SuppressWarnings("unchecked")
+        public List<DataAuditEvent> getAuditDetailsForEntity(final Class entityClass, final Integer entityId)
+
+        {
+            final List<gov.nih.nci.cabig.ctms.audit.domain.DataAuditEvent> dataAuditEvents = getDataAuditEvents(
+                    entityClass, entityId, null);
+            return dataAuditEvents;
+
+        }
+
+
+    @Required
+    public void setAuditHistoryDao(final AuditHistoryDao auditHistoryDao) {
+        this.auditHistoryDao = auditHistoryDao;
     }
 }
