@@ -31,7 +31,7 @@
         
         <unzip src="${cas.war.input}" dest="${exploded.dir}"/>
 
-        <copy todir="${exploded.dir}">
+        <copy todir="${exploded.dir}" overwrite="true" >
             <fileset dir="${webcontent.dir}"/>
         </copy>
 
