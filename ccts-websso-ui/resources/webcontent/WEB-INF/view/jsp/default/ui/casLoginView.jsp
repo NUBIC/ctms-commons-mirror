@@ -71,6 +71,20 @@
             </div>
 
             <div class="row">
+                <div class="label">
+                    Authentication Service
+                </div>
+                <div class="value">
+                    <spring:message code="screen.welcome.label.authentication.service.accesskey" var="authenticationServiceAccessKey" />
+                    <form:select cssClass="required" cssErrorClass="error" id="authenticationServiceURL" tabindex="3" path="authenticationServiceURL"  accesskey="${authenticationServiceAccessKey}" htmlEscape="true" >
+                        <form:option value="-" label="-- Please Select"/>
+                        <form:options items="${authenticationServiceInformationList}" itemValue="authenticationServiceURL" itemLabel="authenticationServiceName"/>
+                    </form:select>
+                </div>
+
+            </div>
+
+            <div class="row">
                 <div class="submit">
                     <input type="hidden" name="lt" value="${flowExecutionKey}"/>
                     <input type="hidden" name="_eventId" value="submit"/>
