@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="test/src"/>
+	<classpathentry kind="lib" path="ext/lib/advertisement-1.2.jar"/>
+	<classpathentry kind="lib" path="ext/lib/ant-contrib-1.0b2.jar"/>
+	<classpathentry kind="lib" path="ext/lib/caGrid-core-1.2.jar"/>
+	<classpathentry kind="lib" path="ext/lib/castor-0.9.9.jar"/>
+	<classpathentry kind="lib" path="ext/lib/common-1.2.jar"/>
+	<classpathentry kind="lib" path="ext/lib/globus_wsrf_servicegroup_stubs-4.0.3.jar"/>
+	<classpathentry kind="lib" path="ext/lib/globus_wsrf_servicegroup-4.0.3.jar"/>
+	<classpathentry kind="lib" path="ext/lib/jdom-1.0.jar"/>
+	<classpathentry kind="lib" path="ext/lib/security-1.2.jar"/>
+	<classpathentry kind="lib" path="ext/lib/ServiceSecurityProvider-client-1.2.jar"/>
+	<classpathentry kind="lib" path="ext/lib/ServiceSecurityProvider-common-1.2.jar"/>
+	<classpathentry kind="lib" path="ext/lib/ServiceSecurityProvider-service-1.2.jar"/>
+	<classpathentry kind="lib" path="ext/lib/ServiceSecurityProvider-stubs-1.2.jar"/>
+	<classpathentry kind="lib" path="ext/lib/spring-2.0.2.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
