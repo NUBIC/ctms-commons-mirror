@@ -41,7 +41,7 @@ public class AuditHistoryRepository {
         if (calendar == null || entityClass == null || entityId == null) {
             throw new IllegalArgumentException("invalid uses of method. All method parameters must not be null");
         }
-       if (Integer.valueOf(minutes).equals(Integer.valueOf(0))) {
+        if (Integer.valueOf(minutes).equals(Integer.valueOf(0))) {
             minutes = 1;
         }
         final Calendar newCalendar = (Calendar) calendar.clone();
@@ -57,7 +57,15 @@ public class AuditHistoryRepository {
 
     }
 
-
+    /**
+     * Returns list of data audit event object matching query criteria
+     *
+     * @param query
+     * @return
+     */
+    public List<DataAuditEvent> findDataAuditEvents(final DataAuditEventQuery query) {
+        return auditHistoryDao.findDataAuditEvents(query);
+    }
 
 
     /**
@@ -204,15 +212,16 @@ public class AuditHistoryRepository {
         return dataAuditEvents;
 
     }
-        @SuppressWarnings("unchecked")
-        public List<DataAuditEvent> getAuditDetailsForEntity(final Class entityClass, final Integer entityId)
 
-        {
-            final List<gov.nih.nci.cabig.ctms.audit.domain.DataAuditEvent> dataAuditEvents = getDataAuditEvents(
-                    entityClass, entityId, null);
-            return dataAuditEvents;
+    @SuppressWarnings("unchecked")
+    public List<DataAuditEvent> getAuditDetailsForEntity(final Class entityClass, final Integer entityId)
 
-        }
+    {
+        final List<gov.nih.nci.cabig.ctms.audit.domain.DataAuditEvent> dataAuditEvents = getDataAuditEvents(
+                entityClass, entityId, null);
+        return dataAuditEvents;
+
+    }
 
 
     @Required
