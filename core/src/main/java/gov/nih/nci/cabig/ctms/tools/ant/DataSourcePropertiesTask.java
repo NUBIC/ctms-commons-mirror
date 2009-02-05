@@ -1,12 +1,11 @@
 package gov.nih.nci.cabig.ctms.tools.ant;
 
+import gov.nih.nci.cabig.ctms.tools.DataSourceSelfDiscoveringPropertiesFactoryBean;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 
 import java.util.Map;
 import java.util.Properties;
-
-import gov.nih.nci.cabig.ctms.tools.DataSourceSelfDiscoveringPropertiesFactoryBean;
 
 /**
  * @author Rhett Sutphin
@@ -24,8 +23,7 @@ public class DataSourcePropertiesTask extends Task {
     public void execute() throws BuildException {
         Properties props = getProperties();
         for (Map.Entry<Object, Object> entry : props.entrySet()) {
-            getOwningTarget().getProject()
-                .setProperty((String) entry.getKey(), (String) entry.getValue());
+            getProject().setProperty((String) entry.getKey(), (String) entry.getValue());
         }
     }
 

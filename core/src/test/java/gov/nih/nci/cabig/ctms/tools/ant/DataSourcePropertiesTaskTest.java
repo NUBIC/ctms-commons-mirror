@@ -1,13 +1,11 @@
 package gov.nih.nci.cabig.ctms.tools.ant;
 
+import gov.nih.nci.cabig.ctms.tools.TestDataSourcePropertiesFactoryBean;
 import junit.framework.TestCase;
 import org.apache.tools.ant.Project;
-import org.apache.tools.ant.Target;
 
-import java.util.Properties;
 import java.io.File;
-
-import gov.nih.nci.cabig.ctms.tools.TestDataSourcePropertiesFactoryBean;
+import java.util.Properties;
 
 /**
  * @author Rhett Sutphin
@@ -15,7 +13,6 @@ import gov.nih.nci.cabig.ctms.tools.TestDataSourcePropertiesFactoryBean;
 public class DataSourcePropertiesTaskTest extends TestCase {
     private Project project;
     private static final Properties PROPERTIES = new Properties();
-    private Target target;
     private DataSourcePropertiesTask task;
 
     static {
@@ -29,10 +26,8 @@ public class DataSourcePropertiesTaskTest extends TestCase {
         System.setProperty("catalina.home", thisDir.getCanonicalPath());
 
         project = new Project();
-        target = new Target();
-        project.addTarget("init", target);
         task = new DataSourcePropertiesTask();
-        task.setOwningTarget(target);
+        task.setProject(project);
     }
     
     public void testPropertiesAppliedToProject() throws Exception {
@@ -41,7 +36,7 @@ public class DataSourcePropertiesTaskTest extends TestCase {
                 return PROPERTIES;
             }
         };
-        stubbedTask.setOwningTarget(target);
+        stubbedTask.setProject(project);
 
         assertNull(project.getProperty("datasource.foo"));
         stubbedTask.execute();
