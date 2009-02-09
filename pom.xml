@@ -26,7 +26,7 @@
         <repository>
             <id>download.bioinformatics.northwestern.edu</id>
             <name>Northwestern RHLCCC Bioinformatics</name>
-            <url>http://download.bioinformatics.northwestern.edu/maven2</url>
+            <url>http://download.bioinformatics.northwestern.edu/download/maven2</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
@@ -39,7 +39,7 @@
         <pluginRepository>
             <id>download.bioinformatics.northwestern.edu</id>
             <name>Northwestern RHLCCC Bioinformatics</name>
-            <url>http://download.bioinformatics.northwestern.edu/maven2</url>
+            <url>http://download.bioinformatics.northwestern.edu/download/maven2</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
