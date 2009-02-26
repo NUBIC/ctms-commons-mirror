@@ -1,11 +1,11 @@
 package gov.nih.nci.cabig.ctms.testing;
 
-import static org.easymock.classextension.EasyMock.*;
 import org.apache.commons.logging.Log;
+import static org.easymock.classextension.EasyMock.*;
 
-import java.util.Set;
-import java.util.LinkedHashSet;
 import java.lang.reflect.Method;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * @author Rhett Sutphin
@@ -23,12 +23,24 @@ public class MockRegistry {
         mocks = new LinkedHashSet<Object>();
     }
 
-    public <T> T registerMockFor(Class<T> forClass) {
-        return registered(createMock(forClass));
+    public <T> T registerMockFor(Class<T> forClass, Method... methodsToMock) {
+        T mock;
+        if (methodsToMock.length == 0) {
+            mock = createMock(forClass);
+        } else {
+            mock = createMock(forClass, methodsToMock);
+        }
+        return registered(mock);
     }
 
-    public <T> T registerMockFor(Class<T> forClass, Method... methodsToMock) {
-        return registered(createMock(forClass, methodsToMock));
+    public <T> T registerNiceMockFor(Class<T> forClass, Method... methodsToMock) {
+        T mock;
+        if (methodsToMock.length == 0) {
+            mock = createNiceMock(forClass);
+        } else {
+            mock = createNiceMock(forClass, methodsToMock);
+        }
+        return registered(mock);
     }
 
     public void replayMocks() {
