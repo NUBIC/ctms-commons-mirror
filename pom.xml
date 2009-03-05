@@ -9,14 +9,7 @@
         Common classes, testing infrastructure, tags, and JSPs for 
         caBIG's CTMS workspace.
     </description>
-    <!-- TODO:
-    <licenses>
-        <license>
-            <name>LGPL</name>
-            <url>http://www.gnu.org/licenses/lgpl.txt</url>
-        </license>
-    </licenses>
-    -->
+
     <scm>
         <url>https://gforge.nci.nih.gov/svnroot/ctmscommons/trunk</url>
         <connection>scm:svn:https://gforge.nci.nih.gov/svnroot/ctmscommons/trunk</connection>
@@ -58,6 +51,14 @@
         <module>maven</module> 
         <module>testing-all</module>
     </modules>
+
+    <!-- Default properties -->
+    <properties>
+        <osgi.symbolicName>${project.groupId}.${project.artifactId}</osgi.symbolicName>
+        <osgi.export>gov.nih.nci.*;version=${pom.version}</osgi.export>
+        <osgi.import>*</osgi.import>
+        <osgi.private></osgi.private>
+    </properties>
 
     <!-- Specify versions once for commonly-used deps -->
     <dependencyManagement>
@@ -160,6 +161,19 @@
                 <configuration>
                     <tagBase>http://gforge.nci.nih.gov/svnroot/ctmscommons/tags/releases</tagBase>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-SymbolicName>${osgi.symbolicName}</Bundle-SymbolicName>
+                        <Export-Package>${osgi.export}</Export-Package>
+                        <Import-Package>${osgi.import}</Import-Package>
+                        <Private-Package>${osgi.private}</Private-Package>
+                    </instructions>
                 </configuration>
             </plugin>
         </plugins>
