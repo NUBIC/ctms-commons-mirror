@@ -56,7 +56,7 @@
     <properties>
         <osgi.symbolicName>${project.groupId}.${project.artifactId}</osgi.symbolicName>
         <osgi.export>gov.nih.nci.*;version=${pom.version}</osgi.export>
-        <osgi.import>*</osgi.import>
+        <osgi.import>gov.nih.nci.*, *;resolution:=optional</osgi.import>
         <osgi.private></osgi.private>
     </properties>
 
