@@ -3,19 +3,19 @@
 	<parent>
 		<artifactId>acegi</artifactId>
 		<groupId>gov.nih.nci.security.acegi</groupId>
-		<version>0.9</version>
+		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>acegi-grid</artifactId>
 	<name>acegi-grid</name>
-	<version>0.9</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<url>http://maven.apache.org</url>
 	<dependencies>
 
 		<dependency>
 			<groupId>gov.nih.nci.security.acegi</groupId>
 			<artifactId>acegi-csm</artifactId>
-			<version>0.9</version>
+			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
