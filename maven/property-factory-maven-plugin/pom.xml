@@ -2,7 +2,7 @@
     <parent>
         <artifactId>ctms-commons-maven-plugins</artifactId>
         <groupId>gov.nih.nci.cabig.ctms</groupId>
-        <version>0.9-SNAPSHOT</version>
+        <version>0.9</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>property-factory-maven-plugin</artifactId>
