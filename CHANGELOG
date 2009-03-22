@@ -1,0 +1,12 @@
+1.0.0 (trunk)
+=============
+*core*
+
+- Backwards incompatible change:  introduce ConfigurationProperty and 
+  ConfigurationProperties interfaces.  The classes which had these names
+  are now called DefaultConfigurationProperty and 
+  DefaultConfigurationProperties.
+
+*all*
+
+- Begin formal changelog

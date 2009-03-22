@@ -7,9 +7,9 @@ import java.util.Properties;
 /**
  * @author Rhett Sutphin
  */
-public class ConfigurationPropertiesTest extends CommonsCoreTestCase {
+public class DefaultConfigurationPropertiesTest extends CommonsCoreTestCase {
     public void testEmptyPropertiesIsEmptyWithoutErrors() throws Exception {
-        ConfigurationProperties empty = ConfigurationProperties.empty();
+        ConfigurationProperties empty = DefaultConfigurationProperties.empty();
         assertEquals(0, empty.size());
         assertNull(empty.get("anything"));
         assertNull(empty.getNameFor("anything"));
@@ -17,7 +17,7 @@ public class ConfigurationPropertiesTest extends CommonsCoreTestCase {
 
     public void testAssertEmptyPropertiesFailsOnAdd() throws Exception {
         try {
-            ConfigurationProperties.empty().add(new ConfigurationProperty.Int("some"));
+            DefaultConfigurationProperties.empty().add(new DefaultConfigurationProperty.Int("some"));
             fail("Exception not thrown");
         } catch (UnsupportedOperationException uoe) {
             // expected
@@ -25,12 +25,12 @@ public class ConfigurationPropertiesTest extends CommonsCoreTestCase {
     }
 
     public void testUnionContainsAllProperties() throws Exception {
-        ConfigurationProperty.Bool goodProp = new ConfigurationProperty.Bool("good");
-        ConfigurationProperties a = new ConfigurationProperties(new Properties());
+        DefaultConfigurationProperty.Bool goodProp = new DefaultConfigurationProperty.Bool("good");
+        DefaultConfigurationProperties a = new DefaultConfigurationProperties(new Properties());
         a.add(goodProp);
         ConfigurationProperties b = new ExampleConfiguration().getProperties();
 
-        ConfigurationProperties aAndB = ConfigurationProperties.union(a, b);
+        ConfigurationProperties aAndB = DefaultConfigurationProperties.union(a, b);
         assertTrue("Missing property from a", aAndB.containsKey("good"));
         assertTrue("Missing property from b", aAndB.containsKey(ExampleConfiguration.SMTP_HOST.getKey()));
         assertEquals("Wrong number of properties", 4, aAndB.size());
@@ -39,12 +39,12 @@ public class ConfigurationPropertiesTest extends CommonsCoreTestCase {
     }
 
     public void testUnionPreservesDetails() throws Exception {
-        ConfigurationProperty.Bool goodProp = new ConfigurationProperty.Bool("good");
-        ConfigurationProperties a = new ConfigurationProperties(new Properties());
+        DefaultConfigurationProperty.Bool goodProp = new DefaultConfigurationProperty.Bool("good");
+        DefaultConfigurationProperties a = new DefaultConfigurationProperties(new Properties());
         a.add(goodProp);
         ConfigurationProperties b = new ExampleConfiguration().getProperties();
 
-        ConfigurationProperties aAndB = ConfigurationProperties.union(a, b);
+        ConfigurationProperties aAndB = DefaultConfigurationProperties.union(a, b);
         assertEquals("Description not preseved in union",
             "The name or IP address for the SMTP server to use for e-mail notifications",
             aAndB.getDescriptionFor(ExampleConfiguration.SMTP_HOST.getKey()));

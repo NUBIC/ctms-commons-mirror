@@ -6,11 +6,11 @@ import org.springframework.core.io.ClassPathResource;
  * @author Rhett Sutphin
  */
 public class AlternateConfiguration extends DatabaseBackedConfiguration {
-    private static final ConfigurationProperties PROPERTIES =
-        new ConfigurationProperties(new ClassPathResource("details.properties", AlternateConfiguration.class));
+    private static final DefaultConfigurationProperties PROPERTIES =
+        new DefaultConfigurationProperties(new ClassPathResource("details.properties", AlternateConfiguration.class));
 
     public static final ConfigurationProperty<String> SMTP_HOST
-        = PROPERTIES.add(new ConfigurationProperty.Text("smtpHost"));
+        = PROPERTIES.add(new DefaultConfigurationProperty.Text("smtpHost"));
 
     public ConfigurationProperties getProperties() {
         return PROPERTIES;

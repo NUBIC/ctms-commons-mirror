@@ -8,15 +8,15 @@ import java.util.List;
  * @author Rhett Sutphin
  */
 public class ExampleConfiguration extends DatabaseBackedConfiguration {
-    private static final ConfigurationProperties PROPERTIES =
-        new ConfigurationProperties(new ClassPathResource("details.properties", ExampleConfiguration.class));
+    private static final DefaultConfigurationProperties PROPERTIES =
+        new DefaultConfigurationProperties(new ClassPathResource("details.properties", ExampleConfiguration.class));
 
     public static final ConfigurationProperty<String> SMTP_HOST
-        = PROPERTIES.add(new ConfigurationProperty.Text("smtpHost"));
+        = PROPERTIES.add(new DefaultConfigurationProperty.Text("smtpHost"));
     public static final ConfigurationProperty<Integer> SMTP_PORT
-        = PROPERTIES.add(new ConfigurationProperty.Int("smtpPort"));
+        = PROPERTIES.add(new DefaultConfigurationProperty.Int("smtpPort"));
     public static final ConfigurationProperty<List<String>> ADDRESSES
-        = PROPERTIES.add(new ConfigurationProperty.Csv("addresses"));
+        = PROPERTIES.add(new DefaultConfigurationProperty.Csv("addresses"));
 
     public ConfigurationProperties getProperties() {
         return PROPERTIES;

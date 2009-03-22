@@ -1,12 +1,8 @@
 package gov.nih.nci.cabig.ctms.tools.configuration;
 
-import gov.nih.nci.cabig.ctms.CommonsSystemException;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.transaction.annotation.Transactional;
 import org.hibernate.SessionFactory;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * Provides a base DAO class for an KV-style configuration system for an application.
@@ -32,8 +28,8 @@ import java.util.Map;
  * {@link #getConfigurationEntryClass()}.
  *
  * @see ConfigurationEntry
- * @see ConfigurationProperties
- * @see ConfigurationProperty
+ * @see DefaultConfigurationProperties
+ * @see DefaultConfigurationProperty
  * @author Rhett Sutphin
  */
 @Transactional(readOnly = true)
