@@ -1,6 +1,5 @@
 package gov.nih.nci.cabig.ctms.tools.configuration;
 
-import org.springframework.transaction.annotation.Transactional;
 import gov.nih.nci.cabig.ctms.CommonsSystemException;
 
 import java.util.List;
@@ -33,18 +32,7 @@ public abstract class AbstractConfiguration implements Configuration {
     public <V> void set(ConfigurationProperty<V> property, V value) {
         ConfigurationEntry entry = getEntry(property);
         if (entry == null) {
-            try {
-                entry = getConfigurationEntryClass().newInstance();
-                entry.setKey(property.getKey());
-            } catch (InstantiationException e) {
-                throw new CommonsSystemException(
-                    "Could not instantiate a new configuration entry of class %s", e,
-                    getConfigurationEntryClass().getName());
-            } catch (IllegalAccessException e) {
-                throw new CommonsSystemException(
-                    "Could not instantiate a new configuration entry of class %s", e,
-                    getConfigurationEntryClass().getName());
-            }
+            entry = createNewEntry(property);
         }
         entry.setValue(value == null ? null : property.toStorageFormat(value));
         store(entry);
@@ -78,6 +66,27 @@ public abstract class AbstractConfiguration implements Configuration {
      */
     protected Class<? extends ConfigurationEntry> getConfigurationEntryClass() {
         return DefaultConfigurationEntry.class;
+    }
+
+    /**
+     * Allows subclasses to specify how new entries should be created.  The default
+     * is to create a new instance of the class returned by {@link #getConfigurationEntryClass()},
+     * set the key from the provided <code>property</code> and return.
+     */
+    protected <V> ConfigurationEntry createNewEntry(ConfigurationProperty<V> property) {
+        try {
+            ConfigurationEntry entry = getConfigurationEntryClass().newInstance();
+            entry.setKey(property.getKey());
+            return entry;
+        } catch (InstantiationException e) {
+            throw new CommonsSystemException(
+                "Could not instantiate a new configuration entry of class %s", e,
+                getConfigurationEntryClass().getName());
+        } catch (IllegalAccessException e) {
+            throw new CommonsSystemException(
+                "Could not instantiate a new configuration entry of class %s", e,
+                getConfigurationEntryClass().getName());
+        }
     }
 
     public java.util.Map<String, Object> getMap() {
