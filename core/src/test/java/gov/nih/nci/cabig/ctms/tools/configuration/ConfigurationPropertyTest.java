@@ -14,12 +14,6 @@ public class ConfigurationPropertyTest extends CommonsCoreTestCase {
         assertEquals("The port on which to communicate with the SMTP server",
             ExampleConfiguration.SMTP_PORT.getDescription());
     }
-
-    public void testCloneRemovesConfigurationPropertiesReference() throws Exception {
-        ConfigurationProperty<Integer> portClone = ExampleConfiguration.SMTP_PORT.clone();
-        assertNull("properties reference retained", portClone.getDescription());
-        assertEquals("key not retained", ExampleConfiguration.SMTP_PORT.getKey(), portClone.getKey());
-    }
     
     public void testClonesEqual() throws Exception {
         assertEquals(ExampleConfiguration.ADDRESSES, ExampleConfiguration.ADDRESSES.clone());

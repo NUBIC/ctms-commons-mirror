@@ -45,11 +45,20 @@ public class DefaultConfigurationPropertiesTest extends CommonsCoreTestCase {
         ConfigurationProperties b = new ExampleConfiguration().getProperties();
 
         ConfigurationProperties aAndB = DefaultConfigurationProperties.union(a, b);
+        ConfigurationProperty<?> newSmtpHost = null, newSmtpPort = null;
+        for (ConfigurationProperty<?> property : aAndB.getAll()) {
+            if (property.getKey().equals(ExampleConfiguration.SMTP_HOST.getKey())) {
+                newSmtpHost = property;
+            } else if (property.getKey().equals(ExampleConfiguration.SMTP_PORT.getKey())) {
+                newSmtpPort = property;
+            }
+        }
+        assertNotNull(newSmtpHost);
+        assertNotNull(newSmtpPort);
         assertEquals("Description not preseved in union",
             "The name or IP address for the SMTP server to use for e-mail notifications",
-            aAndB.getDescriptionFor(ExampleConfiguration.SMTP_HOST.getKey()));
+            newSmtpHost.getDescription());
         assertEquals("Default not preseved in union",
-            "25",
-            aAndB.getStoredDefaultFor(ExampleConfiguration.SMTP_PORT.getKey()));
+            25, newSmtpPort.getDefault());
     }
 }

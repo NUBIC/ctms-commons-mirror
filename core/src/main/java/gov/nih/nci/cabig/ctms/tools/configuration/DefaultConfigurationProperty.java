@@ -14,14 +14,23 @@ import java.util.List;
 */
 public abstract class DefaultConfigurationProperty<V> implements Cloneable, ConfigurationProperty<V> {
     private final String key;
-    private ConfigurationProperties collection;
+    private String name, description, storedDefault;
 
     protected DefaultConfigurationProperty(String key) {
         this.key = key;
     }
 
     public void setCollection(ConfigurationProperties collection) {
-        this.collection = collection;
+        if (collection != null) {
+            String newName = collection.getNameFor(getKey());
+            if (newName != null) this.name = newName;
+
+            String newDescription = collection.getDescriptionFor(getKey());
+            if (newDescription != null) this.description = newDescription;
+
+            String newDefault = collection.getStoredDefaultFor(getKey());
+            if (newDefault != null) this.storedDefault = newDefault;
+        }
     }
 
     public String getKey() {
@@ -29,16 +38,15 @@ public abstract class DefaultConfigurationProperty<V> implements Cloneable, Conf
     }
 
     public String getName() {
-        return collection == null ? null : collection.getNameFor(getKey());
+        return name;
     }
 
     public String getDescription() {
-        return collection == null ? null : collection.getDescriptionFor(getKey());
+        return description;
     }
 
     public V getDefault() {
-        String stored = collection == null ? null : collection.getStoredDefaultFor(getKey());
-        return stored == null ? null : fromStorageFormat(stored);
+        return storedDefault == null ? null : fromStorageFormat(storedDefault);
     }
 
     public String getControlType() {

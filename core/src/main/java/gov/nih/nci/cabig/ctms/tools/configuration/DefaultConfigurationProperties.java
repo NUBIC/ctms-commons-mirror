@@ -64,6 +64,10 @@ public class DefaultConfigurationProperties implements ConfigurationProperties {
         this.details = detailsProperties;
     }
 
+    public DefaultConfigurationProperties() {
+        this(new Properties());
+    }
+
     private static Properties loadDetails(Resource resource) {
         Properties details = new Properties();
         try {
@@ -115,16 +119,7 @@ public class DefaultConfigurationProperties implements ConfigurationProperties {
     }
 
     public static ConfigurationProperties union(ConfigurationProperties... items) {
-        Properties mergedDetails = new Properties();
-        for (ConfigurationProperties collection : items) {
-            if (collection instanceof DefaultConfigurationProperties) {
-                Properties otherDetails = ((DefaultConfigurationProperties) collection).getDetails();
-                if (otherDetails != null) {
-                    mergedDetails.putAll(otherDetails);
-                }
-            }
-        }
-        DefaultConfigurationProperties union = new DefaultConfigurationProperties(mergedDetails);
+        DefaultConfigurationProperties union = new DefaultConfigurationProperties();
         for (ConfigurationProperties collection : items) {
             for (ConfigurationProperty<?> property : collection.getAll()) {
                 union.add(property.clone());
