@@ -1,7 +1,5 @@
 package gov.nih.nci.ccts.grid.studyconsumer.client;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.rmi.RemoteException;
 
@@ -33,7 +31,7 @@ import gov.nih.nci.cagrid.introduce.security.client.ServiceSecurityClient;
  * On construction the class instance will contact the remote service and retrieve it's security
  * metadata description which it will use to configure the Stub specifically for each method call.
  * 
- * @created by Introduce Toolkit version 1.2
+ * @created by Introduce Toolkit version 1.3
  */
 public class StudyConsumerClient extends StudyConsumerClientBase implements StudyConsumerI {	
 
@@ -59,15 +57,11 @@ public class StudyConsumerClient extends StudyConsumerClientBase implements Stud
 	
 	public static void main(String [] args){
 	    System.out.println("Running the Grid Service Client");
-	    String proxyFilePath="/Users/kruttikagarwal/KrLocalProxy";
 		try{
 		if(!(args.length < 2)){
 			if(args[0].equals("-url")){
-			  StudyConsumerClient client = new StudyConsumerClient(args[1], new GlobusCredential(new FileInputStream(
-	                                    new File(proxyFilePath))));
+			  StudyConsumerClient client = new StudyConsumerClient(args[1]);
 			  client.createStudy(new Study());
-			  // place client calls here if you want to use this main as a
-			  // test....
 			} else {
 				usage();
 				System.exit(1);
@@ -81,27 +75,6 @@ public class StudyConsumerClient extends StudyConsumerClientBase implements Stud
 			System.exit(1);
 		}
 	}
-
-  public org.oasis.wsrf.properties.GetMultipleResourcePropertiesResponse getMultipleResourceProperties(org.oasis.wsrf.properties.GetMultipleResourceProperties_Element params) throws RemoteException {
-    synchronized(portTypeMutex){
-      configureStubSecurity((Stub)portType,"getMultipleResourceProperties");
-    return portType.getMultipleResourceProperties(params);
-    }
-  }
-
-  public org.oasis.wsrf.properties.GetResourcePropertyResponse getResourceProperty(javax.xml.namespace.QName params) throws RemoteException {
-    synchronized(portTypeMutex){
-      configureStubSecurity((Stub)portType,"getResourceProperty");
-    return portType.getResourceProperty(params);
-    }
-  }
-
-  public org.oasis.wsrf.properties.QueryResourcePropertiesResponse queryResourceProperties(org.oasis.wsrf.properties.QueryResourceProperties_Element params) throws RemoteException {
-    synchronized(portTypeMutex){
-      configureStubSecurity((Stub)portType,"queryResourceProperties");
-    return portType.queryResourceProperties(params);
-    }
-  }
 
   public void createStudy(gov.nih.nci.cabig.ccts.domain.Study study) throws RemoteException, gov.nih.nci.ccts.grid.studyconsumer.stubs.types.InvalidStudyException, gov.nih.nci.ccts.grid.studyconsumer.stubs.types.StudyCreationException {
     synchronized(portTypeMutex){
@@ -133,6 +106,27 @@ public class StudyConsumerClient extends StudyConsumerClientBase implements Stud
     studyContainer.setStudy(study);
     params.setStudy(studyContainer);
     gov.nih.nci.ccts.grid.studyconsumer.stubs.RollbackResponse boxedResult = portType.rollback(params);
+    }
+  }
+
+  public org.oasis.wsrf.properties.GetMultipleResourcePropertiesResponse getMultipleResourceProperties(org.oasis.wsrf.properties.GetMultipleResourceProperties_Element params) throws RemoteException {
+    synchronized(portTypeMutex){
+      configureStubSecurity((Stub)portType,"getMultipleResourceProperties");
+    return portType.getMultipleResourceProperties(params);
+    }
+  }
+
+  public org.oasis.wsrf.properties.GetResourcePropertyResponse getResourceProperty(javax.xml.namespace.QName params) throws RemoteException {
+    synchronized(portTypeMutex){
+      configureStubSecurity((Stub)portType,"getResourceProperty");
+    return portType.getResourceProperty(params);
+    }
+  }
+
+  public org.oasis.wsrf.properties.QueryResourcePropertiesResponse queryResourceProperties(org.oasis.wsrf.properties.QueryResourceProperties_Element params) throws RemoteException {
+    synchronized(portTypeMutex){
+      configureStubSecurity((Stub)portType,"queryResourceProperties");
+    return portType.queryResourceProperties(params);
     }
   }
 

@@ -1,6 +1,5 @@
 package gov.nih.nci.ccts.grid.studyconsumer.service;
 
-
 import gov.nih.nci.ccts.grid.studyconsumer.common.StudyConsumerI;
 import gov.nih.nci.ccts.grid.studyconsumer.service.sampleimpl.EchoStudyServiceImpl;
 
