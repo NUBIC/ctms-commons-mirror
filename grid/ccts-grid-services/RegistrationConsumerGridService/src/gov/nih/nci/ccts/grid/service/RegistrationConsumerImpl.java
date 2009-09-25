@@ -30,8 +30,16 @@ public class RegistrationConsumerImpl extends RegistrationConsumerImplBase {
                 DEFAULT_SPRING_CLASSPATH_EXPRESSION);
         String bean = ContainerConfig.getConfig().getOption(REGISTRATION_CONSUMER_BEAN_NAME,
                 DEFAULT_REGISTRATION_CONSUMER_BEAN_NAME);
-        ApplicationContext ctx = new ClassPathXmlApplicationContext(exp);
-        this.consumer = (RegistrationConsumerI) ctx.getBean(bean);
+      if(this.getClass().getResourceAsStream(exp)==null){
+	      System.out.print("Registration Consumer Implementation not found. Loading the default echo implementation.");
+	      this.consumer = new EchoRegistrationConsumer();
+	  }else{
+	      System.out.print("###########");
+	      ApplicationContext ctx = new ClassPathXmlApplicationContext(exp);
+	      this.consumer = (RegistrationConsumerI) ctx.getBean(bean);
+	  }
+//        ApplicationContext ctx = new ClassPathXmlApplicationContext(exp);
+//        this.consumer = (RegistrationConsumerI) ctx.getBean(bean);
 	}
 	
   public void rollback(gov.nih.nci.cabig.ccts.domain.Registration registration) throws RemoteException, gov.nih.nci.ccts.grid.stubs.types.InvalidRegistrationException {

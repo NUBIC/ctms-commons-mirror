@@ -1,26 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <securityConfig xmlns="http://www.globus.org">
-  <method name="queryResourceProperties">
-    <auth-method>
-      <none />
-    </auth-method>
-  </method>
-  <method name="getMultipleResourceProperties">
-    <auth-method>
-      <none />
-    </auth-method>
-  </method>
-  <method name="getResourceProperty">
-    <auth-method>
-      <none />
-    </auth-method>
-  </method>
   <method name="getServiceSecurityMetadata">
     <auth-method>
       <none />
     </auth-method>
   </method>
-  <authz value="registrationconsumer:gov.nih.nci.ccts.grid.service.globus.RegistrationConsumerAuthorization" />
   <auth-method>
     <GSITransport>
       <protection-level>
@@ -31,6 +15,22 @@
   <run-as>
     <system-identity />
   </run-as>
+  <authz value="none" />
+  <method name="getMultipleResourceProperties">
+    <auth-method>
+      <none />
+    </auth-method>
+  </method>
+  <method name="getResourceProperty">
+    <auth-method>
+      <none />
+    </auth-method>
+  </method>
+  <method name="queryResourceProperties">
+    <auth-method>
+      <none />
+    </auth-method>
+  </method>
 </securityConfig>
 
 
