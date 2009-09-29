@@ -17,6 +17,8 @@ public class RegistrationConsumerImpl extends RegistrationConsumerImplBase {
 	private static final String SPRING_CLASSPATH_EXPRESSION = "springClasspathExpression";
 
     private static final String DEFAULT_SPRING_CLASSPATH_EXPRESSION = "classpath:applicationContext-grid.xml";
+    
+    private static final String DEFAULT_APPCONTEXT_XML_PATH="applicationContext-grid.xml";
 
     private static final String REGISTRATION_CONSUMER_BEAN_NAME = "registrationConsumerBeanName";
 
@@ -30,7 +32,7 @@ public class RegistrationConsumerImpl extends RegistrationConsumerImplBase {
                 DEFAULT_SPRING_CLASSPATH_EXPRESSION);
         String bean = ContainerConfig.getConfig().getOption(REGISTRATION_CONSUMER_BEAN_NAME,
                 DEFAULT_REGISTRATION_CONSUMER_BEAN_NAME);
-      if(this.getClass().getResourceAsStream(exp)==null){
+      if(this.getClass().getResourceAsStream(DEFAULT_APPCONTEXT_XML_PATH)==null){
 	      System.out.print("Registration Consumer Implementation not found. Loading the default echo implementation.");
 	      this.consumer = new EchoRegistrationConsumer();
 	  }else{
