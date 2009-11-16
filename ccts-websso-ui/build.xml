@@ -8,7 +8,7 @@
     <property name="resources.dir" value="${basedir}/resources"/>
     <property name="webcontent.dir" value="${resources.dir}/webcontent"/>
 
-    <property name="cas.war.name" value="cas.war"/>
+    <property name="cas.war.name" value="webssoserver.war"/>
 
     <property name="input.dir" value="${basedir}/input"/>
     <property name="output.dir" value="${basedir}/output"/>
