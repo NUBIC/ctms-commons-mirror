@@ -15,7 +15,7 @@
   <run-as>
     <system-identity />
   </run-as>
-  <authz value="none" />
+  <authz value="labconsumer:gov.nih.nci.ccts.grid.service.pdp.AuthenticationRequiredPDP labconsumer:gov.nih.nci.ccts.grid.service.globus.LabConsumerServiceAuthorization" />
   <method name="getMultipleResourceProperties">
     <auth-method>
       <none />
