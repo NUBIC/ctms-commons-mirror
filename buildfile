@@ -24,7 +24,10 @@ define "ctms-commons" do
       package(:jar)
     end
 
-    # define "uctrace"
+    define "uctrace" do
+      compile.with project('base').and_dependencies
+      package(:jar)
+    end
   end
   
   define "core" do
@@ -47,4 +50,44 @@ define "ctms-commons" do
     test.with SPRING.test, project("testing-all:testing").and_dependencies, SLF4J.simple
     package(:jar)
   end
+
+  define "acegi" do
+    # TODO: this probably should be something ctms-specific
+    project.group = "gov.nih.nci.security.acegi"
+
+    define "acl-dao", :base_dir => _('acegi-acl-dao') do
+      compile.with ACEGI, HIBERNATE, SPRING.main, EHCACHE, SLF4J.jcl
+      test.with SPRING.test, SLF4J.api, SLF4J.simple, CGLIB, HSQLDB,
+        JAKARTA_COMMONS.dbcp, JAKARTA_COMMONS.pool, JAKARTA_COMMONS.collections
+      package(:jar)
+    end
+
+    define "csm", :base_dir => _('acegi-csm') do
+      compile.with SLF4J.jcl, CSM, ASPECTJ, SPRING.main, ACEGI, SERVLET, HIBERNATE
+      test.with EASYMOCK, SLF4J.simple, SLF4J.api
+      package(:jar)
+    end
+
+    define "csm-test", :base_dir => _('acegi-csm-test') do
+      compile.with JUNIT, DBUNIT, SPRING.main, HIBERNATE
+      test.with project("csm").and_dependencies, SLF4J.api, SLF4J.simple, HSQLDB,
+        JAKARTA_COMMONS.collections, SLF4J.log4j
+    end
+
+    # Disabled until it can be completed -- caGrid is not available in
+    # any ivy repo I can find.
+    #
+    # define "grid", :base_dir => _('acegi-grid') do
+    #  compile.with SLF4J.jcl, project('csm').and_dependencies, GLOBUS
+    # end
+  end
+  
+  # The following submodules exist but are not part of the
+  # whole-project build-release process.  This should be fixed at some
+  # point.
+  #
+  # * ccts-websso-ui
+  # * grid
+  # * acegi/acegi-csm-testapp
+  # * acegi/grid
 end
