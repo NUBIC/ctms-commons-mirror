@@ -11,8 +11,9 @@ SLF4J_VERSION = "1.5.11"
 
 GENERIC_COLLECTIONS = "net.sourceforge.collections:collections-generic:jar:4.01"
 
-def ivy_artifact(repo_url, org, mod, rev, art)
-  url = "#{repo_url}/#{org}/#{mod}/#{rev}/#{art}-#{rev}.jar"
+def ivy_artifact(repo_url, org, mod, rev, art, filename=nil)
+  filename ||= "#{art}-#{rev}.jar"
+  url = URI.join(repo_url, "#{org}/#{mod}/#{rev}/#{filename}").to_s
   artifact_spec = "#{org}.#{mod}:#{art}:jar:#{rev}"
   download(artifact(artifact_spec) => url)
 end
@@ -20,6 +21,19 @@ end
 def cbiit_ivy(organization, mod, rev, art)
   ivy_artifact("https://ncisvn.nci.nih.gov/svn/cbiit-ivy-repo/trunk/",
     organization, mod, rev, art)
+end
+
+def cagrid_ivy(organization, mod, rev, art, filename=nil)
+  ivy_artifact("http://software.cagrid.org/repository-1.2/",
+    organization, mod, rev, art, filename)
+end
+
+def cagrid_artifact_group(mod, rev, art_prefix, suffixes)
+  suffixes.inject({}) { |h, a|
+    art = a.nil? ? art_prefix : "#{art_prefix}-#{a}"
+    key = art.gsub('-', '_').to_sym
+    h.merge!(key => cagrid_ivy("caGrid", mod, rev, art))
+  }
 end
 
 def spring_osgi_apache_commons(name, version)
@@ -103,7 +117,30 @@ CSM = struct(
   )
 
 GLOBUS = struct(
-  :cog_jglobus => cbiit_ivy("globus", "jcog", "4.0.3", "cog-jglobus")
+  :cog_jglobus => cbiit_ivy("globus", "jcog", "4.0.3", "cog-jglobus"),
+  :axis => cbiit_ivy("globus", "axis", "1.2RC2", "axis"),
+  :addressing => cbiit_ivy("globus", "ws-addressing", "1.0", "addressing"),
+  :wsrf_core_stubs => cbiit_ivy("globus", "ws-core-client", "4.0.3", "wsrf_core_stubs"),
+  :bouncycastle => cbiit_ivy("bouncycastle", "bouncycastle", "jdk1.3_1.25", "jce"),
+  :puretls => cbiit_ivy("globus", "puretls", "0.9b5", "puretls"),
+  :cryptix => cbiit_ivy("globus", "cryptix32", "3.2", "cryptix32"),
+  :cryptix_asn1 => cbiit_ivy("globus", "cryptix-asn1", "0.1.11", "cryptix-asn1")
+  )
+
+CAGRID = struct(
+  cagrid_artifact_group(
+    "authentication-service", "1.2", "caGrid-authentication-service", %w(client stubs)).
+  merge!(cagrid_artifact_group("core", "1.2", "caGrid-core", [nil])).
+  merge!(cagrid_artifact_group("dorian", "1.2", "caGrid-dorian", %w(stubs client))).
+  merge!(cagrid_artifact_group("gridca", "1.2", "caGrid-gridca", [nil])).
+  merge!(cagrid_artifact_group("authz", "1.2", "caGrid-authz", %w(common))).
+  merge!(cagrid_artifact_group("gridgrouper", "1.2", "caGrid-gridgrouper", %w(common client))).
+  merge!(cagrid_artifact_group(
+      "service-security-provider", "1.2", "caGrid-ServiceSecurityProvider", %w(client))).
+  merge!(
+    :internet2_subject => cagrid_ivy("internet2", "subject", "0.2.1", "subject"),
+    :internet2_grouper => cagrid_ivy("internet2", "grouper",   "1.1", "grouper", "grouper.jar")
+    )
   )
 
 ###### TESTING

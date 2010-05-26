@@ -81,7 +81,7 @@ public class GridProxyValidatorTest extends TestCase {
             date.add(Calendar.DAY_OF_MONTH, 4);
             end = new Date(date.getTimeInMillis());
             X509Certificate userCert = CertUtil.signCertificateRequest(request, start, end, caCert,
-                            caPair.getPrivate());
+                                                                       caPair.getPrivate(), null);
 
             // Create proxy
             KeyPair proxyPair = KeyUtil.generateRSAKeyPair512();

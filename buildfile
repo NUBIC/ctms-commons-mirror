@@ -74,12 +74,10 @@ define "ctms-commons" do
         JAKARTA_COMMONS.collections, SLF4J.log4j
     end
 
-    # Disabled until it can be completed -- caGrid is not available in
-    # any ivy repo I can find.
-    #
-    # define "grid", :base_dir => _('acegi-grid') do
-    #  compile.with SLF4J.jcl, project('csm').and_dependencies, GLOBUS
-    # end
+    define "grid", :base_dir => _('acegi-grid') do
+      compile.with SLF4J.jcl, project('csm').and_dependencies, GLOBUS, CAGRID
+      test.with SLF4J.api, SLF4J.simple
+    end
   end
   
   # The following submodules exist but are not part of the
@@ -89,5 +87,4 @@ define "ctms-commons" do
   # * ccts-websso-ui
   # * grid
   # * acegi/acegi-csm-testapp
-  # * acegi/grid
 end
