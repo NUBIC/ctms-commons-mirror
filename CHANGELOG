@@ -11,6 +11,12 @@ ctms-commons history
   are now called DefaultConfigurationProperty and
   DefaultConfigurationProperties.
 
+### maven
+
+- No projects use maven any longer, so all the maven mojos have been
+  removed.  If you need one of the mojos, use the jar from an earlier
+  ctms-commons release.
+
 ### all
 
 - Begin formal changelog
