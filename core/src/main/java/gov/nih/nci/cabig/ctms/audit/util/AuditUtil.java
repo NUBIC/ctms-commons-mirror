@@ -22,7 +22,7 @@ public class AuditUtil {
 			// the object.
 			if (element.getName().equals("getId")) {
 				try {
-					persistedObjectId = (Integer) element.invoke(entity, null);
+                                    persistedObjectId = (Integer) element.invoke(entity, (Object) null);
 					break;
 				}
 				catch (Exception e) {
