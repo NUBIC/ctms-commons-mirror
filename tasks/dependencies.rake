@@ -53,7 +53,7 @@ JAKARTA_COMMONS = struct(
   :dbcp        => spring_osgi_apache_commons("dbcp", "1.2.2.osgi"),
   :io          => spring_osgi_apache_commons("io", "1.4.0"),
   :lang        => spring_osgi_apache_commons("lang", "2.4.0"),
-  :pool       => spring_osgi_apache_commons("pool", "1.4.0")
+  :pool        => spring_osgi_apache_commons("pool", "1.4.0")
 )
 
 HIBERNATE = struct(

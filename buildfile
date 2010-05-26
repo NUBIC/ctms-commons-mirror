@@ -79,7 +79,7 @@ define "ctms-commons" do
       test.with SLF4J.api, SLF4J.simple
     end
   end
-  
+
   # The following submodules exist but are not part of the
   # whole-project build-release process.  This should be fixed at some
   # point.
