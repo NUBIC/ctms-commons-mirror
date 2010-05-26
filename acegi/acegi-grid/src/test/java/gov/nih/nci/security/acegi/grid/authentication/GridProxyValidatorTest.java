@@ -26,7 +26,7 @@ import org.globus.gsi.GlobusCredential;
 import junit.framework.TestCase;
 
 /**
- * @author <a href="mailto:joshua.phillips@semanticbits.com>Joshua Phillips</a>
+ * @author <a href="mailto:joshua.phillips@semanticbits.com">Joshua Phillips</a>
  *
  */
 public class GridProxyValidatorTest extends TestCase {
