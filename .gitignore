@@ -1,0 +1,7 @@
+target
+reports
+
+*.ipr
+*.iml
+*.iws
+.rvmrc

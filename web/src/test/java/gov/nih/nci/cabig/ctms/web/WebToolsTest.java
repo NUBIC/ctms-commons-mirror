@@ -31,7 +31,7 @@ public class WebToolsTest extends TestCase {
         "localName", "localPort", "protocol", "remoteAddr", "remoteHost", "remotePort",
         "scheme", "serverName", "serverPort", "secure",
         // From MockHttpServletRequest
-        "active"
+        "active", "servletContext"
     );
 
     @Override

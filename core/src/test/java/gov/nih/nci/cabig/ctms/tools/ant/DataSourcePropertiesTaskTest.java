@@ -23,13 +23,13 @@ public class DataSourcePropertiesTaskTest extends TestCase {
     protected void setUp() throws Exception {
         super.setUp();
         File thisDir = new File(getClass().getResource("/").toURI());
-        System.setProperty("catalina.home", thisDir.getCanonicalPath());
+        System.setProperty("catalina.home", thisDir.getCanonicalPath() + "/../resources");
 
         project = new Project();
         task = new DataSourcePropertiesTask();
         task.setProject(project);
     }
-    
+
     public void testPropertiesAppliedToProject() throws Exception {
         DataSourcePropertiesTask stubbedTask = new DataSourcePropertiesTask() {
             @Override protected Properties getProperties() {

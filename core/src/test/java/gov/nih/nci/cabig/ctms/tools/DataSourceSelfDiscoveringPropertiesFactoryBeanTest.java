@@ -20,7 +20,7 @@ public class DataSourceSelfDiscoveringPropertiesFactoryBeanTest extends TestCase
     protected void setUp() throws Exception {
         super.setUp();
         thisDir = new File(getClass().getResource("/").toURI());
-        System.setProperty("catalina.home", thisDir.getCanonicalPath());
+        System.setProperty("catalina.home", thisDir.getCanonicalPath() + "/../resources");
 
         factoryBean = new TestDataSourcePropertiesFactoryBean();
         factoryBean.setDatabaseConfigurationName("empty");
