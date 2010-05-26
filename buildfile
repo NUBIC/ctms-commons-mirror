@@ -1,4 +1,6 @@
 require 'buildr_iidea'
+require 'buildr_bnd'
+repositories.remote.concat Buildr::Bnd.remote_repositories
 
 CTMS_COMMONS_VERSION = "1.0.0.DEV"
 
@@ -9,13 +11,17 @@ define "ctms-commons" do
 
   desc "Zero-dependency common code for all other packages"
   define "base" do
-    package(:jar)
+    package(:bundle).tap do |bundle|
+      bundle["Export-Package"] = bnd_export_package
+    end
   end
 
   define "lang" do
     compile.with project('base'),
       SLF4J.jcl, JAKARTA_COMMONS.lang, GENERIC_COLLECTIONS
-    package(:jar)
+    package(:bundle).tap do |bundle|
+      bundle["Export-Package"] = bnd_export_package
+    end
   end
 
   define "testing-all" do
@@ -34,21 +40,27 @@ define "ctms-commons" do
     compile.with project("base").and_dependencies, project('lang').and_dependencies,
       HIBERNATE, SLF4J.api, SPRING.main, ANT
     test.with EASYMOCK, JAKARTA_COMMONS.collections, SLF4J.simple, project("testing-all:testing"), HSQLDB
-    package(:jar)
+    package(:bundle).tap do |bundle|
+      bundle["Export-Package"] = bnd_export_package
+    end
   end
 
   define "laf" do
     # TODO: deploy and run the demo, if anyone's still using it
     compile.with SERVLET, JAKARTA_COMMONS.io, project("web").and_dependencies
-    test.with SPRING.test, SLF4J.simple
-    package(:jar)
+    test.with SPRING.test, SLF4J.simple 
+    package(:bundle).tap do |bundle|
+      bundle["Export-Package"] = bnd_export_package
+    end
   end
 
   define "web" do
     compile.with project("core").and_dependencies, SERVLET, SLF4J.jcl,
       SPRING.main, SPRING.webmvc, SITEMESH
     test.with SPRING.test, project("testing-all:testing").and_dependencies, SLF4J.simple
-    package(:jar)
+    package(:bundle).tap do |bundle|
+      bundle["Export-Package"] = bnd_export_package
+    end
   end
 
   define "acegi" do
@@ -65,7 +77,9 @@ define "ctms-commons" do
     define "csm", :base_dir => _('acegi-csm') do
       compile.with SLF4J.jcl, CSM, ASPECTJ, SPRING.main, ACEGI, SERVLET, HIBERNATE
       test.with EASYMOCK, SLF4J.simple, SLF4J.api
-      package(:jar)
+      package(:bundle).tap do |bundle|
+        bundle["Export-Package"] = bnd_export_package
+      end
     end
 
     define "csm-test", :base_dir => _('acegi-csm-test') do
