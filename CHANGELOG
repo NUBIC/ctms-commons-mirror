@@ -1,12 +1,16 @@
-1.0.0 (trunk)
-=============
-*core*
+ctms-commons history
+====================
 
-- Backwards incompatible change:  introduce ConfigurationProperty and 
+1.0.0
+-----
+
+### core
+
+- Backwards incompatible change:  introduce ConfigurationProperty and
   ConfigurationProperties interfaces.  The classes which had these names
-  are now called DefaultConfigurationProperty and 
+  are now called DefaultConfigurationProperty and
   DefaultConfigurationProperties.
 
-*all*
+### all
 
 - Begin formal changelog
