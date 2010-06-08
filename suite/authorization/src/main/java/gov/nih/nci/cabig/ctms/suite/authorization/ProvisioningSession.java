@@ -2,16 +2,12 @@ package gov.nih.nci.cabig.ctms.suite.authorization;
 
 import gov.nih.nci.security.authorization.domainobjects.Group;
 import gov.nih.nci.security.authorization.domainobjects.ProtectionGroup;
-import gov.nih.nci.security.authorization.domainobjects.ProtectionGroupRoleContext;
 import gov.nih.nci.security.authorization.domainobjects.Role;
-import gov.nih.nci.security.exceptions.CSObjectNotFoundException;
 import gov.nih.nci.security.exceptions.CSTransactionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Encapsulates a facade for a series of operations on the provisioning data for a single user.
@@ -68,27 +64,9 @@ public class ProvisioningSession {
     public void deleteRole(SuiteRole role) {
         ensureNotInGroupForRole(role);
 
-        try {
-            Role csmRole = factory.getCsmHelper().getRoleCsmRole(role);
-            Set<ProtectionGroupRoleContext> roleContext =
-                factory.getAuthorizationManager().getProtectionGroupRoleContextForUser(Long.toString(userId));
-            Set<Long> protectionGroupIds = new LinkedHashSet<Long>();
-            for (ProtectionGroupRoleContext context : roleContext) {
-                if (context.getRoles().contains(csmRole)) {
-                    protectionGroupIds.add(context.getProtectionGroup().getProtectionGroupId());
-                }
-            }
-            String[] roleIds = { csmRole.getId().toString() };
-            for (Long id : protectionGroupIds) {
-                factory.getAuthorizationManager().removeUserRoleFromProtectionGroup(
-                    id.toString(), Long.toString(userId), roleIds);
-            }
-        } catch (CSObjectNotFoundException e) {
-            throw new SuiteAuthorizationProvisioningFailure(
-                "Accessing the role context failed", e);
-        } catch (CSTransactionException e) {
-            throw new SuiteAuthorizationProvisioningFailure(
-                "Modifying the user's protection group roles failed.", e);
+        SuiteRoleMembership current = factory.getAuthorizationHelper().getRoleMemberships(userId).get(role);
+        if (current != null) {
+            applyDifferences(role, current.diff(null));
         }
     }
 

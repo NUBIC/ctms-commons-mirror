@@ -310,6 +310,9 @@ public class SuiteRoleMembership {
      * Ignores the role in each.
      */
     public List<Difference> diff(SuiteRoleMembership other) {
+        if (other == null) {
+            other = new SuiteRoleMembership(getRole(), null, null);
+        }
         List<Difference> differences = new LinkedList<Difference>();
         for (ScopeType scope : ScopeType.values()) {
             if (this.isAll(scope)) {

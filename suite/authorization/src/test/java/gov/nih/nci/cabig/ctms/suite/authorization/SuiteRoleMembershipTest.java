@@ -473,6 +473,16 @@ public class SuiteRoleMembershipTest extends TestCase {
         assertAdd("Wrong 3rd add", actual.get(2), ScopeDescription.createForOne(ScopeType.STUDY, "114"));
     }
 
+    public void testDiffToNull() throws Exception {
+        List<SuiteRoleMembership.Difference> actual =
+            createMembership(SuiteRole.DATA_ANALYST).
+                forAllSites().forStudies("CRM", "114").diff(null);
+        assertEquals("Wrong number of changes", 3, actual.size());
+        assertDelete("Wrong 1st del", actual.get(0), ScopeDescription.createForAll(ScopeType.SITE));
+        assertDelete("Wrong 2nd del", actual.get(1), ScopeDescription.createForOne(ScopeType.STUDY, "CRM"));
+        assertDelete("Wrong 3rd del", actual.get(2), ScopeDescription.createForOne(ScopeType.STUDY, "114"));
+    }
+
     private static void assertAdd(String message, SuiteRoleMembership.Difference actual, ScopeDescription expectedSD) {
         assertDifference(message, actual, SuiteRoleMembership.Difference.Kind.ADD, expectedSD);
     }
