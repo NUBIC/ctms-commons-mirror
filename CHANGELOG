@@ -25,4 +25,4 @@ ctms-commons history
 ### all
 
 - Begin formal changelog
-- Convert from maven2 to buildr
+- Convert from maven2 to buildr+ivy4r
