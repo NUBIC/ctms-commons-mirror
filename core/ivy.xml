@@ -31,5 +31,7 @@
     <dependency name="ctms-commons-testing-unit" rev="latest.integration" conf="unit-test->runtime"/>
     <dependency org="org.slf4j" name="slf4j-simple" rev="${lib.slf4j.rev}" conf="unit-test->default"/>
     <dependency org="org.hsqldb" name="com.springsource.org.hsqldb" rev="${lib.hsqldb.rev}" conf="unit-test->*"/>
+
+    <exclude module="com.springsource.slf4j.api"/>
   </dependencies>
 </ivy-module>
