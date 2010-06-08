@@ -41,6 +41,13 @@ public enum Role {
     DATA_ANALYST
     ;
 
+    public static Role getByCsmName(String csmName) {
+        for (Role role : values()) {
+            if (role.getCsmName().equals(csmName)) return role;
+        }
+        throw new IllegalArgumentException("There is no suite role with the CSM name " + csmName);
+    }
+
     private String description;
     private String displayName;
     private Set<ScopeType> scopes;

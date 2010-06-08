@@ -90,6 +90,14 @@ public class RoleMembership {
     }
 
     /**
+     * Expand the memberships' scope to include another site.
+     * @return this (for chaining)
+     */
+    public RoleMembership addSite(String identifier) {
+        return addScopeIdentifier(ScopeType.SITE, identifier);
+    }
+
+    /**
      * Scope this membership to the studies with the given shared identities.
      * @return this (for chaining)
      */
@@ -112,6 +120,25 @@ public class RoleMembership {
      */
     public RoleMembership forStudies(Collection<?> studiesOrIdentifiers) {
         return forScopeObjectsOrIdentifiers(ScopeType.STUDY, studiesOrIdentifiers);
+    }
+
+    /**
+     * Expand the memberships' scope to include another site.
+     * @return this (for chaining)
+     */
+    public RoleMembership addStudy(String identifier) {
+        return addScopeIdentifier(ScopeType.STUDY, identifier);
+    }
+
+    private RoleMembership addScopeIdentifier(ScopeType scope, String identifier) {
+        if (isAll(scope)) {
+            forScopeObjectsOrIdentifiers(scope, Collections.singleton(identifier));
+        } else {
+            List<String> newIs = new ArrayList<String>(this.identifiers.get(scope));
+            newIs.add(identifier);
+            setIdentifiers(scope, newIs);
+        }
+        return this;
     }
 
     @SuppressWarnings({ "unchecked" })

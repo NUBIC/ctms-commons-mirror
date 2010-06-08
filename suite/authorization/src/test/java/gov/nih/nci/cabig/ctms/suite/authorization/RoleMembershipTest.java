@@ -254,6 +254,48 @@ public class RoleMembershipTest extends TestCase {
         }
     }
 
+    ////// appending
+
+    public void testAddSiteWhenBlank() throws Exception {
+        RoleMembership m = createMembership(Role.DATA_ANALYST).addSite("F");
+        assertEquals("Wrong number of sites", 1, m.getSiteIdentifiers().size());
+        assertEquals("Wrong 1st site", "F", m.getSiteIdentifiers().get(0));
+    }
+
+    public void testAddSiteAppendsIfExisting() throws Exception {
+        RoleMembership m = createMembership(Role.DATA_ANALYST).forSites("B").addSite("F");
+        assertEquals("Wrong number of sites", 2, m.getSiteIdentifiers().size());
+        assertEquals("Wrong 1st site", "B", m.getSiteIdentifiers().get(0));
+        assertEquals("Wrong 1st site", "F", m.getSiteIdentifiers().get(1));
+    }
+
+    public void testAddSiteWhenAllResetsToNotAll() throws Exception {
+        RoleMembership m = createMembership(Role.DATA_ANALYST).forAllSites().addSite("F");
+        assertFalse("Should not be for all", m.isAllSites());
+        assertEquals("Wrong number of sites", 1, m.getSiteIdentifiers().size());
+        assertEquals("Wrong 1st site", "F", m.getSiteIdentifiers().get(0));
+    }
+
+    public void testAddStudyWhenBlank() throws Exception {
+        RoleMembership m = createMembership(Role.DATA_ANALYST).addStudy("F");
+        assertEquals("Wrong number of studies", 1, m.getStudyIdentifiers().size());
+        assertEquals("Wrong 1st study", "F", m.getStudyIdentifiers().get(0));
+    }
+
+    public void testAddStudyAppendsIfExisting() throws Exception {
+        RoleMembership m = createMembership(Role.DATA_ANALYST).forStudies("B").addStudy("F");
+        assertEquals("Wrong number of studies", 2, m.getStudyIdentifiers().size());
+        assertEquals("Wrong 1st study", "B", m.getStudyIdentifiers().get(0));
+        assertEquals("Wrong 1st study", "F", m.getStudyIdentifiers().get(1));
+    }
+
+    public void testAddStudyWhenAllResetsToNotAll() throws Exception {
+        RoleMembership m = createMembership(Role.DATA_ANALYST).forAllStudies().addStudy("F");
+        assertFalse("Should not be for all", m.isAllStudies());
+        assertEquals("Wrong number of studies", 1, m.getStudyIdentifiers().size());
+        assertEquals("Wrong 1st study", "F", m.getStudyIdentifiers().get(0));
+    }
+
     ////// validation
 
     public void testAnUnscopedRoleWithNoScopesIsValid() throws Exception {

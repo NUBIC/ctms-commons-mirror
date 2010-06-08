@@ -18,6 +18,20 @@ public class RoleTest extends TestCase {
         assertEquals("system_administrator", Role.SYSTEM_ADMINISTRATOR.getCsmName());
     }
 
+    public void testGetByCsmName() throws Exception {
+        assertEquals(Role.STUDY_QA_MANAGER, Role.getByCsmName("study_qa_manager"));
+    }
+
+    public void testGetByCsmNameThrowsExceptionWhenUnknown() throws Exception {
+        try {
+            Role.getByCsmName("study_qa_mage");
+            fail("Exception ont thrown");
+        } catch (IllegalArgumentException iae) {
+            assertEquals("Wrong message",
+                "There is no suite role with the CSM name study_qa_mage", iae.getMessage());
+        }
+    }
+
     public void testDescription() throws Exception {
         assertEquals("Creates, manages, imports AE rules and AE report definitions.",
             Role.AE_RULE_AND_REPORT_MANAGER.getDescription());
