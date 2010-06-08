@@ -6,7 +6,7 @@ ctms-commons history
 
 ### core
 
-- Backwards incompatible change:  introduce ConfigurationProperty and
+- Backwards-incompatible change:  introduce ConfigurationProperty and
   ConfigurationProperties interfaces.  The classes which had these names
   are now called DefaultConfigurationProperty and
   DefaultConfigurationProperties.
@@ -24,8 +24,8 @@ ctms-commons history
 
 ### acegi
 
-- Moved all the acegi-* modules into CTMS-specific packages so as not
-  to conflict with CSM.  Mapping:
+- Backwards-incompatible change: Moved all the acegi-* modules into
+  CTMS-specific packages so as not to conflict with CSM.  Mapping:
     gov.nih.nci.security (exact) -> gov.nih.nci.cabig.ctms.csmext
     gov.nih.nci.security.acegi.* -> gov.nih.nci.cabig.ctms.acegi.*
 
