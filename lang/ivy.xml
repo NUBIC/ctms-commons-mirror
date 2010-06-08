@@ -1,0 +1,16 @@
+<ivy-module version="2.0"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+  <info organisation="gov.nih.nci.cabig.ctms" module="ctms-commons-lang"/>
+
+  <configurations>
+    <include file="../ivy/default-configurations.xml"/>
+  </configurations>
+
+  <dependencies>
+    <dependency name="ctms-commons-base" rev="latest.integration"/>
+    <dependency org="org.slf4j" name="jcl-over-slf4j" rev="${lib.slf4j.rev}"/>
+    <dependency org="net.sourceforge.collections" name="collections-generic" rev="${lib.generic-commons-collections.rev}"/>
+    <dependency org="org.apache.commons" name="com.springsource.org.apache.commons.lang" rev="${lib.jakarta-commons.lang.rev}"/>
+  </dependencies>
+</ivy-module>

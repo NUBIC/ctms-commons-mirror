@@ -1,0 +1,33 @@
+<ivy-module version="2.0"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+  <info organisation="gov.nih.nci.cabig.ctms" module="ctms-commons-web"/>
+
+  <configurations>
+    <include file="../ivy/default-configurations.xml"/>
+  </configurations>
+
+  <dependencies>
+    <dependency name="ctms-commons-base" rev="latest.integration"/>
+    <dependency name="ctms-commons-core" rev="latest.integration"/>
+    <dependency name="ctms-commons-lang" rev="latest.integration"/>
+
+    <!-- TODO: exclude this from runtime somehow -->
+    <dependency org="javax.servlet" name="com.springsource.javax.servlet" rev="2.5.0" />
+
+    <dependency org="org.springframework" name="org.springframework.beans"        rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="org.springframework.context"      rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="org.springframework.core"         rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="org.springframework.web"          rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="org.springframework.web.servlet"  rev="${lib.spring.rev}"/>
+
+    <dependency org="org.slf4j" name="jcl-over-slf4j" rev="${lib.slf4j.rev}"/>
+    <dependency org="com.opensymphony.sitemesh" name="com.springsource.com.opensymphony.sitemesh" rev="2.4.1" />
+    <dependency org="org.apache.commons" name="com.springsource.org.apache.commons.lang" rev="${lib.jakarta-commons.lang.rev}"/>
+
+    <!-- TEST -->
+    <dependency name="ctms-commons-testing-unit" rev="latest.integration" conf="unit-test->runtime"/>
+    <dependency org="org.slf4j" name="slf4j-simple" rev="${lib.slf4j.rev}" conf="unit-test->*"/>
+    <dependency org="org.springframework" name="org.springframework.test" rev="${lib.spring.rev}" conf="unit-test->*"/>
+  </dependencies>
+</ivy-module>

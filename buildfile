@@ -1,6 +1,7 @@
 require 'buildr_iidea'
 require 'buildr_bnd'
 repositories.remote.concat Buildr::Bnd.remote_repositories
+require 'buildr/ivy_extension'
 
 CTMS_COMMONS_VERSION = "1.0.0.DEV"
 
@@ -11,14 +12,16 @@ define "ctms-commons" do
 
   desc "Zero-dependency common code for all other packages"
   define "base" do
+    ivy.compile_conf('compile').test_conf('unit-test')
     package(:bundle).tap do |bundle|
       bundle["Export-Package"] = bnd_export_package
     end
   end
 
   define "lang" do
-    compile.with project('base'),
-      SLF4J.jcl, JAKARTA_COMMONS.lang, GENERIC_COLLECTIONS
+    ivy.compile_conf('compile').test_conf('unit-test')
+    interproject_dependencies << 'base'
+
     package(:bundle).tap do |bundle|
       bundle["Export-Package"] = bnd_export_package
     end
@@ -26,20 +29,22 @@ define "ctms-commons" do
 
   define "testing" do
     define "unit" do
-      compile.with JUNIT, EASYMOCK, project("lang"), SLF4J.jcl
+      ivy.compile_conf('compile').test_conf('unit-test')
+      interproject_dependencies << 'lang'
       package(:jar)
     end
 
     define "uctrace" do
-      compile.with project('base').and_dependencies
+      ivy.compile_conf('compile').test_conf('unit-test')
+      interproject_dependencies << 'base'
       package(:jar)
     end
   end
 
   define "core" do
-    compile.with project("base").and_dependencies, project('lang').and_dependencies,
-      HIBERNATE, SLF4J.api, SPRING.main, ANT
-    test.with EASYMOCK, JAKARTA_COMMONS.collections, SLF4J.simple, project("testing:unit"), HSQLDB
+    ivy.compile_conf('compile').test_conf('unit-test')
+    interproject_dependencies << 'base' << 'lang' << 'testing:unit'
+
     package(:bundle).tap do |bundle|
       bundle["Export-Package"] = bnd_export_package
     end
@@ -47,17 +52,18 @@ define "ctms-commons" do
 
   define "laf" do
     # TODO: deploy and run the demo, if anyone's still using it
-    compile.with SERVLET, JAKARTA_COMMONS.io, project("web").and_dependencies
-    test.with SPRING.test, SLF4J.simple
+    ivy.compile_conf('compile').test_conf('unit-test')
+    interproject_dependencies << 'web'
+
     package(:bundle).tap do |bundle|
       bundle["Export-Package"] = bnd_export_package
     end
   end
 
   define "web" do
-    compile.with project("core").and_dependencies, SERVLET, SLF4J.jcl,
-      SPRING.main, SPRING.webmvc, SITEMESH
-    test.with SPRING.test, project("testing:unit").and_dependencies, SLF4J.simple
+    ivy.compile_conf('compile').test_conf('unit-test')
+    interproject_dependencies << 'base' << 'lang' << 'core' << 'testing:unit'
+
     package(:bundle).tap do |bundle|
       bundle["Export-Package"] = bnd_export_package
     end

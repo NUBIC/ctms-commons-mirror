@@ -1,3 +1,6 @@
 gems:
 - buildr-iidea
 - buildr-bnd
+- ivy4r
+ivy:
+  settings.file: ivy/ivysettings.xml
