@@ -7,7 +7,7 @@ ctms-commons history
 ### core
 
 - Return build name as BuildInfo#toString.
-- Treat OSGI-style .DEV revisions as snapshots in BuildInfo.
+- Treat OSGi-style .DEV revisions as snapshots in BuildInfo.
 
 ### all
 
