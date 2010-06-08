@@ -35,7 +35,7 @@ define "ctms-commons" do
       package(:jar)
     end
   end
-  
+
   define "core" do
     compile.with project("base").and_dependencies, project('lang').and_dependencies,
       HIBERNATE, SLF4J.api, SPRING.main, ANT
@@ -48,7 +48,7 @@ define "ctms-commons" do
   define "laf" do
     # TODO: deploy and run the demo, if anyone's still using it
     compile.with SERVLET, JAKARTA_COMMONS.io, project("web").and_dependencies
-    test.with SPRING.test, SLF4J.simple 
+    test.with SPRING.test, SLF4J.simple
     package(:bundle).tap do |bundle|
       bundle["Export-Package"] = bnd_export_package
     end
