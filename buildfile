@@ -114,6 +114,7 @@ define "ctms-commons" do
     project.version = "0.0.0.DEV"
 
     define "authorization" do
+      project.iml.group = true
       ivy.compile_conf('compile').compile_type('jar').test_conf('unit-test').test_type('jar')
       interproject_dependencies << 'ctms-commons:core' << 'ctms-commons:base'
       package(:bundle).tap do |bundle|
