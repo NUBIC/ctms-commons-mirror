@@ -17,6 +17,11 @@ ctms-commons history
   removed.  If you need one of the mojos, use the jar from an earlier
   ctms-commons release.
 
+### testing
+
+- Renamed modules "testing-all" to just "testing" and
+  "testing-all:testing" to "testing:unit"
+
 ### all
 
 - Begin formal changelog

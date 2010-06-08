@@ -24,8 +24,8 @@ define "ctms-commons" do
     end
   end
 
-  define "testing-all" do
-    define "testing" do
+  define "testing" do
+    define "unit" do
       compile.with JUNIT, EASYMOCK, project("lang"), SLF4J.jcl
       package(:jar)
     end
@@ -39,7 +39,7 @@ define "ctms-commons" do
   define "core" do
     compile.with project("base").and_dependencies, project('lang').and_dependencies,
       HIBERNATE, SLF4J.api, SPRING.main, ANT
-    test.with EASYMOCK, JAKARTA_COMMONS.collections, SLF4J.simple, project("testing-all:testing"), HSQLDB
+    test.with EASYMOCK, JAKARTA_COMMONS.collections, SLF4J.simple, project("testing:unit"), HSQLDB
     package(:bundle).tap do |bundle|
       bundle["Export-Package"] = bnd_export_package
     end
@@ -57,7 +57,7 @@ define "ctms-commons" do
   define "web" do
     compile.with project("core").and_dependencies, SERVLET, SLF4J.jcl,
       SPRING.main, SPRING.webmvc, SITEMESH
-    test.with SPRING.test, project("testing-all:testing").and_dependencies, SLF4J.simple
+    test.with SPRING.test, project("testing:unit").and_dependencies, SLF4J.simple
     package(:bundle).tap do |bundle|
       bundle["Export-Package"] = bnd_export_package
     end
