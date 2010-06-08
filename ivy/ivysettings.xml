@@ -41,7 +41,6 @@
     <module organisation="org.springframework.*" resolver="springsource"/>
 
     <module organisation="caGrid"        resolver="cagrid"/>
-    <module organisation="globus" name="jcog" resolver="cagrid"/> <!-- the one from cbiit is broken -->
     <module organisation="eracom|clarkware|jgoodies|internet2" resolver="cagrid"/>
     <module         name="commons-codec" resolver="cagrid"/>
 

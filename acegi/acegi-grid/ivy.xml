@@ -22,8 +22,8 @@
     <dependency org="org.springframework" name="org.springframework.core"        rev="${lib.spring.rev}"/>
     <dependency org="org.springframework" name="org.springframework.transaction" rev="${lib.spring.rev}"/>
 
-    <dependency org="globus" name="jcog" rev="syncgts-patched-4.0.3" force="true"/>
     <dependency org="globus" name="axis" rev="1.2RC2"/>
+    <dependency org="globus" name="jcog" rev="4.0.3" force="true"/>
     <dependency org="globus" name="ws-addressing" rev="1.0"/>
     <dependency org="globus" name="ws-core-client" rev="4.0.3"/>
 
