@@ -46,4 +46,13 @@ public class RoleTest extends TestCase {
         assertTrue("Should be site scoped", Role.AE_REPORTER.isSiteScoped());
         assertTrue("Should be scoped", Role.AE_REPORTER.isScoped());
     }
+
+    public void testScopeSetIsImmutable() throws Exception {
+        try {
+            Role.DATA_READER.getScopes().remove(Role.Scope.SITE);
+            fail("Exception not thrown");
+        } catch (UnsupportedOperationException uoe) {
+            // good
+        }
+    }
 }

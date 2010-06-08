@@ -115,7 +115,7 @@ public enum Role {
             for (String scope : prop.split("\\s+")) {
                 creating.add(Role.Scope.valueOf(scope.toUpperCase()));
             }
-            return creating;
+            return Collections.unmodifiableSet(creating);
         }
     }
 

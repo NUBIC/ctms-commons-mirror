@@ -12,8 +12,10 @@
     <dependency name="ctms-commons-core" rev="latest.integration"/>
 
     <dependency org="org.slf4j" name="slf4j-api" rev="${lib.slf4j.rev}"/>
+    <dependency org="org.apache.commons" name="com.springsource.org.apache.commons.lang" rev="${lib.jakarta-commons.lang.rev}"/>
 
     <!-- TEST -->
+    <dependency conf="unit-test->runtime" name="ctms-commons-testing-unit" rev="latest.integration"/>
     <dependency conf="unit-test->*" org="org.slf4j" name="slf4j-simple" rev="${lib.slf4j.rev}"/>
   </dependencies>
 </ivy-module>

@@ -10,6 +10,7 @@ desc "Shared libraries for caBIG CTMS projects"
 define "ctms-commons" do
   project.version = CTMS_COMMONS_VERSION
   project.group = CTMS_COMMONS_IVY_ORG
+  project.compile.options.source = "1.5"
   project.iml.excluded_directories << IVY_HOME
   project.iml.group = true
 
