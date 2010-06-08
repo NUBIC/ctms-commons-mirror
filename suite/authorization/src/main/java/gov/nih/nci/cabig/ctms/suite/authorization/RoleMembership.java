@@ -11,6 +11,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.LinkedList;
 
 /**
  * The suite's logical representation of a user's inclusion in one of the unified roles.  It has
@@ -267,5 +268,82 @@ public class RoleMembership {
 
     protected IdentifiableInstanceMapping getMapping(ScopeType scope) {
         return mappings.get(scope);
+    }
+
+    ////// ANALYSIS
+
+    /**
+     * Returns a set of {@link Difference}s describing the mutations that are necessary to change
+     * this membership into the other one.
+     * <p>
+     * Ignores the role in each.
+     */
+    public List<Difference> diff(RoleMembership other) {
+        List<Difference> differences = new LinkedList<Difference>();
+        for (ScopeType scope : ScopeType.values()) {
+            if (this.isAll(scope)) {
+                if (!other.isAll(scope)) {
+                    differences.add(Difference.delete(scope));
+                    for (String ident : other.getIdentifiers(scope)) {
+                        differences.add(Difference.add(scope, ident));
+                    }
+                }
+            } else {
+                if (other.isAll(scope)) {
+                    differences.add(Difference.add(scope));
+                    for (String ident : this.getIdentifiers(scope)) {
+                        differences.add(Difference.delete(scope, ident));
+                    }
+                } else {
+                    for (String thisIdent : this.getIdentifiers(scope)) {
+                        if (!other.getIdentifiers(scope).contains(thisIdent)) {
+                            differences.add(Difference.delete(scope, thisIdent));
+                        }
+                    }
+                    for (String otherIdent : other.getIdentifiers(scope)) {
+                        if (!this.getIdentifiers(scope).contains(otherIdent)) {
+                            differences.add(Difference.add(scope, otherIdent));
+                        }
+                    }
+                }
+            }
+        }
+        return differences;
+    }
+
+    public static class Difference {
+        public static Difference delete(ScopeType scopeType) {
+            return new Difference(Kind.DELETE, ScopeDescription.createForAll(scopeType));
+        }
+
+        public static Difference delete(ScopeType scopeType, String ident) {
+            return new Difference(Kind.DELETE, ScopeDescription.createForOne(scopeType, ident));
+        }
+
+        public static Difference add(ScopeType scopeType) {
+            return new Difference(Kind.ADD, ScopeDescription.createForAll(scopeType));
+        }
+
+        public static Difference add(ScopeType scopeType, String ident) {
+            return new Difference(Kind.ADD, ScopeDescription.createForOne(scopeType, ident));
+        }
+
+        public static enum Kind { ADD, DELETE }
+
+        private Kind mode;
+        private ScopeDescription scopeDescription;
+
+        private Difference(Kind mode, ScopeDescription scopeDescription) {
+            this.mode = mode;
+            this.scopeDescription = scopeDescription;
+        }
+
+        public Kind getMode() {
+            return mode;
+        }
+
+        public ScopeDescription getScopeDescription() {
+            return scopeDescription;
+        }
     }
 }

@@ -1,14 +1,15 @@
 package gov.nih.nci.cabig.ctms.suite.authorization;
 
-import gov.nih.nci.cabig.ctms.testing.MockRegistry;
 import gov.nih.nci.cabig.ctms.suite.authorization.domain.TestSite;
 import gov.nih.nci.cabig.ctms.suite.authorization.domain.TestSiteMapping;
 import gov.nih.nci.cabig.ctms.suite.authorization.domain.TestStudy;
 import gov.nih.nci.cabig.ctms.suite.authorization.domain.TestStudyMapping;
+import gov.nih.nci.cabig.ctms.testing.MockRegistry;
 import junit.framework.TestCase;
 import static org.easymock.classextension.EasyMock.*;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Rhett Sutphin
@@ -344,6 +345,95 @@ public class RoleMembershipTest extends TestCase {
         } catch (SuiteAuthorizationValidationException save) {
             assertEquals("Wrong message", expectedMessage, save.getMessage());
         }
+    }
+
+    ////// diff
+
+    public void testAddOneSite() throws Exception {
+        List<RoleMembership.Difference> actual =
+            createMembership(Role.USER_ADMINISTRATOR).forSites("A").diff(
+                createMembership(Role.USER_ADMINISTRATOR).forSites("A", "B"));
+        assertEquals("Wrong number of changes", 1, actual.size());
+        assertAdd("Wrong difference", actual.get(0),
+            ScopeDescription.createForOne(ScopeType.SITE, "B"));
+    }
+
+    public void testNoDifferences() throws Exception {
+        List<RoleMembership.Difference> actual =
+            createMembership(Role.USER_ADMINISTRATOR).forSites("A").diff(
+                createMembership(Role.USER_ADMINISTRATOR).forSites("A"));
+        assertEquals("Wrong number of changes", 0, actual.size());
+    }
+
+    public void testConvertFromIndividualSitesToAllSites() throws Exception {
+        List<RoleMembership.Difference> actual =
+            createMembership(Role.USER_ADMINISTRATOR).forSites("A", "B").diff(
+                createMembership(Role.USER_ADMINISTRATOR).forAllSites());
+        assertEquals("Wrong number of changes", 3, actual.size());
+        assertAdd("Wrong 1st difference", actual.get(0),
+            ScopeDescription.createForAll(ScopeType.SITE));
+        assertDelete("Wrong 2nd difference", actual.get(1),
+            ScopeDescription.createForOne(ScopeType.SITE, "A"));
+        assertDelete("Wrong 3rd difference", actual.get(2),
+            ScopeDescription.createForOne(ScopeType.SITE, "B"));
+    }
+
+    public void testConvertFromAllSitesToIndividualSites() throws Exception {
+        List<RoleMembership.Difference> actual =
+            createMembership(Role.USER_ADMINISTRATOR).forAllSites().diff(
+                createMembership(Role.USER_ADMINISTRATOR).forSites("G", "T"));
+        assertEquals("Wrong number of changes", 3, actual.size());
+        assertDelete("Wrong 1st difference", actual.get(0),
+            ScopeDescription.createForAll(ScopeType.SITE));
+        assertAdd("Wrong 2nd difference", actual.get(1),
+            ScopeDescription.createForOne(ScopeType.SITE, "G"));
+        assertAdd("Wrong 3rd difference", actual.get(2),
+            ScopeDescription.createForOne(ScopeType.SITE, "T"));
+    }
+
+    public void testChangeSitesAndStudiesSimultaneously() throws Exception {
+        List<RoleMembership.Difference> actual =
+            createMembership(Role.DATA_ANALYST).forAllSites().forStudies("CRM").diff(
+                createMembership(Role.DATA_ANALYST).forSites("G", "T").forStudies("114", "Z"));
+        assertEquals("Wrong number of changes", 6, actual.size());
+        assertDelete("Wrong 1st difference", actual.get(0),
+            ScopeDescription.createForAll(ScopeType.SITE));
+        assertAdd("Wrong 2nd difference", actual.get(1),
+            ScopeDescription.createForOne(ScopeType.SITE, "G"));
+        assertAdd("Wrong 3rd difference", actual.get(2),
+            ScopeDescription.createForOne(ScopeType.SITE, "T"));
+        assertDelete("Wrong 4th difference", actual.get(3),
+            ScopeDescription.createForOne(ScopeType.STUDY, "CRM"));
+        assertAdd("Wrong 5th difference", actual.get(4),
+            ScopeDescription.createForOne(ScopeType.STUDY, "114"));
+        assertAdd("Wrong 6th difference", actual.get(5),
+            ScopeDescription.createForOne(ScopeType.STUDY, "Z"));
+    }
+
+    public void testChangeToBlank() throws Exception {
+        List<RoleMembership.Difference> actual =
+            createMembership(Role.DATA_ANALYST).forAllSites().forStudies("CRM").diff(
+                createMembership(Role.DATA_ANALYST));
+        assertEquals("Wrong number of changes", 2, actual.size());
+        assertDelete("Wrong 1st difference", actual.get(0),
+            ScopeDescription.createForAll(ScopeType.SITE));
+        assertDelete("Wrong 2nd difference", actual.get(1),
+            ScopeDescription.createForOne(ScopeType.STUDY, "CRM"));
+    }
+
+    private void assertAdd(String message, RoleMembership.Difference actual, ScopeDescription expectedSD) {
+        assertDifference(message, actual, RoleMembership.Difference.Kind.ADD, expectedSD);
+    }
+
+    private void assertDelete(String message, RoleMembership.Difference actual, ScopeDescription expectedSD) {
+        assertDifference(message, actual, RoleMembership.Difference.Kind.DELETE, expectedSD);
+    }
+
+    private void assertDifference(
+        String message, RoleMembership.Difference actual, RoleMembership.Difference.Kind expectedKind, ScopeDescription expectedSD
+    ) {
+        assertEquals(message + ": wrong kind", expectedKind, actual.getMode());
+        assertEquals(message + ": wrong scope description", expectedSD, actual.getScopeDescription());
     }
 
     ////// HELPERS

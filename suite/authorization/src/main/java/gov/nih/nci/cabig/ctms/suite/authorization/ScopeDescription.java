@@ -96,4 +96,36 @@ public class ScopeDescription {
         }
         return identifier;
     }
+
+    ////// OBJECT METHODS
+
+    @Override
+    public String toString() {
+        return new StringBuilder(getClass().getSimpleName()).
+            append("[scopeType=").append(getScope()).
+            append("; ident=").append(getIdentifier()).
+            append(']').
+            toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ScopeDescription)) return false;
+
+        ScopeDescription that = (ScopeDescription) o;
+
+        if (identifier != null ? !identifier.equals(that.identifier) : that.identifier != null)
+            return false;
+        if (scope != that.scope) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = scope != null ? scope.hashCode() : 0;
+        result = 31 * result + (identifier != null ? identifier.hashCode() : 0);
+        return result;
+    }
 }

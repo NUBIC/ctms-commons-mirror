@@ -103,4 +103,39 @@ public class ScopeDescriptionTest extends TestCase {
                 e.getMessage());
         }
     }
+
+    public void testEqualsForSameScopeAndOneEquivalentInstance() throws Exception {
+        assertEquals(
+            ScopeDescription.createForOne(ScopeType.SITE, "A"),
+            ScopeDescription.createForOne(ScopeType.SITE, "A")
+        );
+    }
+
+    public void testEqualsForAllInSameScope() throws Exception {
+        assertEquals(
+            ScopeDescription.createForAll(ScopeType.SITE),
+            ScopeDescription.createForAll(ScopeType.SITE)
+        );
+    }
+
+    public void testNotEqualsForAllWithDifferentScopes() throws Exception {
+        assertFalse(
+            ScopeDescription.createForAll(ScopeType.SITE).equals(
+                ScopeDescription.createForAll(ScopeType.STUDY))
+        );
+    }
+
+    public void testNotEqualsForOneWithDifferentScopes() throws Exception {
+        assertFalse(
+            ScopeDescription.createForOne(ScopeType.SITE,  "A").equals(
+                ScopeDescription.createForOne(ScopeType.STUDY, "A"))
+        );
+    }
+
+    public void testNotEqualsForOneWithDifferentIdents() throws Exception {
+        assertFalse(
+            ScopeDescription.createForOne(ScopeType.STUDY, "A").equals(
+                ScopeDescription.createForOne(ScopeType.STUDY, "B"))
+        );
+    }
 }
