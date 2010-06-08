@@ -2,13 +2,17 @@ package gov.nih.nci.cabig.ctms.suite.authorization;
 
 import gov.nih.nci.security.AuthorizationManager;
 import gov.nih.nci.security.authorization.domainobjects.Group;
+import gov.nih.nci.security.authorization.domainobjects.ProtectionGroup;
 import gov.nih.nci.security.authorization.domainobjects.ProtectionGroupRoleContext;
 import gov.nih.nci.security.authorization.domainobjects.Role;
 import gov.nih.nci.security.dao.AuthorizationDAO;
 import gov.nih.nci.security.exceptions.CSObjectNotFoundException;
 import gov.nih.nci.security.exceptions.CSTransactionException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -16,10 +20,13 @@ import java.util.Set;
  */
 @SuppressWarnings({ "RawUseOfParameterizedType" })
 public class ProvisioningHelper {
+    private final Logger log = LoggerFactory.getLogger(getClass());
+
     private AuthorizationManager authorizationManager;
     private AuthorizationDAO authorizationDao;
     private SiteMapping siteMapping;
     private StudyMapping studyMapping;
+    private AuthorizationHelper authorizationHelper;
     private CsmHelper csmHelper;
 
     /**
@@ -43,10 +50,21 @@ public class ProvisioningHelper {
      * If the user already has exactly the given scopes, the method does nothing.
      *
      * @param userId the CSM user ID for the user to change
-     * @param membership the membership data to apply to the user
+     * @param replacement the membership data to apply to the user
      */
-    public void replaceRole(long userId, SuiteRoleMembership membership) {
-        throw new UnsupportedOperationException("TODO");
+    public void replaceRole(long userId, SuiteRoleMembership replacement) {
+        replacement.validate();
+
+        ensureInGroupForRole(replacement.getRole(), userId);
+
+        SuiteRoleMembership current = getAuthorizationHelper().getRoleMemberships(userId).get(replacement.getRole());
+        List<SuiteRoleMembership.Difference> diff;
+        if (current == null) {
+            diff = replacement.diffFromNothing();
+        } else {
+            diff = current.diff(replacement);
+        }
+        applyDifferences(userId, replacement.getRole(), diff);
     }
 
     /**
@@ -58,14 +76,7 @@ public class ProvisioningHelper {
      */
     @SuppressWarnings({ "unchecked" })
     public void deleteRole(long userId, SuiteRole role) {
-        Group csmGroup = getCsmHelper().getRoleCsmGroup(role);
-        try {
-            getAuthorizationManager().removeUserFromGroup(
-                csmGroup.getGroupId().toString(), Long.toString(userId));
-        } catch (CSTransactionException e) {
-            throw new SuiteAuthorizationProvisioningFailure(
-                "Deleting the group relationship failed", e);
-        }
+        ensureNotInGroupForRole(role, userId);
 
         try {
             Role csmRole = getCsmHelper().getRoleCsmRole(role);
@@ -91,6 +102,49 @@ public class ProvisioningHelper {
         }
     }
 
+    private void ensureInGroupForRole(SuiteRole role, long userId) {
+        Group csmGroup = getCsmHelper().getRoleCsmGroup(role);
+        try {
+            getAuthorizationManager().assignGroupsToUser(
+                Long.toString(userId), new String[] { csmGroup.getGroupId().toString() });
+        } catch (CSTransactionException e) {
+            throw new SuiteAuthorizationProvisioningFailure(
+                "Deleting the group relationship failed", e);
+        }
+    }
+
+    private void ensureNotInGroupForRole(SuiteRole role, long userId) {
+        Group csmGroup = getCsmHelper().getRoleCsmGroup(role);
+        try {
+            getAuthorizationManager().removeUserFromGroup(
+                csmGroup.getGroupId().toString(), Long.toString(userId));
+        } catch (CSTransactionException e) {
+            throw new SuiteAuthorizationProvisioningFailure(
+                "Deleting the group relationship failed", e);
+        }
+    }
+
+    private void applyDifferences(long userId, SuiteRole role, List<SuiteRoleMembership.Difference> diff) {
+        Role csmRole = getCsmHelper().getRoleCsmRole(role);
+        String[] csmRoleIds = new String[] { csmRole.getId().toString() };
+        try {
+            for (SuiteRoleMembership.Difference difference : diff) {
+                ProtectionGroup pg = getCsmHelper().getOrCreateScopeProtectionGroup(difference.getScopeDescription());
+                log.debug("{} role {} ({})", new Object[] { difference.getKind(), csmRole.getId(), csmRole.getName() });
+                log.debug("  scoped by PG {} ({})", pg.getProtectionGroupId().toString(), pg.getProtectionGroupName());
+                if (difference.getKind().equals(SuiteRoleMembership.Difference.Kind.ADD)) {
+                    getAuthorizationManager().addUserRoleToProtectionGroup(
+                        Long.toString(userId), csmRoleIds, pg.getProtectionGroupId().toString());
+                } else if (difference.getKind().equals(SuiteRoleMembership.Difference.Kind.DELETE)) {
+                    getAuthorizationManager().removeUserRoleFromProtectionGroup(
+                        pg.getProtectionGroupId().toString(), Long.toString(userId), csmRoleIds);
+                }
+            }
+        } catch (CSTransactionException e) {
+            throw new SuiteAuthorizationValidationException("Failed to update role-group associations from " + diff, e);
+        }
+    }
+
     ///// CONFIGURATION
 
     protected synchronized CsmHelper getCsmHelper() {
@@ -109,6 +163,23 @@ public class ProvisioningHelper {
      */
     public void setCsmHelper(CsmHelper csmHelper) {
         this.csmHelper = csmHelper;
+    }
+
+    protected synchronized AuthorizationHelper getAuthorizationHelper() {
+        if (authorizationHelper == null) {
+            authorizationHelper = new AuthorizationHelper();
+            authorizationHelper.setAuthorizationManager(getAuthorizationManager());
+            authorizationHelper.setSiteMapping(getSiteMapping());
+            authorizationHelper.setStudyMapping(getStudyMapping());
+        }
+        return authorizationHelper;
+    }
+
+    /**
+     * Set the {@link CsmHelper} to use.  If none is provided, an instance will be created on use.
+     */
+    public void setAuthorizationHelper(AuthorizationHelper authorizationHelper) {
+        this.authorizationHelper = authorizationHelper;
     }
 
     protected AuthorizationManager getAuthorizationManager() {

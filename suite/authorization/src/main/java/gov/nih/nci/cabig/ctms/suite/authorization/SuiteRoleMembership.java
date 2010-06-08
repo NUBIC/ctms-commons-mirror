@@ -342,6 +342,14 @@ public class SuiteRoleMembership {
         return differences;
     }
 
+    /**
+     * Returns the list of differences needed to create this instance from scratch.
+     * @return
+     */
+    public List<Difference> diffFromNothing() {
+        return new SuiteRoleMembership(getRole(), null, null).diff(this);
+    }
+
     public static class Difference {
         public static Difference delete(ScopeType scopeType) {
             return new Difference(Kind.DELETE, ScopeDescription.createForAll(scopeType));
@@ -369,7 +377,7 @@ public class SuiteRoleMembership {
             this.scopeDescription = scopeDescription;
         }
 
-        public Kind getMode() {
+        public Kind getKind() {
             return mode;
         }
 

@@ -463,18 +463,28 @@ public class SuiteRoleMembershipTest extends TestCase {
             ScopeDescription.createForOne(ScopeType.STUDY, "CRM"));
     }
 
-    private void assertAdd(String message, SuiteRoleMembership.Difference actual, ScopeDescription expectedSD) {
+    public void testDifferenceFromBaseline() throws Exception {
+        List<SuiteRoleMembership.Difference> actual =
+            createMembership(SuiteRole.DATA_ANALYST).
+                forAllSites().forStudies("CRM", "114").diffFromNothing();
+        assertEquals("Wrong number of changes", 3, actual.size());
+        assertAdd("Wrong 1st add", actual.get(0), ScopeDescription.createForAll(ScopeType.SITE));
+        assertAdd("Wrong 2nd add", actual.get(1), ScopeDescription.createForOne(ScopeType.STUDY, "CRM"));
+        assertAdd("Wrong 3rd add", actual.get(2), ScopeDescription.createForOne(ScopeType.STUDY, "114"));
+    }
+
+    private static void assertAdd(String message, SuiteRoleMembership.Difference actual, ScopeDescription expectedSD) {
         assertDifference(message, actual, SuiteRoleMembership.Difference.Kind.ADD, expectedSD);
     }
 
-    private void assertDelete(String message, SuiteRoleMembership.Difference actual, ScopeDescription expectedSD) {
+    private static void assertDelete(String message, SuiteRoleMembership.Difference actual, ScopeDescription expectedSD) {
         assertDifference(message, actual, SuiteRoleMembership.Difference.Kind.DELETE, expectedSD);
     }
 
-    private void assertDifference(
+    private static void assertDifference(
         String message, SuiteRoleMembership.Difference actual, SuiteRoleMembership.Difference.Kind expectedKind, ScopeDescription expectedSD
     ) {
-        assertEquals(message + ": wrong kind", expectedKind, actual.getMode());
+        assertEquals(message + ": wrong kind", expectedKind, actual.getKind());
         assertEquals(message + ": wrong scope description", expectedSD, actual.getScopeDescription());
     }
 

@@ -1,11 +1,11 @@
 package gov.nih.nci.cabig.ctms.suite.authorization;
 
+import gov.nih.nci.cabig.ctms.suite.authorization.domain.TestSiteMapping;
+import gov.nih.nci.cabig.ctms.suite.authorization.domain.TestStudyMapping;
 import gov.nih.nci.security.authorization.domainobjects.Group;
 import gov.nih.nci.security.authorization.domainobjects.Privilege;
 import gov.nih.nci.security.authorization.domainobjects.ProtectionElementPrivilegeContext;
 import gov.nih.nci.security.exceptions.CSObjectNotFoundException;
-import gov.nih.nci.cabig.ctms.suite.authorization.domain.TestSiteMapping;
-import gov.nih.nci.cabig.ctms.suite.authorization.domain.TestStudyMapping;
 
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -52,13 +52,65 @@ public class ProvisioningHelperIntegratedTest extends IntegratedTestCase {
     }
 
     public void testDeleteNonExistentRoleDoesNothing() throws Exception {
-        helper.deleteRole(-22, SuiteRole.DATA_READER);
+        helper.deleteRole(-22, SuiteRole.DATA_ANALYST);
 
         // expect no exceptions, plus
         assertUserInGroup("Unrelated group membership deleted",
             SuiteRole.USER_ADMINISTRATOR.getCsmName(), -22);
         assertUserHasPrivilege("Unrelated PE deleted", -22, "HealthcareSite.MI001",
             SuiteRole.USER_ADMINISTRATOR.getCsmName());
+    }
+
+    public void testReplaceRoleWhenNewScopedRole() throws Exception {
+        helper.replaceRole(-22, helper.createSuiteRoleMembership(SuiteRole.DATA_ANALYST).
+            forAllSites().forStudies("CRM114"));
+
+        assertUserInGroup("Not added to group", "data_analyst", -22);
+        assertUserHasPrivilege("Not given study priv", -22, "Study.CRM114", "data_analyst");
+        assertUserHasPrivilege("Not given site priv", -22, "HealthcareSite", "data_analyst");
+    }
+
+    public void testReplaceRoleWhenNewGlobalRole() throws Exception {
+        helper.replaceRole(-22, helper.createSuiteRoleMembership(SuiteRole.SYSTEM_ADMINISTRATOR));
+
+        assertUserInGroup("Not added to group", "system_administrator", -22);
+    }
+
+    public void testReplaceRoleWhenIdentical() throws Exception {
+        helper.replaceRole(-22, helper.createSuiteRoleMembership(SuiteRole.DATA_READER).
+            forAllStudies().forSites("MI001"));
+
+        assertUserInGroup("Not still in group", "data_reader", -22);
+        assertUserHasPrivilege("Not still with study priv", -22, "Study", "data_reader");
+        assertUserHasPrivilege("Not still with site priv", -22, "HealthcareSite.MI001", "data_reader");
+    }
+
+    public void testReplaceWhenScopeExpanded() throws Exception {
+        helper.replaceRole(-22, 
+            helper.createSuiteRoleMembership(SuiteRole.USER_ADMINISTRATOR).forSites("IL033", "MI001"));
+
+        assertUserInGroup("Not still in group", "user_administrator", -22);
+        assertUserHasPrivilege("Original priv not preserved", -22, "HealthcareSite.MI001", "user_administrator");
+        assertUserHasPrivilege("New priv not added", -22, "HealthcareSite.IL033", "user_administrator");
+    }
+
+    public void testReplaceWhenScopeChanged() throws Exception {
+        helper.replaceRole(-22,
+            helper.createSuiteRoleMembership(SuiteRole.USER_ADMINISTRATOR).forAllSites());
+
+        assertUserInGroup("Not still in group", "user_administrator", -22);
+        assertUserDoesNotHavePrivilege("Original priv not removed", -22, "HealthcareSite.MI001", "user_administrator");
+        assertUserHasPrivilege("New priv not added", -22, "HealthcareSite", "user_administrator");
+    }
+
+    public void testFailsWhenNewMembershipIsInvalid() throws Exception {
+        try {
+                                           // missing scope
+            helper.replaceRole(-22, helper.createSuiteRoleMembership(SuiteRole.USER_ADMINISTRATOR));
+            fail("Exception not thrown");
+        } catch (SuiteAuthorizationValidationException save) {
+            // expected
+        }
     }
 
     private void assertUserHasPrivilege(
