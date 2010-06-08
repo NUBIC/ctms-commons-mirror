@@ -10,6 +10,10 @@ ctms-commons history
   ConfigurationProperties interfaces.  The classes which had these names
   are now called DefaultConfigurationProperty and
   DefaultConfigurationProperties.
+- Deprecated ...tools.spring.PropertyPlaceholderConfigurer.  The
+  Spring 2.5+ version of this class provides equivalent functionality,
+  so we don't need to maintain this fork any longer.  It will be
+  removed in 1.1 or later.
 
 ### maven
 

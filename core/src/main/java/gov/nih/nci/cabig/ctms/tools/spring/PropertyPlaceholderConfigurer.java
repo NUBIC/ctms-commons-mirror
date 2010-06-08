@@ -16,20 +16,20 @@
 
 package gov.nih.nci.cabig.ctms.tools.spring;
 
-import java.util.HashSet;
-import java.util.Properties;
-import java.util.Set;
-
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.BeanNameAware;
-import org.springframework.beans.factory.config.PropertyResourceConfigurer;
-import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionVisitor;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.beans.factory.config.PropertyResourceConfigurer;
 import org.springframework.core.Constants;
+
+import java.util.HashSet;
+import java.util.Properties;
+import java.util.Set;
 
 //////
 //  This is a straight copy of the Spring 2.0.2 version of this class, with one feature added:
@@ -97,6 +97,7 @@ import org.springframework.core.Constants;
  * @see System#getProperty(String)
  * @see #convertPropertyValue
  * @see org.springframework.beans.factory.config.PropertyOverrideConfigurer
+ * @deprecated The Spring 2.5.6 version of this class contains equivalent functionality.  This class will be removed from ctms commons in version 1.1 or later.
  */
 public class PropertyPlaceholderConfigurer extends PropertyResourceConfigurer
     implements BeanNameAware, BeanFactoryAware {
