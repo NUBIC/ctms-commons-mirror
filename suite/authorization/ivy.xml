@@ -1,0 +1,19 @@
+<ivy-module version="2.0"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+  <info organisation="gov.nih.nci.cabig.ctms" module="ctms-commons-suite-authorization"/>
+
+  <configurations>
+    <include file="../../ivy/default-configurations.xml"/>
+  </configurations>
+
+  <dependencies>
+    <dependency name="ctms-commons-base" rev="latest.integration"/>
+    <dependency name="ctms-commons-core" rev="latest.integration"/>
+
+    <dependency org="org.slf4j" name="slf4j-api" rev="${lib.slf4j.rev}"/>
+
+    <!-- TEST -->
+    <dependency conf="unit-test->*" org="org.slf4j" name="slf4j-simple" rev="${lib.slf4j.rev}"/>
+  </dependencies>
+</ivy-module>

@@ -14,4 +14,16 @@ public class EnumHelper {
         }
         return name.toString();
     }
+
+    public static <T extends Enum<T>> String titleCasedName(T instance) {
+        StringBuilder name = new StringBuilder(instance.name().toLowerCase());
+        name.setCharAt(0, Character.toUpperCase(name.charAt(0)));
+        for (int i = 0 ; i < name.length() ; i++) {
+            if (name.charAt(i) == '_') {
+                name.setCharAt(i, ' ');
+                name.setCharAt(i + 1, Character.toUpperCase(name.charAt(i + 1)));
+            }
+        }
+        return name.toString();
+    }
 }

@@ -10,4 +10,9 @@ public class EnumHelperTest extends CommonsCoreTestCase {
         assertEquals("Grizzly", EnumHelper.sentenceCasedName(SampleCodedEnum.GRIZZLY));
         assertEquals("Human skull", EnumHelper.sentenceCasedName(SampleCodedEnum.HUMAN_SKULL));
     }
+
+    public void testTitleCasedName() throws Exception {
+        assertEquals("Grizzly", EnumHelper.titleCasedName(SampleCodedEnum.GRIZZLY));
+        assertEquals("Human Skull", EnumHelper.titleCasedName(SampleCodedEnum.HUMAN_SKULL));
+    }
 }

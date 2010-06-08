@@ -108,6 +108,18 @@ define "ctms-commons" do
     end
   end
 
+  define "suite" do
+    project.no_iml
+
+    define "authorization" do
+      ivy.compile_conf('compile').compile_type('jar').test_conf('unit-test').test_type('jar')
+      interproject_dependencies << 'ctms-commons:core' << 'ctms-commons:base'
+      package(:bundle).tap do |bundle|
+        bundle["Export-Package"] = bnd_export_package
+      end
+    end
+  end
+
   # The following submodules exist but are not part of the
   # whole-project build-release process.  This should be fixed at some
   # point.

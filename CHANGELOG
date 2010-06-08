@@ -34,6 +34,14 @@ ctms-commons history
   CTMS-specific packages so as not to conflict with CSM.  Mapping:
     gov.nih.nci.security.acegi.* -> gov.nih.nci.cabig.ctms.acegi.*
 
+### suite
+
+- New module collection: suite.  Contains code that is specific to the
+  Clinical Trials Suite and probably can't be used outside of the
+  suite (or interacting with the suite).
+- New module: authorization.  Contains common provisioning code (based
+  on CSM) for the Clinical Trials Suite.
+
 ### all
 
 - Begin formal changelog
