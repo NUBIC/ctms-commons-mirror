@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Encapsulates a facade for a series of operations on the provisioning data for a single user.
@@ -21,6 +22,11 @@ public class ProvisioningSession {
 
     private long userId;
     private ProvisioningSessionFactory factory;
+    /**
+     * A cache of the logical reflection of this user's roles and scopes.  Kept in sync with CSM at
+     * all times.
+     */
+    private Map<SuiteRole, SuiteRoleMembership> roleMemberships;
 
     /**
      * @see gov.nih.nci.cabig.ctms.suite.authorization.ProvisioningSessionFactory
@@ -28,6 +34,7 @@ public class ProvisioningSession {
     public ProvisioningSession(long userId, ProvisioningSessionFactory factory) {
         this.userId = userId;
         this.factory = factory;
+        this.roleMemberships = factory.getAuthorizationHelper().getRoleMemberships(userId);
     }
 
     /**
@@ -39,12 +46,12 @@ public class ProvisioningSession {
      *
      * @param replacement the membership data to apply to the user
      */
-    public void replaceRole(SuiteRoleMembership replacement) {
+    public synchronized void replaceRole(SuiteRoleMembership replacement) {
         replacement.validate();
 
         ensureInGroupForRole(replacement.getRole());
 
-        SuiteRoleMembership current = factory.getAuthorizationHelper().getRoleMemberships(userId).get(replacement.getRole());
+        SuiteRoleMembership current = this.roleMemberships.get(replacement.getRole());
         List<SuiteRoleMembership.Difference> diff;
         if (current == null) {
             diff = replacement.diffFromNothing();
@@ -52,6 +59,7 @@ public class ProvisioningSession {
             diff = current.diff(replacement);
         }
         applyDifferences(replacement.getRole(), diff);
+        this.roleMemberships.put(replacement.getRole(), replacement);
     }
 
     /**
@@ -61,10 +69,10 @@ public class ProvisioningSession {
      * @param role the role from which to remove the user
      */
     @SuppressWarnings({ "unchecked" })
-    public void deleteRole(SuiteRole role) {
+    public synchronized void deleteRole(SuiteRole role) {
         ensureNotInGroupForRole(role);
 
-        SuiteRoleMembership current = factory.getAuthorizationHelper().getRoleMemberships(userId).get(role);
+        SuiteRoleMembership current = this.roleMemberships.remove(role);
         if (current != null) {
             applyDifferences(role, current.diff(null));
         }

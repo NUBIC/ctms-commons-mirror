@@ -99,15 +99,35 @@ public class ProvisioningSessionIntegratedTest extends IntegratedTestCase {
         assertUserHasPrivilege("New priv not added", -22, "HealthcareSite", "user_administrator");
     }
 
-    public void testFailsWhenNewMembershipIsInvalid() throws Exception {
-        ProvisioningSession helper = createSession(-22);
+    public void testReplaceFailsWhenNewMembershipIsInvalid() throws Exception {
         try {
             // missing scope
-            helper.replaceRole(psFactory.createSuiteRoleMembership(SuiteRole.USER_ADMINISTRATOR));
+            createSession(-22).replaceRole(psFactory.createSuiteRoleMembership(SuiteRole.USER_ADMINISTRATOR));
             fail("Exception not thrown");
         } catch (SuiteAuthorizationValidationException save) {
             // expected
         }
+    }
+
+    public void testDeleteAfterReplaceNewWorks() throws Exception {
+        ProvisioningSession session = psFactory.createSession(-26);
+        session.replaceRole(psFactory.createSuiteRoleMembership(SuiteRole.STUDY_TEAM_ADMINISTRATOR).
+            forAllSites().forAllStudies());
+        session.deleteRole(SuiteRole.STUDY_TEAM_ADMINISTRATOR);
+
+        assertUserNotInGroup("Group assoc not deleted", "study_team_administrator", -26);
+        assertUserDoesNotHavePrivilege("Study priv not deleted", -26, "Study", "study_team_administrator");
+        assertUserDoesNotHavePrivilege("Site priv not deleted", -26, "HealthcareSite", "study_team_administrator");
+    }
+
+    public void testReplaceSameAfterDeleteWorks() throws Exception {
+        ProvisioningSession session = psFactory.createSession(-22);
+        session.deleteRole(SuiteRole.USER_ADMINISTRATOR);
+        session.replaceRole(psFactory.createSuiteRoleMembership(SuiteRole.USER_ADMINISTRATOR).
+            forSites("MI001"));
+
+        assertUserInGroup("User not restored to group", "user_administrator", -22);
+        assertUserHasPrivilege("Site priv not restored", -22, "HealthcareSite.MI001", "user_administrator");
     }
 
     private void assertUserHasPrivilege(
