@@ -3,7 +3,7 @@ require 'buildr_bnd'
 repositories.remote << Buildr::Bnd.remote_repository
 require 'buildr/ivy_extension'
 
-CTMS_COMMONS_VERSION = "1.0.0.RELEASE"
+CTMS_COMMONS_VERSION = "1.0.1.DEV"
 CTMS_COMMONS_IVY_ORG = "gov.nih.nci.cabig.ctms"
 
 desc "Shared libraries for caBIG CTMS projects"
@@ -111,7 +111,7 @@ define "ctms-commons" do
 
   define "suite" do
     project.no_iml
-    project.version = "0.0.0.RELEASE"
+    project.version = "0.0.1.DEV"
 
     define "authorization" do
       project.iml.group = true
