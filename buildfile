@@ -11,6 +11,7 @@ define "ctms-commons" do
   project.version = CTMS_COMMONS_VERSION
   project.group = CTMS_COMMONS_IVY_ORG
   project.iml.excluded_directories << IVY_HOME
+  project.iml.group = true
 
   desc "Zero-dependency common code for all other packages"
   define "base" do
@@ -33,12 +34,14 @@ define "ctms-commons" do
     project.no_iml
 
     define "unit" do
+      project.iml.group = true
       ivy.compile_conf('compile').compile_type('jar').test_conf('unit-test').test_type('jar')
       interproject_dependencies << 'ctms-commons:lang'
       package(:jar)
     end
 
     define "uctrace" do
+      project.iml.group = true
       ivy.compile_conf('compile').compile_type('jar').test_conf('unit-test').test_type('jar')
       interproject_dependencies << 'ctms-commons:base'
       package(:jar)
@@ -77,11 +80,13 @@ define "ctms-commons" do
     project.no_iml
 
     define "acl-dao", :base_dir => _('acegi-acl-dao') do
+      project.iml.group = true
       ivy.compile_conf('compile').compile_type('jar').test_conf('unit-test').test_type('jar')
       package(:jar)
     end
 
     define "csm", :base_dir => _('acegi-csm') do
+      project.iml.group = true
       ivy.compile_conf('compile').compile_type('jar').test_conf('unit-test').test_type('jar')
 
       package(:bundle).tap do |bundle|
@@ -90,11 +95,13 @@ define "ctms-commons" do
     end
 
     define "csm-test", :base_dir => _('acegi-csm-test') do
+      project.iml.group = true
       ivy.compile_conf('compile').compile_type('jar').test_conf('unit-test').test_type('jar')
       interproject_dependencies << 'acegi:csm'
     end
 
     define "grid", :base_dir => _('acegi-grid') do
+      project.iml.group = true
       ivy.compile_conf('compile').compile_type('jar').test_conf('unit-test').test_type('jar')
       interproject_dependencies << 'acegi:csm'
       package(:jar)
