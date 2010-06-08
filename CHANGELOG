@@ -1,6 +1,13 @@
 ctms-commons history
 ====================
 
+1.0.1
+-----
+
+### all
+
+- Update ivy4r dependency to 0.11.0
+
 1.0.0
 -----
 
