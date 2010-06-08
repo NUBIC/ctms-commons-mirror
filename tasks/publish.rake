@@ -111,6 +111,10 @@ namespace :publish do
 
   desc "Commit the prepared artifacts"
   task :commit => :repo do
+    all_statuses = repo_status.collect { |st, path| st }.uniq
+    unless all_statuses == %w(A)
+      fail "You can only publish adds, not changes: #{all_statuses.join(' ')}"
+    end
     info "Committing #{repo_status.size} changes."
     system("svn commit #{task("publish:repo").path} -m 'Publishing #{CTMS_COMMONS_VERSION}'")
     info "If the commit succeeded, please run `buildr publish:tag`."
