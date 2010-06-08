@@ -44,6 +44,13 @@ summary that means that the library version numbers go
     compatibility.
   * [major] is updated for breaking changes.  This should be very rare.
 
+An exception is where the [major] value is 0.  New modules in the
+library can be initially released with major=0 while the API is being
+hashed out.  Libraries with major=0 are expected to maintain backwards
+compatibility only within minor versions (e.g., 0.1.0 -> 0.1.1).  Once
+the API is firm, these modules should be released under the same
+version scheme as the remainder of the library.
+
 Going forward, ctms-commons will have many minor releases as an
 alternative to publishing snapshot builds.
 
