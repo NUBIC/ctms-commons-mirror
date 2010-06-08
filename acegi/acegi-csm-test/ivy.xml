@@ -11,7 +11,7 @@
     <dependency org="gov.nih.nci.security" name="csm" rev="${lib.csm.rev}"/>
 
     <dependency org="org.junit" name="com.springsource.org.junit" rev="${lib.junit.rev}"/>
-    <dependency org="org.dbunit" name="dbunit" rev="2.2"/>
+    <dependency org="org.dbunit" name="dbunit" rev="${lib.dbunit.rev}"/>
     <dependency org="org.hibernate" name="com.springsource.org.hibernate" rev="${lib.hibernate.rev}"/>
     <dependency org="org.slf4j" name="slf4j-api" rev="${lib.slf4j.rev}"/>
 
