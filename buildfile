@@ -1,6 +1,6 @@
 require 'buildr_iidea'
 require 'buildr_bnd'
-repositories.remote.concat Buildr::Bnd.remote_repositories
+repositories.remote << Buildr::Bnd.remote_repository
 require 'buildr/ivy_extension'
 
 CTMS_COMMONS_VERSION = "1.0.0.DEV"
