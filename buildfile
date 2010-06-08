@@ -4,11 +4,12 @@ repositories.remote.concat Buildr::Bnd.remote_repositories
 require 'buildr/ivy_extension'
 
 CTMS_COMMONS_VERSION = "1.0.0.DEV"
+CTMS_COMMONS_IVY_ORG = "gov.nih.nci.cabig.ctms"
 
 desc "Shared libraries for caBIG CTMS projects"
 define "ctms-commons" do
   project.version = CTMS_COMMONS_VERSION
-  project.group = "gov.nih.nci.cabig.ctms"
+  project.group = CTMS_COMMONS_IVY_ORG
   project.iml.excluded_directories << IVY_HOME
 
   desc "Zero-dependency common code for all other packages"

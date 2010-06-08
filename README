@@ -28,4 +28,40 @@ with buildr 1.3.5 on jruby 1.4.0.  It uses ivy4r for ivy integration.
 
 ### Releasing
 
-TODO.
+In order to release ctms-commons, you have to have been granted access
+[per the BDA team's directions][bda-ivy].
+
+[bda-ivy]: https://wiki.nci.nih.gov/display/BuildandDeploymentAutomation/Ivy-+How+to+add+files+to+Repo
+
+#### Versions
+
+ctms-commons tries to follow the rational versioning policy.  In
+summary that means that the library version numbers go
+[major].[minor].[patch]:
+
+  * [patch] is updated for bugfixes only.
+  * [minor] is updated for new features which do not break backwards
+    compatibility.
+  * [major] is updated for breaking changes.  This should be very rare.
+
+Going forward, ctms-commons will have many minor releases as an
+alternative to publishing snapshot builds.
+
+#### Steps to release
+
+0) Ensure that everything you want to go into the release has been
+   committed into trunk.  Ensure that the CHANGELOG is up to date.
+1) Set the version number in the buildfile to the appropriate release
+   version.  E.g., 3.9.4.RELEASE.
+2) Commit.
+3) Run `buildr publish:prepare`.  This will do a clean build, check
+   out the CBIIT repo, and ready the ivy artifacts for publication.
+4) Check that the new artifacts (under publish-repo) are as you expect.
+5) Run `buildr publish:commit`.
+6) Run `buildr publish:tag`.
+7) Update the version number in the buildfile to the next development
+   version.  E.g., 3.9.5.DEV.
+8) Commit.
+
+(Note that buildr provides a release process, but we aren't using it
+because it doesn't support CBIIT's ivy repo setup.)
