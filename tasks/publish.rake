@@ -86,13 +86,15 @@ namespace :publish do
     end
   end
 
+  # TODO: this is not working
   task :build => [task("clean"), task("package")]
 
   task :copy => [:check_clean_repo, :repo] do
     publish_repo = task("publish:repo").path
     project_repo = ProjectIvyRepo::PROJECT_REPO_ROOT
     prefix = File.join(project_repo, CTMS_COMMONS_IVY_ORG) + "/"
-    artifacts = Dir[File.join(prefix, "*", CTMS_COMMONS_VERSION, "**/*")]
+    artifacts = projects.collect { |p| p.version }.uniq.
+      collect { |version| Dir[File.join(prefix, "*", version, "**/*")] }.flatten
     artifacts.each do |artifact|
       target = File.join(publish_repo, artifact.sub(prefix, ''))
       FileUtils.mkdir_p File.dirname(target)
