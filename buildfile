@@ -9,6 +9,7 @@ desc "Shared libraries for caBIG CTMS projects"
 define "ctms-commons" do
   project.version = CTMS_COMMONS_VERSION
   project.group = "gov.nih.nci.cabig.ctms"
+  project.iml.excluded_directories << IVY_HOME
 
   desc "Zero-dependency common code for all other packages"
   define "base" do
@@ -28,15 +29,17 @@ define "ctms-commons" do
   end
 
   define "testing" do
+    project.no_iml
+
     define "unit" do
       ivy.compile_conf('compile').test_conf('unit-test')
-      interproject_dependencies << 'lang'
+      interproject_dependencies << 'ctms-commons:lang'
       package(:jar)
     end
 
     define "uctrace" do
       ivy.compile_conf('compile').test_conf('unit-test')
-      interproject_dependencies << 'base'
+      interproject_dependencies << 'ctms-commons:base'
       package(:jar)
     end
   end
@@ -70,6 +73,8 @@ define "ctms-commons" do
   end
 
   define "acegi" do
+    project.no_iml
+
     define "acl-dao", :base_dir => _('acegi-acl-dao') do
       ivy.compile_conf('compile').test_conf('unit-test')
       package(:jar)
@@ -77,6 +82,7 @@ define "ctms-commons" do
 
     define "csm", :base_dir => _('acegi-csm') do
       ivy.compile_conf('compile').test_conf('unit-test')
+
       package(:bundle).tap do |bundle|
         bundle["Export-Package"] = bnd_export_package
       end
