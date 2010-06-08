@@ -6,7 +6,9 @@ ctms-commons history
 
 ### all
 
-- Update ivy4r dependency to 0.11.0
+- Updated ivy4r dependency to 0.11.0.
+- Ensured that `buildr javadoc` can build combined javadoc for the
+  whole project.
 
 1.0.0
 -----

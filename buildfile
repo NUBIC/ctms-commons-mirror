@@ -6,6 +6,14 @@ require 'buildr/ivy_extension'
 CTMS_COMMONS_VERSION = "1.0.1.DEV"
 CTMS_COMMONS_IVY_ORG = "gov.nih.nci.cabig.ctms"
 
+# All modules use the same ivy4r config
+def configure_ivy(ivy_config)
+  ivy.compile_conf('compile').
+    compile_type('jar').
+    test_conf('unit-test').
+    test_type('jar')
+end
+
 desc "Shared libraries for caBIG CTMS projects"
 define "ctms-commons" do
   project.version = CTMS_COMMONS_VERSION
@@ -16,14 +24,14 @@ define "ctms-commons" do
 
   desc "Zero-dependency common code for all other packages"
   define "base" do
-    ivy.compile_conf('compile').compile_type('jar').test_conf('unit-test').test_type('jar')
+    configure_ivy(ivy)
     package(:bundle).tap do |bundle|
       bundle["Export-Package"] = bnd_export_package
     end
   end
 
   define "lang" do
-    ivy.compile_conf('compile').compile_type('jar').test_conf('unit-test').test_type('jar')
+    configure_ivy(ivy)
     interproject_dependencies << 'base'
 
     package(:bundle).tap do |bundle|
@@ -36,21 +44,21 @@ define "ctms-commons" do
 
     define "unit" do
       project.iml.group = true
-      ivy.compile_conf('compile').compile_type('jar').test_conf('unit-test').test_type('jar')
+      configure_ivy(ivy)
       interproject_dependencies << 'ctms-commons:lang'
       package(:jar)
     end
 
     define "uctrace" do
       project.iml.group = true
-      ivy.compile_conf('compile').compile_type('jar').test_conf('unit-test').test_type('jar')
+      configure_ivy(ivy)
       interproject_dependencies << 'ctms-commons:base'
       package(:jar)
     end
   end
 
   define "core" do
-    ivy.compile_conf('compile').compile_type('jar').test_conf('unit-test').test_type('jar')
+    configure_ivy(ivy)
     interproject_dependencies << 'base' << 'lang' << 'testing:unit'
 
     package(:bundle).tap do |bundle|
@@ -60,7 +68,7 @@ define "ctms-commons" do
 
   define "laf" do
     # TODO: deploy and run the demo, if anyone's still using it
-    ivy.compile_conf('compile').compile_type('jar').test_conf('unit-test').test_type('jar')
+    configure_ivy(ivy)
     interproject_dependencies << 'web'
 
     package(:bundle).tap do |bundle|
@@ -69,7 +77,7 @@ define "ctms-commons" do
   end
 
   define "web" do
-    ivy.compile_conf('compile').compile_type('jar').test_conf('unit-test').test_type('jar')
+    configure_ivy(ivy)
     interproject_dependencies << 'base' << 'lang' << 'core' << 'testing:unit'
 
     package(:bundle).tap do |bundle|
@@ -82,13 +90,13 @@ define "ctms-commons" do
 
     define "acl-dao", :base_dir => _('acegi-acl-dao') do
       project.iml.group = true
-      ivy.compile_conf('compile').compile_type('jar').test_conf('unit-test').test_type('jar')
+      configure_ivy(ivy)
       package(:jar)
     end
 
     define "csm", :base_dir => _('acegi-csm') do
       project.iml.group = true
-      ivy.compile_conf('compile').compile_type('jar').test_conf('unit-test').test_type('jar')
+      configure_ivy(ivy)
 
       package(:bundle).tap do |bundle|
         bundle["Export-Package"] = bnd_export_package
@@ -97,13 +105,13 @@ define "ctms-commons" do
 
     define "csm-test", :base_dir => _('acegi-csm-test') do
       project.iml.group = true
-      ivy.compile_conf('compile').compile_type('jar').test_conf('unit-test').test_type('jar')
+      configure_ivy(ivy)
       interproject_dependencies << 'acegi:csm'
     end
 
     define "grid", :base_dir => _('acegi-grid') do
       project.iml.group = true
-      ivy.compile_conf('compile').compile_type('jar').test_conf('unit-test').test_type('jar')
+      configure_ivy(ivy)
       interproject_dependencies << 'acegi:csm'
       package(:jar)
     end
@@ -115,7 +123,7 @@ define "ctms-commons" do
 
     define "authorization" do
       project.iml.group = true
-      ivy.compile_conf('compile').compile_type('jar').test_conf('unit-test').test_type('jar')
+      configure_ivy(ivy)
       interproject_dependencies << 'ctms-commons:core' << 'ctms-commons:base'
       package(:bundle).tap do |bundle|
         bundle["Export-Package"] = bnd_export_package
@@ -133,6 +141,19 @@ define "ctms-commons" do
       end
     end
   end
+
+  doc_projects = projects(%w(base lang core web suite:authorization))
+  javadoc.from(doc_projects)
+  task :all_javadocdeps => doc_projects.collect { |p| p.task(:javadocdeps) } do
+    doc_projects.each do |p|
+      confs = [p.ivy.test_conf, p.ivy.compile_conf].flatten.uniq
+      if deps = p.ivy.deps(confs)
+        project.javadoc.with deps
+        info "Ivy adding javadoc dependencies from #{p} '#{confs.join(', ')}' to project '#{project.name}'"
+      end
+    end
+  end
+  project.task :javadoc => :all_javadocdeps
 
   # The following submodules exist but are not part of the
   # whole-project build-release process.  This should be fixed at some
