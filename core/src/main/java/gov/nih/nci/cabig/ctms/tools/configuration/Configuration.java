@@ -13,7 +13,6 @@ public interface Configuration {
      * implementors must be able to handle properties that are not in this
      * collection without throwing an exception.  [Ignoring them (or returning null) is
      * acceptable.] 
-     * @return
      */
     ConfigurationProperties getProperties();
 

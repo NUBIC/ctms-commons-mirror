@@ -83,7 +83,6 @@ public abstract class CodedEnumType implements UserType, ParameterizedType {
     /**
      * The JDBC typecode for the column in which the enum's code is stored.  E.g., if the
      * database column is an integer, this method should return {@link java.sql.Types#INTEGER}.
-     * @return
      */
     protected abstract int codeSqlType();
 

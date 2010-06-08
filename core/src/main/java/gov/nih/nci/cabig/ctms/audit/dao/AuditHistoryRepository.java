@@ -29,7 +29,7 @@ public class AuditHistoryRepository {
      * @param entityClass the entity class
      * @param entityId    the primary key of entity
      * @param calendar    the date
-     * @param time        time before the entity was created
+     * @param minutes     time before the entity was created
      * @return true if entity was created minutes before the specefied date.
      * @throws IllegalArgumentException if all the parameter except minutes is null;
      */
@@ -61,7 +61,6 @@ public class AuditHistoryRepository {
      * Returns list of data audit event object matching query criteria
      *
      * @param query
-     * @return
      */
     public List<DataAuditEvent> findDataAuditEvents(final DataAuditEventQuery query) {
         return auditHistoryDao.findDataAuditEvents(query);
@@ -92,9 +91,6 @@ public class AuditHistoryRepository {
 
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @SuppressWarnings("unchecked")
     public List<AuditHistory> getAuditDetailsForEntity(final Class entityClass, final Integer entityId,
                                                        final Calendar calendar)

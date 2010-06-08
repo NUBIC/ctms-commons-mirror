@@ -22,7 +22,6 @@ public class ScopeDescription {
     /**
      * Creates an instance which indicates scoping to all objects of the given type.
      * @param scope
-     * @return
      */
     public static ScopeDescription createForAll(ScopeType scope) {
         return new ScopeDescription(scope, null);

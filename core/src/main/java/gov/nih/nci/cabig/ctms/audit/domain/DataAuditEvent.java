@@ -1,7 +1,8 @@
 package gov.nih.nci.cabig.ctms.audit.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -15,10 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
-
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Padmaja Vedula
@@ -39,9 +38,6 @@ public class DataAuditEvent {
 	@Version
 	private Integer version;
 
-	/**
-	 * {@inheritDoc}
-	 */
 	public Integer getId() {
 		return id;
 	}

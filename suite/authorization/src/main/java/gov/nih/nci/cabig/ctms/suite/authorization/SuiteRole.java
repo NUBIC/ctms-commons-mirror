@@ -11,8 +11,10 @@ import java.util.Set;
 
 /**
  * The unified suite roles.  This enum reflects all information known about each role.
+ * <p>
+ * See also <a href="https://cabig-kc.nci.nih.gov/CTMS/KC/index.php/Roles_-_The_Suite_v2.2">the
+ * original hashing out of the roles across the suite</a>.
  *
- * @see https://cabig-kc.nci.nih.gov/CTMS/KC/index.php/Roles_-_The_Suite_v2.2
  * @author Rhett Sutphin
  */
 public enum SuiteRole {
@@ -69,7 +71,6 @@ public enum SuiteRole {
 
     /**
      * A string usable for referring to this role in, e.g., a user interface.
-     * @return
      */
     public String getDisplayName() {
         return this.displayName;

@@ -347,7 +347,6 @@ public class SuiteRoleMembership {
 
     /**
      * Returns the list of differences needed to create this instance from scratch.
-     * @return
      */
     public List<Difference> diffFromNothing() {
         return new SuiteRoleMembership(getRole(), null, null).diff(this);

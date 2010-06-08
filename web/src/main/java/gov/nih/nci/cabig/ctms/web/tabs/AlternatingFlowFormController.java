@@ -20,7 +20,6 @@ public abstract class AlternatingFlowFormController<C> extends AbstractTabbedFlo
      * Check if Alternate flow (Sub Flows
      *
      * @param request
-     * @return
      */
     public boolean isUseAlternateFlow(HttpServletRequest request) {
         return request.getSession().getAttribute(getAlternateFlowAttributeName()) != null;
