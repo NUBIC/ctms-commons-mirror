@@ -28,9 +28,10 @@ ctms-commons history
 
 ### acegi
 
+- Upgraded to CSM 4.2.
+- Removed DIAuthorizationDao because CSM 4.2 supports this on its own.
 - Backwards-incompatible change: Moved all the acegi-* modules into
   CTMS-specific packages so as not to conflict with CSM.  Mapping:
-    gov.nih.nci.security (exact) -> gov.nih.nci.cabig.ctms.csmext
     gov.nih.nci.security.acegi.* -> gov.nih.nci.cabig.ctms.acegi.*
 
 ### all

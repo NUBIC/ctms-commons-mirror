@@ -113,49 +113,51 @@
 	<!-- Person -->
 	<!-- Maps testapp.bean.Person.CREATE to CREATE -->
 	<CSM_ROLE_PRIVILEGE ROLE_PRIVILEGE_ID="-1" ROLE_ID="-1"
-		PRIVILEGE_ID="-1" UPDATE_DATE="2007-01-27"/>
+		PRIVILEGE_ID="-1"/>
 
 	<!-- Maps testapp.bean.Person.UPDATE to UPDATE -->
 	<CSM_ROLE_PRIVILEGE ROLE_PRIVILEGE_ID="-2" ROLE_ID="-2"
-		PRIVILEGE_ID="-5" UPDATE_DATE="2007-01-27"/>
+		PRIVILEGE_ID="-5"/>
 		
 	<!-- Maps testapp.bean.Person.READ to READ -->
 	<CSM_ROLE_PRIVILEGE ROLE_PRIVILEGE_ID="-3" ROLE_ID="-3"
-		PRIVILEGE_ID="-3" UPDATE_DATE="2007-01-27"/>
+		PRIVILEGE_ID="-3"/>
 		
 	<!-- Statement -->
 	<!-- Maps testapp.bean.Person.CREATE to CREATE -->
 	<CSM_ROLE_PRIVILEGE ROLE_PRIVILEGE_ID="-4" ROLE_ID="-4"
-		PRIVILEGE_ID="-1" UPDATE_DATE="2007-01-27"/>
+		PRIVILEGE_ID="-1"/>
 
 	<!-- Maps testapp.bean.Person.UPDATE to UPDATE -->
 	<CSM_ROLE_PRIVILEGE ROLE_PRIVILEGE_ID="-5" ROLE_ID="-5"
-		PRIVILEGE_ID="-5" UPDATE_DATE="2007-01-27"/>
+		PRIVILEGE_ID="-5"/>
 		
 	<!-- Maps testapp.bean.Person.READ to READ -->
 	<CSM_ROLE_PRIVILEGE ROLE_PRIVILEGE_ID="-6" ROLE_ID="-6"
-		PRIVILEGE_ID="-3" UPDATE_DATE="2007-01-27"/>		
+		PRIVILEGE_ID="-3"/>		
 		
 				
 	<!--==================== USERS ====================-->
 	<CSM_USER USER_ID="-1" LOGIN_NAME="testapp_admin"
-		FIRST_NAME="testapp_admin" LAST_NAME="testapp_admin"
+		FIRST_NAME="testapp_admin" LAST_NAME="testapp_admin" MIGRATED_FLAG="0"
 		PASSWORD="testapp_admin" EMAIL_ID="testapp_admin@somewhere.com" UPDATE_DATE="2007-01-27" />
 		
 	<CSM_USER USER_ID="-2" LOGIN_NAME="user1"
 		FIRST_NAME="user" LAST_NAME="one"
-		PASSWORD="2OeuyEf6LQM=" 
+		PASSWORD="2OeuyEf6LQM=" MIGRATED_FLAG="0"
 		EMAIL_ID="user1@somewhere.com" UPDATE_DATE="2007-01-27" />
 		
 	<CSM_USER USER_ID="-3" LOGIN_NAME="user2"
 		FIRST_NAME="user" LAST_NAME="two"
-		PASSWORD="IRzONnc936M=" 
+		PASSWORD="IRzONnc936M="
+        MIGRATED_FLAG="0"
 		EMAIL_ID="user2@somewhere.com"
 		UPDATE_DATE="2007-01-27" />
 		
 	<CSM_USER USER_ID="-4" LOGIN_NAME="user3"
 		FIRST_NAME="user" LAST_NAME="three"
-		PASSWORD="EfOwwRZmRHU=" 
+		PASSWORD="EfOwwRZmRHU="
+        MIGRATED_FLAG="0"
 		EMAIL_ID="user3@somewhere.com"
 		UPDATE_DATE="2007-01-27" />				
 		
@@ -197,7 +199,7 @@
 		
 	<!--==================== USER TO PROTECTION ELEMENT MAPPINGS ==================-->
 	<CSM_USER_PE USER_PROTECTION_ELEMENT_ID="-1"
-		PROTECTION_ELEMENT_ID="-1" USER_ID="-1" UPDATE_DATE="2007-01-27" />
+		PROTECTION_ELEMENT_ID="-1" USER_ID="-1"/>
 
 		
 </dataset>

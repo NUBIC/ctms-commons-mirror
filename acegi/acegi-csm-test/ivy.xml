@@ -8,9 +8,7 @@
   </configurations>
 
   <dependencies>
-    <dependency org="gov.nih.nci.security" name="csm" rev="3.2"/>
-    <!-- temporary explicitly-specified transient dep because csm's is wrong. -->
-    <dependency org="ncicb" name="clm" rev="3.2"/>
+    <dependency org="gov.nih.nci.security" name="csm" rev="${lib.csm.rev}"/>
 
     <dependency org="org.junit" name="com.springsource.org.junit" rev="${lib.junit.rev}"/>
     <dependency org="org.dbunit" name="dbunit" rev="2.2"/>
@@ -27,12 +25,13 @@
     <dependency conf="unit-test->*" org="org.slf4j" name="log4j-over-slf4j" rev="${lib.slf4j.rev}"/>
     <dependency conf="unit-test->*" org="org.slf4j" name="jcl-over-slf4j" rev="${lib.slf4j.rev}"/>
     <dependency conf="unit-test->*" org="org.hsqldb" name="com.springsource.org.hsqldb" rev="${lib.hsqldb.rev}"/>
+    <!-- HACK: ivy is excluding the transient dep from csm to jdom when running the tests (for no reason I can see) -->
+    <dependency conf="unit-test->*" org="jdom" name="jdom" rev="1.0"/>
 
     <exclude org="org.springframework" module="spring" matcher="exact"/>
     <exclude org="ant" module="ant" matcher="exact"/>
-    <exclude org="log4j" module="log4j" matcher="exact"/>
+    <exclude org="log4j"/>
     <exclude org="org.apache.log4j" module="com.springsource.org.apache.log4j" matcher="exact"/>
-    <exclude org="gov.nih.nci.security" module="clm"/>
     <exclude module="com.springsource.slf4j.api"/>
   </dependencies>
 </ivy-module>

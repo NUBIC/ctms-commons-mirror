@@ -8,9 +8,7 @@
   </configurations>
 
   <dependencies>
-    <dependency org="gov.nih.nci.security" name="csm" rev="3.2"/>
-    <!-- temporary explicitly-specified transient dep because csm 3.2's is wrong. -->
-    <dependency org="ncicb" name="clm" rev="3.2"/>
+    <dependency org="gov.nih.nci.security" name="csm" rev="${lib.csm.rev}"/>
 
     <dependency org="org.acegisecurity" name="com.springsource.org.acegisecurity" rev="${lib.acegi.rev}" />
     <dependency org="org.aspectj" name="com.springsource.org.aspectj.runtime" rev="1.6.8.RELEASE" />
@@ -36,7 +34,7 @@
     <dependency conf="unit-test->*" org="org.easymock" name="easymockclassextension" rev="2.2.2"/>
 
     <exclude org="org.springframework" module="spring" matcher="exact"/>
-    <exclude org="gov.nih.nci.security" module="clm"/>
     <exclude module="com.springsource.slf4j.api"/>
+    <exclude org="log4j"/>
   </dependencies>
 </ivy-module>

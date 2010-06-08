@@ -10,9 +10,7 @@
   <dependencies>
     <dependency name="ctms-commons-acegi-csm" rev="latest.integration"/>
 
-    <dependency org="gov.nih.nci.security" name="csm" rev="3.2"/>
-    <!-- temporary explicitly-specified transient dep because csm 3.2's is wrong. -->
-    <dependency org="ncicb" name="clm" rev="3.2"/>
+    <dependency org="gov.nih.nci.security" name="csm" rev="${lib.csm.rev}"/>
 
     <dependency org="org.slf4j" name="slf4j-api" rev="${lib.slf4j.rev}"/>
     <dependency org="org.acegisecurity" name="com.springsource.org.acegisecurity" rev="${lib.acegi.rev}" />
@@ -52,7 +50,7 @@
     <exclude org="org.springframework" module="spring" matcher="exact"/> <!-- from clm -->
     <exclude org="springframework" module="spring" matcher="exact"/>     <!-- from cagrid -->
     <exclude org="cacore" module="csm"/>                                 <!-- from cagrid -->
-    <exclude org="gov.nih.nci.security" module="clm"/>                   <!-- from csm -->
     <exclude org="jakarta" module="commons-discovery"/>                  <!-- from cbiit/globus -->
+    <exclude org="log4j"/>
   </dependencies>
 </ivy-module>

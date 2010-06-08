@@ -1,29 +1,18 @@
 package gov.nih.nci.cabig.ctms.acegi.csm.authorization;
 
-import gov.nih.nci.security.UserProvisioningManager;
-import gov.nih.nci.security.dao.AuthorizationDAOImpl;
+import gov.nih.nci.security.AuthorizationManager;
 import gov.nih.nci.security.exceptions.CSConfigurationException;
-import gov.nih.nci.security.provisioning.UserProvisioningManagerImpl;
-import gov.nih.nci.security.system.ApplicationSessionFactory;
+import gov.nih.nci.security.provisioning.AuthorizationManagerImpl;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.hibernate.SessionFactory;
-
 public class UserProvisioningManagerFactory {
-
-    public static UserProvisioningManager newUserProvisioningManager(String contextName, Map props) {
-        UserProvisioningManagerImpl mgr = null;
-
+    public static AuthorizationManager newUserProvisioningManager(String contextName, Map props) {
         try {
-            mgr = new UserProvisioningManagerImpl(contextName, new HashMap(props));
+            return new AuthorizationManagerImpl(contextName, new HashMap(props));
         } catch (CSConfigurationException ex) {
-            throw new RuntimeException("Error instantiating UserProvisioningManager: "
-                            + ex.getMessage(), ex);
+            throw new RuntimeException("Error instantiating UserProvisioningManager", ex);
         }
-
-        return mgr;
     }
-
 }
