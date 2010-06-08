@@ -15,7 +15,7 @@ import java.util.Set;
  * @see https://cabig-kc.nci.nih.gov/CTMS/KC/index.php/Roles_-_The_Suite_v2.2
  * @author Rhett Sutphin
  */
-public enum Role {
+public enum SuiteRole {
     SYSTEM_ADMINISTRATOR,
     BUSINESS_ADMINISTRATOR,
     PERSON_AND_ORGANIZATION_INFORMATION_MANAGER,
@@ -41,8 +41,8 @@ public enum Role {
     DATA_ANALYST
     ;
 
-    public static Role getByCsmName(String csmName) {
-        for (Role role : values()) {
+    public static SuiteRole getByCsmName(String csmName) {
+        for (SuiteRole role : values()) {
             if (role.getCsmName().equals(csmName)) return role;
         }
         throw new IllegalArgumentException("There is no suite role with the CSM name " + csmName);
@@ -54,7 +54,7 @@ public enum Role {
 
     private static Properties roleProperties;
 
-    Role() {
+    SuiteRole() {
         this.displayName = createDisplayName();
         this.description = createDescription();
         this.scopes = createScopes();
@@ -131,7 +131,7 @@ public enum Role {
         if (roleProperties == null) {
             roleProperties = new Properties();
             try {
-                roleProperties.load(Role.class.getResourceAsStream("role.properties"));
+                roleProperties.load(SuiteRole.class.getResourceAsStream("role.properties"));
             } catch (IOException e) {
                 throw new CommonsError("Cannot load role info from properties", e);
             }

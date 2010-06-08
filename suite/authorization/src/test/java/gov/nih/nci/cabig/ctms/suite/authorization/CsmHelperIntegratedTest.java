@@ -6,6 +6,7 @@ import gov.nih.nci.cabig.ctms.suite.authorization.domain.TestStudyMapping;
 import gov.nih.nci.security.authorization.domainobjects.Group;
 import gov.nih.nci.security.authorization.domainobjects.ProtectionElement;
 import gov.nih.nci.security.authorization.domainobjects.ProtectionGroup;
+import gov.nih.nci.security.authorization.domainobjects.Role;
 import gov.nih.nci.security.exceptions.CSObjectNotFoundException;
 
 import java.util.Set;
@@ -161,27 +162,26 @@ public class CsmHelperIntegratedTest extends IntegratedTestCase {
     }
 
     public void testGetSuiteRoleCsmGroup() throws Exception {
-        Group actual = csmHelper.getRoleCsmGroup(Role.STUDY_SUBJECT_CALENDAR_MANAGER);
+        Group actual = csmHelper.getRoleCsmGroup(SuiteRole.STUDY_SUBJECT_CALENDAR_MANAGER);
         assertNotNull("This method should never return null", actual);
         assertEquals("Wrong group returned", "study_subject_calendar_manager", actual.getGroupName());
     }
 
     public void testAllSuiteRolesAreAccessibleAsCsmGroups() throws Exception {
-        for (Role role : Role.values()) {
+        for (SuiteRole role : SuiteRole.values()) {
             csmHelper.getRoleCsmGroup(role);
         }
         // It's sufficient that there aren't any exceptions
     }
 
     public void testGetSuiteRoleCsmRole() throws Exception {
-        gov.nih.nci.security.authorization.domainobjects.Role actual
-            = csmHelper.getRoleCsmRole(Role.STUDY_SUBJECT_CALENDAR_MANAGER);
+        Role actual = csmHelper.getRoleCsmRole(SuiteRole.STUDY_SUBJECT_CALENDAR_MANAGER);
         assertNotNull("This method should never return null", actual);
         assertEquals("Wrong object returned", "study_subject_calendar_manager", actual.getName());
     }
 
     public void testAllSuiteRolesAreAccessibleAsCsmRoles() throws Exception {
-        for (Role role : Role.values()) {
+        for (SuiteRole role : SuiteRole.values()) {
             csmHelper.getRoleCsmRole(role);
         }
         // It's sufficient that there aren't any exceptions

@@ -4,6 +4,7 @@ import gov.nih.nci.security.AuthorizationManager;
 import gov.nih.nci.security.authorization.domainobjects.Group;
 import gov.nih.nci.security.authorization.domainobjects.ProtectionElement;
 import gov.nih.nci.security.authorization.domainobjects.ProtectionGroup;
+import gov.nih.nci.security.authorization.domainobjects.Role;
 import gov.nih.nci.security.dao.AuthorizationDAO;
 import gov.nih.nci.security.dao.GroupSearchCriteria;
 import gov.nih.nci.security.dao.RoleSearchCriteria;
@@ -80,7 +81,7 @@ public class CsmHelper {
      * @throws SuiteAuthorizationAccessException if anything other than exactly one CSM group is
      *   found for the role
      */
-    public Group getRoleCsmGroup(Role role) throws SuiteAuthorizationAccessException {
+    public Group getRoleCsmGroup(SuiteRole role) throws SuiteAuthorizationAccessException {
         Group example = new Group();
         example.setGroupName(role.getCsmName());
         List found = getAuthorizationDao().getObjects(new GroupSearchCriteria(example));
@@ -101,9 +102,8 @@ public class CsmHelper {
      * @throws SuiteAuthorizationAccessException if anything other than exactly one CSM role is
      *   found for the suite role.
      */
-    public gov.nih.nci.security.authorization.domainobjects.Role getRoleCsmRole(Role role) {
-        gov.nih.nci.security.authorization.domainobjects.Role example
-            = new gov.nih.nci.security.authorization.domainobjects.Role();
+    public Role getRoleCsmRole(SuiteRole role) {
+        Role example = new Role();
         example.setName(role.getCsmName());
         List found = getAuthorizationDao().getObjects(new RoleSearchCriteria(example));
         if (found.size() == 0) {
@@ -113,7 +113,7 @@ public class CsmHelper {
             throw new SuiteAuthorizationAccessException("Too many CSM roles found for suite role %s (%s): %s",
                 role.getDisplayName(), role.getCsmName(), found);
         } else {
-            return (gov.nih.nci.security.authorization.domainobjects.Role) found.get(0);
+            return (Role) found.get(0);
         }
     }
 

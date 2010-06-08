@@ -3,6 +3,7 @@ package gov.nih.nci.cabig.ctms.suite.authorization;
 import gov.nih.nci.security.AuthorizationManager;
 import gov.nih.nci.security.authorization.domainobjects.Group;
 import gov.nih.nci.security.authorization.domainobjects.ProtectionGroupRoleContext;
+import gov.nih.nci.security.authorization.domainobjects.Role;
 import gov.nih.nci.security.dao.AuthorizationDAO;
 import gov.nih.nci.security.exceptions.CSObjectNotFoundException;
 import gov.nih.nci.security.exceptions.CSTransactionException;
@@ -22,16 +23,16 @@ public class ProvisioningHelper {
     private CsmHelper csmHelper;
 
     /**
-     * Assists in creating {@link RoleMembership}s which use the same configuration as this helper.
+     * Assists in creating {@link SuiteRoleMembership}s which use the same configuration as this helper.
      * E.g., you might use it like so:
      * <code><pre>
      * long userId = ...
      * gov.nih.nci.ctms.someapp.domain.Study someStudy = ...
-     * provisioningHelper.replaceRole(userId, provisioningHelper.createRoleMembership(Role.DATA_READER).forAllSites().forStudies(someStudy));
+     * provisioningHelper.replaceRole(userId, provisioningHelper.createSuiteRoleMembership(Role.DATA_READER).forAllSites().forStudies(someStudy));
      * </pre></code>
      */
-    public RoleMembership createRoleMembership(Role role) {
-        return new RoleMembership(role, getSiteMapping(), getStudyMapping());
+    public SuiteRoleMembership createSuiteRoleMembership(SuiteRole role) {
+        return new SuiteRoleMembership(role, getSiteMapping(), getStudyMapping());
     }
 
     /**
@@ -44,7 +45,7 @@ public class ProvisioningHelper {
      * @param userId the CSM user ID for the user to change
      * @param membership the membership data to apply to the user
      */
-    public void replaceRole(long userId, RoleMembership membership) {
+    public void replaceRole(long userId, SuiteRoleMembership membership) {
         throw new UnsupportedOperationException("TODO");
     }
 
@@ -56,7 +57,7 @@ public class ProvisioningHelper {
      * @param role the role from which to remove the user
      */
     @SuppressWarnings({ "unchecked" })
-    public void deleteRole(long userId, Role role) {
+    public void deleteRole(long userId, SuiteRole role) {
         Group csmGroup = getCsmHelper().getRoleCsmGroup(role);
         try {
             getAuthorizationManager().removeUserFromGroup(
@@ -67,8 +68,7 @@ public class ProvisioningHelper {
         }
 
         try {
-            gov.nih.nci.security.authorization.domainobjects.Role csmRole =
-                getCsmHelper().getRoleCsmRole(role);
+            Role csmRole = getCsmHelper().getRoleCsmRole(role);
             Set<ProtectionGroupRoleContext> roleContext =
                 getAuthorizationManager().getProtectionGroupRoleContextForUser(Long.toString(userId));
             Set<Long> protectionGroupIds = new LinkedHashSet<Long>();
@@ -139,7 +139,7 @@ public class ProvisioningHelper {
 
     /**
      * Specify an application site object mapping for this instance.  If this is not wired, created
-     * {@link RoleMembership}s will not be able to accept application site objects.
+     * {@link SuiteRoleMembership}s will not be able to accept application site objects.
      */
     public void setSiteMapping(SiteMapping siteMapping) {
         this.siteMapping = siteMapping;
@@ -151,7 +151,7 @@ public class ProvisioningHelper {
 
     /**
      * Specify an application study object mapping for this instance.  If this is not wired, created
-     * {@link RoleMembership}s will not be able to accept application study objects.
+     * {@link SuiteRoleMembership}s will not be able to accept application study objects.
      */
     public void setStudyMapping(StudyMapping studyMapping) {
         this.studyMapping = studyMapping;

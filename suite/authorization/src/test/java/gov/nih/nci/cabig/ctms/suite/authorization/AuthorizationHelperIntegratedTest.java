@@ -20,13 +20,13 @@ public class AuthorizationHelperIntegratedTest extends IntegratedTestCase {
     }
 
     public void testInvalidRoleMembershipsExcluded() throws Exception {
-        Map<Role,RoleMembership> actual = helper.getRoleMemberships(-26);
+        Map<SuiteRole, SuiteRoleMembership> actual = helper.getRoleMemberships(-26);
         assertEquals(1, actual.size());
-        assertTrue("Wrong role present", actual.containsKey(Role.BUSINESS_ADMINISTRATOR));
+        assertTrue("Wrong role present", actual.containsKey(SuiteRole.BUSINESS_ADMINISTRATOR));
     }
 
     public void testGlobalRoleMembershipCorrectlyConstructed() throws Exception {
-        RoleMembership actual = helper.getRoleMemberships(-22).get(Role.DATA_IMPORTER);
+        SuiteRoleMembership actual = helper.getRoleMemberships(-22).get(SuiteRole.DATA_IMPORTER);
         assertNotNull(actual);
         assertFalse(actual.isAllSites());
         assertFalse(actual.isAllStudies());
@@ -35,7 +35,7 @@ public class AuthorizationHelperIntegratedTest extends IntegratedTestCase {
     }
 
     public void testSiteSpecificRoleMembershipCorrectlyConstructed() throws Exception {
-        RoleMembership actual = helper.getRoleMemberships(-22).get(Role.USER_ADMINISTRATOR);
+        SuiteRoleMembership actual = helper.getRoleMemberships(-22).get(SuiteRole.USER_ADMINISTRATOR);
         assertNotNull(actual);
         assertFalse(actual.isAllSites());
         assertFalse(actual.isAllStudies());
@@ -45,7 +45,7 @@ public class AuthorizationHelperIntegratedTest extends IntegratedTestCase {
     }
 
     public void testSiteAndStudySpecificRoleMembershipCorrectlyConstructed() throws Exception {
-        RoleMembership actual = helper.getRoleMemberships(-22).get(Role.DATA_READER);
+        SuiteRoleMembership actual = helper.getRoleMemberships(-22).get(SuiteRole.DATA_READER);
         assertNotNull(actual);
         assertFalse(actual.isAllSites());
         assertTrue(actual.isAllStudies());

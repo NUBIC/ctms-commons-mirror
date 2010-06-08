@@ -28,15 +28,15 @@ public class ProvisioningHelperIntegratedTest extends IntegratedTestCase {
     }
 
     public void testCreateRoleMembership() throws Exception {
-        RoleMembership aRoleMembership = helper.createRoleMembership(Role.DATA_IMPORTER);
+        SuiteRoleMembership aRoleMembership = helper.createSuiteRoleMembership(SuiteRole.DATA_IMPORTER);
         assertNotNull(aRoleMembership);
-        assertEquals("Wrong role", Role.DATA_IMPORTER, aRoleMembership.getRole());
+        assertEquals("Wrong role", SuiteRole.DATA_IMPORTER, aRoleMembership.getRole());
         assertNotNull("Site mapping not passed along", aRoleMembership.getMapping(ScopeType.SITE));
         assertNotNull("Study mapping not passed along", aRoleMembership.getMapping(ScopeType.STUDY));
     }
 
     public void testDeleteExistingRoleDeletesUserPrivilegeMapping() throws Exception {
-        Role existingRole = Role.USER_ADMINISTRATOR;
+        SuiteRole existingRole = SuiteRole.USER_ADMINISTRATOR;
         assertUserHasPrivilege("Test setup failure", -22, "HealthcareSite.MI001", existingRole.getCsmName());
 
         helper.deleteRole(-22, existingRole);
@@ -44,7 +44,7 @@ public class ProvisioningHelperIntegratedTest extends IntegratedTestCase {
     }
 
     public void testDeleteExistingRoleDeletesUserGroupMapping() throws Exception {
-        Role existingRole = Role.USER_ADMINISTRATOR;
+        SuiteRole existingRole = SuiteRole.USER_ADMINISTRATOR;
         assertUserInGroup("Test setup failure", existingRole.getCsmName(), -22);
 
         helper.deleteRole(-22, existingRole);
@@ -52,13 +52,13 @@ public class ProvisioningHelperIntegratedTest extends IntegratedTestCase {
     }
 
     public void testDeleteNonExistentRoleDoesNothing() throws Exception {
-        helper.deleteRole(-22, Role.DATA_READER);
+        helper.deleteRole(-22, SuiteRole.DATA_READER);
 
         // expect no exceptions, plus
         assertUserInGroup("Unrelated group membership deleted",
-            Role.USER_ADMINISTRATOR.getCsmName(), -22);
+            SuiteRole.USER_ADMINISTRATOR.getCsmName(), -22);
         assertUserHasPrivilege("Unrelated PE deleted", -22, "HealthcareSite.MI001",
-            Role.USER_ADMINISTRATOR.getCsmName());
+            SuiteRole.USER_ADMINISTRATOR.getCsmName());
     }
 
     private void assertUserHasPrivilege(

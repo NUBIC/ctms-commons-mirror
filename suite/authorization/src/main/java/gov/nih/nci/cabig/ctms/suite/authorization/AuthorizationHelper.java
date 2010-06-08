@@ -25,17 +25,17 @@ public class AuthorizationHelper {
     private StudyMapping studyMapping;
 
     /**
-     * Returns all the {@link RoleMembership}s for a user, indexed by {@link Role}.
+     * Returns all the {@link SuiteRoleMembership}s for a user, indexed by {@link SuiteRole}.
      * <p>
      * Applications may not wish to use this as their primary authorization interface.
      * That is fine -- this method is expected to primarily be used by {@link ProvisioningHelper}.
      */
-    public Map<Role, RoleMembership> getRoleMemberships(long userId) {
-        Map<Role, RoleMembership> memberships = new LinkedHashMap<Role, RoleMembership>();
+    public Map<SuiteRole, SuiteRoleMembership> getRoleMemberships(long userId) {
+        Map<SuiteRole, SuiteRoleMembership> memberships = new LinkedHashMap<SuiteRole, SuiteRoleMembership>();
         memberships.putAll(readUnscopedRoles(userId));
         memberships.putAll(readScopedRoles(userId));
-        for (Iterator<Map.Entry<Role, RoleMembership>> it = memberships.entrySet().iterator(); it.hasNext();) {
-            Map.Entry<Role, RoleMembership> entry = it.next();
+        for (Iterator<Map.Entry<SuiteRole, SuiteRoleMembership>> it = memberships.entrySet().iterator(); it.hasNext();) {
+            Map.Entry<SuiteRole, SuiteRoleMembership> entry = it.next();
             try {
                 entry.getValue().validate();
             } catch (SuiteAuthorizationValidationException e) {
@@ -47,8 +47,8 @@ public class AuthorizationHelper {
     }
 
     @SuppressWarnings({ "unchecked" })
-    private Map<Role, RoleMembership> readUnscopedRoles(long userId) {
-        Map<Role, RoleMembership> result = new LinkedHashMap<Role, RoleMembership>();
+    private Map<SuiteRole, SuiteRoleMembership> readUnscopedRoles(long userId) {
+        Map<SuiteRole, SuiteRoleMembership> result = new LinkedHashMap<SuiteRole, SuiteRoleMembership>();
         Set<Group> groups;
         try {
             groups = getAuthorizationManager().getGroups(Long.toString(userId));
@@ -56,7 +56,7 @@ public class AuthorizationHelper {
             throw new SuiteAuthorizationAccessException("Failed to load groups for user %s", e, userId);
         }
         for (Group group : groups) {
-            Role r = Role.getByCsmName(group.getGroupName());
+            SuiteRole r = SuiteRole.getByCsmName(group.getGroupName());
             if (!r.isScoped()) {
                 result.put(r, createRoleMembership(r));
             }
@@ -65,8 +65,8 @@ public class AuthorizationHelper {
     }
 
     @SuppressWarnings({ "unchecked" })
-    private Map<Role, RoleMembership> readScopedRoles(long userId) {
-        Map<Role, RoleMembership> result = new LinkedHashMap<Role, RoleMembership>();
+    private Map<SuiteRole, SuiteRoleMembership> readScopedRoles(long userId) {
+        Map<SuiteRole, SuiteRoleMembership> result = new LinkedHashMap<SuiteRole, SuiteRoleMembership>();
         Set<ProtectionElementPrivilegeContext> contexts;
         try {
             contexts = getAuthorizationManager().getProtectionElementPrivilegeContextForUser(Long.toString(userId));
@@ -77,7 +77,7 @@ public class AuthorizationHelper {
         for (ProtectionElementPrivilegeContext context : contexts) {
             ScopeDescription sd = ScopeDescription.createFrom(context.getProtectionElement());
             for (Object p : context.getPrivileges()) {
-                Role role = Role.getByCsmName(((Privilege) p).getName());
+                SuiteRole role = SuiteRole.getByCsmName(((Privilege) p).getName());
                 if (!result.containsKey(role)) {
                     result.put(role, createRoleMembership(role));
                 }
@@ -100,8 +100,8 @@ public class AuthorizationHelper {
         return result;
     }
 
-    private RoleMembership createRoleMembership(Role role) {
-        return new RoleMembership(role, getSiteMapping(), getStudyMapping());
+    private SuiteRoleMembership createRoleMembership(SuiteRole role) {
+        return new SuiteRoleMembership(role, getSiteMapping(), getStudyMapping());
     }
 
     ////// CONFIGURATION

@@ -22,8 +22,8 @@ import java.util.LinkedList;
  * @author Rhett Sutphin
  */
 @SuppressWarnings({ "RawUseOfParameterizedType" })
-public class RoleMembership {
-    private final Role role;
+public class SuiteRoleMembership {
+    private final SuiteRole role;
     private final Map<ScopeType, IdentifiableInstanceMapping> mappings;
 
     private Map<ScopeType, List<String>> identifiers;
@@ -35,11 +35,11 @@ public class RoleMembership {
     private Map<ScopeType, Boolean> forAll;
 
     /**
-     * Create a new instance.  Consider using {@link ProvisioningHelper#createRoleMembership}
+     * Create a new instance.  Consider using {@link ProvisioningHelper#createSuiteRoleMembership}
      * instead if you have a {@link ProvisioningHelper} available.
      */
-    public RoleMembership(
-        Role role,
+    public SuiteRoleMembership(
+        SuiteRole role,
         SiteMapping siteMapping,
         StudyMapping studyMapping
     ) {
@@ -68,7 +68,7 @@ public class RoleMembership {
      * Scope this membership to the sites with the given shared identities.
      * @return this (for chaining)
      */
-    public RoleMembership forSites(String... siteIdents) {
+    public SuiteRoleMembership forSites(String... siteIdents) {
         return forSites(Arrays.asList(siteIdents));
     }
 
@@ -76,7 +76,7 @@ public class RoleMembership {
      * Scope this membership to the specified application site objects.
      * @return this (for chaining)
      */
-    public RoleMembership forSites(Object... siteObjects) {
+    public SuiteRoleMembership forSites(Object... siteObjects) {
         return forSites(Arrays.asList(siteObjects));
     }
 
@@ -85,7 +85,7 @@ public class RoleMembership {
      * site objects or site shared identifiers.
      * @return this (for chaining)
      */
-    public RoleMembership forSites(Collection<?> sitesOrIdentifiers) {
+    public SuiteRoleMembership forSites(Collection<?> sitesOrIdentifiers) {
         return forScopeObjectsOrIdentifiers(ScopeType.SITE, sitesOrIdentifiers);
     }
 
@@ -93,7 +93,7 @@ public class RoleMembership {
      * Expand the memberships' scope to include another site.
      * @return this (for chaining)
      */
-    public RoleMembership addSite(String identifier) {
+    public SuiteRoleMembership addSite(String identifier) {
         return addScopeIdentifier(ScopeType.SITE, identifier);
     }
 
@@ -101,7 +101,7 @@ public class RoleMembership {
      * Scope this membership to the studies with the given shared identities.
      * @return this (for chaining)
      */
-    public RoleMembership forStudies(String... studyIdents) {
+    public SuiteRoleMembership forStudies(String... studyIdents) {
         return forStudies(Arrays.asList(studyIdents));
     }
 
@@ -109,7 +109,7 @@ public class RoleMembership {
      * Scope this membership to the specified application site objects.
      * @return this (for chaining)
      */
-    public RoleMembership forStudies(Object... studyObjects) {
+    public SuiteRoleMembership forStudies(Object... studyObjects) {
         return forStudies(Arrays.asList(studyObjects));
     }
 
@@ -118,7 +118,7 @@ public class RoleMembership {
      * site objects or site shared identifiers.
      * @return this (for chaining)
      */
-    public RoleMembership forStudies(Collection<?> studiesOrIdentifiers) {
+    public SuiteRoleMembership forStudies(Collection<?> studiesOrIdentifiers) {
         return forScopeObjectsOrIdentifiers(ScopeType.STUDY, studiesOrIdentifiers);
     }
 
@@ -126,11 +126,11 @@ public class RoleMembership {
      * Expand the memberships' scope to include another site.
      * @return this (for chaining)
      */
-    public RoleMembership addStudy(String identifier) {
+    public SuiteRoleMembership addStudy(String identifier) {
         return addScopeIdentifier(ScopeType.STUDY, identifier);
     }
 
-    private RoleMembership addScopeIdentifier(ScopeType scope, String identifier) {
+    private SuiteRoleMembership addScopeIdentifier(ScopeType scope, String identifier) {
         if (isAll(scope)) {
             forScopeObjectsOrIdentifiers(scope, Collections.singleton(identifier));
         } else {
@@ -142,7 +142,7 @@ public class RoleMembership {
     }
 
     @SuppressWarnings({ "unchecked" })
-    private RoleMembership forScopeObjectsOrIdentifiers(ScopeType scope, Collection<?> objectsOrIdentifiers) {
+    private SuiteRoleMembership forScopeObjectsOrIdentifiers(ScopeType scope, Collection<?> objectsOrIdentifiers) {
         if (objectsOrIdentifiers.isEmpty()) {
             setIdentifiers(scope, Collections.<String>emptyList());
         } else {
@@ -166,15 +166,15 @@ public class RoleMembership {
         this.applicationObjectCaches.put(scope, objects);
     }
 
-    public RoleMembership forAllSites() {
+    public SuiteRoleMembership forAllSites() {
         return forAll(ScopeType.SITE);
     }
 
-    public RoleMembership forAllStudies() {
+    public SuiteRoleMembership forAllStudies() {
         return forAll(ScopeType.STUDY);
     }
 
-    private RoleMembership forAll(ScopeType scope) {
+    private SuiteRoleMembership forAll(ScopeType scope) {
         clear(scope);
         this.forAll.put(scope, true);
         return this;
@@ -224,7 +224,7 @@ public class RoleMembership {
 
     ////// ACCESSORS
 
-    public Role getRole() {
+    public SuiteRole getRole() {
         return role;
     }
 
@@ -309,7 +309,7 @@ public class RoleMembership {
      * <p>
      * Ignores the role in each.
      */
-    public List<Difference> diff(RoleMembership other) {
+    public List<Difference> diff(SuiteRoleMembership other) {
         List<Difference> differences = new LinkedList<Difference>();
         for (ScopeType scope : ScopeType.values()) {
             if (this.isAll(scope)) {
