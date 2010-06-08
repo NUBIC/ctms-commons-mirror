@@ -1,0 +1,137 @@
+package gov.nih.nci.cabig.ctms.suite.authorization;
+
+import gov.nih.nci.security.authorization.domainobjects.Group;
+import gov.nih.nci.security.authorization.domainobjects.ProtectionGroup;
+import gov.nih.nci.security.authorization.domainobjects.ProtectionGroupRoleContext;
+import gov.nih.nci.security.authorization.domainobjects.Role;
+import gov.nih.nci.security.exceptions.CSObjectNotFoundException;
+import gov.nih.nci.security.exceptions.CSTransactionException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+
+/**
+ * Encapsulates a facade for a series of operations on the provisioning data for a single user.
+ * It is not intended to be kept around for longer than a single request.
+ *
+ * @see ProvisioningSessionFactory
+ * @author Rhett Sutphin
+ */
+public class ProvisioningSession {
+    private final Logger log = LoggerFactory.getLogger(getClass());
+
+    private long userId;
+    private ProvisioningSessionFactory factory;
+
+    /**
+     * @see gov.nih.nci.cabig.ctms.suite.authorization.ProvisioningSessionFactory
+     */
+    public ProvisioningSession(long userId, ProvisioningSessionFactory factory) {
+        this.userId = userId;
+        this.factory = factory;
+    }
+
+    /**
+     * Ensures that the given user has the given role with exactly the scopes specified in the
+     * membership object.  The user need not have the role before the first time this method is
+     * called.
+     * <p>
+     * If the user already has exactly the given scopes, the method does nothing.
+     *
+     * @param replacement the membership data to apply to the user
+     */
+    public void replaceRole(SuiteRoleMembership replacement) {
+        replacement.validate();
+
+        ensureInGroupForRole(replacement.getRole());
+
+        SuiteRoleMembership current = factory.getAuthorizationHelper().getRoleMemberships(userId).get(replacement.getRole());
+        List<SuiteRoleMembership.Difference> diff;
+        if (current == null) {
+            diff = replacement.diffFromNothing();
+        } else {
+            diff = current.diff(replacement);
+        }
+        applyDifferences(replacement.getRole(), diff);
+    }
+
+    /**
+     * Removes all traces of the given role for the specified user.  If the user doesn't have the
+     * role, it does nothing.
+     *
+     * @param role the role from which to remove the user
+     */
+    @SuppressWarnings({ "unchecked" })
+    public void deleteRole(SuiteRole role) {
+        ensureNotInGroupForRole(role);
+
+        try {
+            Role csmRole = factory.getCsmHelper().getRoleCsmRole(role);
+            Set<ProtectionGroupRoleContext> roleContext =
+                factory.getAuthorizationManager().getProtectionGroupRoleContextForUser(Long.toString(userId));
+            Set<Long> protectionGroupIds = new LinkedHashSet<Long>();
+            for (ProtectionGroupRoleContext context : roleContext) {
+                if (context.getRoles().contains(csmRole)) {
+                    protectionGroupIds.add(context.getProtectionGroup().getProtectionGroupId());
+                }
+            }
+            String[] roleIds = { csmRole.getId().toString() };
+            for (Long id : protectionGroupIds) {
+                factory.getAuthorizationManager().removeUserRoleFromProtectionGroup(
+                    id.toString(), Long.toString(userId), roleIds);
+            }
+        } catch (CSObjectNotFoundException e) {
+            throw new SuiteAuthorizationProvisioningFailure(
+                "Accessing the role context failed", e);
+        } catch (CSTransactionException e) {
+            throw new SuiteAuthorizationProvisioningFailure(
+                "Modifying the user's protection group roles failed.", e);
+        }
+    }
+
+    private void ensureInGroupForRole(SuiteRole role) {
+        Group csmGroup = factory.getCsmHelper().getRoleCsmGroup(role);
+        try {
+            factory.getAuthorizationManager().assignGroupsToUser(
+                Long.toString(userId), new String[] { csmGroup.getGroupId().toString() });
+        } catch (CSTransactionException e) {
+            throw new SuiteAuthorizationProvisioningFailure(
+                "Deleting the group relationship failed", e);
+        }
+    }
+
+    private void ensureNotInGroupForRole(SuiteRole role) {
+        Group csmGroup = factory.getCsmHelper().getRoleCsmGroup(role);
+        try {
+            factory.getAuthorizationManager().removeUserFromGroup(
+                csmGroup.getGroupId().toString(), Long.toString(userId));
+        } catch (CSTransactionException e) {
+            throw new SuiteAuthorizationProvisioningFailure(
+                "Deleting the group relationship failed", e);
+        }
+    }
+
+    private void applyDifferences(SuiteRole role, List<SuiteRoleMembership.Difference> diff) {
+        Role csmRole = factory.getCsmHelper().getRoleCsmRole(role);
+        String[] csmRoleIds = new String[] { csmRole.getId().toString() };
+        try {
+            for (SuiteRoleMembership.Difference difference : diff) {
+                ProtectionGroup pg = factory.getCsmHelper().getOrCreateScopeProtectionGroup(difference.getScopeDescription());
+                log.debug("{} role {} ({})", new Object[] { difference.getKind(), csmRole.getId(), csmRole.getName() });
+                log.debug("  scoped by PG {} ({})", pg.getProtectionGroupId().toString(), pg.getProtectionGroupName());
+                if (difference.getKind().equals(SuiteRoleMembership.Difference.Kind.ADD)) {
+                    factory.getAuthorizationManager().addUserRoleToProtectionGroup(
+                        Long.toString(userId), csmRoleIds, pg.getProtectionGroupId().toString());
+                } else if (difference.getKind().equals(SuiteRoleMembership.Difference.Kind.DELETE)) {
+                    factory.getAuthorizationManager().removeUserRoleFromProtectionGroup(
+                        pg.getProtectionGroupId().toString(), Long.toString(userId), csmRoleIds);
+                }
+            }
+        } catch (CSTransactionException e) {
+            throw new SuiteAuthorizationValidationException("Failed to update role-group associations from " + diff, e);
+        }
+    }
+}

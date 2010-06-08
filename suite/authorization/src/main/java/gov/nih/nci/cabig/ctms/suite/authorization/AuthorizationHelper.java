@@ -28,7 +28,7 @@ public class AuthorizationHelper {
      * Returns all the {@link SuiteRoleMembership}s for a user, indexed by {@link SuiteRole}.
      * <p>
      * Applications may not wish to use this as their primary authorization interface.
-     * That is fine -- this method is expected to primarily be used by {@link ProvisioningHelper}.
+     * That is fine -- this method is expected to primarily be used by {@link ProvisioningSession}.
      */
     public Map<SuiteRole, SuiteRoleMembership> getRoleMemberships(long userId) {
         Map<SuiteRole, SuiteRoleMembership> memberships = new LinkedHashMap<SuiteRole, SuiteRoleMembership>();

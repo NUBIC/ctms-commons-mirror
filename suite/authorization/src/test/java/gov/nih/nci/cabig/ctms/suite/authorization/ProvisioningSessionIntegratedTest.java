@@ -14,32 +14,28 @@ import java.util.Set;
 /**
  * @author Rhett Sutphin
  */
-public class ProvisioningHelperIntegratedTest extends IntegratedTestCase {
-    private ProvisioningHelper helper;
+public class ProvisioningSessionIntegratedTest extends IntegratedTestCase {
+    private ProvisioningSessionFactory psFactory;
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        helper = new ProvisioningHelper();
-        helper.setAuthorizationManager(getAuthorizationManager());
-        helper.setAuthorizationDao(getAuthorizationDao());
-        helper.setSiteMapping(new TestSiteMapping());
-        helper.setStudyMapping(new TestStudyMapping());
+        psFactory = new ProvisioningSessionFactory();
+        psFactory.setAuthorizationManager(getAuthorizationManager());
+        psFactory.setAuthorizationDao(getAuthorizationDao());
+        psFactory.setSiteMapping(new TestSiteMapping());
+        psFactory.setStudyMapping(new TestStudyMapping());
     }
 
-    public void testCreateRoleMembership() throws Exception {
-        SuiteRoleMembership aRoleMembership = helper.createSuiteRoleMembership(SuiteRole.DATA_IMPORTER);
-        assertNotNull(aRoleMembership);
-        assertEquals("Wrong role", SuiteRole.DATA_IMPORTER, aRoleMembership.getRole());
-        assertNotNull("Site mapping not passed along", aRoleMembership.getMapping(ScopeType.SITE));
-        assertNotNull("Study mapping not passed along", aRoleMembership.getMapping(ScopeType.STUDY));
+    protected ProvisioningSession createSession(long userId) throws Exception {
+        return psFactory.createSession(userId);
     }
 
     public void testDeleteExistingRoleDeletesUserPrivilegeMapping() throws Exception {
         SuiteRole existingRole = SuiteRole.USER_ADMINISTRATOR;
         assertUserHasPrivilege("Test setup failure", -22, "HealthcareSite.MI001", existingRole.getCsmName());
 
-        helper.deleteRole(-22, existingRole);
+        createSession(-22).deleteRole(existingRole);
         assertUserDoesNotHavePrivilege("Role not removed", -22, "HealthcareSite.MI001", existingRole.getCsmName());
     }
 
@@ -47,12 +43,12 @@ public class ProvisioningHelperIntegratedTest extends IntegratedTestCase {
         SuiteRole existingRole = SuiteRole.USER_ADMINISTRATOR;
         assertUserInGroup("Test setup failure", existingRole.getCsmName(), -22);
 
-        helper.deleteRole(-22, existingRole);
+        createSession(-22).deleteRole(existingRole);
         assertUserNotInGroup("Membership not deleted", existingRole.getCsmName(), -22);
     }
 
     public void testDeleteNonExistentRoleDoesNothing() throws Exception {
-        helper.deleteRole(-22, SuiteRole.DATA_ANALYST);
+        createSession(-22).deleteRole(SuiteRole.DATA_ANALYST);
 
         // expect no exceptions, plus
         assertUserInGroup("Unrelated group membership deleted",
@@ -62,7 +58,7 @@ public class ProvisioningHelperIntegratedTest extends IntegratedTestCase {
     }
 
     public void testReplaceRoleWhenNewScopedRole() throws Exception {
-        helper.replaceRole(-22, helper.createSuiteRoleMembership(SuiteRole.DATA_ANALYST).
+        createSession(-22).replaceRole(psFactory.createSuiteRoleMembership(SuiteRole.DATA_ANALYST).
             forAllSites().forStudies("CRM114"));
 
         assertUserInGroup("Not added to group", "data_analyst", -22);
@@ -71,13 +67,13 @@ public class ProvisioningHelperIntegratedTest extends IntegratedTestCase {
     }
 
     public void testReplaceRoleWhenNewGlobalRole() throws Exception {
-        helper.replaceRole(-22, helper.createSuiteRoleMembership(SuiteRole.SYSTEM_ADMINISTRATOR));
+        createSession(-22).replaceRole(psFactory.createSuiteRoleMembership(SuiteRole.SYSTEM_ADMINISTRATOR));
 
         assertUserInGroup("Not added to group", "system_administrator", -22);
     }
 
     public void testReplaceRoleWhenIdentical() throws Exception {
-        helper.replaceRole(-22, helper.createSuiteRoleMembership(SuiteRole.DATA_READER).
+        createSession(-22).replaceRole(psFactory.createSuiteRoleMembership(SuiteRole.DATA_READER).
             forAllStudies().forSites("MI001"));
 
         assertUserInGroup("Not still in group", "data_reader", -22);
@@ -86,8 +82,8 @@ public class ProvisioningHelperIntegratedTest extends IntegratedTestCase {
     }
 
     public void testReplaceWhenScopeExpanded() throws Exception {
-        helper.replaceRole(-22, 
-            helper.createSuiteRoleMembership(SuiteRole.USER_ADMINISTRATOR).forSites("IL033", "MI001"));
+        createSession(-22).replaceRole(
+            psFactory.createSuiteRoleMembership(SuiteRole.USER_ADMINISTRATOR).forSites("IL033", "MI001"));
 
         assertUserInGroup("Not still in group", "user_administrator", -22);
         assertUserHasPrivilege("Original priv not preserved", -22, "HealthcareSite.MI001", "user_administrator");
@@ -95,8 +91,8 @@ public class ProvisioningHelperIntegratedTest extends IntegratedTestCase {
     }
 
     public void testReplaceWhenScopeChanged() throws Exception {
-        helper.replaceRole(-22,
-            helper.createSuiteRoleMembership(SuiteRole.USER_ADMINISTRATOR).forAllSites());
+        createSession(-22).replaceRole(
+            psFactory.createSuiteRoleMembership(SuiteRole.USER_ADMINISTRATOR).forAllSites());
 
         assertUserInGroup("Not still in group", "user_administrator", -22);
         assertUserDoesNotHavePrivilege("Original priv not removed", -22, "HealthcareSite.MI001", "user_administrator");
@@ -104,9 +100,10 @@ public class ProvisioningHelperIntegratedTest extends IntegratedTestCase {
     }
 
     public void testFailsWhenNewMembershipIsInvalid() throws Exception {
+        ProvisioningSession helper = createSession(-22);
         try {
-                                           // missing scope
-            helper.replaceRole(-22, helper.createSuiteRoleMembership(SuiteRole.USER_ADMINISTRATOR));
+            // missing scope
+            helper.replaceRole(psFactory.createSuiteRoleMembership(SuiteRole.USER_ADMINISTRATOR));
             fail("Exception not thrown");
         } catch (SuiteAuthorizationValidationException save) {
             // expected

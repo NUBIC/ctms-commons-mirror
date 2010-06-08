@@ -15,7 +15,7 @@ import java.util.LinkedList;
 
 /**
  * The suite's logical representation of a user's inclusion in one of the unified roles.  It has
- * two purposes: first, along with {@link ProvisioningHelper}, it assists in the uniform provisioning of
+ * two purposes: first, along with {@link ProvisioningSession}, it assists in the uniform provisioning of
  * users into certain roles.  Second, applications may receive instances of it from
  * {@link AuthorizationHelper} which reflect the authorization information for a particular user.
  *
@@ -35,8 +35,8 @@ public class SuiteRoleMembership {
     private Map<ScopeType, Boolean> forAll;
 
     /**
-     * Create a new instance.  Consider using {@link ProvisioningHelper#createSuiteRoleMembership}
-     * instead if you have a {@link ProvisioningHelper} available.
+     * Create a new instance.  Consider using {@link ProvisioningSessionFactory#createSuiteRoleMembership}
+     * instead if you have a {@link ProvisioningSessionFactory} available.
      */
     public SuiteRoleMembership(
         SuiteRole role,
