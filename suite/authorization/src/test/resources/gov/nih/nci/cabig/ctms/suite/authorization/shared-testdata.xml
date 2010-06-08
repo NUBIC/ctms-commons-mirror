@@ -1,6 +1,6 @@
 <dataset>
-  <CSM_USER login_name="alice" first_name="Alice" last_name="Wunderland"/>
-  <CSM_USER login_name="eve" first_name="Eve" last_name="Harlow"/>
+  <CSM_USER user_id="-26" login_name="alice" first_name="Alice" last_name="Wunderland"/>
+  <CSM_USER user_id="-22" login_name="eve" first_name="Eve" last_name="Harlow"/>
 
   <CSM_PROTECTION_ELEMENT protection_element_id="-38"
                           protection_element_name="HealthcareSite.THX11"
@@ -25,4 +25,20 @@
                         application_id="1"
     />
   <CSM_PG_PE pg_pe_id="-1" protection_group_id="-1" protection_element_id="-1"/>
+  <CSM_PROTECTION_ELEMENT protection_element_id="-2"
+                          protection_element_name="HealthcareSite.MI001"
+                          object_id="HealthcareSite.MI001"
+                          application_id="1"
+    />
+  <CSM_PROTECTION_GROUP protection_group_id="-2"
+                        protection_group_name="HealthcareSite.MI001"
+                        large_element_count_flag="0"
+                        application_id="1"
+    />
+  <CSM_PG_PE pg_pe_id="-2" protection_group_id="-2" protection_element_id="-2"/>
+
+  <!-- Eve is a User Administrator for site MI001 -->
+  <CSM_USER_GROUP_ROLE_PG
+      user_group_role_pg_id="-2" user_id="-22" role_id="5" protection_group_id="-2"/>
+  <CSM_USER_GROUP user_group_id="-2" user_id="-22" group_id="5"/>
 </dataset>

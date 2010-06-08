@@ -1,6 +1,5 @@
 package gov.nih.nci.cabig.ctms.suite.authorization;
 
-import static gov.nih.nci.cabig.ctms.suite.authorization.CsmIntegratedTestHelper.*;
 import gov.nih.nci.cabig.ctms.suite.authorization.domain.TestSiteMapping;
 import gov.nih.nci.cabig.ctms.suite.authorization.domain.TestStudy;
 import gov.nih.nci.cabig.ctms.suite.authorization.domain.TestStudyMapping;
@@ -8,19 +7,16 @@ import gov.nih.nci.security.authorization.domainobjects.Group;
 import gov.nih.nci.security.authorization.domainobjects.ProtectionElement;
 import gov.nih.nci.security.authorization.domainobjects.ProtectionGroup;
 import gov.nih.nci.security.exceptions.CSObjectNotFoundException;
-import org.dbunit.DBTestCase;
-import org.dbunit.IDatabaseTester;
-import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.xml.FlatXmlDataSet;
 
 import java.util.Set;
 
 /**
  * @author Rhett Sutphin
  */
-public class CsmHelperIntegratedTest extends DBTestCase {
+public class CsmHelperIntegratedTest extends IntegratedTestCase {
     private CsmHelper csmHelper;
 
+    @Override
     public void setUp() throws Exception {
         super.setUp();
         csmHelper = new CsmHelper();
@@ -28,15 +24,6 @@ public class CsmHelperIntegratedTest extends DBTestCase {
         csmHelper.setAuthorizationDao(getAuthorizationDao());
         csmHelper.setSiteMapping(new TestSiteMapping());
         csmHelper.setStudyMapping(new TestStudyMapping());
-    }
-
-    protected IDataSet getDataSet() throws Exception {
-        return new FlatXmlDataSet(getClass().getResourceAsStream("shared-testdata.xml"));
-    }
-
-    @Override
-    protected IDatabaseTester newDatabaseTester() throws Exception {
-        return createDatabaseTester();
     }
 
     public void testGetExistingProtectionElementForScopeDescription() throws Exception {
@@ -57,9 +44,9 @@ public class CsmHelperIntegratedTest extends DBTestCase {
 
     public void testGetNewProtectionElement() throws Exception {
         ProtectionElement actual = csmHelper.getOrCreateScopeProtectionElement(
-            ScopeDescription.createForAll(ScopeType.SITE));
+            ScopeDescription.createForOne(ScopeType.SITE, "60"));
         assertNotNull("This method should never return null", actual);
-        assertEquals("Returned the wrong PE", "HealthcareSite", actual.getProtectionElementName());
+        assertEquals("Returned the wrong PE", "HealthcareSite.60", actual.getProtectionElementName());
         assertNotNull("Did not return an instance with an ID", actual.getProtectionElementId());
     }
 
@@ -124,9 +111,9 @@ public class CsmHelperIntegratedTest extends DBTestCase {
 
     public void testGetNewProtectionGroup() throws Exception {
         ProtectionElement actual = csmHelper.getOrCreateScopeProtectionElement(
-            ScopeDescription.createForAll(ScopeType.STUDY));
+            ScopeDescription.createForOne(ScopeType.STUDY, "E45"));
         assertNotNull("This method should never return null", actual);
-        assertEquals("Returned the wrong PG", "Study", actual.getProtectionElementName());
+        assertEquals("Returned the wrong PG", "Study.E45", actual.getProtectionElementName());
         assertNotNull("Did not return an instance with an ID", actual.getProtectionElementId());
     }
 
