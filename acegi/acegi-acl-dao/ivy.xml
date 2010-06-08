@@ -1,0 +1,30 @@
+<ivy-module version="2.0"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+  <info organisation="gov.nih.nci.cabig.ctms" module="ctms-commons-acegi-acl-dao"/>
+
+  <configurations>
+    <include file="../../ivy/default-configurations.xml"/>
+  </configurations>
+
+  <dependencies>
+    <dependency org="org.slf4j" name="jcl-over-slf4j" rev="${lib.slf4j.rev}"/>
+    <dependency org="org.acegisecurity" name="com.springsource.org.acegisecurity" rev="${lib.acegi.rev}" />
+    <dependency org="net.sourceforge.ehcache" name="com.springsource.net.sf.ehcache" rev="1.5.0" />
+
+    <dependency org="org.hibernate" name="com.springsource.org.hibernate" rev="${lib.hibernate.rev}"/>
+    <dependency org="org.hibernate" name="com.springsource.org.hibernate.annotations" rev="${lib.hibernate-annotations.rev}"/>
+    <dependency org="javax.persistence" name="com.springsource.javax.persistence" rev="1.0.0" />
+
+    <dependency org="org.springframework" name="org.springframework.beans"           rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="org.springframework.core"            rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="org.springframework.orm"             rev="${lib.spring.rev}" conf="*->hibernate"/>
+    <dependency org="org.springframework" name="org.springframework.transaction"     rev="${lib.spring.rev}"/>
+
+    <!-- TEST -->
+    <dependency conf="unit-test->*" org="org.slf4j" name="slf4j-simple" rev="${lib.slf4j.rev}"/>
+    <dependency conf="unit-test->*" org="org.apache.commons" name="com.springsource.org.apache.commons.dbcp" rev="${lib.jakarta-commons.dbcp.rev}"/>
+    <dependency conf="unit-test->*" org="org.hsqldb" name="com.springsource.org.hsqldb" rev="${lib.hsqldb.rev}"/>
+    <dependency conf="unit-test->*" org="org.springframework" name="org.springframework.context.support" rev="${lib.spring.rev}"/>
+  </dependencies>
+</ivy-module>

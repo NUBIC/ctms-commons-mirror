@@ -1,0 +1,40 @@
+<ivy-module version="2.0"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+  <info organisation="gov.nih.nci.cabig.ctms" module="ctms-commons-acegi-csm"/>
+
+  <configurations>
+    <include file="../../ivy/default-configurations.xml"/>
+  </configurations>
+
+  <dependencies>
+    <dependency org="gov.nih.nci.security" name="csm" rev="3.2"/>
+    <!-- temporary explicitly-specified transient dep because csm 3.2's is wrong. -->
+    <dependency org="ncicb" name="clm" rev="3.2"/>
+
+    <dependency org="org.slf4j" name="jcl-over-slf4j" rev="${lib.slf4j.rev}"/>
+    <dependency org="org.acegisecurity" name="com.springsource.org.acegisecurity" rev="${lib.acegi.rev}" />
+    <dependency org="org.aspectj" name="com.springsource.org.aspectj.runtime" rev="1.6.8.RELEASE" />
+    <dependency org="org.hibernate" name="com.springsource.org.hibernate" rev="${lib.hibernate.rev}"/>
+
+    <dependency org="org.springframework" name="org.springframework.aop"         rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="org.springframework.beans"       rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="org.springframework.core"        rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="org.springframework.context"     rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="org.springframework.orm"         rev="${lib.spring.rev}" conf="*->hibernate"/>
+    <dependency org="org.springframework" name="org.springframework.transaction" rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="org.springframework.web"         rev="${lib.spring.rev}"/>
+
+    <!-- TODO: exclude these from runtime somehow -->
+    <dependency org="javax.servlet" name="com.springsource.javax.servlet" rev="${lib.servlet.rev}" />
+    <dependency org="javax.servlet" name="com.springsource.javax.servlet.jsp" rev="${lib.jsp.rev}" />
+
+    <!-- TEST -->
+    <dependency conf="unit-test->*" org="org.slf4j" name="slf4j-simple" rev="${lib.slf4j.rev}"/>
+    <dependency conf="unit-test->*" org="org.easymock" name="easymock" rev="2.2"/>
+    <dependency conf="unit-test->*" org="org.easymock" name="easymockclassextension" rev="2.2.2"/>
+
+    <exclude org="org.springframework" module="spring" matcher="exact"/>
+    <exclude org="gov.nih.nci.security" module="clm"/>
+  </dependencies>
+</ivy-module>

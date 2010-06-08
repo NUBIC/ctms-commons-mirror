@@ -1,0 +1,57 @@
+<ivy-module version="2.0"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+  <info organisation="gov.nih.nci.cabig.ctms" module="ctms-commons-acegi-grid"/>
+
+  <configurations>
+    <include file="../../ivy/default-configurations.xml"/>
+  </configurations>
+
+  <dependencies>
+    <dependency name="ctms-commons-acegi-csm" rev="latest.integration"/>
+
+    <dependency org="gov.nih.nci.security" name="csm" rev="3.2"/>
+    <!-- temporary explicitly-specified transient dep because csm 3.2's is wrong. -->
+    <dependency org="ncicb" name="clm" rev="3.2"/>
+
+    <dependency org="org.slf4j" name="jcl-over-slf4j" rev="${lib.slf4j.rev}"/>
+    <dependency org="org.acegisecurity" name="com.springsource.org.acegisecurity" rev="${lib.acegi.rev}" />
+
+    <dependency org="org.springframework" name="org.springframework.beans"       rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="org.springframework.context"     rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="org.springframework.core"        rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="org.springframework.transaction" rev="${lib.spring.rev}"/>
+
+    <dependency org="globus" name="jcog" rev="syncgts-patched-4.0.3" force="true"/>
+    <dependency org="globus" name="axis" rev="1.2RC2"/>
+    <dependency org="globus" name="ws-addressing" rev="1.0"/>
+    <dependency org="globus" name="ws-core-client" rev="4.0.3"/>
+
+    <dependency org="internet2" name="grouper" rev="1.1" conf="*->minimal"/>
+    <dependency org="internet2" name="subject" rev="0.2.1"/>
+
+    <dependency org="caGrid" name="authentication-service" rev="${lib.cagrid.rev}" conf="*->client"/>
+    <dependency org="caGrid" name="authz"       rev="${lib.cagrid.rev}"/>
+    <dependency org="caGrid" name="core"        rev="${lib.cagrid.rev}"/>
+    <dependency org="caGrid" name="dorian"      rev="${lib.cagrid.rev}" conf="*->client"/>
+    <dependency org="caGrid" name="gridca"      rev="${lib.cagrid.rev}"/>
+    <dependency org="caGrid" name="gridgrouper" rev="${lib.cagrid.rev}" conf="*->client"/>
+    <dependency org="caGrid" name="service-security-provider" rev="${lib.cagrid.rev}" conf="*->client"/>
+
+    <!-- TODO: exclude these from runtime somehow -->
+    <dependency org="javax.servlet" name="com.springsource.javax.servlet" rev="${lib.servlet.rev}" />
+
+    <!-- TEST -->
+    <dependency conf="unit-test->*" org="org.slf4j" name="slf4j-simple" rev="${lib.slf4j.rev}"/>
+    <dependency conf="unit-test->*" org="bouncycastle" name="bouncycastle" rev="jdk1.3_1.25"/>
+    <dependency conf="unit-test->*" org="globus" name="puretls"      rev="0.9b5"/>
+    <dependency conf="unit-test->*" org="globus" name="cryptix32"    rev="3.2"/>
+    <dependency conf="unit-test->*" org="globus" name="cryptix-asn1" rev="0.1.11"/>
+
+    <exclude org="org.springframework" module="spring" matcher="exact"/> <!-- from clm -->
+    <exclude org="springframework" module="spring" matcher="exact"/>     <!-- from cagrid -->
+    <exclude org="cacore" module="csm"/>                                 <!-- from cagrid -->
+    <exclude org="gov.nih.nci.security" module="clm"/>                   <!-- from csm -->
+    <exclude org="jakarta" module="commons-discovery"/>                  <!-- from cbiit/globus -->
+  </dependencies>
+</ivy-module>

@@ -19,6 +19,15 @@
         <artifact pattern="http://repository.springsource.com/ivy/bundles/external/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
       </url>
     </chain>
+    <url name="nci-cbiit">
+      <artifact pattern="https://ncisvn.nci.nih.gov/svn/cbiit-ivy-repo/trunk/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
+      <ivy pattern="https://ncisvn.nci.nih.gov/svn/cbiit-ivy-repo/trunk/[organisation]/[module]/[revision]/ivy.xml" />
+    </url>
+    <url name="cagrid">
+      <ivy pattern="http://software.cagrid.org/repository-1.2/[organisation]/[module]/ivy-[revision].xml"/>
+      <artifact pattern="http://software.cagrid.org/repository-1.2/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]"/>
+      <artifact pattern="http://software.cagrid.org/repository-1.2/[organisation]/[module]/[revision]/[artifact].[ext]"/>
+    </url>
     <chain name="libraries">
       <ibiblio name="m2" m2compatible="true"/>
     </chain>
@@ -26,8 +35,18 @@
 
   <modules>
     <module organisation="gov.nih.nci.cabig.ctms" resolver="this-project"/>
+
     <module organisation="com.springsource.*" resolver="springsource"/>
     <module         name="com.springsource.*" resolver="springsource"/>
     <module organisation="org.springframework.*" resolver="springsource"/>
+
+    <module organisation="caGrid"        resolver="cagrid"/>
+    <module organisation="globus" name="jcog" resolver="cagrid"/> <!-- the one from cbiit is broken -->
+    <module organisation="eracom|clarkware|jgoodies|internet2" resolver="cagrid"/>
+    <module         name="commons-codec" resolver="cagrid"/>
+
+    <module organisation="gov.nih.nci.*"      resolver="nci-cbiit"/>
+    <module organisation="ncicb|bouncycastle" resolver="nci-cbiit"/>
+    <module organisation="globus"             resolver="nci-cbiit"/>
   </modules>
 </ivysettings>

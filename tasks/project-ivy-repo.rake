@@ -27,13 +27,6 @@ module ProjectIvyRepo
   after_define do |proj|
     jar = proj.packages.detect { |p| p.to_s =~ /jar$/ }
     if jar && proj.ivy.own_file?
-      unless proj.interproject_dependencies.empty?
-        # Ensure that all sibling projects are built and published
-        # before resolving this one.
-        proj.task("ivy:resolve" =>
-          proj.interproject_dependencies.collect { |n| proj.project(n).packages })
-      end
-
       proj.ivy.publish_options(
         :resolver => 'this-project',
         :artifactspattern => proj.path_to(:target, "[artifact]-[revision].[ext]"),
@@ -50,6 +43,13 @@ module ProjectIvyRepo
           proj.ivy.__publish__
         end
       end
+    end
+
+    unless proj.interproject_dependencies.empty?
+      # Ensure that all sibling projects are built and published
+      # before resolving this one.
+      proj.task("ivy:resolve" =>
+        proj.interproject_dependencies.collect { |n| proj.project(n).packages })
     end
   end
 end

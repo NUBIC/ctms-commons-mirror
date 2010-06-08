@@ -74,29 +74,26 @@ define "ctms-commons" do
     project.group = "gov.nih.nci.security.acegi"
 
     define "acl-dao", :base_dir => _('acegi-acl-dao') do
-      compile.with ACEGI, HIBERNATE, SPRING.main, EHCACHE, SLF4J.jcl
-      test.with SPRING.test, SLF4J.api, SLF4J.simple, CGLIB, HSQLDB,
-        JAKARTA_COMMONS.dbcp, JAKARTA_COMMONS.pool, JAKARTA_COMMONS.collections
+      ivy.compile_conf('compile').test_conf('unit-test')
       package(:jar)
     end
 
     define "csm", :base_dir => _('acegi-csm') do
-      compile.with SLF4J.jcl, CSM, ASPECTJ, SPRING.main, ACEGI, SERVLET, HIBERNATE
-      test.with EASYMOCK, SLF4J.simple, SLF4J.api
+      ivy.compile_conf('compile').test_conf('unit-test')
       package(:bundle).tap do |bundle|
         bundle["Export-Package"] = bnd_export_package
       end
     end
 
     define "csm-test", :base_dir => _('acegi-csm-test') do
-      compile.with JUNIT, DBUNIT, SPRING.main, HIBERNATE
-      test.with project("csm").and_dependencies, SLF4J.api, SLF4J.simple, HSQLDB,
-        JAKARTA_COMMONS.collections, SLF4J.log4j
+      ivy.compile_conf('compile').test_conf('unit-test')
+      interproject_dependencies << 'acegi:csm'
     end
 
     define "grid", :base_dir => _('acegi-grid') do
-      compile.with SLF4J.jcl, project('csm').and_dependencies, GLOBUS, CAGRID
-      test.with SLF4J.api, SLF4J.simple
+      ivy.compile_conf('compile').test_conf('unit-test')
+      interproject_dependencies << 'acegi:csm'
+      package(:jar)
     end
   end
 

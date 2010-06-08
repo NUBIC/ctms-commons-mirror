@@ -13,7 +13,7 @@
     <dependency name="ctms-commons-lang" rev="latest.integration"/>
 
     <!-- TODO: exclude this from runtime somehow -->
-    <dependency org="javax.servlet" name="com.springsource.javax.servlet" rev="2.5.0" />
+    <dependency org="javax.servlet" name="com.springsource.javax.servlet" rev="${lib.servlet.rev}" />
 
     <dependency org="org.springframework" name="org.springframework.beans"        rev="${lib.spring.rev}"/>
     <dependency org="org.springframework" name="org.springframework.context"      rev="${lib.spring.rev}"/>

@@ -1,0 +1,36 @@
+<ivy-module version="2.0"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+  <info organisation="gov.nih.nci.cabig.ctms" module="ctms-commons-acegi-csm-test"/>
+
+  <configurations>
+    <include file="../../ivy/default-configurations.xml"/>
+  </configurations>
+
+  <dependencies>
+    <dependency org="gov.nih.nci.security" name="csm" rev="3.2"/>
+    <!-- temporary explicitly-specified transient dep because csm's is wrong. -->
+    <dependency org="ncicb" name="clm" rev="3.2"/>
+
+    <dependency org="org.slf4j" name="jcl-over-slf4j" rev="${lib.slf4j.rev}"/>
+    <dependency org="org.junit" name="com.springsource.org.junit" rev="${lib.junit.rev}"/>
+    <dependency org="org.dbunit" name="dbunit" rev="2.2"/>
+    <dependency org="org.hibernate" name="com.springsource.org.hibernate" rev="${lib.hibernate.rev}"/>
+
+    <dependency org="org.springframework" name="org.springframework.beans"   rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="org.springframework.core"    rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="org.springframework.context" rev="${lib.spring.rev}"/>
+
+    <!-- TEST -->
+    <dependency conf="unit-test->runtime" name="ctms-commons-acegi-csm" rev="latest.integration"/>
+    <dependency conf="unit-test->*" org="org.slf4j" name="slf4j-simple" rev="${lib.slf4j.rev}"/>
+    <dependency conf="unit-test->*" org="org.slf4j" name="log4j-over-slf4j" rev="${lib.slf4j.rev}"/>
+    <dependency conf="unit-test->*" org="org.hsqldb" name="com.springsource.org.hsqldb" rev="${lib.hsqldb.rev}"/>
+
+    <exclude org="org.springframework" module="spring" matcher="exact"/>
+    <exclude org="ant" module="ant" matcher="exact"/>
+    <exclude org="log4j" module="log4j" matcher="exact"/>
+    <exclude org="org.apache.log4j" module="com.springsource.org.apache.log4j" matcher="exact"/>
+    <exclude org="gov.nih.nci.security" module="clm"/>
+  </dependencies>
+</ivy-module>
