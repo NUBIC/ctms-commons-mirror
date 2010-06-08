@@ -4,7 +4,6 @@
 package gov.nih.nci.cabig.ctms.acegi.grid.authentication;
 
 import gov.nih.nci.cabig.ctms.acegi.grid.Utils;
-
 import org.acegisecurity.AccountExpiredException;
 import org.acegisecurity.Authentication;
 import org.acegisecurity.AuthenticationException;
@@ -16,8 +15,8 @@ import org.acegisecurity.providers.AuthenticationProvider;
 import org.acegisecurity.userdetails.UserDetails;
 import org.acegisecurity.userdetails.UserDetailsService;
 import org.acegisecurity.userdetails.UsernameNotFoundException;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author <a href="mailto:joshua.phillips@semanticbits.com">Joshua Phillips</a>
@@ -26,8 +25,8 @@ import org.apache.commons.logging.LogFactory;
 public class GlobusCredentialAuthenticationProvider implements
 		AuthenticationProvider {
 
-	private static final Log logger = LogFactory
-			.getLog(GlobusCredentialAuthenticationProvider.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(GlobusCredentialAuthenticationProvider.class);
 
 	private GridProxyValidator validator;
 

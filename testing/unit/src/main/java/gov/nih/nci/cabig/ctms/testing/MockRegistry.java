@@ -1,7 +1,7 @@
 package gov.nih.nci.cabig.ctms.testing;
 
-import org.apache.commons.logging.Log;
 import static org.easymock.classextension.EasyMock.*;
+import org.slf4j.Logger;
 
 import java.lang.reflect.Method;
 import java.util.LinkedHashSet;
@@ -11,14 +11,14 @@ import java.util.Set;
  * @author Rhett Sutphin
  */
 public class MockRegistry {
-    private Log log;
+    private Logger log;
     private Set<Object> mocks;
 
     public MockRegistry() {
         this(null);
     }
 
-    public MockRegistry(Log log) {
+    public MockRegistry(Logger log) {
         this.log = log;
         mocks = new LinkedHashSet<Object>();
     }

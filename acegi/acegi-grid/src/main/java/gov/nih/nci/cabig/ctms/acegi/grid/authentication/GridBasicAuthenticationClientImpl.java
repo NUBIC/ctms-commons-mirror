@@ -8,7 +8,6 @@ import gov.nih.nci.cagrid.authentication.bean.Credential;
 import gov.nih.nci.cagrid.authentication.client.AuthenticationServiceClient;
 import gov.nih.nci.cagrid.authentication.stubs.types.InsufficientAttributeFault;
 import gov.nih.nci.cagrid.authentication.stubs.types.InvalidCredentialFault;
-import gov.nih.nci.cagrid.common.Utils;
 import gov.nih.nci.cagrid.dorian.bean.SAMLAssertion;
 import gov.nih.nci.cagrid.dorian.client.DorianClient;
 import gov.nih.nci.cagrid.dorian.ifs.bean.DelegationPathLength;
@@ -20,22 +19,17 @@ import gov.nih.nci.cagrid.dorian.stubs.types.PermissionDeniedFault;
 import gov.nih.nci.cagrid.dorian.stubs.types.UserPolicyFault;
 import gov.nih.nci.cagrid.gridca.common.CertUtil;
 import gov.nih.nci.cagrid.gridca.common.KeyUtil;
+import org.globus.gsi.GlobusCredential;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.StringWriter;
 import java.security.KeyPair;
 import java.security.cert.X509Certificate;
-
-import javax.xml.namespace.QName;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.globus.gsi.GlobusCredential;
 
 /**
  * @author <a href="mailto:joshua.phillips@semanticbits.com>Joshua Phillips</a>
@@ -43,7 +37,7 @@ import org.globus.gsi.GlobusCredential;
  */
 public class GridBasicAuthenticationClientImpl implements GridBasicAuthenticationClient {
 
-  private static Log logger = LogFactory.getLog(GridBasicAuthenticationClientImpl.class);
+  private static Logger logger = LoggerFactory.getLogger(GridBasicAuthenticationClientImpl.class);
 
   private String idpUrl;
 
@@ -100,11 +94,11 @@ public class GridBasicAuthenticationClientImpl implements GridBasicAuthenticatio
     try {
       saml = client.authenticate(cred);
     } catch (InvalidCredentialFault ex) {
-      logger.error(ex);
+      logger.error("Invalid credentials", ex);
     } catch (InsufficientAttributeFault ex) {
-      logger.error(ex);
+      logger.error("Insufficient attributes", ex);
     } catch (Exception ex) {
-      throw new AuthenticationErrorException("Error getting SAMLAssertion: " + ex.getMessage());
+      throw new AuthenticationErrorException("Error getting SAMLAssertion: " + ex.getMessage(), ex);
     }
 
     if (saml != null) {
@@ -144,13 +138,13 @@ public class GridBasicAuthenticationClientImpl implements GridBasicAuthenticatio
         list = dClient.createProxy(saml2, key, lifetime, new DelegationPathLength(
                 getDelegationPathLength()));
       } catch (InvalidAssertionFault ex) {
-        logger.error(ex);
+        logger.error("Invalid assertion", ex);
       } catch (InvalidProxyFault ex) {
-        logger.error(ex);
+        logger.error("Invalid proxy", ex);
       } catch (UserPolicyFault ex) {
-        logger.error(ex);
+        logger.error("Problem with user policy", ex);
       } catch (PermissionDeniedFault ex) {
-        logger.error(ex);
+        logger.error("Permission denied", ex);
       } catch (Exception ex) {
         throw new AuthenticationErrorException("Error getting proxy: " + ex.getMessage(), ex);
       }

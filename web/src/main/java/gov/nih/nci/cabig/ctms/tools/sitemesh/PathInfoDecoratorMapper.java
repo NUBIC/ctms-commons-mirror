@@ -1,28 +1,13 @@
 package gov.nih.nci.cabig.ctms.tools.sitemesh;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.ServletException;
-import java.util.Properties;
-/*
- * Title:        ConfigDecoratorMapper
- * Description:
- *
- * This software is published under the terms of the OpenSymphony Software
- * License version 1.1, of which a copy has been included with this
- * distribution in the LICENSE.txt file.
- */
-
 import com.opensymphony.module.sitemesh.Config;
 import com.opensymphony.module.sitemesh.Decorator;
 import com.opensymphony.module.sitemesh.DecoratorMapper;
 import com.opensymphony.module.sitemesh.Page;
 import com.opensymphony.module.sitemesh.mapper.AbstractDecoratorMapper;
 import com.opensymphony.module.sitemesh.mapper.ConfigLoader;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -41,7 +26,7 @@ import java.util.Properties;
  * @see com.opensymphony.module.sitemesh.mapper.ConfigLoader
  */
 public class PathInfoDecoratorMapper extends AbstractDecoratorMapper {
-    protected final Log logger = LogFactory.getLog(getClass());
+    protected final Logger logger = LoggerFactory.getLogger(getClass());
 
     private ConfigLoader configLoader = null;
 

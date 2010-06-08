@@ -1,21 +1,16 @@
 package gov.nih.nci.cabig.ctms.acegi.csm.aop;
 
 import gov.nih.nci.cabig.ctms.acegi.csm.authorization.ObjectResultHandler;
-
-import java.util.Iterator;
-
 import org.acegisecurity.AccessDeniedException;
 import org.acegisecurity.AfterInvocationManager;
 import org.acegisecurity.Authentication;
 import org.acegisecurity.ConfigAttribute;
 import org.acegisecurity.ConfigAttributeDefinition;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+
+import java.util.Iterator;
 
 public class CSMAfterInvocationManager implements
 		AfterInvocationManager {
-	
-	private static final Log logger = LogFactory.getLog(CSMAfterInvocationManager.class);
 
 	private String processConfigAttribute;
 

@@ -4,19 +4,18 @@ import gov.nih.nci.cabig.ctms.acegi.csm.authorization.CSMAuthorizationCheck;
 import gov.nih.nci.cabig.ctms.acegi.csm.authorization.ObjectResultHandler;
 import gov.nih.nci.cabig.ctms.acegi.csm.authorization.PrivilegeAndObject;
 import gov.nih.nci.cabig.ctms.acegi.csm.authorization.PrivilegeAndObjectRetrievalStrategy;
-
-import java.util.List;
-
 import org.acegisecurity.AccessDeniedException;
 import org.acegisecurity.Authentication;
 import org.acegisecurity.context.SecurityContextHolder;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 public class CSMAuthorizationAspect {
 
-	private Log logger = LogFactory.getLog(CSMAuthorizationAspect.class);
+	private Logger logger = LoggerFactory.getLogger(CSMAuthorizationAspect.class);
 
 	private List<CSMAuthorizationCheck> authorizationChecks;
 

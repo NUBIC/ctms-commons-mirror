@@ -3,19 +3,18 @@
  */
 package gov.nih.nci.cabig.ctms.acegi.grid.authorization;
 
-import java.util.Iterator;
-import java.util.List;
-
 import org.acegisecurity.GrantedAuthority;
 import org.acegisecurity.GrantedAuthorityImpl;
-import org.acegisecurity.providers.UsernamePasswordAuthenticationToken;
 import org.acegisecurity.userdetails.User;
 import org.acegisecurity.userdetails.UserDetails;
 import org.acegisecurity.userdetails.UserDetailsService;
 import org.acegisecurity.userdetails.UsernameNotFoundException;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
+
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * @author <a href="mailto:joshua.phillips@semanticbits.com">Joshua Phillips</a>
@@ -23,8 +22,8 @@ import org.springframework.dao.DataAccessException;
  */
 public class GridUserDetailsService implements UserDetailsService {
 
-	private static final Log logger = LogFactory
-			.getLog(GridUserDetailsService.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(GridUserDetailsService.class);
 
 	private GridGroupSearch gridGroupSearch;
 

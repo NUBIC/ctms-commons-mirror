@@ -14,7 +14,7 @@
     <!-- temporary explicitly-specified transient dep because csm 3.2's is wrong. -->
     <dependency org="ncicb" name="clm" rev="3.2"/>
 
-    <dependency org="org.slf4j" name="jcl-over-slf4j" rev="${lib.slf4j.rev}"/>
+    <dependency org="org.slf4j" name="slf4j-api" rev="${lib.slf4j.rev}"/>
     <dependency org="org.acegisecurity" name="com.springsource.org.acegisecurity" rev="${lib.acegi.rev}" />
 
     <dependency org="org.springframework" name="org.springframework.beans"       rev="${lib.spring.rev}"/>
@@ -43,6 +43,7 @@
 
     <!-- TEST -->
     <dependency conf="unit-test->*" org="org.slf4j" name="slf4j-simple" rev="${lib.slf4j.rev}"/>
+    <dependency conf="unit-test->*" org="org.slf4j" name="jcl-over-slf4j" rev="${lib.slf4j.rev}"/>
     <dependency conf="unit-test->*" org="bouncycastle" name="bouncycastle" rev="jdk1.3_1.25"/>
     <dependency conf="unit-test->*" org="globus" name="puretls"      rev="0.9b5"/>
     <dependency conf="unit-test->*" org="globus" name="cryptix32"    rev="3.2"/>

@@ -3,10 +3,10 @@ package gov.nih.nci.cabig.ctms.tools.hibernate;
 import gov.nih.nci.cabig.ctms.CommonsError;
 import gov.nih.nci.cabig.ctms.CommonsSystemException;
 import gov.nih.nci.cabig.ctms.lang.ComparisonTools;
-import org.apache.commons.logging.Log;
 import org.hibernate.HibernateException;
 import org.hibernate.usertype.ParameterizedType;
 import org.hibernate.usertype.UserType;
+import org.slf4j.Logger;
 
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
@@ -49,7 +49,7 @@ public abstract class CodedEnumType implements UserType, ParameterizedType {
 
     private static final Class<?>[] NO_PARAMS = new Class[0];
 
-    private Log log = HibernateTypeTools.getLog(getClass());
+    private Logger log = HibernateTypeTools.getLogger(getClass());
 
     private Properties parameterValues;
 

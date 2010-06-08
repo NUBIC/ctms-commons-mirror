@@ -4,14 +4,13 @@
 package gov.nih.nci.cabig.ctms.acegi.csm.vote;
 
 import gov.nih.nci.cabig.ctms.acegi.csm.authorization.AuthorizationSwitch;
-
 import org.acegisecurity.Authentication;
 import org.acegisecurity.ConfigAttribute;
 import org.acegisecurity.ConfigAttributeDefinition;
 import org.acegisecurity.context.SecurityContextHolder;
 import org.acegisecurity.vote.AccessDecisionVoter;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 
 /**
@@ -23,7 +22,7 @@ import org.springframework.beans.factory.annotation.Required;
  */
 public class AuthorizationSwitchVoter implements AccessDecisionVoter {
 	
-	private static final Log logger = LogFactory.getLog(AuthorizationSwitchVoter.class);
+	private static final Logger logger = LoggerFactory.getLogger(AuthorizationSwitchVoter.class);
 	
 	private AuthorizationSwitch authorizationSwitch;
 	

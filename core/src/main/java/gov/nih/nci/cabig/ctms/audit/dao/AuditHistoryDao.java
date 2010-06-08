@@ -9,6 +9,8 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -19,11 +21,12 @@ import java.util.Map;
  */
 @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 public class AuditHistoryDao extends HibernateDaoSupport {
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
     @SuppressWarnings("unchecked")
     public List<DataAuditEvent> findDataAuditEvents(final DataAuditEventQuery query) {
         String queryString = query.getQueryString();
-        logger.debug("query: " + queryString);
+        log.debug("query: " + queryString);
         return (List<DataAuditEvent>) getHibernateTemplate().execute(new HibernateCallback() {
 
             public Object doInHibernate(final Session session) throws HibernateException, SQLException {

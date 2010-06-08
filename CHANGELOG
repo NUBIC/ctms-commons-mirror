@@ -37,3 +37,4 @@ ctms-commons history
 
 - Begin formal changelog
 - Convert from maven2 to buildr+ivy4r
+- Switch to slf4j-api and away from commons-logging

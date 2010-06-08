@@ -1,24 +1,23 @@
 package gov.nih.nci.cabig.ctms.tools.spring;
 
+import gov.nih.nci.cabig.ctms.CommonsSystemException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.beans.BeansException;
-import org.springframework.web.servlet.mvc.Controller;
 import org.springframework.core.Ordered;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.springframework.web.servlet.mvc.Controller;
 
-import java.util.Map;
 import java.util.HashMap;
-
-import gov.nih.nci.cabig.ctms.CommonsSystemException;
+import java.util.Map;
 
 /**
  * @author Rhett Sutphin
  */
 public class BeanNameControllerUrlResolver implements ControllerUrlResolver, BeanFactoryPostProcessor, Ordered {
-    private Log log = LogFactory.getLog(getClass());
+    private Logger log = LoggerFactory.getLogger(getClass());
 
     private String servletName;
     // maps bean IDs to resolved refs

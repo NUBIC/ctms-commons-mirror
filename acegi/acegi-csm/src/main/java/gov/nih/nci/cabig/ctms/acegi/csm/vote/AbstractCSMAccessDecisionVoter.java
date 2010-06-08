@@ -4,26 +4,19 @@
 package gov.nih.nci.cabig.ctms.acegi.csm.vote;
 
 import gov.nih.nci.cabig.ctms.acegi.csm.authorization.CSMObjectIdGenerator;
-
-import java.util.Iterator;
-
 import org.acegisecurity.Authentication;
 import org.acegisecurity.ConfigAttribute;
 import org.acegisecurity.ConfigAttributeDefinition;
 import org.acegisecurity.vote.AbstractAclVoter;
 import org.acegisecurity.vote.AccessDecisionVoter;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+
+import java.util.Iterator;
 
 /**
  * @author joshua
  * 
  */
 public abstract class AbstractCSMAccessDecisionVoter extends AbstractAclVoter {
-
-	private static final Log logger = LogFactory
-			.getLog(AbstractCSMAccessDecisionVoter.class);
-
 	private String processConfigAttribute;
 
 	private CSMObjectIdGenerator objectIdGenerator;

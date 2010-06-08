@@ -10,8 +10,8 @@ import org.acegisecurity.userdetails.User;
 import org.acegisecurity.userdetails.UserDetails;
 import org.acegisecurity.userdetails.UserDetailsService;
 import org.acegisecurity.userdetails.UsernameNotFoundException;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.dao.DataAccessException;
 
@@ -19,7 +19,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 public class CSMUserDetailsService implements UserDetailsService {
-    private static final Log log = LogFactory.getLog(CSMUserDetailsService.class);
+    private static final Logger log = LoggerFactory.getLogger(CSMUserDetailsService.class);
 
     private String rolePrefix = "ROLE_";
 

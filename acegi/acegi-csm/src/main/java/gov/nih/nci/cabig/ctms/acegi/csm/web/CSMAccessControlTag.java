@@ -1,6 +1,14 @@
 package gov.nih.nci.cabig.ctms.acegi.csm.web;
 
 import gov.nih.nci.cabig.ctms.acegi.csm.authorization.CSMAuthorizationCheck;
+import org.acegisecurity.Authentication;
+import org.acegisecurity.context.HttpSessionContextIntegrationFilter;
+import org.acegisecurity.context.SecurityContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springframework.web.util.ExpressionEvaluationUtils;
 
 import javax.servlet.ServletContext;
 import javax.servlet.jsp.JspException;
@@ -8,20 +16,10 @@ import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.Tag;
 import javax.servlet.jsp.tagext.TagSupport;
 
-import org.acegisecurity.Authentication;
-import org.acegisecurity.context.HttpSessionContextIntegrationFilter;
-import org.acegisecurity.context.SecurityContext;
-import org.acegisecurity.context.SecurityContextHolder;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
-import org.springframework.web.util.ExpressionEvaluationUtils;
-
 public class CSMAccessControlTag extends TagSupport {
 
-	protected static final Log logger = LogFactory
-			.getLog(CSMAccessControlTag.class);
+	protected static final Logger logger = LoggerFactory
+			.getLogger(CSMAccessControlTag.class);
 
 	private Object domainObject;
 

@@ -1,23 +1,22 @@
 package gov.nih.nci.cabig.ctms.tools;
 
+import gov.nih.nci.cabig.ctms.CommonsConfigurationException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.FactoryBean;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
-import java.util.Properties;
-import java.util.List;
-import java.util.LinkedList;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-
-import gov.nih.nci.cabig.ctms.CommonsConfigurationException;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Properties;
 
 /**
  * @author Rhett Sutphin
  */
 public class DataSourceSelfDiscoveringPropertiesFactoryBean extends DatabaseConfigurationAccessor implements FactoryBean {
-    protected final Log log = LogFactory.getLog(getClass());
+    protected final Logger log = LoggerFactory.getLogger(getClass());
 
     public static final String HIBERNATE_DIALECT_PROPERTY_NAME = "hibernate.dialect";
     public static final String RDBMS_PROPERTY_NAME = "datasource.rdbms";

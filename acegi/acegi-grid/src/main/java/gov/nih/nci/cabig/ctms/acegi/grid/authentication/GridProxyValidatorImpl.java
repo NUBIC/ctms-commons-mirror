@@ -3,15 +3,15 @@
  */
 package gov.nih.nci.cabig.ctms.acegi.grid.authentication;
 
-import java.io.ByteArrayInputStream;
-import java.security.cert.X509Certificate;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.globus.gsi.CertificateRevocationLists;
 import org.globus.gsi.GlobusCredential;
 import org.globus.gsi.TrustedCertificates;
 import org.globus.gsi.proxy.ProxyPathValidator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.ByteArrayInputStream;
+import java.security.cert.X509Certificate;
 
 /**
  * @author <a href="mailto:joshua.phillips@semanticbits.com>Joshua Phillips</a>
@@ -19,7 +19,7 @@ import org.globus.gsi.proxy.ProxyPathValidator;
  */
 public class GridProxyValidatorImpl implements GridProxyValidator {
 
-    private static final Log logger = LogFactory.getLog(GridProxyValidatorImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(GridProxyValidatorImpl.class);
 
     private String trustedCertsLocations;
 

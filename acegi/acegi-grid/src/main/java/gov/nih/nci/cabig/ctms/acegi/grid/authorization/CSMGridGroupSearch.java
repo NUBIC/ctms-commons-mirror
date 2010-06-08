@@ -9,6 +9,8 @@ import gov.nih.nci.security.UserProvisioningManager;
 import gov.nih.nci.security.authorization.domainobjects.Application;
 import gov.nih.nci.security.authorization.domainobjects.Group;
 import gov.nih.nci.security.dao.GroupSearchCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.MalformedURLException;
 import java.util.ArrayList;
@@ -19,16 +21,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * @author <a href="mailto:joshua.phillips@semanticbits.com">Joshua Phillips</a>
  *
  */
 public class CSMGridGroupSearch implements GridGroupSearch {
 	
-	private static final Log logger = LogFactory.getLog(CSMGridGroupSearch.class);
+	private static final Logger logger = LoggerFactory.getLogger(CSMGridGroupSearch.class);
 	
 	
     private UserProvisioningManager userProvisioningManager;

@@ -21,13 +21,14 @@
     <dependency org="org.springframework" name="org.springframework.web"          rev="${lib.spring.rev}"/>
     <dependency org="org.springframework" name="org.springframework.web.servlet"  rev="${lib.spring.rev}"/>
 
-    <dependency org="org.slf4j" name="jcl-over-slf4j" rev="${lib.slf4j.rev}"/>
+    <dependency org="org.slf4j" name="slf4j-api" rev="${lib.slf4j.rev}"/>
     <dependency org="com.opensymphony.sitemesh" name="com.springsource.com.opensymphony.sitemesh" rev="2.4.1" />
     <dependency org="org.apache.commons" name="com.springsource.org.apache.commons.lang" rev="${lib.jakarta-commons.lang.rev}"/>
 
     <!-- TEST -->
     <dependency name="ctms-commons-testing-unit" rev="latest.integration" conf="unit-test->runtime"/>
-    <dependency org="org.slf4j" name="slf4j-simple" rev="${lib.slf4j.rev}" conf="unit-test->*"/>
+    <dependency conf="unit-test->*" org="org.slf4j" name="slf4j-simple" rev="${lib.slf4j.rev}"/>
+    <dependency conf="unit-test->*" org="org.slf4j" name="jcl-over-slf4j" rev="${lib.slf4j.rev}"/>
     <dependency org="org.springframework" name="org.springframework.test" rev="${lib.spring.rev}" conf="unit-test->*"/>
   </dependencies>
 </ivy-module>

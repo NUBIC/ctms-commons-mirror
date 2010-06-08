@@ -1,16 +1,15 @@
 package gov.nih.nci.cabig.ctms.web.tabs;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.validation.Errors;
+import gov.nih.nci.cabig.ctms.CommonsSystemException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindException;
+import org.springframework.validation.Errors;
 import org.springframework.web.servlet.mvc.AbstractWizardFormController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
-
-import gov.nih.nci.cabig.ctms.CommonsSystemException;
 
 /**
  * More object-oriented version of {@link AbstractWizardFormController}.
@@ -24,7 +23,7 @@ import gov.nih.nci.cabig.ctms.CommonsSystemException;
  * @author Priyatam
  */
 public abstract class AbstractTabbedFlowFormController<C> extends AbstractWizardFormController {
-    private final Log log = LogFactory.getLog(getClass());
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
     private FlowFactory<C> flowFactory;
 

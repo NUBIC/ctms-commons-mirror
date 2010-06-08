@@ -9,7 +9,6 @@
 
   <dependencies>
     <dependency name="ctms-commons-base" rev="latest.integration"/>
-    <dependency org="org.slf4j" name="jcl-over-slf4j" rev="${lib.slf4j.rev}"/>
     <dependency org="net.sourceforge.collections" name="collections-generic" rev="${lib.generic-commons-collections.rev}"/>
     <dependency org="org.apache.commons" name="com.springsource.org.apache.commons.lang" rev="${lib.jakarta-commons.lang.rev}"/>
   </dependencies>

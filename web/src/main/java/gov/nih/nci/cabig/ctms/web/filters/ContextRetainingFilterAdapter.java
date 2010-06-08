@@ -1,7 +1,7 @@
 package gov.nih.nci.cabig.ctms.web.filters;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -23,7 +23,7 @@ import javax.servlet.ServletException;
  * @author Rhett Sutphin
  */
 public abstract class ContextRetainingFilterAdapter extends FilterAdapter {
-    protected final Log log = LogFactory.getLog(getClass());
+    protected final Logger log = LoggerFactory.getLogger(getClass());
 
     private ServletContext servletContext;
 

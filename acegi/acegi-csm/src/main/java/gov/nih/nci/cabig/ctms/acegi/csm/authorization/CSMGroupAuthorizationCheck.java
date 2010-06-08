@@ -4,21 +4,21 @@ import gov.nih.nci.security.UserProvisioningManager;
 import gov.nih.nci.security.authorization.domainobjects.Group;
 import gov.nih.nci.security.authorization.domainobjects.User;
 import gov.nih.nci.security.exceptions.CSObjectNotFoundException;
+import gov.nih.nci.security.exceptions.CSException;
+import org.acegisecurity.Authentication;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.acegisecurity.Authentication;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 public class CSMGroupAuthorizationCheck extends AbstractCSMAuthorizationCheck {
 
 	private String requiredPermission;
 
-	private static final Log logger = LogFactory
-			.getLog(CSMGroupAuthorizationCheck.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(CSMGroupAuthorizationCheck.class);
 
 	public boolean checkAuthorizationForObjectId(Authentication authentication,
 			String privilege, String objectId) {
@@ -45,9 +45,8 @@ public class CSMGroupAuthorizationCheck extends AbstractCSMAuthorizationCheck {
 					}
 				}
 			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			logger.debug(ex);
+		} catch (CSException e) {
+            logger.debug("Ignoring error while finding groups", e);
 		}
 		return isAuthorized;
 	}

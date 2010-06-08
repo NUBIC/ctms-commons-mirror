@@ -1,11 +1,11 @@
 package gov.nih.nci.cabig.ctms.web.chrome;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Required;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.util.UrlPathHelper;
-import org.springframework.util.AntPathMatcher;
-import org.springframework.beans.factory.annotation.Required;
-import org.apache.commons.logging.LogFactory;
-import org.apache.commons.logging.Log;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +15,7 @@ import java.util.List;
  * Interceptor which figures out which section a requested page is from
  * and associates that section with the current request.
  * <p>
- * Adds two attributes to the request:
+ * Adds three attributes to the request:
  * <ul>
  *   <li><kbd>sections</kbd> - the list of {@link Section}s provided to this interceptor.
  *   <li><kbd>currentSection</kbd> - {@link Section} containing the requested page, if one is found.
@@ -29,7 +29,7 @@ public class SectionInterceptor extends HandlerInterceptorAdapter {
     private String attributePrefix;
     private UrlPathHelper urlPathHelper = new UrlPathHelper();
     private AntPathMatcher pathMatcher = new AntPathMatcher();
-    private Log log = LogFactory.getLog(getClass());
+    private Logger log = LoggerFactory.getLogger(getClass());
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

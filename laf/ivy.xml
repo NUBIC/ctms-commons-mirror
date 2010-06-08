@@ -13,7 +13,6 @@
     <!-- TODO: exclude this from runtime somehow -->
     <dependency org="javax.servlet" name="com.springsource.javax.servlet" rev="2.5.0" />
 
-    <dependency org="org.slf4j" name="jcl-over-slf4j" rev="${lib.slf4j.rev}"/>
     <dependency org="org.apache.commons" name="com.springsource.org.apache.commons.io" rev="${lib.jakarta-commons.io.rev}"/>
   </dependencies>
 </ivy-module>

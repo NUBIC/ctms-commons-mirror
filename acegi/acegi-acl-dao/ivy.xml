@@ -8,7 +8,6 @@
   </configurations>
 
   <dependencies>
-    <dependency org="org.slf4j" name="jcl-over-slf4j" rev="${lib.slf4j.rev}"/>
     <dependency org="org.acegisecurity" name="com.springsource.org.acegisecurity" rev="${lib.acegi.rev}" />
     <dependency org="net.sourceforge.ehcache" name="com.springsource.net.sf.ehcache" rev="1.5.0" />
 
@@ -23,8 +22,11 @@
 
     <!-- TEST -->
     <dependency conf="unit-test->*" org="org.slf4j" name="slf4j-simple" rev="${lib.slf4j.rev}"/>
+    <dependency conf="unit-test->*" org="org.slf4j" name="jcl-over-slf4j" rev="${lib.slf4j.rev}"/>
     <dependency conf="unit-test->*" org="org.apache.commons" name="com.springsource.org.apache.commons.dbcp" rev="${lib.jakarta-commons.dbcp.rev}"/>
     <dependency conf="unit-test->*" org="org.hsqldb" name="com.springsource.org.hsqldb" rev="${lib.hsqldb.rev}"/>
     <dependency conf="unit-test->*" org="org.springframework" name="org.springframework.context.support" rev="${lib.spring.rev}"/>
+
+    <exclude module="com.springsource.slf4j.api"/>
   </dependencies>
 </ivy-module>

@@ -3,15 +3,15 @@
  */
 package gov.nih.nci.cabig.ctms.acegi.csm.authorization;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author <a href="mailto:joshua.phillips@semanticbits.com">Joshua Phillips</a>
  * @author Rhett Sutphin
  */
 public class AuthorizationSwitch {
-    private static final Log log = LogFactory.getLog(AuthorizationSwitch.class);
+    private static final Logger log = LoggerFactory.getLogger(AuthorizationSwitch.class);
 
     private boolean on = true;
 

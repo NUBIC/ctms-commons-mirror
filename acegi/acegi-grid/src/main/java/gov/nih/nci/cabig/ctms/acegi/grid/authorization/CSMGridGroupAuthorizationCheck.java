@@ -3,15 +3,14 @@
  */
 package gov.nih.nci.cabig.ctms.acegi.grid.authorization;
 
-import gov.nih.nci.cagrid.authorization.GridGroupName;
 import gov.nih.nci.cabig.ctms.acegi.csm.authorization.CSMGroupAuthorizationCheck;
-
-import java.net.MalformedURLException;
-
+import gov.nih.nci.cagrid.authorization.GridGroupName;
 import org.acegisecurity.Authentication;
 import org.acegisecurity.GrantedAuthority;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.net.MalformedURLException;
 
 /**
  * @author <a href="mailto:joshua.phillips@semanticbits.com">Joshua Phillips</a>
@@ -19,7 +18,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class CSMGridGroupAuthorizationCheck extends CSMGroupAuthorizationCheck {
 
-	private static final Log logger = LogFactory.getLog(CSMGridGroupAuthorizationCheck.class);
+	private static final Logger logger = LoggerFactory.getLogger(CSMGridGroupAuthorizationCheck.class);
 	
 	protected boolean isMember(Authentication authentication, String groupName){
 		boolean isMember = false;

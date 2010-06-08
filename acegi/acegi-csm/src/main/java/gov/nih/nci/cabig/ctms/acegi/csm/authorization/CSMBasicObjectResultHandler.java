@@ -1,5 +1,10 @@
 package gov.nih.nci.cabig.ctms.acegi.csm.authorization;
 
+import org.acegisecurity.AccessDeniedException;
+import org.acegisecurity.Authentication;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,15 +12,10 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import org.acegisecurity.AccessDeniedException;
-import org.acegisecurity.Authentication;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 public class CSMBasicObjectResultHandler implements ObjectResultHandler {
 
-	private static final Log logger = LogFactory
-			.getLog(CSMBasicObjectResultHandler.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(CSMBasicObjectResultHandler.class);
 
 	private String processDomainObjectClass;
 

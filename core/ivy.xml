@@ -21,6 +21,7 @@
     <dependency org="org.springframework" name="org.springframework.orm"          rev="${lib.spring.rev}" conf="*->hibernate"/>
     <dependency org="org.springframework" name="org.springframework.transaction"  rev="${lib.spring.rev}"/>
 
+    <dependency org="org.slf4j" name="slf4j-api" rev="${lib.slf4j.rev}"/>
     <dependency org="org.slf4j" name="jcl-over-slf4j" rev="${lib.slf4j.rev}"/>
     <dependency org="org.apache.commons" name="com.springsource.org.apache.commons.lang" rev="${lib.jakarta-commons.lang.rev}"/>
     <dependency org="net.sourceforge.collections" name="collections-generic" rev="${lib.generic-commons-collections.rev}"/>

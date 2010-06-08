@@ -1,13 +1,13 @@
 package gov.nih.nci.cabig.ctms.acegi.csm.authorization;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.aspectj.lang.Signature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class RegexSignatureToPrivilegeMapping implements
 		SignatureToPrivilegeMapping {
 	
-	private static final Log logger = LogFactory.getLog(RegexSignatureToPrivilegeMapping.class);
+	private static final Logger logger = LoggerFactory.getLogger(RegexSignatureToPrivilegeMapping.class);
 	
 	
 	private String privilege;

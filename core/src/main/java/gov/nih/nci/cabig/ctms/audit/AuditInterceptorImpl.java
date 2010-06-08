@@ -8,6 +8,15 @@ import gov.nih.nci.cabig.ctms.audit.domain.Operation;
 import gov.nih.nci.cabig.ctms.audit.exception.AuditSystemException;
 import gov.nih.nci.cabig.ctms.audit.util.AuditUtil;
 import gov.nih.nci.cabig.ctms.lang.ComparisonTools;
+import org.hibernate.EmptyInterceptor;
+import org.hibernate.EntityMode;
+import org.hibernate.type.AbstractComponentType;
+import org.hibernate.type.CollectionType;
+import org.hibernate.type.EntityType;
+import org.hibernate.type.Type;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Required;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,16 +26,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.hibernate.EmptyInterceptor;
-import org.hibernate.EntityMode;
-import org.hibernate.type.AbstractComponentType;
-import org.hibernate.type.CollectionType;
-import org.hibernate.type.EntityType;
-import org.hibernate.type.Type;
-import org.springframework.beans.factory.annotation.Required;
-
 /**
  * @author Rhett Sutphin
  * @author Saurabh Agrawal
@@ -34,7 +33,7 @@ import org.springframework.beans.factory.annotation.Required;
 public class AuditInterceptorImpl extends EmptyInterceptor {
 
 	/** The Constant log. */
-	private static final Log log = LogFactory.getLog(AuditInterceptorImpl.class);
+	private static final Logger log = LoggerFactory.getLogger(AuditInterceptorImpl.class);
 
 	private static final ThreadLocal<AuditSession> sessions = new ThreadLocal<AuditSession>();
 
