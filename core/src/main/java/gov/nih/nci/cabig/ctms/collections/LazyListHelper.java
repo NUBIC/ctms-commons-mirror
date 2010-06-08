@@ -15,7 +15,7 @@ import java.util.ArrayList;
  *
  * Suggested use:
  *
- * <pre><code>public class Person {
+ * <code><pre>public class Person {
  *     private LazyListHelper helper;
  *     public Person() {
  *         helper = new LazyListHelper();
@@ -24,18 +24,18 @@ import java.util.ArrayList;
  *
  *     // ...
  *
- *     public List<Role> getRoles() {
- *         return helper.getLazyList(Role.class)
+ *     public List&lt;Role> getRoles() {
+ *         return helper.getLazyList(Role.class);
  *     }
  *
- *     @OneToMany
- *     @Etc.
- *     public List<Role> getRolesInternal() {
- *         return helper.getInternalList(Role.class)
+ *     &#64;OneToMany
+ *     &#64;Etc.
+ *     public List&lt;Role> getRolesInternal() {
+ *         return helper.getInternalList(Role.class);
  *     }
  *
- *     public void setRolesInternal(List<Role> roles) {
- *         return helper.setInternalList(Role.class, roles)
+ *     public void setRolesInternal(List&lt;Role> roles) {
+ *         return helper.setInternalList(Role.class, roles);
  *     }
  *
  *     // ...

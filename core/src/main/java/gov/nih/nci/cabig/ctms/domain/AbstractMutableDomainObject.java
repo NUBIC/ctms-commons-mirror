@@ -13,9 +13,9 @@ import javax.persistence.Version;
  * If used with hibernate annotations, each concrete subclass will need to define
  * an ID generator called "id-generator".  For example:
  *
- * <pre>@GenericGenerator(name="id-generator", strategy = "native",
+ * <pre>&#64;GenericGenerator(name="id-generator", strategy = "native",
  *     parameters = {
- *         @Parameter(name="sequence", value="seq_mytable_id")
+ *         &#64;Parameter(name="sequence", value="seq_mytable_id")
  *     }
  * )</pre>
  *
