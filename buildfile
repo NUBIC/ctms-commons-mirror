@@ -14,14 +14,14 @@ define "ctms-commons" do
 
   desc "Zero-dependency common code for all other packages"
   define "base" do
-    ivy.compile_conf('compile').test_conf('unit-test')
+    ivy.compile_conf('compile').compile_type('jar').test_conf('unit-test').test_type('jar')
     package(:bundle).tap do |bundle|
       bundle["Export-Package"] = bnd_export_package
     end
   end
 
   define "lang" do
-    ivy.compile_conf('compile').test_conf('unit-test')
+    ivy.compile_conf('compile').compile_type('jar').test_conf('unit-test').test_type('jar')
     interproject_dependencies << 'base'
 
     package(:bundle).tap do |bundle|
@@ -33,20 +33,20 @@ define "ctms-commons" do
     project.no_iml
 
     define "unit" do
-      ivy.compile_conf('compile').test_conf('unit-test')
+      ivy.compile_conf('compile').compile_type('jar').test_conf('unit-test').test_type('jar')
       interproject_dependencies << 'ctms-commons:lang'
       package(:jar)
     end
 
     define "uctrace" do
-      ivy.compile_conf('compile').test_conf('unit-test')
+      ivy.compile_conf('compile').compile_type('jar').test_conf('unit-test').test_type('jar')
       interproject_dependencies << 'ctms-commons:base'
       package(:jar)
     end
   end
 
   define "core" do
-    ivy.compile_conf('compile').test_conf('unit-test')
+    ivy.compile_conf('compile').compile_type('jar').test_conf('unit-test').test_type('jar')
     interproject_dependencies << 'base' << 'lang' << 'testing:unit'
 
     package(:bundle).tap do |bundle|
@@ -56,7 +56,7 @@ define "ctms-commons" do
 
   define "laf" do
     # TODO: deploy and run the demo, if anyone's still using it
-    ivy.compile_conf('compile').test_conf('unit-test')
+    ivy.compile_conf('compile').compile_type('jar').test_conf('unit-test').test_type('jar')
     interproject_dependencies << 'web'
 
     package(:bundle).tap do |bundle|
@@ -65,7 +65,7 @@ define "ctms-commons" do
   end
 
   define "web" do
-    ivy.compile_conf('compile').test_conf('unit-test')
+    ivy.compile_conf('compile').compile_type('jar').test_conf('unit-test').test_type('jar')
     interproject_dependencies << 'base' << 'lang' << 'core' << 'testing:unit'
 
     package(:bundle).tap do |bundle|
@@ -77,12 +77,12 @@ define "ctms-commons" do
     project.no_iml
 
     define "acl-dao", :base_dir => _('acegi-acl-dao') do
-      ivy.compile_conf('compile').test_conf('unit-test')
+      ivy.compile_conf('compile').compile_type('jar').test_conf('unit-test').test_type('jar')
       package(:jar)
     end
 
     define "csm", :base_dir => _('acegi-csm') do
-      ivy.compile_conf('compile').test_conf('unit-test')
+      ivy.compile_conf('compile').compile_type('jar').test_conf('unit-test').test_type('jar')
 
       package(:bundle).tap do |bundle|
         bundle["Export-Package"] = bnd_export_package
@@ -90,12 +90,12 @@ define "ctms-commons" do
     end
 
     define "csm-test", :base_dir => _('acegi-csm-test') do
-      ivy.compile_conf('compile').test_conf('unit-test')
+      ivy.compile_conf('compile').compile_type('jar').test_conf('unit-test').test_type('jar')
       interproject_dependencies << 'acegi:csm'
     end
 
     define "grid", :base_dir => _('acegi-grid') do
-      ivy.compile_conf('compile').test_conf('unit-test')
+      ivy.compile_conf('compile').compile_type('jar').test_conf('unit-test').test_type('jar')
       interproject_dependencies << 'acegi:csm'
       package(:jar)
     end
