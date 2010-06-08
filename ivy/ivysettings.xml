@@ -5,7 +5,7 @@
   <settings defaultResolver="libraries"/>
 
   <resolvers>
-    <filesystem name="this-project" local="true">
+    <filesystem name="this-project" changingPattern=".*" local="true">
       <artifact pattern="${project-repo.base}/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]"/>
       <ivy pattern="${project-repo.base}/[organisation]/[module]/[revision]/[artifact].[ext]"/>
     </filesystem>
