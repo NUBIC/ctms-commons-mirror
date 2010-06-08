@@ -65,7 +65,9 @@ public class BuildInfo {
     }
 
     public boolean isSnapshot() {
-        return versionNumber == null || versionNumber.toUpperCase().endsWith("SNAPSHOT");
+        return versionNumber == null
+            || versionNumber.toUpperCase().endsWith("SNAPSHOT") 
+            || versionNumber.toUpperCase().endsWith(".DEV");
     }
 
     ////// BEAN PROPERTIES
@@ -108,5 +110,12 @@ public class BuildInfo {
 
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
+    }
+
+    ////// OBJECT METHODS
+
+    @Override
+    public String toString() {
+        return getBuildName();
     }
 }

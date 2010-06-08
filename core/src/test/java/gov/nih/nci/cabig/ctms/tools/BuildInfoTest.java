@@ -1,10 +1,9 @@
 package gov.nih.nci.cabig.ctms.tools;
 
+import gov.nih.nci.cabig.ctms.lang.DateTools;
 import junit.framework.TestCase;
 
 import java.util.Calendar;
-
-import gov.nih.nci.cabig.ctms.lang.DateTools;
 
 /**
  * @author Rhett Sutphin
@@ -22,6 +21,11 @@ public class BuildInfoTest extends TestCase {
         assertFalse(buildInfo.isSnapshot());
     }
     
+    public void testIsSnapshotForDev() throws Exception {
+        buildInfo.setVersionNumber("0.7.1.DEV");
+        assertTrue(buildInfo.isSnapshot());
+    }
+
     public void testIsSnapshotWhenNullVersion() throws Exception {
         buildInfo.setVersionNumber(null);
         assertTrue(buildInfo.isSnapshot());
@@ -74,5 +78,11 @@ public class BuildInfoTest extends TestCase {
         addAllFields();
         buildInfo.setTimestamp(null);
         assertEquals("CTMS-o v. 1.22-SNAPSHOT (builder@localhost [unknown time])", buildInfo.getBuildName());
+    }
+
+    public void testToStringIsBuildName() throws Exception {
+        addAllFields();
+        buildInfo.setVersionNumber("3.9.0");
+        assertEquals("CTMS-o v. 3.9.0", buildInfo.toString());
     }
 }
