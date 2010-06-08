@@ -65,7 +65,7 @@ public class ProvisioningSessionFactory {
     }
 
     /**
-     * Set the {@link CsmHelper} to use.  If none is provided, an instance will be created on use.
+     * Set the {@link AuthorizationHelper} to use.  If none is provided, an instance will be created on use.
      */
     public void setAuthorizationHelper(AuthorizationHelper authorizationHelper) {
         this.authorizationHelper = authorizationHelper;
