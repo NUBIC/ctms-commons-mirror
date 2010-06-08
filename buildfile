@@ -70,9 +70,6 @@ define "ctms-commons" do
   end
 
   define "acegi" do
-    # TODO: this probably should be something ctms-specific
-    project.group = "gov.nih.nci.security.acegi"
-
     define "acl-dao", :base_dir => _('acegi-acl-dao') do
       ivy.compile_conf('compile').test_conf('unit-test')
       package(:jar)

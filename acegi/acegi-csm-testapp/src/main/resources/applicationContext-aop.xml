@@ -21,7 +21,7 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
 		</aop:aspect>
 	</aop:config>
 	
-	<bean id="assignDomainObjectOwnershipBean" class="gov.nih.nci.security.acegi.csm.aop.DomainObjectOwnershipAssigner">
+	<bean id="assignDomainObjectOwnershipBean" class="gov.nih.nci.cabig.ctms.acegi.csm.aop.DomainObjectOwnershipAssigner">
 		<property name="csmAuthorizationManager" ref="csmAuthorizationManager"/>
 	</bean>
 

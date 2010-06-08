@@ -47,9 +47,9 @@
 		autowire="byName">
 		<property name="annotatedClasses">
 			<list>
-				<value>gov.nih.nci.security.acegi.acls.dao.beans.AclEntryBean</value>
-				<value>gov.nih.nci.security.acegi.acls.dao.beans.AclObjectIdentityBean</value>
-				<value>gov.nih.nci.security.acegi.acls.dao.beans.AclSidBean</value>
+				<value>gov.nih.nci.cabig.ctms.acegi.acls.dao.beans.AclEntryBean</value>
+				<value>gov.nih.nci.cabig.ctms.acegi.acls.dao.beans.AclObjectIdentityBean</value>
+				<value>gov.nih.nci.cabig.ctms.acegi.acls.dao.beans.AclSidBean</value>
 			</list>
 		</property>
 	</bean>
@@ -78,11 +78,11 @@
 	</bean>
 
 	<bean id="mutableAclDao" parent="daoTemplate"
-		class="gov.nih.nci.security.acegi.acls.dao.impl.MutableAclDaoImpl" autowire="byName" />
+		class="gov.nih.nci.cabig.ctms.acegi.acls.dao.impl.MutableAclDaoImpl" autowire="byName" />
 
 
 	<bean id="aclCache"
-		class="gov.nih.nci.security.acegi.acls.dao.impl.EhCacheBasedAclCache">
+		class="gov.nih.nci.cabig.ctms.acegi.acls.dao.impl.EhCacheBasedAclCache">
 		<constructor-arg>
 			<bean
 				class="org.springframework.cache.ehcache.EhCacheFactoryBean">
@@ -98,7 +98,7 @@
 	</bean>
 
 	<bean id="lookupStrategy"
-		class="gov.nih.nci.security.acegi.acls.dao.impl.BasicAclLookupStrategy"
+		class="gov.nih.nci.cabig.ctms.acegi.acls.dao.impl.BasicAclLookupStrategy"
 		parent="daoTemplate">
 
 		<property name="aclCache" ref="aclCache" />
@@ -131,7 +131,7 @@
 	</bean>
 
 	<bean id="aclService"
-		class="gov.nih.nci.security.acegi.acls.service.DelegatingMutableAclService">
+		class="gov.nih.nci.cabig.ctms.acegi.acls.service.DelegatingMutableAclService">
 		<property name="service" ref="mutableAclDao" />
 	</bean>
 

@@ -1,6 +1,6 @@
 package testapp.test;
 
-import gov.nih.nci.security.acegi.csm.AbstractCSMTestCase;
+import gov.nih.nci.cabig.ctms.acegi.csm.AbstractCSMTestCase;
 
 import java.io.File;
 import java.io.FileInputStream;

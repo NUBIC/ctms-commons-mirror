@@ -21,9 +21,9 @@
 		</property>
 		<property name="show_sql">true</property>
 
-		<mapping class="gov.nih.nci.security.acegi.acls.dao.beans.AclEntryBean" />
-		<mapping class="gov.nih.nci.security.acegi.acls.dao.beans.AclObjectIdentityBean" />
-		<mapping class="gov.nih.nci.security.acegi.acls.dao.beans.AclSidBean" />
+		<mapping class="gov.nih.nci.cabig.ctms.acegi.acls.dao.beans.AclEntryBean" />
+		<mapping class="gov.nih.nci.cabig.ctms.acegi.acls.dao.beans.AclObjectIdentityBean" />
+		<mapping class="gov.nih.nci.cabig.ctms.acegi.acls.dao.beans.AclSidBean" />
 
 	</session-factory>
 

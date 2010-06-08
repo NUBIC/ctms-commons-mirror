@@ -30,7 +30,7 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
 
 						<!--============== BEGIN STATEMENT SAVE ================-->
 						<bean
-							class="gov.nih.nci.security.acegi.csm.vote.CSMBasicAccessDecisionVoter">
+							class="gov.nih.nci.cabig.ctms.acegi.csm.vote.CSMBasicAccessDecisionVoter">
 
 							<property name="processDomainObjectClass"
 								value="testapp.bean.Statement" />
@@ -38,7 +38,7 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
 								value="CSM_STATEMENT_SAVE" />
 							<property name="authorizationCheck">
 								<bean
-									class="gov.nih.nci.security.acegi.csm.authorization.CSMGroupAuthorizationCheck">
+									class="gov.nih.nci.cabig.ctms.acegi.csm.authorization.CSMGroupAuthorizationCheck">
 									<property
 										name="csmAuthorizationManager" ref="csmAuthorizationManager" />
 									<property name="requiredPermission"
@@ -51,7 +51,7 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
 						</bean>
 
 						<bean
-							class="gov.nih.nci.security.acegi.csm.vote.CSMBasicAccessDecisionVoter">
+							class="gov.nih.nci.cabig.ctms.acegi.csm.vote.CSMBasicAccessDecisionVoter">
 
 							<property name="processDomainObjectClass"
 								value="testapp.bean.Statement" />
@@ -60,7 +60,7 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
 
 							<property name="authorizationCheck">
 								<bean
-									class="gov.nih.nci.security.acegi.csm.authorization.CSMUserAuthorizationCheck">
+									class="gov.nih.nci.cabig.ctms.acegi.csm.authorization.CSMUserAuthorizationCheck">
 									<property
 										name="csmAuthorizationManager" ref="csmAuthorizationManager" />
 									<property name="requiredPermission"
@@ -73,7 +73,7 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
 						</bean>
 
 						<bean
-							class="gov.nih.nci.security.acegi.csm.vote.CSMBasicAccessDecisionVoter">
+							class="gov.nih.nci.cabig.ctms.acegi.csm.vote.CSMBasicAccessDecisionVoter">
 
 							<property name="processDomainObjectClass"
 								value="testapp.bean.Statement" />
@@ -82,7 +82,7 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
 
 							<property name="authorizationCheck">
 								<bean
-									class="gov.nih.nci.security.acegi.csm.authorization.CSMOwnershipAuthorizationCheck">
+									class="gov.nih.nci.cabig.ctms.acegi.csm.authorization.CSMOwnershipAuthorizationCheck">
 									<property
 										name="csmAuthorizationManager" ref="csmAuthorizationManager" />
 									<property name="objectIdGenerator"
@@ -95,14 +95,14 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
 
 						<!--============== BEGIN STATEMENT UPDATE ================-->
 						<bean
-							class="gov.nih.nci.security.acegi.csm.vote.CSMBasicAccessDecisionVoter">
+							class="gov.nih.nci.cabig.ctms.acegi.csm.vote.CSMBasicAccessDecisionVoter">
 							<property name="processDomainObjectClass"
 								value="testapp.bean.Statement" />
 							<property name="processConfigAttribute"
 								value="CSM_STATEMENT_UPDATE" />
 							<property name="authorizationCheck">
 								<bean
-									class="gov.nih.nci.security.acegi.csm.authorization.CSMGroupAuthorizationCheck">
+									class="gov.nih.nci.cabig.ctms.acegi.csm.authorization.CSMGroupAuthorizationCheck">
 									<property
 										name="csmAuthorizationManager" ref="csmAuthorizationManager" />
 									<property name="requiredPermission"
@@ -115,7 +115,7 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
 						</bean>
 
 						<bean
-							class="gov.nih.nci.security.acegi.csm.vote.CSMBasicAccessDecisionVoter">
+							class="gov.nih.nci.cabig.ctms.acegi.csm.vote.CSMBasicAccessDecisionVoter">
 
 							<property name="processDomainObjectClass"
 								value="testapp.bean.Statement" />
@@ -124,7 +124,7 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
 
 							<property name="authorizationCheck">
 								<bean
-									class="gov.nih.nci.security.acegi.csm.authorization.CSMUserAuthorizationCheck">
+									class="gov.nih.nci.cabig.ctms.acegi.csm.authorization.CSMUserAuthorizationCheck">
 									<property
 										name="csmAuthorizationManager" ref="csmAuthorizationManager" />
 									<property name="requiredPermission"
@@ -137,7 +137,7 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
 						</bean>
 
 						<bean
-							class="gov.nih.nci.security.acegi.csm.vote.CSMBasicAccessDecisionVoter">
+							class="gov.nih.nci.cabig.ctms.acegi.csm.vote.CSMBasicAccessDecisionVoter">
 
 							<property name="processDomainObjectClass"
 								value="testapp.bean.Statement" />
@@ -146,7 +146,7 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
 
 							<property name="authorizationCheck">
 								<bean
-									class="gov.nih.nci.security.acegi.csm.authorization.CSMOwnershipAuthorizationCheck">
+									class="gov.nih.nci.cabig.ctms.acegi.csm.authorization.CSMOwnershipAuthorizationCheck">
 									<property
 										name="csmAuthorizationManager" ref="csmAuthorizationManager" />
 									<property name="objectIdGenerator"
@@ -163,20 +163,20 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
 		</property>
 
 		<property name="afterInvocationManager">
-			<bean class="gov.nih.nci.security.acegi.csm.aop.CSMAfterInvocationManager">
+			<bean class="gov.nih.nci.cabig.ctms.acegi.csm.aop.CSMAfterInvocationManager">
 
 				<property name="processConfigAttribute"
 					value="CSM_STATEMENT_FIND" />
 
 				<property name="objectResultHandler">
 					<bean
-						class="gov.nih.nci.security.acegi.csm.authorization.CSMBasicObjectResultHandler">
+						class="gov.nih.nci.cabig.ctms.acegi.csm.authorization.CSMBasicObjectResultHandler">
 						<property name="processDomainObjectClass"
 							value="testapp.bean.Statement" />
 						<property name="authorizationChecks">
 							<list>
 								<bean
-									class="gov.nih.nci.security.acegi.csm.authorization.CSMGroupAuthorizationCheck">
+									class="gov.nih.nci.cabig.ctms.acegi.csm.authorization.CSMGroupAuthorizationCheck">
 									<property
 										name="csmAuthorizationManager" ref="csmAuthorizationManager" />
 									<property name="requiredPermission"
@@ -185,7 +185,7 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
 										ref="csmExtentIdGenerator" />
 								</bean>
 								<bean
-									class="gov.nih.nci.security.acegi.csm.authorization.CSMUserAuthorizationCheck">
+									class="gov.nih.nci.cabig.ctms.acegi.csm.authorization.CSMUserAuthorizationCheck">
 									<property
 										name="csmAuthorizationManager" ref="csmAuthorizationManager" />
 									<property name="requiredPermission"
@@ -194,7 +194,7 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
 										ref="csmObjectIdGenerator" />
 								</bean>
 								<bean
-									class="gov.nih.nci.security.acegi.csm.authorization.CSMOwnershipAuthorizationCheck">
+									class="gov.nih.nci.cabig.ctms.acegi.csm.authorization.CSMOwnershipAuthorizationCheck">
 									<property
 										name="csmAuthorizationManager" ref="csmAuthorizationManager" />
 									<property name="objectIdGenerator"

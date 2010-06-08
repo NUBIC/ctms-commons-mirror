@@ -22,6 +22,13 @@ ctms-commons history
 - Renamed modules "testing-all" to just "testing" and
   "testing-all:testing" to "testing:unit"
 
+### acegi
+
+- Moved all the acegi-* modules into CTMS-specific packages so as not
+  to conflict with CSM.  Mapping:
+    gov.nih.nci.security (exact) -> gov.nih.nci.cabig.ctms.csmext
+    gov.nih.nci.security.acegi.* -> gov.nih.nci.cabig.ctms.acegi.*
+
 ### all
 
 - Begin formal changelog

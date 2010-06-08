@@ -173,7 +173,7 @@
 	</bean>
 
 	<bean id="csmAuthenticationProvider"
-		class="gov.nih.nci.security.acegi.csm.authentication.CSMAuthenticationProvider">
+		class="gov.nih.nci.cabig.ctms.acegi.csm.authentication.CSMAuthenticationProvider">
 
 		<property name="csmAuthenticationManager">
 			<bean class="gov.nih.nci.security.SecurityServiceProvider"
