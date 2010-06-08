@@ -45,7 +45,7 @@ namespace :publish do
     unless which_vcs == :svn
       fail "Tagging may only be done from an svn checkout."
     end
-    system("svn tag ^/trunk ^/tags/releases/#{CTMS_COMMONS_VERSION} -m 'Tag #{CTMS_COMMONS_VERSION}'")
+    system("svn cp ^/trunk ^/tags/releases/#{CTMS_COMMONS_VERSION} -m 'Tag #{CTMS_COMMONS_VERSION}'")
     fail "Tagging failed" unless $? == 0
   end
 
