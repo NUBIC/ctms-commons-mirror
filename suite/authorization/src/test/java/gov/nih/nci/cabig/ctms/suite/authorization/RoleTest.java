@@ -49,7 +49,7 @@ public class RoleTest extends TestCase {
 
     public void testScopeSetIsImmutable() throws Exception {
         try {
-            Role.DATA_READER.getScopes().remove(Role.Scope.SITE);
+            Role.DATA_READER.getScopes().remove(ScopeType.SITE);
             fail("Exception not thrown");
         } catch (UnsupportedOperationException uoe) {
             // good

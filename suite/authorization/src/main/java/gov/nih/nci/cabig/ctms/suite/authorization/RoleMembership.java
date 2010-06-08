@@ -23,15 +23,15 @@ import java.util.Set;
 @SuppressWarnings({ "RawUseOfParameterizedType" })
 public class RoleMembership {
     private final Role role;
-    private final Map<Role.Scope, IdentifiableInstanceMapping> mappings;
+    private final Map<ScopeType, IdentifiableInstanceMapping> mappings;
 
-    private Map<Role.Scope, List<String>> identifiers;
+    private Map<ScopeType, List<String>> identifiers;
     /**
      * Cache of the actual objects related to identifiers.  Invariant: the list of objects for a
      * given scope will either match the corresponding identifiers or be null.
      */
-    private Map<Role.Scope, List<Object>> applicationObjectCaches;
-    private Map<Role.Scope, Boolean> forAll;
+    private Map<ScopeType, List<Object>> applicationObjectCaches;
+    private Map<ScopeType, Boolean> forAll;
 
     public RoleMembership(
         Role role,
@@ -39,19 +39,19 @@ public class RoleMembership {
         StudyMapping studyMapping
     ) {
         this.role = role;
-        this.mappings = new HashMap<Role.Scope, IdentifiableInstanceMapping>();
-        this.mappings.put(Role.Scope.SITE, siteMapping);
-        this.mappings.put(Role.Scope.STUDY, studyMapping);
+        this.mappings = new HashMap<ScopeType, IdentifiableInstanceMapping>();
+        this.mappings.put(ScopeType.SITE, siteMapping);
+        this.mappings.put(ScopeType.STUDY, studyMapping);
 
-        this.identifiers = new HashMap<Role.Scope, List<String>>();
-        this.applicationObjectCaches = new HashMap<Role.Scope, List<Object>>();
-        this.forAll = new HashMap<Role.Scope, Boolean>();
+        this.identifiers = new HashMap<ScopeType, List<String>>();
+        this.applicationObjectCaches = new HashMap<ScopeType, List<Object>>();
+        this.forAll = new HashMap<ScopeType, Boolean>();
 
-        clear(Role.Scope.SITE);
-        clear(Role.Scope.STUDY);
+        clear(ScopeType.SITE);
+        clear(ScopeType.STUDY);
     }
 
-    private synchronized void clear(Role.Scope scope) {
+    private synchronized void clear(ScopeType scope) {
         this.identifiers.put(scope, Collections.<String>emptyList());
         this.applicationObjectCaches.put(scope, null);
         this.forAll.put(scope, false);
@@ -81,7 +81,7 @@ public class RoleMembership {
      * @return this (for chaining)
      */
     public RoleMembership forSites(Collection<?> sitesOrIdentifiers) {
-        return forScopeObjectsOrIdentifiers(Role.Scope.SITE, sitesOrIdentifiers);
+        return forScopeObjectsOrIdentifiers(ScopeType.SITE, sitesOrIdentifiers);
     }
 
     /**
@@ -106,11 +106,11 @@ public class RoleMembership {
      * @return this (for chaining)
      */
     public RoleMembership forStudies(Collection<?> studiesOrIdentifiers) {
-        return forScopeObjectsOrIdentifiers(Role.Scope.STUDY, studiesOrIdentifiers);
+        return forScopeObjectsOrIdentifiers(ScopeType.STUDY, studiesOrIdentifiers);
     }
 
     @SuppressWarnings({ "unchecked" })
-    private RoleMembership forScopeObjectsOrIdentifiers(Role.Scope scope, Collection<?> objectsOrIdentifiers) {
+    private RoleMembership forScopeObjectsOrIdentifiers(ScopeType scope, Collection<?> objectsOrIdentifiers) {
         if (objectsOrIdentifiers.isEmpty()) {
             setIdentifiers(scope, Collections.<String>emptyList());
         } else {
@@ -125,7 +125,7 @@ public class RoleMembership {
     }
 
     @SuppressWarnings({ "unchecked" })
-    private void setApplicationObjects(Role.Scope scope, List<Object> objects) {
+    private void setApplicationObjects(ScopeType scope, List<Object> objects) {
         List<String> correspondingIdentifiers = new ArrayList<String>(objects.size());
         for (Object siteObject : objects) {
             correspondingIdentifiers.add(getMapping(scope).getSharedIdentity(siteObject));
@@ -135,14 +135,14 @@ public class RoleMembership {
     }
 
     public RoleMembership forAllSites() {
-        return forAll(Role.Scope.SITE);
+        return forAll(ScopeType.SITE);
     }
 
     public RoleMembership forAllStudies() {
-        return forAll(Role.Scope.STUDY);
+        return forAll(ScopeType.STUDY);
     }
 
-    private RoleMembership forAll(Role.Scope scope) {
+    private RoleMembership forAll(ScopeType scope) {
         clear(scope);
         this.forAll.put(scope, true);
         return this;
@@ -152,9 +152,9 @@ public class RoleMembership {
 
     public void validate() throws SuiteAuthorizationValidationException {
         // validate scopes
-        Set<Role.Scope> extraScopes = new LinkedHashSet<Role.Scope>();
-        Set<Role.Scope> missingScopes = new LinkedHashSet<Role.Scope>();
-        for (Role.Scope scope : Role.Scope.values()) {
+        Set<ScopeType> extraScopes = new LinkedHashSet<ScopeType>();
+        Set<ScopeType> missingScopes = new LinkedHashSet<ScopeType>();
+        for (ScopeType scope : ScopeType.values()) {
             boolean applicable = this.role.getScopes().contains(scope);
             boolean present = isScoped(scope);
             if (applicable && !present) {
@@ -178,15 +178,15 @@ public class RoleMembership {
         }
     }
 
-    private String scopeNameList(Set<Role.Scope> scopes) {
+    private String scopeNameList(Set<ScopeType> scopes) {
         Collection<String> msNames = new LinkedHashSet<String>();
-        for (Role.Scope missingScope : scopes) {
+        for (ScopeType missingScope : scopes) {
             msNames.add(missingScope.name().toLowerCase());
         }
         return StringUtils.join(msNames, " and ");
     }
 
-    private boolean isScoped(Role.Scope scope) {
+    private boolean isScoped(ScopeType scope) {
         return isAll(scope) || !getIdentifiers(scope).isEmpty();
     }
 
@@ -201,7 +201,7 @@ public class RoleMembership {
      * method may result in an object resolve.
      */
     public synchronized List<Object> getSites() {
-        return getApplicationObjects(Role.Scope.SITE);
+        return getApplicationObjects(ScopeType.SITE);
     }
 
     /**
@@ -209,11 +209,11 @@ public class RoleMembership {
      * method may result in an object resolve.
      */
     public synchronized List<Object> getStudies() {
-        return getApplicationObjects(Role.Scope.STUDY);
+        return getApplicationObjects(ScopeType.STUDY);
     }
 
     @SuppressWarnings({ "unchecked" })
-    private List<Object> getApplicationObjects(Role.Scope scope) {
+    private List<Object> getApplicationObjects(ScopeType scope) {
         if (isAll(scope)) {
             throw new SuiteAuthorizationAccessException(
                 "This %s has access to every %s.  You can't list %s instances for it.",
@@ -227,14 +227,14 @@ public class RoleMembership {
     }
 
     public List<String> getSiteIdentifiers() {
-        return getIdentifiers(Role.Scope.SITE);
+        return getIdentifiers(ScopeType.SITE);
     }
 
     public List<String> getStudyIdentifiers() {
-        return getIdentifiers(Role.Scope.STUDY);
+        return getIdentifiers(ScopeType.STUDY);
     }
 
-    private List<String> getIdentifiers(Role.Scope scope) throws SuiteAuthorizationAccessException {
+    private List<String> getIdentifiers(ScopeType scope) throws SuiteAuthorizationAccessException {
         if (isAll(scope)) {
             throw new SuiteAuthorizationAccessException(
                 "This %s has access to every %s.  You can't list %s identifiers for it.",
@@ -243,20 +243,20 @@ public class RoleMembership {
         return this.identifiers.get(scope);
     }
 
-    private synchronized void setIdentifiers(Role.Scope scope, List<String> identifiers) {
+    private synchronized void setIdentifiers(ScopeType scope, List<String> identifiers) {
         clear(scope);
         this.identifiers.put(scope, identifiers);
     }
 
     public boolean isAllSites() {
-        return isAll(Role.Scope.SITE);
+        return isAll(ScopeType.SITE);
     }
 
     public boolean isAllStudies() {
-        return isAll(Role.Scope.STUDY);
+        return isAll(ScopeType.STUDY);
     }
 
-    private boolean isAll(Role.Scope scope) {
+    private boolean isAll(ScopeType scope) {
         Boolean value = forAll.get(scope);
         if (value == null) {
             return false;
@@ -265,7 +265,7 @@ public class RoleMembership {
         }
     }
 
-    protected IdentifiableInstanceMapping getMapping(Role.Scope scope) {
+    protected IdentifiableInstanceMapping getMapping(ScopeType scope) {
         return mappings.get(scope);
     }
 }

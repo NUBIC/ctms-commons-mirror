@@ -41,12 +41,9 @@ public enum Role {
     DATA_ANALYST
     ;
 
-    /** The scopes which may apply to a role. */
-    public enum Scope { SITE, STUDY }
-
     private String description;
     private String displayName;
-    private Set<Scope> scopes;
+    private Set<ScopeType> scopes;
 
     private static Properties roleProperties;
 
@@ -81,16 +78,16 @@ public enum Role {
     /**
      * The axes on which this role is scoped.
      */
-    public Set<Role.Scope> getScopes() {
+    public Set<ScopeType> getScopes() {
         return this.scopes;
     }
 
     public boolean isStudyScoped() {
-        return getScopes().contains(Role.Scope.STUDY);
+        return getScopes().contains(ScopeType.STUDY);
     }
 
     public boolean isSiteScoped() {
-        return getScopes().contains(Role.Scope.SITE);
+        return getScopes().contains(ScopeType.SITE);
     }
 
     public boolean isScoped() {
@@ -106,14 +103,14 @@ public enum Role {
         return getRoleProperties().getProperty(getCsmName() + ".description");
     }
 
-    private Set<Role.Scope> createScopes() {
+    private Set<ScopeType> createScopes() {
         String prop = getRoleProperties().getProperty(getCsmName() + ".scopes");
         if (prop == null) {
             return Collections.emptySet();
         } else {
-            Set<Scope> creating = new LinkedHashSet<Scope>();
+            Set<ScopeType> creating = new LinkedHashSet<ScopeType>();
             for (String scope : prop.split("\\s+")) {
-                creating.add(Role.Scope.valueOf(scope.toUpperCase()));
+                creating.add(ScopeType.valueOf(scope.toUpperCase()));
             }
             return Collections.unmodifiableSet(creating);
         }

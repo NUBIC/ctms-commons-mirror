@@ -11,6 +11,8 @@
     <dependency name="ctms-commons-base" rev="latest.integration"/>
     <dependency name="ctms-commons-core" rev="latest.integration"/>
 
+    <dependency org="gov.nih.nci.security" name="csm" rev="${lib.csm.rev}"/>
+
     <dependency org="org.slf4j" name="slf4j-api" rev="${lib.slf4j.rev}"/>
     <dependency org="org.apache.commons" name="com.springsource.org.apache.commons.lang" rev="${lib.jakarta-commons.lang.rev}"/>
 
