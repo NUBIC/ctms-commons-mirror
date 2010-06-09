@@ -131,6 +131,13 @@ namespace :publish do
       each { |file| FileUtils.rm_rf file }
   end
 
+  desc "Remove all changes to already-published artifacts from the local copy of the publish repo"
+  task :unmodify => :repo do
+    repo = task("publish:repo").path
+    paths = repo_status.select { |st, path| st == 'M' }.collect { |st, path| "'#{path}'" }.join(' ')
+    system("svn revert #{paths}")
+  end
+
   def repo_status
     `svn status #{task("publish:repo").path}`.split("\n").collect { |line| line.split(/\s+/, 2) }
   end
