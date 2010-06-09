@@ -22,7 +22,6 @@ public class ProvisioningSessionIntegratedTest extends IntegratedTestCase {
         super.setUp();
         psFactory = new ProvisioningSessionFactory();
         psFactory.setAuthorizationManager(getAuthorizationManager());
-        psFactory.setAuthorizationDao(getAuthorizationDao());
         psFactory.setSiteMapping(new TestSiteMapping());
         psFactory.setStudyMapping(new TestStudyMapping());
     }

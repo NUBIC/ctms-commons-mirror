@@ -1,7 +1,6 @@
 package gov.nih.nci.cabig.ctms.suite.authorization;
 
 import gov.nih.nci.security.AuthorizationManager;
-import gov.nih.nci.security.dao.AuthorizationDAO;
 import org.dbunit.DBTestCase;
 import org.dbunit.IDatabaseTester;
 import org.dbunit.dataset.IDataSet;
@@ -23,9 +22,5 @@ public abstract class IntegratedTestCase extends DBTestCase {
 
     protected AuthorizationManager getAuthorizationManager() {
         return CsmIntegratedTestHelper.getAuthorizationManager();
-    }
-
-    protected AuthorizationDAO getAuthorizationDao() {
-        return CsmIntegratedTestHelper.getAuthorizationDao();
     }
 }

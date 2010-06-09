@@ -1,7 +1,6 @@
 package gov.nih.nci.cabig.ctms.suite.authorization;
 
 import gov.nih.nci.security.AuthorizationManager;
-import gov.nih.nci.security.dao.AuthorizationDAO;
 
 /**
  * @author Rhett Sutphin
@@ -9,7 +8,6 @@ import gov.nih.nci.security.dao.AuthorizationDAO;
 @SuppressWarnings({ "RawUseOfParameterizedType" })
 public class ProvisioningSessionFactory {
     private AuthorizationManager authorizationManager;
-    private AuthorizationDAO authorizationDao;
     private SiteMapping siteMapping;
     private StudyMapping studyMapping;
     private AuthorizationHelper authorizationHelper;
@@ -39,7 +37,6 @@ public class ProvisioningSessionFactory {
     protected synchronized CsmHelper getCsmHelper() {
         if (csmHelper == null) {
             csmHelper = new CsmHelper();
-            csmHelper.setAuthorizationDao(getAuthorizationDao());
             csmHelper.setAuthorizationManager(getAuthorizationManager());
             csmHelper.setSiteMapping(getSiteMapping());
             csmHelper.setStudyMapping(getStudyMapping());
@@ -80,17 +77,6 @@ public class ProvisioningSessionFactory {
      */
     public void setAuthorizationManager(AuthorizationManager authorizationManager) {
         this.authorizationManager = authorizationManager;
-    }
-
-    protected AuthorizationDAO getAuthorizationDao() {
-        return authorizationDao;
-    }
-
-    /**
-     * Set the CSM AuthorizationDao to use.
-     */
-    public void setAuthorizationDao(AuthorizationDAO authorizationDao) {
-        this.authorizationDao = authorizationDao;
     }
 
     protected SiteMapping getSiteMapping() {

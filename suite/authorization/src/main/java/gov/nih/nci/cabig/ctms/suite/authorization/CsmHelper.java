@@ -1,12 +1,13 @@
 package gov.nih.nci.cabig.ctms.suite.authorization;
 
+import gov.nih.nci.cabig.ctms.CommonsError;
 import gov.nih.nci.security.AuthorizationManager;
 import gov.nih.nci.security.authorization.domainobjects.Group;
 import gov.nih.nci.security.authorization.domainobjects.ProtectionElement;
 import gov.nih.nci.security.authorization.domainobjects.ProtectionGroup;
 import gov.nih.nci.security.authorization.domainobjects.Role;
-import gov.nih.nci.security.dao.AuthorizationDAO;
 import gov.nih.nci.security.dao.GroupSearchCriteria;
+import gov.nih.nci.security.dao.ProtectionGroupSearchCriteria;
 import gov.nih.nci.security.dao.RoleSearchCriteria;
 import gov.nih.nci.security.exceptions.CSObjectNotFoundException;
 import gov.nih.nci.security.exceptions.CSTransactionException;
@@ -26,7 +27,6 @@ public class CsmHelper {
 
     private Map<ScopeType, IdentifiableInstanceMapping> mappings;
     private AuthorizationManager authorizationManager;
-    private AuthorizationDAO authorizationDao;
 
     public CsmHelper() {
         mappings = new LinkedHashMap<ScopeType, IdentifiableInstanceMapping>();
@@ -70,6 +70,7 @@ public class CsmHelper {
      *
      * @see #setStudyMapping
      */
+    @SuppressWarnings({"unchecked"})
     public ProtectionGroup getOrCreateScopeProtectionGroup(ScopeType scope, Object scopeObject) {
         return getOrCreateScopeProtectionGroup(ScopeDescription.createForOne(
             scope, getMapping(scope).getSharedIdentity(scopeObject)));
@@ -84,7 +85,7 @@ public class CsmHelper {
     public Group getRoleCsmGroup(SuiteRole role) throws SuiteAuthorizationAccessException {
         Group example = new Group();
         example.setGroupName(role.getCsmName());
-        List found = getAuthorizationDao().getObjects(new GroupSearchCriteria(example));
+        List found = getAuthorizationManager().getObjects(new GroupSearchCriteria(example));
         if (found.size() == 0) {
             throw new SuiteAuthorizationAccessException("Missing CSM group for suite role %s (%s)", 
                 role.getDisplayName(), role.getCsmName());
@@ -105,7 +106,7 @@ public class CsmHelper {
     public Role getRoleCsmRole(SuiteRole role) {
         Role example = new Role();
         example.setName(role.getCsmName());
-        List found = getAuthorizationDao().getObjects(new RoleSearchCriteria(example));
+        List found = getAuthorizationManager().getObjects(new RoleSearchCriteria(example));
         if (found.size() == 0) {
             throw new SuiteAuthorizationAccessException("Missing CSM role for suite role %s (%s)",
                 role.getDisplayName(), role.getCsmName());
@@ -156,12 +157,7 @@ public class CsmHelper {
     }
 
     private ProtectionGroup ensureProtectionGroupExists(String csmName) {
-        ProtectionGroup existing = null;
-        try {
-            existing = getAuthorizationDao().getProtectionGroup(csmName);
-        } catch (CSObjectNotFoundException e) {
-            // fall through
-        }
+        ProtectionGroup existing = getProtectionGroup(csmName);
         if (existing == null) {
             ProtectionGroup newPg = new ProtectionGroup();
             newPg.setProtectionGroupName(csmName);
@@ -172,14 +168,27 @@ public class CsmHelper {
             }
             // reload to ensure that we always return an object with the same set of fields
             // filled in
-            try {
-                existing = getAuthorizationDao().getProtectionGroup(csmName);
-            } catch (CSObjectNotFoundException e) {
-                throw new SuiteAuthorizationProvisioningFailure(
-                    "Failed to reload the ProtectionElement that was just created.", e);
-            }
+            existing = getProtectionGroup(csmName);
         }
         return existing;
+    }
+
+    /**
+     * Get a single PG by name, or return null.
+     */
+    private ProtectionGroup getProtectionGroup(String name) {
+        ProtectionGroup template = new ProtectionGroup();
+        template.setProtectionGroupName(name);
+        List matches
+            = getAuthorizationManager().getObjects(new ProtectionGroupSearchCriteria(template));
+        if (matches.size() == 0) {
+            return null;
+        } else if (matches.size() == 1) {
+            return (ProtectionGroup) matches.get(0);
+        } else {
+            throw new CommonsError(
+                "There are two or more PGs named " + name + ".  This shouldn't be possible.");
+        }
     }
 
     private void ensurePgPeLink(ProtectionElement pe, ProtectionGroup pg) {
@@ -230,14 +239,6 @@ public class CsmHelper {
 
     public void setAuthorizationManager(AuthorizationManager authorizationManager) {
         this.authorizationManager = authorizationManager;
-    }
-
-    protected AuthorizationDAO getAuthorizationDao() {
-        return authorizationDao;
-    }
-
-    public void setAuthorizationDao(AuthorizationDAO authorizationDao) {
-        this.authorizationDao = authorizationDao;
     }
 
     ////// INNER CLASSES

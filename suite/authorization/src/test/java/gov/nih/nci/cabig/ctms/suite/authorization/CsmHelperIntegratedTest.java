@@ -3,6 +3,7 @@ package gov.nih.nci.cabig.ctms.suite.authorization;
 import gov.nih.nci.cabig.ctms.suite.authorization.domain.TestSiteMapping;
 import gov.nih.nci.cabig.ctms.suite.authorization.domain.TestStudy;
 import gov.nih.nci.cabig.ctms.suite.authorization.domain.TestStudyMapping;
+import static gov.nih.nci.cabig.ctms.suite.authorization.CsmIntegratedTestHelper.getAuthorizationDao;
 import gov.nih.nci.security.authorization.domainobjects.Group;
 import gov.nih.nci.security.authorization.domainobjects.ProtectionElement;
 import gov.nih.nci.security.authorization.domainobjects.ProtectionGroup;
@@ -22,7 +23,6 @@ public class CsmHelperIntegratedTest extends IntegratedTestCase {
         super.setUp();
         csmHelper = new CsmHelper();
         csmHelper.setAuthorizationManager(getAuthorizationManager());
-        csmHelper.setAuthorizationDao(getAuthorizationDao());
         csmHelper.setSiteMapping(new TestSiteMapping());
         csmHelper.setStudyMapping(new TestStudyMapping());
     }
