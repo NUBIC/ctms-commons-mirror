@@ -16,7 +16,7 @@ namespace :publish do
                      p = project('ctms-commons')
                      if File.directory?(p._('.git'))
                        :git
-                     elsif File.directory?(p._('svn'))
+                     elsif File.directory?(p._('.svn'))
                        :svn
                      end
                    end
