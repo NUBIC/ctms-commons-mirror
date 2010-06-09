@@ -14,6 +14,7 @@ ctms-commons history
 - Updated ivy4r dependency to 0.11.0.
 - Ensured that `buildr javadoc` can build combined javadoc for the
   whole project.
+- Ensure that the project is built using Java 5's classfile format.
 
 1.0.0
 -----
