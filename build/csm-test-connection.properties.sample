@@ -1,0 +1,7 @@
+url=jdbc:postgresql:csm_for_ctms_commons_suite
+username=postgres
+password=
+
+# These two are guessable.  Only specify them if the guess is wrong.
+#driver=
+#dialect=

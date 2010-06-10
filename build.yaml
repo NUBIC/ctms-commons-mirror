@@ -4,3 +4,4 @@ gems:
 - ivy4r =0.11.0
 ivy:
   settings.file: ivy/ivysettings.xml
+ant: 1.8.0

@@ -30,6 +30,26 @@ associated entry in the changelog.
 This library is built with buildr.  As of this writing, it works
 with buildr 1.3.5 on jruby 1.4.0.  It uses ivy4r for ivy integration.
 
+### Testing
+
+#### Databases
+
+The suite-authorization module has integrated tests that are PostgreSQL-backed.  In order to run these tests successfully, you'll need to
+
+1) Create a database for them to use
+2) Create a file named build/csm-test-connection.properties.  There's a sample in that directory.
+3) Run `buildr ctms-commons:suite:authorization:test:wipe_db` to initialize the schema.
+
+If you get an error like this:
+
+    org.apache.tools.ant.BuildException: org.postgresql.util.PSQLException: ERROR: language "plpgsql" does not exist
+     Hint: Use CREATE LANGUAGE to load the language into the database.
+
+Run this command as a database superuser in your PostgreSQL test
+database:
+
+    CREATE LANGUAGE plpgsql;
+
 ### Releasing
 
 In order to release ctms-commons, you have to have been granted access

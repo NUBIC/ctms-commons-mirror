@@ -1,6 +1,14 @@
 ctms-commons history
 ====================
 
+1.0.2
+-----
+
+### all
+
+- Allow suite:authorization integrated test database connection
+  parameters to be specified using a properties file.
+
 1.0.1
 -----
 

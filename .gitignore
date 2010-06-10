@@ -6,3 +6,5 @@ publish-repo
 *.iml
 *.iws
 .rvmrc
+
+build/*.properties

@@ -126,18 +126,28 @@ define "ctms-commons" do
       project.iml.group = true
       configure_ivy(ivy)
       interproject_dependencies << 'ctms-commons:core' << 'ctms-commons:base'
+
+      test.resources.filter.using( csm_db_properties )
+
       package(:bundle).tap do |bundle|
         bundle["Export-Package"] = bnd_export_package
       end
 
-      task "test:wipe_db" => task("test:resources") do
-        # TODO: this assumes many things: that the database is local, that it is postgresql, etc.
-        db_name = File.read(_(:target, :test, :resources, 'csm-connection.properties')).split("\n").
-          grep(/connection.url/).first.scan(/jdbc:postgresql:(\S+)/).first.first
-        raise "Couldn't find database name" unless db_name
+      task "test:wipe_db" => ["#{project.name}:test:compile", "#{project.name}:testdeps"] do
+        p = csm_db_properties
         %w(schema seeddata).each do |n|
-          info "Executing #{n}.sql on #{db_name}"
-          system("psql '#{db_name}' -F '/' -f '#{_(:target, :test, :resources, "csm-sql/postgresql/#{n}.sql")}'")
+          info "Executing #{n}.sql on #{p['csm_db.db_type']}"
+          ant('wipe_db').sql(
+            :src => _(:target, :test, :resources, "csm-sql", p["csm_db.db_type"], "#{n}.sql"),
+            :delimiter => '/',
+            :delimitertype => 'row',
+            :userid   => p['csm_db.username'],
+            :password => p['csm_db.password'],
+            :driver   => p['csm_db.driver'],
+            :url      => p['csm_db.url'],
+            :classpath => project.test.compile.dependencies.collect { |a| a.to_s }.join(';'),
+            :keepformat => false
+            )
         end
       end
     end
