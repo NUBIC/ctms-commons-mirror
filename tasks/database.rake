@@ -8,21 +8,21 @@ module DatabaseSetup
 
   DEFAULT_CSM_PROPERTIES_FILENAME = "csm-test-connection.properties"
 
-  def csm_db_properties_filename
+  def csm_db_properties_filename(root_project)
     basename = ENV['CSM_DB'] || DEFAULT_CSM_PROPERTIES_FILENAME
     basename << '.properties' unless basename =~ /.properties$/
-    full_path = basename =~ %r{^/} ? basename : project('ctms-commons').path_to("build", basename)
+    full_path = basename =~ %r{^/} ? basename : root_project.path_to("build", basename)
     unless File.exist?(full_path)
-      sample_path = project('ctms-commons')._("build", DEFAULT_CSM_PROPERTIES_FILENAME)
+      sample_path = root_project._("build", DEFAULT_CSM_PROPERTIES_FILENAME)
       fail "Please create #{full_path}. There's a sample in #{sample_path}.sample."
     end
     full_path
   end
 
-  def csm_db_properties
+  def csm_db_properties(root_project)
     @csm_db_properties ||=
       begin
-        filename = csm_db_properties_filename
+        filename = csm_db_properties_filename(root_project)
         raw_props = Hash.from_java_properties(File.read(filename))
         trace "Raw CSM test DB properties from #{filename} are #{raw_props.inspect}"
         url = raw_props["url"] or raise "\"url\" is required in #{filename}"

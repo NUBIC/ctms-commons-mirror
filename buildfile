@@ -107,13 +107,13 @@ define "ctms-commons" do
     define "csm-test", :base_dir => _('acegi-csm-test') do
       project.iml.group = true
       configure_ivy(ivy)
-      interproject_dependencies << 'acegi:csm'
+      interproject_dependencies << project.parent.project('csm')
     end
 
     define "grid", :base_dir => _('acegi-grid') do
       project.iml.group = true
       configure_ivy(ivy)
-      interproject_dependencies << 'acegi:csm'
+      interproject_dependencies << project.parent.project('csm')
       package(:jar)
     end
   end
@@ -127,14 +127,14 @@ define "ctms-commons" do
       configure_ivy(ivy)
       interproject_dependencies << 'ctms-commons:core' << 'ctms-commons:base'
 
-      test.resources.filter.using( csm_db_properties )
+      test.resources.filter.using( csm_db_properties(project.parent.parent) )
 
       package(:bundle).tap do |bundle|
         bundle["Export-Package"] = bnd_export_package
       end
 
       task "test:wipe_db" => ["#{project.name}:test:compile", "#{project.name}:testdeps"] do
-        p = csm_db_properties
+        p = csm_db_properties(project.parent.parent)
         %w(schema seeddata).each do |n|
           info "Executing #{n}.sql on #{p['csm_db.db_type']}"
           ant('wipe_db').sql(
