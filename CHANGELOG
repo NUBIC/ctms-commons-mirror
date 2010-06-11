@@ -6,6 +6,9 @@ ctms-commons history
 
 ### all
 
+- Ensure that non-class resources are properly included in
+  bnd-packaged jars.  This affected the web, laf, and
+  suite:authorization modules.
 - Allow suite:authorization integrated test database connection
   parameters to be specified using a properties file.
 

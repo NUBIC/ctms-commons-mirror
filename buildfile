@@ -74,6 +74,7 @@ define "ctms-commons" do
 
     package(:bundle).tap do |bundle|
       bundle["Export-Package"] = bnd_export_package
+      bundle["Include-Resource"] = _('target/resources')
     end
   end
 
@@ -83,6 +84,7 @@ define "ctms-commons" do
 
     package(:bundle).tap do |bundle|
       bundle["Export-Package"] = bnd_export_package
+      bundle["Include-Resource"] = _('target/resources')
     end
   end
 
@@ -131,6 +133,7 @@ define "ctms-commons" do
 
       package(:bundle).tap do |bundle|
         bundle["Export-Package"] = bnd_export_package
+        bundle["Include-Resource"] = _('target/resources')
       end
 
       task "test:wipe_db" => ["#{project.name}:test:compile", "#{project.name}:testdeps"] do
@@ -150,6 +153,11 @@ define "ctms-commons" do
             )
         end
       end
+
+      # TODO: this should work
+      # check package(:bundle), "includes resources" do
+      #  it.should contain('**/*.properties')
+      # end
     end
   end
 
