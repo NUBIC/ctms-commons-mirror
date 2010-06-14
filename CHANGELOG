@@ -1,6 +1,15 @@
 ctms-commons history
 ====================
 
+1.0.3
+-----
+
+### core
+
+- Add tests for AuditUtil.
+- Fix varargs problem in AuditUtil.getObjectId which caused it to
+  never return an ID.
+
 1.0.2
 -----
 
