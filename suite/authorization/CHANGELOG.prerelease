@@ -2,6 +2,12 @@ This is a list of changes for pre-release versions of the
 suite-authorization module.  Once it merges versions with the rest of
 the library, its changes will be listed in the main CHANGELOG.
 
+0.1.1
+-----
+
+- Renamed role adverse_event_study_data_reviewer to ae_study_data_reviewer
+- Renamed role expedited_report_reviewer to ae_expedited_report_reviewer
+
 0.1.0
 -----
 

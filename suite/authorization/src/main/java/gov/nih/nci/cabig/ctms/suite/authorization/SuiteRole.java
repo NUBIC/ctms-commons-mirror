@@ -35,13 +35,12 @@ public enum SuiteRole {
     STUDY_SUBJECT_CALENDAR_MANAGER,
     REGISTRAR,
     AE_REPORTER,
-    EXPEDITED_REPORT_REVIEWER,
-    ADVERSE_EVENT_STUDY_DATA_REVIEWER,
+    AE_EXPEDITED_REPORT_REVIEWER,
+    AE_STUDY_DATA_REVIEWER,
     LAB_IMPACT_CALENDAR_NOTIFIER,
     LAB_DATA_USER,
     DATA_READER,
-    DATA_ANALYST
-    ;
+    DATA_ANALYST;
 
     public static SuiteRole getByCsmName(String csmName) {
         for (SuiteRole role : values()) {
