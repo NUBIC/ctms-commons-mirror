@@ -22,63 +22,63 @@ import javax.persistence.Version;
 @GenericGenerator(name = "id-generator", strategy = "native", parameters = { @Parameter(name = "sequence", value = "SEQ_AUDIT_EVENT_VALUES_ID") })
 public class DataAuditEventValue {
 
-	/** The id. */
-	@Id
-	@GeneratedValue(generator = "id-generator")
-	@Column(name = "id")
-	private Integer id;
+    /** The id. */
+    @Id
+    @GeneratedValue(generator = "id-generator")
+    @Column(name = "id")
+    private Integer id;
 
-	/** The version. */
-	@Version
-	private Integer version;
+    /** The version. */
+    @Version
+    private Integer version;
 
-	public Integer getId() {
-		return id;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "audit_event_id")
-	private DataAuditEvent auditEvent;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "audit_event_id")
+    private DataAuditEvent auditEvent;
 
-	@Column(name = "attribute_name")
-	private String attributeName;
+    @Column(name = "attribute_name")
+    private String attributeName;
 
-	@Column(name = "previous_value")
-	private String previousValue;
+    @Column(name = "previous_value")
+    private String previousValue;
 
-	@Column(name = "new_value")
-	private String currentValue;
+    @Column(name = "new_value")
+    private String currentValue;
 
-	/* for hibernate */
-	protected DataAuditEventValue() {
-	}
+    /* for hibernate */
+    protected DataAuditEventValue() {
+    }
 
-	public DataAuditEventValue(final String attributeName, final String previousValue, final String currentValue) {
-		this.attributeName = attributeName;
-		this.previousValue = previousValue;
-		this.currentValue = currentValue;
-	}
+    public DataAuditEventValue(final String attributeName, final String previousValue, final String currentValue) {
+        this.attributeName = attributeName;
+        this.previousValue = previousValue;
+        this.currentValue = currentValue;
+    }
 
-	// //// BEAN PROPERTIES
+    // //// BEAN PROPERTIES
 
-	public String getAttributeName() {
-		return attributeName;
-	}
+    public String getAttributeName() {
+        return attributeName;
+    }
 
-	public DataAuditEvent getAuditEvent() {
-		return auditEvent;
-	}
+    public DataAuditEvent getAuditEvent() {
+        return auditEvent;
+    }
 
-	public String getCurrentValue() {
-		return currentValue;
-	}
+    public String getCurrentValue() {
+        return currentValue;
+    }
 
-	public String getPreviousValue() {
-		return previousValue;
-	}
+    public String getPreviousValue() {
+        return previousValue;
+    }
 
-	public void setAuditEvent(final DataAuditEvent auditEvent) {
-		this.auditEvent = auditEvent;
-	}
+    public void setAuditEvent(final DataAuditEvent auditEvent) {
+        this.auditEvent = auditEvent;
+    }
 
 }

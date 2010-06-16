@@ -6,43 +6,43 @@ package gov.nih.nci.cabig.ctms.audit.domain;
  */
 public class AuditHistoryDetail {
 
-	private AuditHistory auditHistory;
+    private AuditHistory auditHistory;
 
-	private String attributeName;
+    private String attributeName;
 
-	private String previousValue;
+    private String previousValue;
 
-	private String currentValue;
+    private String currentValue;
 
-	protected AuditHistoryDetail() {
-	}
+    protected AuditHistoryDetail() {
+    }
 
-	public AuditHistoryDetail(final String attributeName, final String previousValue, final String currentValue) {
-		this.attributeName = attributeName;
-		this.previousValue = previousValue;
-		this.currentValue = currentValue;
-	}
+    public AuditHistoryDetail(final String attributeName, final String previousValue, final String currentValue) {
+        this.attributeName = attributeName;
+        this.previousValue = previousValue;
+        this.currentValue = currentValue;
+    }
 
-	// //// BEAN PROPERTIES
+    // //// BEAN PROPERTIES
 
-	public String getAttributeName() {
-		return attributeName;
-	}
+    public String getAttributeName() {
+        return attributeName;
+    }
 
-	public String getCurrentValue() {
-		return currentValue;
-	}
+    public String getCurrentValue() {
+        return currentValue;
+    }
 
-	public String getPreviousValue() {
-		return previousValue;
-	}
+    public String getPreviousValue() {
+        return previousValue;
+    }
 
-	public AuditHistory getAuditHistory() {
-		return auditHistory;
-	}
+    public AuditHistory getAuditHistory() {
+        return auditHistory;
+    }
 
-	public void setAuditHistory(final AuditHistory auditHistory) {
-		this.auditHistory = auditHistory;
-	}
+    public void setAuditHistory(final AuditHistory auditHistory) {
+        this.auditHistory = auditHistory;
+    }
 
 }

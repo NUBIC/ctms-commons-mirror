@@ -7,41 +7,41 @@ import gov.nih.nci.cabig.ctms.audit.util.AuditUtil;
  */
 public class DataReference {
 
-	public static DataReference create(Object entity) {
+    public static DataReference create(Object entity) {
 
-		return new DataReference(entity.getClass().getName(), AuditUtil.getObjectId(entity));
-	}
+        return new DataReference(entity.getClass().getName(), AuditUtil.getObjectId(entity));
+    }
 
-	private String className;
+    private String className;
 
-	private Integer id;
+    private Integer id;
 
-	public DataReference() {
-	}
+    public DataReference() {
+    }
 
-	public DataReference(Class<?> clazz, Integer id) {
-		this(clazz.getName(), id);
-	}
+    public DataReference(Class<?> clazz, Integer id) {
+        this(clazz.getName(), id);
+    }
 
-	public DataReference(String className, Integer id) {
-		this.className = className;
-		this.id = id;
-	}
+    public DataReference(String className, Integer id) {
+        this.className = className;
+        this.id = id;
+    }
 
-	public String getClassName() {
-		return className;
-	}
+    public String getClassName() {
+        return className;
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setClassName(String className) {
-		this.className = className;
-	}
+    public void setClassName(String className) {
+        this.className = className;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
 }
