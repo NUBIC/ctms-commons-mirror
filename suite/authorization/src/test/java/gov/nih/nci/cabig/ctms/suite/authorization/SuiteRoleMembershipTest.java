@@ -5,6 +5,7 @@ import gov.nih.nci.cabig.ctms.suite.authorization.domain.TestSiteMapping;
 import gov.nih.nci.cabig.ctms.suite.authorization.domain.TestStudy;
 import gov.nih.nci.cabig.ctms.suite.authorization.domain.TestStudyMapping;
 import gov.nih.nci.cabig.ctms.testing.MockRegistry;
+import gov.nih.nci.security.authorization.domainobjects.Role;
 import junit.framework.TestCase;
 import static org.easymock.classextension.EasyMock.*;
 
@@ -584,6 +585,26 @@ public class SuiteRoleMembershipTest extends TestCase {
     ) {
         assertEquals(message + ": wrong kind", expectedKind, actual.getKind());
         assertEquals(message + ": wrong scope description", expectedSD, actual.getScopeDescription());
+    }
+
+    ////// optional mappings
+    
+    public void testAttemptingToUseAnUnavailableMappingGivesAHelpfulErrorMessage() throws Exception {
+        try {
+            new SuiteRoleMembership(SuiteRole.DATA_READER, null, null).
+                forSites(new TestSite("B"));
+            fail("Exception not thrown");
+        } catch (SuiteAuthorizationAccessException e) {
+            assertEquals("Wrong message",
+                "No site mapping was provided.  Either provide one or stick to the identifier-based methods.",
+                e.getMessage());
+        }
+    }
+
+    public void testUsingIdentifiersWhenNoMappingsWorksFine() throws Exception {
+        SuiteRoleMembership m = new SuiteRoleMembership(SuiteRole.DATA_READER, null, null).
+            forSites("B");
+        assertEquals("Wrong number of sites", 1, m.getSiteIdentifiers().size());
     }
 
     ////// HELPERS

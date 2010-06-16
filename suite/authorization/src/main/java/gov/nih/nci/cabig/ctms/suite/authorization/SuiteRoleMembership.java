@@ -386,7 +386,13 @@ public class SuiteRoleMembership {
     }
 
     protected IdentifiableInstanceMapping getMapping(ScopeType scope) {
-        return mappings.get(scope);
+        IdentifiableInstanceMapping mapping = mappings.get(scope);
+        if (mapping == null) {
+            throw new SuiteAuthorizationAccessException(
+                "No %s mapping was provided.  Either provide one or stick to the identifier-based methods.",
+                scope.name().toLowerCase());
+        }
+        return mapping;
     }
 
     ////// ANALYSIS

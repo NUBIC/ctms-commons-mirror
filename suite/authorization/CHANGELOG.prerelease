@@ -8,6 +8,8 @@ the library, its changes will be listed in the main CHANGELOG.
 - Add SuiteRoleMembership#removeSite and SuiteRoleMembership#removeStudy.
 - Allow SuiteRoleMembership#add* and #remove* to accept mapped application
   scope object instances in addition to identifiers.
+- Provide a nicer failure message if you call a method that needs an
+  instance mapping that isn't configured.
 
 0.1.3
 -----

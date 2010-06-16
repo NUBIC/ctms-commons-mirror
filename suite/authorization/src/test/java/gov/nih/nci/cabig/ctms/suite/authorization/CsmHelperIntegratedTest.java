@@ -1,5 +1,6 @@
 package gov.nih.nci.cabig.ctms.suite.authorization;
 
+import gov.nih.nci.cabig.ctms.suite.authorization.domain.TestSite;
 import gov.nih.nci.cabig.ctms.suite.authorization.domain.TestSiteMapping;
 import gov.nih.nci.cabig.ctms.suite.authorization.domain.TestStudy;
 import gov.nih.nci.cabig.ctms.suite.authorization.domain.TestStudyMapping;
@@ -185,5 +186,17 @@ public class CsmHelperIntegratedTest extends IntegratedTestCase {
             csmHelper.getRoleCsmRole(role);
         }
         // It's sufficient that there aren't any exceptions
+    }
+
+    public void testAttemptingToUseAnUnavailableMappingGivesAHelpfulErrorMessage() throws Exception {
+        csmHelper.setStudyMapping(null);
+        try {
+            csmHelper.getOrCreateScopeProtectionGroup(ScopeType.STUDY, new TestStudy("Y"));
+            fail("Exception not thrown");
+        } catch (SuiteAuthorizationProvisioningFailure e) {
+            assertEquals("Wrong message",
+                "No study mapping was provided.  Either provide one or stick to the identifier-based methods.",
+                e.getMessage());
+        }
     }
 }

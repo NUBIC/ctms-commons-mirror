@@ -222,7 +222,13 @@ public class CsmHelper {
     ///// CONFIGURATION
 
     protected IdentifiableInstanceMapping getMapping(ScopeType scope) {
-        return mappings.get(scope);
+        IdentifiableInstanceMapping mapping = mappings.get(scope);
+        if (mapping == null) {
+            throw new SuiteAuthorizationProvisioningFailure(
+                "No %s mapping was provided.  Either provide one or stick to the identifier-based methods.",
+                scope.name().toLowerCase());
+        }
+        return mapping;
     }
 
     public void setSiteMapping(SiteMapping mapping) {
