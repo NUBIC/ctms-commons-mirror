@@ -27,7 +27,7 @@ define "ctms-commons" do
   define "base" do
     configure_ivy(ivy)
     package(:bundle).tap do |bundle|
-      bundle["Export-Package"] = bnd_export_package
+      configure_bundle(bundle)
     end
   end
 
@@ -36,7 +36,7 @@ define "ctms-commons" do
     interproject_dependencies << 'base'
 
     package(:bundle).tap do |bundle|
-      bundle["Export-Package"] = bnd_export_package
+      configure_bundle(bundle)
     end
   end
 
@@ -63,7 +63,7 @@ define "ctms-commons" do
     interproject_dependencies << 'base' << 'lang' << 'testing:unit'
 
     package(:bundle).tap do |bundle|
-      bundle["Export-Package"] = bnd_export_package
+      configure_bundle(bundle)
     end
   end
 
@@ -73,8 +73,7 @@ define "ctms-commons" do
     interproject_dependencies << 'web'
 
     package(:bundle).tap do |bundle|
-      bundle["Export-Package"] = bnd_export_package
-      bundle["Include-Resource"] = _('target/resources')
+      configure_bundle(bundle)
     end
   end
 
@@ -83,8 +82,7 @@ define "ctms-commons" do
     interproject_dependencies << 'base' << 'lang' << 'core' << 'testing:unit'
 
     package(:bundle).tap do |bundle|
-      bundle["Export-Package"] = bnd_export_package
-      bundle["Include-Resource"] = _('target/resources')
+      configure_bundle(bundle)
     end
   end
 
@@ -102,7 +100,7 @@ define "ctms-commons" do
       configure_ivy(ivy)
 
       package(:bundle).tap do |bundle|
-        bundle["Export-Package"] = bnd_export_package
+        configure_bundle(bundle)
       end
     end
 
@@ -116,7 +114,10 @@ define "ctms-commons" do
       project.iml.group = true
       configure_ivy(ivy)
       interproject_dependencies << project.parent.project('csm')
-      package(:jar)
+
+      package(:bundle).tap do |bundle|
+        configure_bundle(bundle)
+      end
     end
   end
 
@@ -132,8 +133,7 @@ define "ctms-commons" do
       test.resources.filter.using( csm_db_properties(project.parent.parent) )
 
       package(:bundle).tap do |bundle|
-        bundle["Export-Package"] = bnd_export_package
-        bundle["Include-Resource"] = _('target/resources')
+        configure_bundle(bundle)
       end
 
       task "test:wipe_db" => ["#{project.name}:test:compile", "#{project.name}:testdeps"] do

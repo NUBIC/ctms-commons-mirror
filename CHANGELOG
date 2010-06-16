@@ -1,6 +1,15 @@
 ctms-commons history
 ====================
 
+1.0.4
+-----
+
+### all
+
+- Make all external imports optional in OSGi metadata.  This allows
+  applications which use ctms-commons to pick-and-choose which
+  features to use.
+
 1.0.3
 -----
 

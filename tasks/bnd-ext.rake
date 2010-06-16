@@ -1,8 +1,6 @@
 require 'buildr'
 
-# Extends project with an accessor to find the java packages defined
-# by that project and one to use to inform bnd that those are the only
-# ones to export.
+# Helper methods for building bundles using buildr-bnd.
 
 class Buildr::Project
   def java_packages
@@ -13,5 +11,15 @@ class Buildr::Project
 
   def bnd_export_package
     @bnd_export_package ||= java_packages.collect { |p| "#{p};version=#{version}" }.join(',')
+  end
+
+  def bnd_import_package
+    "gov.nih.nci.*, *;resolution:=optional"
+  end
+
+  def configure_bundle(bundle)
+    bundle["Export-Package"] = bnd_export_package
+    bundle["Import-Package"] = bnd_import_package
+    bundle["Include-Resource"] = _(:target, :resources) if File.exist?(_(:target, :resources))
   end
 end
