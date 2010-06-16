@@ -10,13 +10,13 @@ the library, its changes will be listed in the main CHANGELOG.
 0.1.2
 -----
 
-- Renamed role adverse_event_study_data_reviewer to ae_study_data_reviewer
-- Renamed role expedited_report_reviewer to ae_expedited_report_reviewer
+- Renamed role adverse_event_study_data_reviewer to ae_study_data_reviewer.
+- Renamed role expedited_report_reviewer to ae_expedited_report_reviewer.
 
 0.1.1
 -----
 
-- Corrected missing role.properties from package
+- Ensure that role.properties is included in the package.
 
 0.1.0
 -----
@@ -35,4 +35,3 @@ the library, its changes will be listed in the main CHANGELOG.
 
 - Initial release.  Key public API is SuiteRoleMembership and
   ProvisioningSession.
-

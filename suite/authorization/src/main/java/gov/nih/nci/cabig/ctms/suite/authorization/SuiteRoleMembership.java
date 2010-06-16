@@ -106,7 +106,7 @@ public class SuiteRoleMembership {
     }
 
     /**
-     * Scope this membership to the specified application site objects.
+     * Scope this membership to the specified application study objects.
      * @return this (for chaining)
      */
     public SuiteRoleMembership forStudies(Object... studyObjects) {
@@ -114,8 +114,8 @@ public class SuiteRoleMembership {
     }
 
     /**
-     * Scope this membership to the specified sites.  The collection may contain either application
-     * site objects or site shared identifiers.
+     * Scope this membership to the specified studies.  The collection may contain either application
+     * study objects or study shared identifiers.
      * @return this (for chaining)
      */
     public SuiteRoleMembership forStudies(Collection<?> studiesOrIdentifiers) {
@@ -123,7 +123,7 @@ public class SuiteRoleMembership {
     }
 
     /**
-     * Expand the memberships' scope to include another site.
+     * Expand the memberships' scope to include another study.
      * @return this (for chaining)
      */
     public SuiteRoleMembership addStudy(String identifier) {
