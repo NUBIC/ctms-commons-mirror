@@ -17,9 +17,13 @@ class Buildr::Project
     "gov.nih.nci.*, *;resolution:=optional"
   end
 
-  def configure_bundle(bundle)
+  def configure_bundle(bundle, options = {})
+    unless options.has_key?(:resources)
+      options[:resources] = File.exist?(_(:source, :main, :resources))
+    end
+
     bundle["Export-Package"] = bnd_export_package
     bundle["Import-Package"] = bnd_import_package
-    bundle["Include-Resource"] = _(:target, :resources) if File.exist?(_(:target, :resources))
+    bundle["Include-Resource"] = _(:target, :resources) if options[:resources]
   end
 end
