@@ -1,6 +1,8 @@
 package gov.nih.nci.cabig.ctms.suite.authorization;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,6 +25,8 @@ import java.util.LinkedList;
  */
 @SuppressWarnings({ "RawUseOfParameterizedType" })
 public class SuiteRoleMembership {
+    private final Logger log = LoggerFactory.getLogger(getClass());
+
     private final SuiteRole role;
     private final Map<ScopeType, IdentifiableInstanceMapping> mappings;
 
@@ -90,11 +94,35 @@ public class SuiteRoleMembership {
     }
 
     /**
-     * Expand the memberships' scope to include another site.
+     * Expand the membership's scope to include another site.
      * @return this (for chaining)
      */
     public SuiteRoleMembership addSite(String identifier) {
-        return addScopeIdentifier(ScopeType.SITE, identifier);
+        return addScopeObjectOrIdentifier(ScopeType.SITE, identifier);
+    }
+
+    /**
+     * Expand the membership's scope to include another site.
+     * @return this (for chaining)
+     */
+    public SuiteRoleMembership addSite(Object site) {
+        return addScopeObjectOrIdentifier(ScopeType.SITE, site);
+    }
+
+    /**
+     * Contract the membership's scope by removing the specified site.
+     * @return this (for chaining)
+     */
+    public SuiteRoleMembership removeSite(String identifier) {
+        return removeScopeObjectOrIdentifier(ScopeType.SITE, identifier);
+    }
+
+    /**
+     * Contract the membership's scope by removing the specified site.
+     * @return this (for chaining)
+     */
+    public SuiteRoleMembership removeSite(Object site) {
+        return removeScopeObjectOrIdentifier(ScopeType.SITE, site);
     }
 
     /**
@@ -127,17 +155,77 @@ public class SuiteRoleMembership {
      * @return this (for chaining)
      */
     public SuiteRoleMembership addStudy(String identifier) {
-        return addScopeIdentifier(ScopeType.STUDY, identifier);
+        return addScopeObjectOrIdentifier(ScopeType.STUDY, identifier);
     }
 
-    private SuiteRoleMembership addScopeIdentifier(ScopeType scope, String identifier) {
+    /**
+     * Expand the memberships' scope to include another study.
+     * @return this (for chaining)
+     */
+    public SuiteRoleMembership addStudy(Object study) {
+        return addScopeObjectOrIdentifier(ScopeType.STUDY, study);
+    }
+
+    /**
+     * Contract the membership's scope by removing the specified study.
+     * @return this (for chaining)
+     */
+    public SuiteRoleMembership removeStudy(String identifier) {
+        return removeScopeObjectOrIdentifier(ScopeType.STUDY, identifier);
+    }
+
+    /**
+     * Contract the membership's scope by removing the specified study.
+     * @return this (for chaining)
+     */
+    public SuiteRoleMembership removeStudy(Object study) {
+        return removeScopeObjectOrIdentifier(ScopeType.STUDY, study);
+    }
+
+    // n.b.: add is always done in terms of identifiers.  We assume that most of the time
+    // when you are doing an add, the application objects won't be loaded.  No point in loading
+    // them just to add one.
+    @SuppressWarnings({ "unchecked" })
+    private SuiteRoleMembership addScopeObjectOrIdentifier(ScopeType scope, Object objectOrIdentifier) {
+        String identifierToAdd = null;
+        if (objectOrIdentifier instanceof String) {
+            identifierToAdd = (String) objectOrIdentifier;
+        } else if (getMapping(scope).isInstance(objectOrIdentifier)) {
+            identifierToAdd = getMapping(scope).getSharedIdentity(objectOrIdentifier);
+        } else {
+            throw new SuiteAuthorizationValidationException(
+                "Attempted to add an instance of %s as a %s scope object.  This is not an acceptable type; check your mapping.",
+                objectOrIdentifier.getClass().getName(), scope.name().toLowerCase());
+        }
+
         if (isAll(scope)) {
-            forScopeObjectsOrIdentifiers(scope, Collections.singleton(identifier));
+            forScopeObjectsOrIdentifiers(scope, Collections.singleton(identifierToAdd));
         } else {
             List<String> newIs = new ArrayList<String>(this.identifiers.get(scope));
-            newIs.add(identifier);
+            newIs.add(identifierToAdd);
             setIdentifiers(scope, newIs);
         }
+        return this;
+    }
+
+    // n.b.: remove is always done in terms of identifiers.  We assume that most of the time
+    // when you are doing a remove, the application objects won't be loaded.  No point in loading
+    // them just to remove one.
+    @SuppressWarnings({ "unchecked" })
+    private SuiteRoleMembership removeScopeObjectOrIdentifier(ScopeType scope, Object objectOrIdentifier) {
+        String identifierToRemove = null;
+        if (objectOrIdentifier instanceof String) {
+            identifierToRemove = (String) objectOrIdentifier;
+        } else if (getMapping(scope).isInstance(objectOrIdentifier)) {
+            identifierToRemove = getMapping(scope).getSharedIdentity(objectOrIdentifier);
+        } else {
+            log.warn("Attempted to remove an instance of {} as an authorization {} scope object.  There is no conversion from that type to an identifier, so nothing will happen.",
+                objectOrIdentifier.getClass().getName(), scope.name().toLowerCase());
+        }
+
+        List<String> newIs = new ArrayList<String>(this.identifiers.get(scope));
+        newIs.remove(identifierToRemove);
+        setIdentifiers(scope, newIs);
         return this;
     }
 

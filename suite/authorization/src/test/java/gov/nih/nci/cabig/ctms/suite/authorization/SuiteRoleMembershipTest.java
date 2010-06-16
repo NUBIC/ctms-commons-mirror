@@ -254,7 +254,7 @@ public class SuiteRoleMembershipTest extends TestCase {
         }
     }
 
-    ////// appending
+    ////// appending and removing
 
     public void testAddSiteWhenBlank() throws Exception {
         SuiteRoleMembership m = createMembership(SuiteRole.DATA_ANALYST).addSite("F");
@@ -276,6 +276,25 @@ public class SuiteRoleMembershipTest extends TestCase {
         assertEquals("Wrong 1st site", "F", m.getSiteIdentifiers().get(0));
     }
 
+    public void testAddSiteObject() throws Exception {
+        SuiteRoleMembership m = createMembership(SuiteRole.DATA_ANALYST).
+            forSites("B").addSite(new TestSite("F"));
+        assertEquals("Wrong number of sites", 2, m.getSiteIdentifiers().size());
+        assertEquals("Wrong 1st site", "B", m.getSiteIdentifiers().get(0));
+        assertEquals("Wrong 1st site", "F", m.getSiteIdentifiers().get(1));
+    }
+
+    public void testAddSiteWithUnknownObjectTypeFails() throws Exception {
+        try {
+            createMembership(SuiteRole.DATA_ANALYST).addSite(new Object());
+            fail("Exception not thrown");
+        } catch (SuiteAuthorizationValidationException save) {
+            assertEquals("Wrong message",
+                "Attempted to add an instance of java.lang.Object as a site scope object.  This is not an acceptable type; check your mapping.",
+                save.getMessage());
+        }
+    }
+
     public void testAddStudyWhenBlank() throws Exception {
         SuiteRoleMembership m = createMembership(SuiteRole.DATA_ANALYST).addStudy("F");
         assertEquals("Wrong number of studies", 1, m.getStudyIdentifiers().size());
@@ -294,6 +313,75 @@ public class SuiteRoleMembershipTest extends TestCase {
         assertFalse("Should not be for all", m.isAllStudies());
         assertEquals("Wrong number of studies", 1, m.getStudyIdentifiers().size());
         assertEquals("Wrong 1st study", "F", m.getStudyIdentifiers().get(0));
+    }
+
+    public void testAddStudyObject() throws Exception {
+        SuiteRoleMembership m = createMembership(SuiteRole.DATA_ANALYST).
+            forStudies("B").addStudy(new TestStudy("F"));
+        assertEquals("Wrong number of studies", 2, m.getStudyIdentifiers().size());
+        assertEquals("Wrong 1st study", "B", m.getStudyIdentifiers().get(0));
+        assertEquals("Wrong 1st study", "F", m.getStudyIdentifiers().get(1));
+    }
+
+    public void testAddStudyWithUnknownObjectTypeFails() throws Exception {
+        try {
+            createMembership(SuiteRole.DATA_ANALYST).addStudy(new Object());
+            fail("Exception not thrown");
+        } catch (SuiteAuthorizationValidationException save) {
+            assertEquals("Wrong message",
+                "Attempted to add an instance of java.lang.Object as a study scope object.  This is not an acceptable type; check your mapping.",
+                save.getMessage());
+        }
+    }
+
+    public void testRemoveNonExistentSiteDoesNothing() throws Exception {
+        SuiteRoleMembership m = createMembership(SuiteRole.DATA_ANALYST).forSites("F", "I").removeSite("B");
+        assertEquals("Wrong number of sites", 2, m.getSiteIdentifiers().size());
+        assertEquals("Wrong 1st site", "F", m.getSiteIdentifiers().get(0));
+        assertEquals("Wrong 2nd site", "I", m.getSiteIdentifiers().get(1));
+    }
+
+    public void testRemoveSiteWhenEmptyDoesNothing() throws Exception {
+        SuiteRoleMembership m = createMembership(SuiteRole.DATA_ANALYST).removeSite("B");
+        assertEquals("Wrong number of sites", 0, m.getSiteIdentifiers().size());
+    }
+
+    public void testRemoveExistingSiteWorks() throws Exception {
+        SuiteRoleMembership m = createMembership(SuiteRole.DATA_ANALYST).forSites("B", "I").removeSite("B");
+        assertEquals("Wrong number of sites", 1, m.getSiteIdentifiers().size());
+        assertEquals("Wrong 1st site", "I", m.getSiteIdentifiers().get(0));
+    }
+
+    public void testRemoveSiteObjectWorks() throws Exception {
+        SuiteRoleMembership m = createMembership(SuiteRole.DATA_ANALYST).
+            forSites("B", "F").removeSite(new TestSite("F"));
+        assertEquals("Wrong number of sites", 1, m.getSiteIdentifiers().size());
+        assertEquals("Wrong 1st site", "B", m.getSiteIdentifiers().get(0));
+    }
+
+    public void testRemoveNonExistentStudyDoesNothing() throws Exception {
+        SuiteRoleMembership m = createMembership(SuiteRole.DATA_ANALYST).forStudies("F", "I").removeStudy("B");
+        assertEquals("Wrong number of studies", 2, m.getStudyIdentifiers().size());
+        assertEquals("Wrong 1st study", "F", m.getStudyIdentifiers().get(0));
+        assertEquals("Wrong 2nd study", "I", m.getStudyIdentifiers().get(1));
+    }
+
+    public void testRemoveStudyWhenEmptyDoesNothing() throws Exception {
+        SuiteRoleMembership m = createMembership(SuiteRole.DATA_ANALYST).removeStudy("B");
+        assertEquals("Wrong number of studies", 0, m.getStudyIdentifiers().size());
+    }
+
+    public void testRemoveExistingStudyWorks() throws Exception {
+        SuiteRoleMembership m = createMembership(SuiteRole.DATA_ANALYST).forStudies("B", "I").removeStudy("B");
+        assertEquals("Wrong number of studies", 1, m.getStudyIdentifiers().size());
+        assertEquals("Wrong 1st study", "I", m.getStudyIdentifiers().get(0));
+    }
+
+    public void testRemoveStudyObjectWorks() throws Exception {
+        SuiteRoleMembership m = createMembership(SuiteRole.DATA_ANALYST).
+            forStudies("B", "F").removeStudy(new TestStudy("F"));
+        assertEquals("Wrong number of studies", 1, m.getStudyIdentifiers().size());
+        assertEquals("Wrong 1st study", "B", m.getStudyIdentifiers().get(0));
     }
 
     ////// validation

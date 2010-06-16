@@ -2,6 +2,13 @@ This is a list of changes for pre-release versions of the
 suite-authorization module.  Once it merges versions with the rest of
 the library, its changes will be listed in the main CHANGELOG.
 
+0.2.0
+-----
+
+- Add SuiteRoleMembership#removeSite and SuiteRoleMembership#removeStudy.
+- Allow SuiteRoleMembership#add* and #remove* to accept mapped application
+  scope object instances in addition to identifiers.
+
 0.1.3
 -----
 
