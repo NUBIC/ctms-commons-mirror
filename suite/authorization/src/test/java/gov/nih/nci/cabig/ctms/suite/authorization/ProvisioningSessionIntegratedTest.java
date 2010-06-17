@@ -6,6 +6,8 @@ import gov.nih.nci.security.authorization.domainobjects.Group;
 import gov.nih.nci.security.authorization.domainobjects.Privilege;
 import gov.nih.nci.security.authorization.domainobjects.ProtectionElementPrivilegeContext;
 import gov.nih.nci.security.exceptions.CSObjectNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -15,15 +17,23 @@ import java.util.Set;
  * @author Rhett Sutphin
  */
 public class ProvisioningSessionIntegratedTest extends IntegratedTestCase {
+    private final Logger log = LoggerFactory.getLogger(getClass());
     private ProvisioningSessionFactory psFactory;
 
     @Override
     protected void setUp() throws Exception {
+        log.info("------ Starting test {} ------", getName());
         super.setUp();
         psFactory = new ProvisioningSessionFactory();
         psFactory.setAuthorizationManager(getAuthorizationManager());
         psFactory.setSiteMapping(new TestSiteMapping());
         psFactory.setStudyMapping(new TestStudyMapping());
+    }
+
+    @Override
+    protected void tearDown() throws Exception {
+        super.tearDown();
+        log.info("------  Ending  test {} ------", getName());
     }
 
     protected ProvisioningSession createSession(long userId) throws Exception {
@@ -54,6 +64,17 @@ public class ProvisioningSessionIntegratedTest extends IntegratedTestCase {
             SuiteRole.USER_ADMINISTRATOR.getCsmName(), -22);
         assertUserHasPrivilege("Unrelated PE deleted", -22, "HealthcareSite.MI001",
             SuiteRole.USER_ADMINISTRATOR.getCsmName());
+    }
+
+    public void testDeleteDoesNotAffectOtherRoles() throws Exception {
+        SuiteRole existingRole = SuiteRole.USER_ADMINISTRATOR;
+        assertUserInGroup("Test setup failure", existingRole.getCsmName(), -22);
+
+        createSession(-22).deleteRole(existingRole);
+
+        assertUserHasPrivilege("Unrelated privilege removed", -22, "HealthcareSite.MI001", "data_reader");
+        assertUserHasPrivilege("Unrelated privilege removed", -22, "Study", "data_reader");
+        assertUserInGroup("Unrelated group removed", "data_importer", -22);
     }
 
     public void testReplaceRoleWhenNewScopedRole() throws Exception {
@@ -96,6 +117,19 @@ public class ProvisioningSessionIntegratedTest extends IntegratedTestCase {
         assertUserInGroup("Not still in group", "user_administrator", -22);
         assertUserDoesNotHavePrivilege("Original priv not removed", -22, "HealthcareSite.MI001", "user_administrator");
         assertUserHasPrivilege("New priv not added", -22, "HealthcareSite", "user_administrator");
+    }
+
+    public void testReplaceDoesNotAffectOtherRoles() throws Exception {
+        assertUserInGroup("Test setup failure", "data_importer", -22);
+        assertUserHasPrivilege("Test setup failure", -22, "HealthcareSite.MI001", "data_reader");
+        assertUserHasPrivilege("Test setup failure", -22, "Study", "data_reader");
+
+        createSession(-22).replaceRole(
+            psFactory.createSuiteRoleMembership(SuiteRole.USER_ADMINISTRATOR).forAllSites());
+
+        assertUserHasPrivilege("Unrelated privilege removed", -22, "HealthcareSite.MI001", "data_reader");
+        assertUserHasPrivilege("Unrelated privilege removed", -22, "Study", "data_reader");
+        assertUserInGroup("Unrelated group removed", "data_importer", -22);
     }
 
     public void testReplaceFailsWhenNewMembershipIsInvalid() throws Exception {

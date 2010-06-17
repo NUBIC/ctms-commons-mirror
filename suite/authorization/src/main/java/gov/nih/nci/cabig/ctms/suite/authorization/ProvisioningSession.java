@@ -81,7 +81,7 @@ public class ProvisioningSession {
     private void ensureInGroupForRole(SuiteRole role) {
         Group csmGroup = factory.getCsmHelper().getRoleCsmGroup(role);
         try {
-            factory.getAuthorizationManager().assignGroupsToUser(
+            factory.getAuthorizationManager().addGroupsToUser(
                 Long.toString(userId), new String[] { csmGroup.getGroupId().toString() });
         } catch (CSTransactionException e) {
             throw new SuiteAuthorizationProvisioningFailure(

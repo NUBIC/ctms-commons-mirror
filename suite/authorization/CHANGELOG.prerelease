@@ -2,6 +2,13 @@ This is a list of changes for pre-release versions of the
 suite-authorization module.  Once it merges versions with the rest of
 the library, its changes will be listed in the main CHANGELOG.
 
+0.2.1
+-----
+
+- Bugfix: ProvisioningSession no longer implicitly deletes all other
+  CSM group memberships when #replaceRole is called.  (n.b. the
+  difference between "assign" and "add" in CSM.)
+
 0.2.0
 -----
 
