@@ -1,0 +1,30 @@
+<configuration debug="true">
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %40logger{40} %5level | %1X{depth} | %msg%n
+            </Pattern>
+        </layout>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>ctms-commons-test.log</file>
+        <append>false</append>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %date{HH:mm:ss.SSS} [%thread] %36logger{36} %-5level: %msg%n
+            </Pattern>
+        </layout>
+    </appender>
+
+    <root>
+        <appender-ref ref="FILE"/>
+    </root>
+
+    <logger name="gov.nih.nci.cabig.ctms">
+        <level value="trace"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="org.hibernate.type"><level value="trace"/></logger>
+</configuration>

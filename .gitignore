@@ -8,3 +8,4 @@ publish-repo
 .rvmrc
 
 build/*.properties
+*.log

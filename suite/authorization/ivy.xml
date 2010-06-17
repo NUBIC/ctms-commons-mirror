@@ -18,12 +18,14 @@
 
     <!-- TEST -->
     <dependency conf="unit-test->runtime" name="ctms-commons-testing-unit" rev="latest.integration"/>
-    <dependency conf="unit-test->*" org="org.slf4j" name="slf4j-simple" rev="${lib.slf4j.rev}"/>
+    <dependency conf="unit-test->*" org="ch.qos.logback" name="logback-classic" rev="0.9.20"/>
     <dependency conf="unit-test->*" org="org.slf4j" name="log4j-over-slf4j" rev="${lib.slf4j.rev}"/>
     <dependency conf="unit-test->*" org="org.dbunit" name="dbunit" rev="${lib.dbunit.rev}"/>
     <dependency conf="unit-test->*" org="postgresql" name="postgresql" rev="8.2-504.jdbc3"/>
 
     <exclude module="ant"/>
-    <exclude module="log4j"/>
+    <exclude module="log4j" matcher="exact"/>
+    <exclude org="org.apache.log4j"/>
+    <exclude module="slf4j-simple"/>
   </dependencies>
 </ivy-module>
