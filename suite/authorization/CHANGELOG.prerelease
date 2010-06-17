@@ -8,6 +8,8 @@ the library, its changes will be listed in the main CHANGELOG.
 - Bugfix: ProvisioningSession no longer implicitly deletes all other
   CSM group memberships when #replaceRole is called.  (n.b. the
   difference between "assign" and "add" in CSM.)
+- Changed ae_rule_and_report_manager to unscoped (i.e., global scope).
+- Changed supplemental_study_information_manager to site-scoped only.
 
 0.2.0
 -----
