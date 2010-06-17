@@ -23,6 +23,17 @@ define "ctms-commons" do
   project.iml.excluded_directories << IVY_HOME
   project.iml.group = true
 
+  ipr.add_component("CompilerConfiguration") do |component|
+    component.option :name => 'DEFAULT_COMPILER', :value => 'Javac'
+    component.option :name => 'DEPLOY_AFTER_MAKE', :value => '0'
+    component.resourceExtensions do |xml|
+      xml.entry :name => '.+\.nonexistent'
+    end
+    component.wildcardResourceExtensions do |xml|
+      xml.entry :name => '?*.nonexistent'
+    end
+  end
+
   desc "Zero-dependency common code for all other packages"
   define "base" do
     configure_ivy(ivy)
