@@ -104,15 +104,30 @@ namespace :publish do
     info "Copied #{artifacts.size} artifacts to the local publish repo."
   end
 
+  desc "Does a sanity check on the prepared artifacts"
+  task :sanity => :repo do
+    problems = repo_status.collect { |st, path|
+      if path =~ /ivy.xml$/
+        if File.read(path) =~ /\.DEV/
+          "#{path} contains a dependency on a development artifact."
+        end
+      end
+    }.compact
+    unless problems.empty?
+      fail "There are problems with the soon-to-be-published artifacts.  " <<
+        "Please fix them before committing.\n- #{problems.join("\n- ")}"
+    end
+  end
+
   desc "Prepare the project artifacts for publication"
-  task :prepare => [:check, :build, :copy] do
+  task :prepare => [:check, :build, :copy, :sanity] do
     info "The local checkout of the target repo now contains the artifacts for #{CTMS_COMMONS_VERSION}."
     info "Please verify they are correct, then run `buildr publish:commit`."
     info "(The local checkout is in #{task("publish:repo").path}.)"
   end
 
   desc "Commit the prepared artifacts"
-  task :commit => :repo do
+  task :commit => [:repo, :sanity] do
     all_statuses = repo_status.collect { |st, path| st }.uniq
     unless all_statuses == %w(A)
       fail "You can only publish adds, not changes: #{all_statuses.join(' ')}"
