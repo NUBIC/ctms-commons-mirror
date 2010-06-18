@@ -34,7 +34,7 @@ public class ProvisioningSession {
     public ProvisioningSession(long userId, ProvisioningSessionFactory factory) {
         this.userId = userId;
         this.factory = factory;
-        this.roleMemberships = factory.getAuthorizationHelper().getProvisioningRoleMemberships(userId);
+        this.roleMemberships = factory.getSuiteRoleMembershipLoader().getProvisioningRoleMemberships(userId);
     }
 
     /**

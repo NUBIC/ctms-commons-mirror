@@ -20,7 +20,7 @@ import java.util.LinkedList;
  * The suite's logical representation of a user's inclusion in one of the unified roles.  It has
  * two purposes: first, along with {@link ProvisioningSession}, it assists in the uniform provisioning of
  * users into certain roles.  Second, applications may receive instances of it from
- * {@link AuthorizationHelper} which reflect the authorization information for a particular user.
+ * {@link SuiteRoleMembershipLoader} which reflect the authorization information for a particular user.
  *
  * @author Rhett Sutphin
  */

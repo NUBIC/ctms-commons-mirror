@@ -10,7 +10,7 @@ public class ProvisioningSessionFactory {
     private AuthorizationManager authorizationManager;
     private SiteMapping siteMapping;
     private StudyMapping studyMapping;
-    private AuthorizationHelper authorizationHelper;
+    private SuiteRoleMembershipLoader suiteRoleMembershipLoader;
     private CsmHelper csmHelper;
 
     /**
@@ -51,21 +51,21 @@ public class ProvisioningSessionFactory {
         this.csmHelper = csmHelper;
     }
 
-    protected synchronized AuthorizationHelper getAuthorizationHelper() {
-        if (authorizationHelper == null) {
-            authorizationHelper = new AuthorizationHelper();
-            authorizationHelper.setAuthorizationManager(getAuthorizationManager());
-            authorizationHelper.setSiteMapping(getSiteMapping());
-            authorizationHelper.setStudyMapping(getStudyMapping());
+    protected synchronized SuiteRoleMembershipLoader getSuiteRoleMembershipLoader() {
+        if (suiteRoleMembershipLoader == null) {
+            suiteRoleMembershipLoader = new SuiteRoleMembershipLoader();
+            suiteRoleMembershipLoader.setAuthorizationManager(getAuthorizationManager());
+            suiteRoleMembershipLoader.setSiteMapping(getSiteMapping());
+            suiteRoleMembershipLoader.setStudyMapping(getStudyMapping());
         }
-        return authorizationHelper;
+        return suiteRoleMembershipLoader;
     }
 
     /**
-     * Set the {@link AuthorizationHelper} to use.  If none is provided, an instance will be created on use.
+     * Set the {@link SuiteRoleMembershipLoader} to use.  If none is provided, an instance will be created on use.
      */
-    public void setAuthorizationHelper(AuthorizationHelper authorizationHelper) {
-        this.authorizationHelper = authorizationHelper;
+    public void setSuiteRoleMembershipLoader(SuiteRoleMembershipLoader suiteRoleMembershipLoader) {
+        this.suiteRoleMembershipLoader = suiteRoleMembershipLoader;
     }
 
     protected AuthorizationManager getAuthorizationManager() {

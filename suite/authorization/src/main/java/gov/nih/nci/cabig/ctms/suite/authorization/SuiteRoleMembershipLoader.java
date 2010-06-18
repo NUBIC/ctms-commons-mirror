@@ -17,7 +17,7 @@ import java.util.Set;
  * @author Rhett Sutphin
  */
 @SuppressWarnings({ "RawUseOfParameterizedType" })
-public class AuthorizationHelper {
+public class SuiteRoleMembershipLoader {
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     private AuthorizationManager authorizationManager;

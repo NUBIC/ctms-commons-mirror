@@ -19,8 +19,10 @@ the library, its changes will be listed in the main CHANGELOG.
   exception if the membership doesn't meet their respective criteria.
 - Use only SuiteRoleMembership#validate when determining if a membership is
   acceptable in ProvisioningSession#replaceRole.
-- Add AuthorizationHelper#getProvisioningRoleMemberships to return
+- Add SuiteRoleMembershipLoader#getProvisioningRoleMemberships to return
   memberships which are incomplete.
+- Rename AuthorizationHelper to SuiteRoleMembershipLoader to reflect the fact
+  that it has explicitly non-authorization behaviors.
 
 0.2.1
 -----

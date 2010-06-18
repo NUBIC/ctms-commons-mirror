@@ -5,13 +5,13 @@ import java.util.Map;
 /**
  * @author Rhett Sutphin
  */
-public class AuthorizationHelperIntegratedTest extends IntegratedTestCase {
-    private AuthorizationHelper helper;
+public class SuiteRoleMembershipLoaderIntegratedTest extends IntegratedTestCase {
+    private SuiteRoleMembershipLoader helper;
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        helper = new AuthorizationHelper();
+        helper = new SuiteRoleMembershipLoader();
         helper.setAuthorizationManager(getAuthorizationManager());
     }
 
