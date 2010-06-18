@@ -134,7 +134,7 @@ define "ctms-commons" do
 
   define "suite" do
     project.no_iml
-    project.version = "0.2.1.DEV"
+    project.version = "0.2.2.DEV"
 
     define "authorization" do
       project.iml.group = true
