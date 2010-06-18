@@ -57,3 +57,7 @@ end
 class Buildr::Project
   include ProjectIvyRepo
 end
+
+task("clean").enhance do
+  rm_r ProjectIvyRepo::PROJECT_REPO_ROOT
+end
