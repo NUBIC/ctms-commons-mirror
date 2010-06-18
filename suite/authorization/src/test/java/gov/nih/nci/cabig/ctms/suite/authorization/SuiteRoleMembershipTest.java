@@ -388,7 +388,7 @@ public class SuiteRoleMembershipTest extends TestCase {
     ////// validation
 
     public void testAnUnscopedRoleWithNoScopesIsValid() throws Exception {
-        assertValid(createMembership(SuiteRole.SYSTEM_ADMINISTRATOR));
+        assertValidAndComplete(createMembership(SuiteRole.SYSTEM_ADMINISTRATOR));
     }
 
     public void testAnUnscopedRoleWithAllSiteScopeIsInvalid() throws Exception {
@@ -412,11 +412,11 @@ public class SuiteRoleMembershipTest extends TestCase {
     }
 
     public void testASiteOnlyRoleWithSpecificSiteScopesIsValid() throws Exception {
-        assertValid(createMembership(SuiteRole.STUDY_CREATOR).forSites("G"));
+        assertValidAndComplete(createMembership(SuiteRole.STUDY_CREATOR).forSites("G"));
     }
 
     public void testASiteOnlyRoleWithAllSiteScopeIsValid() throws Exception {
-        assertValid(createMembership(SuiteRole.STUDY_CREATOR).forAllSites());
+        assertValidAndComplete(createMembership(SuiteRole.STUDY_CREATOR).forAllSites());
     }
 
     public void testHavingStudyScopeWithASiteOnlyRoleIsInvalid() throws Exception {
@@ -429,35 +429,35 @@ public class SuiteRoleMembershipTest extends TestCase {
             "The Study Creator role is not scoped to study.");
     }
 
-    public void testASiteOnlyRoleWithoutSiteScopeIsInvalid() throws Exception {
-        assertInvalid(createMembership(SuiteRole.STUDY_CREATOR),
+    public void testASiteOnlyRoleWithoutSiteScopeIsValidButNotComplete() throws Exception {
+        assertValidButIncomplete(createMembership(SuiteRole.STUDY_CREATOR),
             "The Study Creator role is scoped to site.  Please specify the site scope.");
     }
 
-    public void testAStudyAndSiteRoleWithStudiesAndSitesIsValid() throws Exception {
-        assertValid(createMembership(SuiteRole.DATA_ANALYST).forStudies("CRM114").forSites("B"));
+    public void testAStudyAndSiteRoleWithStudiesAndSitesIsValidAndComplete() throws Exception {
+        assertValidAndComplete(createMembership(SuiteRole.DATA_ANALYST).forStudies("CRM114").forSites("B"));
     }
 
     public void testAStudyAndSiteRoleWithAllStudiesIsValid() throws Exception {
-        assertValid(createMembership(SuiteRole.DATA_ANALYST).forAllStudies().forSites("B"));
+        assertValidAndComplete(createMembership(SuiteRole.DATA_ANALYST).forAllStudies().forSites("B"));
     }
 
     public void testAStudyAndSiteRoleWithAllSitesIsValid() throws Exception {
-        assertValid(createMembership(SuiteRole.DATA_ANALYST).forAllSites().forStudies("CRM114"));
+        assertValidAndComplete(createMembership(SuiteRole.DATA_ANALYST).forAllSites().forStudies("CRM114"));
     }
 
     public void testAStudyAndSiteRoleWithoutSitesIsInvalid() throws Exception {
-        assertInvalid(createMembership(SuiteRole.DATA_ANALYST).forStudies("CRM114"),
+        assertValidButIncomplete(createMembership(SuiteRole.DATA_ANALYST).forStudies("CRM114"),
             "The Data Analyst role is scoped to site.  Please specify the site scope.");
     }
 
     public void testAStudyAndSiteRoleWithoutStudiesIsInvalid() throws Exception {
-        assertInvalid(createMembership(SuiteRole.DATA_ANALYST).forSites("T"),
+        assertValidButIncomplete(createMembership(SuiteRole.DATA_ANALYST).forSites("T"),
             "The Data Analyst role is scoped to study.  Please specify the study scope.");
     }
 
     public void testAStudyAndSiteRoleWithoutAnyScopeIsInvalid() throws Exception {
-        assertInvalid(createMembership(SuiteRole.DATA_ANALYST),
+        assertValidButIncomplete(createMembership(SuiteRole.DATA_ANALYST),
             "The Data Analyst role is scoped to site and study.  Please specify the site and study scopes.");
     }
 
@@ -476,6 +476,33 @@ public class SuiteRoleMembershipTest extends TestCase {
         } catch (SuiteAuthorizationValidationException save) {
             assertEquals("Wrong message", expectedMessage, save.getMessage());
         }
+    }
+
+    private void assertComplete(SuiteRoleMembership membership) {
+        try {
+            membership.checkComplete();
+        } catch (SuiteAuthorizationValidationException save) {
+            fail("Incorrectly incomplete: " + save.getMessage());
+        }
+    }
+
+    private void assertIncomplete(SuiteRoleMembership membership, String expectedMessage) {
+        try {
+            membership.checkComplete();
+            fail("Incorrectly complete");
+        } catch (SuiteAuthorizationValidationException save) {
+            assertEquals("Wrong message", expectedMessage, save.getMessage());
+        }
+    }
+
+    private void assertValidAndComplete(SuiteRoleMembership membership) {
+        assertValid(membership);
+        assertComplete(membership);
+    }
+
+    private void assertValidButIncomplete(SuiteRoleMembership membership, String expectedIncompletenessMessage) {
+        assertValid(membership);
+        assertIncomplete(membership, expectedIncompletenessMessage);
     }
 
     ////// diff

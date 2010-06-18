@@ -25,12 +25,27 @@ public class AuthorizationHelper {
     private StudyMapping studyMapping;
 
     /**
-     * Returns all the {@link SuiteRoleMembership}s for a user, indexed by {@link SuiteRole}.
+     * Returns all the complete {@link SuiteRoleMembership}s for a user, indexed by {@link SuiteRole}.
      * <p>
-     * Applications may not wish to use this as their primary authorization interface.
-     * That is fine -- this method is expected to primarily be used by {@link ProvisioningSession}.
+     * This is an alternative to using the CSM API to acquire this information piecemeal.  Pros:
+     * automatically excludes invalid or incomplete memberships.  Cons: Less future-proof.
      */
     public Map<SuiteRole, SuiteRoleMembership> getRoleMemberships(long userId) {
+        return getRoleMemberships(userId, false);
+    }
+
+    /**
+     * Returns all the {@link SuiteRoleMembership}s for a user, indexed by {@link SuiteRole}.
+     * <p>
+     * Includes incomplete memberships (e.g., memberships for study-scoped roles that are missing
+     * study scoping information).  This method should not be used for authorization; only for
+     * provisioning.
+     */
+    public Map<SuiteRole, SuiteRoleMembership> getProvisioningRoleMemberships(long userId) {
+        return getRoleMemberships(userId, true);
+    }
+
+    private Map<SuiteRole, SuiteRoleMembership> getRoleMemberships(long userId, boolean forProvisioning) {
         Map<SuiteRole, SuiteRoleMembership> memberships = new LinkedHashMap<SuiteRole, SuiteRoleMembership>();
         memberships.putAll(readUnscopedRoles(userId));
         memberships.putAll(readScopedRoles(userId));
@@ -38,8 +53,11 @@ public class AuthorizationHelper {
             Map.Entry<SuiteRole, SuiteRoleMembership> entry = it.next();
             try {
                 entry.getValue().validate();
+                if (!forProvisioning) {
+                    entry.getValue().checkComplete();
+                }
             } catch (SuiteAuthorizationValidationException e) {
-                log.debug("Removing invalid membership for {}: {}", entry.getKey(), e.getMessage());
+                log.debug("Removing inappropriate membership for {}: {}", entry.getKey(), e.getMessage());
                 it.remove();
             }
         }

@@ -19,10 +19,18 @@ public class AuthorizationHelperIntegratedTest extends IntegratedTestCase {
         assertEquals(3, helper.getRoleMemberships(-22).size());
     }
 
-    public void testInvalidRoleMembershipsExcluded() throws Exception {
+    public void testIncompleteRoleMembershipsExcludedByDefault() throws Exception {
         Map<SuiteRole, SuiteRoleMembership> actual = helper.getRoleMemberships(-26);
         assertEquals(1, actual.size());
         assertTrue("Wrong role present", actual.containsKey(SuiteRole.BUSINESS_ADMINISTRATOR));
+    }
+
+    public void testIncompleteRoleMembershipsIncludedOnRequest() throws Exception {
+        Map<SuiteRole, SuiteRoleMembership> actual = helper.getProvisioningRoleMemberships(-26);
+        assertEquals(2, actual.size());
+        assertFalse("Invalid role present", actual.containsKey(SuiteRole.STUDY_CREATOR));
+        assertTrue("Missing expected complete role", actual.containsKey(SuiteRole.BUSINESS_ADMINISTRATOR));
+        assertTrue("Missing expected incomplete role", actual.containsKey(SuiteRole.STUDY_TEAM_ADMINISTRATOR));
     }
 
     public void testGlobalRoleMembershipCorrectlyConstructed() throws Exception {

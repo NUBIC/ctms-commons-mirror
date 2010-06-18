@@ -271,25 +271,20 @@ public class SuiteRoleMembership implements Cloneable {
 
     ////// VALIDATION
 
+    /**
+     * Verifies that the membership is sufficiently well-formed to be persisted to CSM.
+     * Such a membership may still not be complete enough to actually be used for authorization.
+     *
+     * @see #checkComplete
+     */
     public void validate() throws SuiteAuthorizationValidationException {
-        // validate scopes
         Set<ScopeType> extraScopes = new LinkedHashSet<ScopeType>();
-        Set<ScopeType> missingScopes = new LinkedHashSet<ScopeType>();
         for (ScopeType scope : ScopeType.values()) {
             boolean applicable = this.role.getScopes().contains(scope);
             boolean present = isScoped(scope);
-            if (applicable && !present) {
-                missingScopes.add(scope);
-            } else if (present && !applicable) {
+            if (present && !applicable) {
                 extraScopes.add(scope);
             }
-        }
-
-        if (!missingScopes.isEmpty()) {
-            String msMsg = scopeNameList(missingScopes);
-            throw new SuiteAuthorizationValidationException(
-                "The %s role is scoped to %s.  Please specify the %s scope%s.",
-                role.getDisplayName(), msMsg, msMsg, missingScopes.size() == 1 ? "" : "s");
         }
 
         if (!extraScopes.isEmpty()) {
@@ -299,12 +294,53 @@ public class SuiteRoleMembership implements Cloneable {
         }
     }
 
+    /**
+     * Ensures that a membership has enough associated information to be used for authorization.
+     * I.e., that scope data is specified for all the scopes which apply to it.
+     *
+     * @see #validate
+     * @see SuiteRole#getScopes()
+     */
+    public void checkComplete() throws SuiteAuthorizationValidationException {
+        Set<ScopeType> missingScopes = new LinkedHashSet<ScopeType>();
+        for (ScopeType scope : ScopeType.values()) {
+            boolean applicable = this.role.getScopes().contains(scope);
+            boolean present = isScoped(scope);
+            if (applicable && !present) {
+                missingScopes.add(scope);
+            }
+        }
+
+        if (!missingScopes.isEmpty()) {
+            String msMsg = scopeNameList(missingScopes);
+            throw new SuiteAuthorizationValidationException(
+                "The %s role is scoped to %s.  Please specify the %s scope%s.",
+                role.getDisplayName(), msMsg, msMsg, missingScopes.size() == 1 ? "" : "s");
+        }
+    }
+
     private String scopeNameList(Set<ScopeType> scopes) {
         Collection<String> msNames = new LinkedHashSet<String>();
         for (ScopeType missingScope : scopes) {
             msNames.add(missingScope.name().toLowerCase());
         }
         return StringUtils.join(msNames, " and ");
+    }
+
+    /**
+     * Returns true if this membership has any site scoping information associated.
+     * (Not whether it <i>should</i> but whether it does.)
+     */
+    public boolean hasSiteScope() {
+        return isScoped(ScopeType.SITE);
+    }
+
+    /**
+     * Returns true if this membership has any study scoping information associated.
+     * (Not whether it <i>should</i> but whether it does.)
+     */
+    public boolean hasStudyScope() {
+        return isScoped(ScopeType.STUDY);
     }
 
     private boolean isScoped(ScopeType scope) {

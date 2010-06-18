@@ -80,12 +80,16 @@
   <!-- ... and a Data Importer -->
   <CSM_USER_GROUP user_group_id="-222" user_id="-22" group_id="4"/>
 
-  <!-- Alice has a malformed, group-only membership in Study Creator (a site-specific role) -->
+  <!-- Alice has an incomplete, group-only membership in Study Creator (a site-specific role) -->
   <CSM_USER_GROUP user_group_id="-260" user_id="-26" group_id="7"/>
-  <!-- ... and a study, but not site, constrained membership in Study Team Administrator -->
+  <!-- ... and an incomplete study-, but not site-, constrained membership in Study Team Administrator -->
   <CSM_USER_GROUP_ROLE_PG
       user_group_role_pg_id="-2610" user_id="-26" role_id="9" protection_group_id="-1"/>
   <CSM_USER_GROUP user_group_id="-261" user_id="-26" group_id="9"/>
+  <!-- ... and an invalid site-constrained membership in Data Importer -->
+  <CSM_USER_GROUP_ROLE_PG
+      user_group_role_pg_id="-2620" user_id="-26" role_id="4" protection_group_id="-2"/>
+  <CSM_USER_GROUP user_group_id="-262" user_id="-26" group_id="4"/>
   <!-- .. and a well-formed membership in Business Administrator -->
-  <CSM_USER_GROUP user_group_id="-262" user_id="-26" group_id="2"/>
+  <CSM_USER_GROUP user_group_id="-263" user_id="-26" group_id="2"/>
 </dataset>

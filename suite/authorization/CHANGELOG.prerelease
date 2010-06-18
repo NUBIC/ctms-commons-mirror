@@ -9,6 +9,18 @@ the library, its changes will be listed in the main CHANGELOG.
   provides easy access to a SuiteRoleMembership instance reflecting the
   user's current status.  It can then be updated and passed to
   #replaceRole.
+- Implement separate validation requirements in SuiteRoleMembership for
+  authorization vs. provisioning.  Two things could cause a membership
+  to be invalid in the old scheme: missing scope data and extra scope data.
+  For authorization you need to check for missing and for provisioning you
+  need to check for extra.  SuiteRoleMembership#validate now only checks for
+  extra scope data. SuiteRoleMembership#checkComplete provides a parallel
+  method for checking that there is no missing scope data.  Both throw an
+  exception if the membership doesn't meet their respective criteria.
+- Use only SuiteRoleMembership#validate when determining if a membership is
+  acceptable in ProvisioningSession#replaceRole.
+- Add AuthorizationHelper#getProvisioningRoleMemberships to return
+  memberships which are incomplete.
 
 0.2.1
 -----

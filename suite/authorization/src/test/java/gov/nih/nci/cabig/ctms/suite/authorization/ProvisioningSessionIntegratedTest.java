@@ -144,12 +144,19 @@ public class ProvisioningSessionIntegratedTest extends IntegratedTestCase {
 
     public void testReplaceFailsWhenNewMembershipIsInvalid() throws Exception {
         try {
-            // missing scope
-            createSession(-22).replaceRole(psFactory.createSuiteRoleMembership(SuiteRole.USER_ADMINISTRATOR));
+            // extra scope
+            createSession(-22).replaceRole(
+                psFactory.createSuiteRoleMembership(SuiteRole.USER_ADMINISTRATOR).forAllStudies());
             fail("Exception not thrown");
         } catch (SuiteAuthorizationValidationException save) {
             // expected
         }
+    }
+
+    public void testReplaceDoesNotFailWhenNewMembershipIsIncomplete() throws Exception {
+        createSession(-22).replaceRole(psFactory.createSuiteRoleMembership(SuiteRole.USER_ADMINISTRATOR));
+        // no exception
+        assertUserInGroup("Group not added", "user_administrator", -22);
     }
 
     public void testDeleteAfterReplaceNewWorks() throws Exception {
@@ -217,11 +224,27 @@ public class ProvisioningSessionIntegratedTest extends IntegratedTestCase {
         assertEquals("MI001", actual.getSiteIdentifiers().get(0));
     }
 
-    public void testGetProvisioningRoleMembershipReturnsDifferentInstancesForSubsequentCalls() throws Exception {
+    public void testGetProvisionableRoleMembershipReturnsDifferentInstancesForSubsequentCalls() throws Exception {
         ProvisioningSession session = psFactory.createSession(-22);
         SuiteRoleMembership first = session.getProvisionableRoleMembership(SuiteRole.DATA_READER);
         SuiteRoleMembership second = session.getProvisionableRoleMembership(SuiteRole.DATA_READER);
         assertNotSame(first, second);
+    }
+
+    public void testGetProvisionableRoleMembershipDoesNotReturnInvalidMemberships() throws Exception {
+        SuiteRoleMembership actual = psFactory.createSession(-26).
+            getProvisionableRoleMembership(SuiteRole.DATA_IMPORTER);
+        assertNotNull("Not returned", actual);
+        assertFalse("Should be clean", actual.hasSiteScope());
+        assertFalse("Should be clean", actual.hasStudyScope());
+    }
+
+    public void testGetProvisionableRoleMembershipReturnsIncompletePartiallyScopedMemberships() throws Exception {
+        SuiteRoleMembership actual = psFactory.createSession(-26).
+            getProvisionableRoleMembership(SuiteRole.STUDY_TEAM_ADMINISTRATOR);
+        assertNotNull("Not returned", actual);
+        assertFalse("Should be missing site scope", actual.hasSiteScope());
+        assertTrue("Should have study scope", actual.hasStudyScope());
     }
 
     ////// ASSERTIONS
