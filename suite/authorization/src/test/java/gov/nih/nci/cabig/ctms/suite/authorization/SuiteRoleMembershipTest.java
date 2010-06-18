@@ -607,6 +607,83 @@ public class SuiteRoleMembershipTest extends TestCase {
         assertEquals("Wrong number of sites", 1, m.getSiteIdentifiers().size());
     }
 
+    ////// clone
+
+    public void testCloneReturnsNotSame() throws Exception {
+        SuiteRoleMembership original = createMembership(SuiteRole.REGISTRAR);
+        SuiteRoleMembership actual = original.clone();
+        assertNotSame("Not cloned", actual, original);
+    }
+
+    public void testCloneIsForSameRole() throws Exception {
+        assertEquals(SuiteRole.STUDY_CALENDAR_TEMPLATE_BUILDER,
+            createMembership(SuiteRole.STUDY_CALENDAR_TEMPLATE_BUILDER).clone().getRole());
+    }
+
+    public void testCloneCopiesAllSitesFlag() throws Exception {
+        SuiteRoleMembership actual = createMembership(SuiteRole.REGISTRAR).forAllSites().clone();
+        assertTrue("Not copied", actual.isAllSites());
+    }
+
+    public void testCloneCopiesAllStudiesFlag() throws Exception {
+        SuiteRoleMembership actual = createMembership(SuiteRole.REGISTRAR).forAllStudies().clone();
+        assertTrue("Not copied", actual.isAllStudies());
+    }
+
+    public void testCloneAllSitesFlagUnlinked() throws Exception {
+        SuiteRoleMembership original = createMembership(SuiteRole.REGISTRAR).forAllSites();
+        SuiteRoleMembership actual = original.clone();
+        original.forSites("A");
+        assertTrue("Clone reflects source after cloning", actual.isAllSites());
+    }
+
+    public void testCloneAllStudiesFlagUnlinked() throws Exception {
+        SuiteRoleMembership original = createMembership(SuiteRole.REGISTRAR).forAllStudies();
+        SuiteRoleMembership actual = original.clone();
+        original.forStudies("T");
+        assertTrue("Clone reflects source after cloning", actual.isAllStudies());
+    }
+
+    public void testCloneCopiesReturnsNotSameSiteIdentifierList() throws Exception {
+        SuiteRoleMembership original = createMembership(SuiteRole.DATA_ANALYST).
+            forStudies("B").forSites("H", "Q");
+        SuiteRoleMembership actual = original.clone();
+        assertNotSame(original.getSiteIdentifiers(), actual.getSiteIdentifiers());
+    }
+
+    public void testCloneCopiesReturnsNotSameStudyIdentifierList() throws Exception {
+        SuiteRoleMembership original = createMembership(SuiteRole.DATA_ANALYST).
+            forStudies("B").forSites("H", "Q");
+        SuiteRoleMembership actual = original.clone();
+        assertNotSame(original.getStudyIdentifiers(), actual.getStudyIdentifiers());
+    }
+
+    public void testCloneCopiesSiteIdentifierList() throws Exception {
+        SuiteRoleMembership actual = createMembership(SuiteRole.DATA_ANALYST).
+            forStudies("B").forSites("H", "Q").clone();
+        assertEquals("Wrong number of identifiers", 2, actual.getSiteIdentifiers().size());
+        assertEquals("Wrong 1st site", "H", actual.getSiteIdentifiers().get(0));
+        assertEquals("Wrong 2nd site", "Q", actual.getSiteIdentifiers().get(1));
+    }
+
+    public void testCloneCopiesStudyIdentifierList() throws Exception {
+        SuiteRoleMembership actual = createMembership(SuiteRole.DATA_ANALYST).
+            forStudies("B").forSites("H", "Q").clone();
+        assertEquals("Wrong number of identifiers", 1, actual.getStudyIdentifiers().size());
+        assertEquals("Wrong 1st study", "B", actual.getStudyIdentifiers().get(0));
+    }
+
+    public void testCloneIncludesMappings() throws Exception {
+        SuiteRoleMembership actual = createMembership(SuiteRole.DATA_ANALYST).clone();
+        actual.forSites(new TestSite("T")).forStudies(new TestStudy("Y"));
+        // no exception
+    }
+
+    public void testCloneWorksWithoutMappings() throws Exception {
+        SuiteRoleMembership actual = new SuiteRoleMembership(SuiteRole.DATA_ANALYST, null, null).clone();
+        // no exception
+    }
+
     ////// HELPERS
 
     private SuiteRoleMembership createMembership(SuiteRole role) {

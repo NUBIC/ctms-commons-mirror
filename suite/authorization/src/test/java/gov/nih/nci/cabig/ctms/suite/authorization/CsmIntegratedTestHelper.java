@@ -81,7 +81,9 @@ public class CsmIntegratedTestHelper {
             connectionProperties.load(
                 CsmIntegratedTestHelper.class.getResourceAsStream("/csm-connection.properties"));
         } catch (IOException e) {
-            throw new CommonsError("Could not load/parse connection properties file for integrated tests.");
+            throw new CommonsError("Could not load/parse connection properties file for integrated tests.", e);
+        } catch (NullPointerException e) {
+            throw new CommonsError("Could not find resource for connection properties.", e);
         }
         return new HashMap<String, String>((Map) connectionProperties);
     }

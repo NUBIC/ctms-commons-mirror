@@ -132,6 +132,16 @@ public class ProvisioningSessionIntegratedTest extends IntegratedTestCase {
         assertUserInGroup("Unrelated group removed", "data_importer", -22);
     }
 
+    public void testReplaceByModifiyingCurrent() throws Exception {
+        ProvisioningSession session = createSession(-22);
+        session.replaceRole(
+            session.getProvisionableRoleMembership(SuiteRole.USER_ADMINISTRATOR).addSite("IL033"));
+
+        assertUserInGroup("Not still in group", "user_administrator", -22);
+        assertUserHasPrivilege("Original priv not preserved", -22, "HealthcareSite.MI001", "user_administrator");
+        assertUserHasPrivilege("New priv not added", -22, "HealthcareSite.IL033", "user_administrator");
+    }
+
     public void testReplaceFailsWhenNewMembershipIsInvalid() throws Exception {
         try {
             // missing scope
@@ -162,6 +172,59 @@ public class ProvisioningSessionIntegratedTest extends IntegratedTestCase {
         assertUserInGroup("User not restored to group", "user_administrator", -22);
         assertUserHasPrivilege("Site priv not restored", -22, "HealthcareSite.MI001", "user_administrator");
     }
+
+    public void testGetProvisonableRoleMembershipReturnsBlankForUnknownRole() throws Exception {
+        assertUserNotInGroup("Test setup failure", "data_analyst", -22);
+
+        SuiteRoleMembership actual = psFactory.createSession(-22).
+            getProvisionableRoleMembership(SuiteRole.DATA_ANALYST);
+        assertEquals(SuiteRole.DATA_ANALYST, actual.getRole());
+        assertNotNull(actual);
+        assertFalse(actual.isAllSites());
+        assertFalse(actual.isAllStudies());
+        assertEquals(0, actual.getSiteIdentifiers().size());
+        assertEquals(0, actual.getStudyIdentifiers().size());
+    }
+
+    public void testGlobalRoleMembershipCorrectlyConstructed() throws Exception {
+        SuiteRoleMembership actual = psFactory.createSession(-22).
+            getProvisionableRoleMembership(SuiteRole.DATA_IMPORTER);
+        assertNotNull(actual);
+        assertFalse(actual.isAllSites());
+        assertFalse(actual.isAllStudies());
+        assertEquals(0, actual.getSiteIdentifiers().size());
+        assertEquals(0, actual.getStudyIdentifiers().size());
+    }
+
+    public void testSiteSpecificRoleMembershipCorrectlyConstructed() throws Exception {
+        SuiteRoleMembership actual = psFactory.createSession(-22).
+            getProvisionableRoleMembership(SuiteRole.USER_ADMINISTRATOR);
+        assertNotNull(actual);
+        assertFalse(actual.isAllSites());
+        assertFalse(actual.isAllStudies());
+        assertEquals(1, actual.getSiteIdentifiers().size());
+        assertEquals("MI001", actual.getSiteIdentifiers().get(0));
+        assertEquals(0, actual.getStudyIdentifiers().size());
+    }
+
+    public void testSiteAndStudySpecificRoleMembershipCorrectlyConstructed() throws Exception {
+        SuiteRoleMembership actual = psFactory.createSession(-22).
+            getProvisionableRoleMembership(SuiteRole.DATA_READER);
+        assertNotNull(actual);
+        assertFalse(actual.isAllSites());
+        assertTrue(actual.isAllStudies());
+        assertEquals(1, actual.getSiteIdentifiers().size());
+        assertEquals("MI001", actual.getSiteIdentifiers().get(0));
+    }
+
+    public void testGetProvisioningRoleMembershipReturnsDifferentInstancesForSubsequentCalls() throws Exception {
+        ProvisioningSession session = psFactory.createSession(-22);
+        SuiteRoleMembership first = session.getProvisionableRoleMembership(SuiteRole.DATA_READER);
+        SuiteRoleMembership second = session.getProvisionableRoleMembership(SuiteRole.DATA_READER);
+        assertNotSame(first, second);
+    }
+
+    ////// ASSERTIONS
 
     private void assertUserHasPrivilege(
         String message, long userId, String peName, String privilegeName

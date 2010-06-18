@@ -1,5 +1,6 @@
 package gov.nih.nci.cabig.ctms.suite.authorization;
 
+import gov.nih.nci.cabig.ctms.CommonsError;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +25,7 @@ import java.util.LinkedList;
  * @author Rhett Sutphin
  */
 @SuppressWarnings({ "RawUseOfParameterizedType" })
-public class SuiteRoleMembership {
+public class SuiteRoleMembership implements Cloneable {
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     private final SuiteRole role;
@@ -444,6 +445,24 @@ public class SuiteRoleMembership {
      */
     public List<Difference> diffFromNothing() {
         return new SuiteRoleMembership(getRole(), null, null).diff(this);
+    }
+
+    @Override
+    public SuiteRoleMembership clone() {
+        SuiteRoleMembership clone;
+        try {
+            clone = (SuiteRoleMembership) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new CommonsError("Clone is supported", e);
+        }
+
+        clone.applicationObjectCaches = new HashMap<ScopeType, List<Object>>();
+        clone.identifiers = new HashMap<ScopeType, List<String>>();
+        for (Map.Entry<ScopeType, List<String>> entry : this.identifiers.entrySet()) {
+            clone.identifiers.put(entry.getKey(), new ArrayList<String>(entry.getValue()));
+        }
+        clone.forAll = new HashMap<ScopeType, Boolean>(this.forAll);
+        return clone;
     }
 
     public static class Difference {

@@ -2,6 +2,14 @@ This is a list of changes for pre-release versions of the
 suite-authorization module.  Once it merges versions with the rest of
 the library, its changes will be listed in the main CHANGELOG.
 
+0.3.0
+-----
+
+- Add ProvisioningSession#getProvisionableRoleMembership.  This method
+  provides easy access to a SuiteRoleMembership instance reflecting the
+  user's current status.  It can then be updated and passed to
+  #replaceRole.
+
 0.2.1
 -----
 

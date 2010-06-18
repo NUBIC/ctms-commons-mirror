@@ -78,6 +78,20 @@ public class ProvisioningSession {
         }
     }
 
+    /**
+     * Returns a {@link SuiteRoleMembership} reflecting the user's current membership the specified
+     * role.  If the user isn't in the given role, it returns a new clean instance that can be
+     * configured and passed to {@link #replaceRole}.
+     */
+    public SuiteRoleMembership getProvisionableRoleMembership(SuiteRole role) {
+        SuiteRoleMembership current = this.roleMemberships.get(role);
+        if (current == null) {
+            return factory.createSuiteRoleMembership(role);
+        } else {
+            return current.clone();
+        }
+    }
+
     private void ensureInGroupForRole(SuiteRole role) {
         Group csmGroup = factory.getCsmHelper().getRoleCsmGroup(role);
         try {
