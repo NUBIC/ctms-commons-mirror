@@ -27,8 +27,8 @@ associated entry in the changelog.
 
 ### Building
 
-This library is built with buildr.  As of this writing, it works
-with buildr 1.3.5 on jruby 1.4.0.  It uses ivy4r for ivy integration.
+This library is built with buildr.  As of this writing, it works with
+buildr 1.3.5 on jruby 1.4.0.  It uses ivy4r for ivy integration.
 
 #### CI
 
@@ -38,11 +38,15 @@ The CI build is at https://ctms-ci.nubic.northwestern.edu/hudson/job/ctms-common
 
 #### Databases
 
-The suite-authorization module has integrated tests that are PostgreSQL-backed.  In order to run these tests successfully, you'll need to
+The suite-authorization module has integrated tests that are
+PostgreSQL-backed.  In order to run these tests successfully, you'll
+need to
 
 1) Create a database for them to use
-2) Create a file named build/csm-test-connection.properties.  There's a sample in that directory.
-3) Run `buildr ctms-commons:suite:authorization:test:wipe_db` to initialize the schema.
+2) Create a file named build/csm-test-connection.properties.  There's
+   a sample in that directory.
+3) Run `buildr ctms-commons:suite:authorization:test:wipe_db` to
+   initialize the schema.
 
 If you get an error like this:
 
