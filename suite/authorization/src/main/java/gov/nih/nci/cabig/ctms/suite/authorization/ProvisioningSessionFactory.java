@@ -3,6 +3,9 @@ package gov.nih.nci.cabig.ctms.suite.authorization;
 import gov.nih.nci.security.AuthorizationManager;
 
 /**
+ * Creates {@link ProvisioningSession}s.  While provisioning sessions should be used within a single
+ * request, this class is intended to be used as an application-level singleton.
+ *
  * @author Rhett Sutphin
  */
 @SuppressWarnings({ "RawUseOfParameterizedType" })
@@ -23,11 +26,18 @@ public class ProvisioningSessionFactory {
      * ProvisioningSession ps = factory.createSession(userId);
      * ps.replaceRole(factory.createSuiteRoleMembership(Role.DATA_READER).forAllSites().forStudies(someStudy));
      * </pre></code>
+     *
+     * @see ProvisioningSession#getProvisionableRoleMembership
      */
     public SuiteRoleMembership createSuiteRoleMembership(SuiteRole role) {
         return new SuiteRoleMembership(role, getSiteMapping(), getStudyMapping());
     }
 
+    /**
+     * The main factory method.
+     *
+     * @param userId
+     */
     public ProvisioningSession createSession(long userId) {
         return new ProvisioningSession(userId, this);
     }

@@ -14,6 +14,8 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * Retrieves {@link SuiteRoleMembership}s from CSM.
+ *
  * @author Rhett Sutphin
  */
 @SuppressWarnings({ "RawUseOfParameterizedType" })

@@ -501,23 +501,42 @@ public class SuiteRoleMembership implements Cloneable {
         return clone;
     }
 
+    /**
+     * A single point of difference between the scopes of two SuiteRoleMemberships.  It's either
+     * {@link Kind an add or delete} of either a single identifier or the special "all" scope.
+     */
     public static class Difference {
+        /**
+         * Creates a delete difference for the all scope.
+         */
         public static Difference delete(ScopeType scopeType) {
             return new Difference(Kind.DELETE, ScopeDescription.createForAll(scopeType));
         }
 
+        /**
+         * Creates a delete difference for a single identifier.
+         */
         public static Difference delete(ScopeType scopeType, String ident) {
             return new Difference(Kind.DELETE, ScopeDescription.createForOne(scopeType, ident));
         }
 
+        /**
+         * Creates an add difference for the all scope.
+         */
         public static Difference add(ScopeType scopeType) {
             return new Difference(Kind.ADD, ScopeDescription.createForAll(scopeType));
         }
 
+        /**
+         * Creates an difference for a single identifier.
+         */
         public static Difference add(ScopeType scopeType, String ident) {
             return new Difference(Kind.ADD, ScopeDescription.createForOne(scopeType, ident));
         }
 
+        /**
+         * The possible kinds of {@link Difference}s.
+         */
         public static enum Kind { ADD, DELETE }
 
         private Kind mode;
