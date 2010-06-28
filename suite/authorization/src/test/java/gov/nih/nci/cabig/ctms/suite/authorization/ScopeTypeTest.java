@@ -15,4 +15,14 @@ public class ScopeTypeTest extends TestCase {
         assertEquals(ScopeType.SITE.getScopeCsmNamePrefix(), "HealthcareSite.");
         assertEquals(ScopeType.STUDY.getScopeCsmNamePrefix(), "Study.");
     }
+
+    public void testGetDisplayName() throws Exception {
+        assertEquals("site", ScopeType.SITE.getName());
+        assertEquals("study", ScopeType.STUDY.getName());
+    }
+
+    public void testGetPluralName() throws Exception {
+        assertEquals("sites", ScopeType.SITE.getPluralName());
+        assertEquals("studies", ScopeType.STUDY.getPluralName());
+    }
 }

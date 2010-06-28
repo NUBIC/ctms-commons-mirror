@@ -2,16 +2,18 @@ package gov.nih.nci.cabig.ctms.suite.authorization;
 
 /** The scopes which may apply to a role. */
 public enum ScopeType {
-    SITE("HealthcareSite"),
-    STUDY("Study")
+    SITE("HealthcareSite", "sites"),
+    STUDY("Study", "studies")
     ;
 
-    private String allScopeCsmName;
-    private String scopeCsmNamePrefix;
+    private final String allScopeCsmName;
+    private final String scopeCsmNamePrefix;
+    private final String pluralName;
 
-    ScopeType(String csmName) {
+    ScopeType(String csmName, String pluralName) {
         this.allScopeCsmName = csmName;
         this.scopeCsmNamePrefix = csmName + '.';
+        this.pluralName = pluralName;
     }
 
     /**
@@ -28,5 +30,13 @@ public enum ScopeType {
      */
     public String getScopeCsmNamePrefix() {
         return scopeCsmNamePrefix;
+    }
+
+    public String getName() {
+        return name().toLowerCase();
+    }
+
+    public String getPluralName() {
+        return pluralName;
     }
 }

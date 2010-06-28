@@ -196,7 +196,7 @@ public class SuiteRoleMembership implements Cloneable {
         } else {
             throw new SuiteAuthorizationValidationException(
                 "Attempted to add an instance of %s as a %s scope object.  This is not an acceptable type; check your mapping.",
-                objectOrIdentifier.getClass().getName(), scope.name().toLowerCase());
+                objectOrIdentifier.getClass().getName(), scope.getName());
         }
 
         if (isAll(scope)) {
@@ -221,7 +221,7 @@ public class SuiteRoleMembership implements Cloneable {
             identifierToRemove = getMapping(scope).getSharedIdentity(objectOrIdentifier);
         } else {
             log.warn("Attempted to remove an instance of {} as an authorization {} scope object.  There is no conversion from that type to an identifier, so nothing will happen.",
-                objectOrIdentifier.getClass().getName(), scope.name().toLowerCase());
+                objectOrIdentifier.getClass().getName(), scope.getName());
         }
 
         List<String> newIs = new ArrayList<String>(this.identifiers.get(scope));
@@ -351,7 +351,7 @@ public class SuiteRoleMembership implements Cloneable {
     private String scopeNameList(Set<ScopeType> scopes) {
         Collection<String> msNames = new LinkedHashSet<String>();
         for (ScopeType missingScope : scopes) {
-            msNames.add(missingScope.name().toLowerCase());
+            msNames.add(missingScope.getName());
         }
         return StringUtils.join(msNames, " and ");
     }
@@ -403,7 +403,7 @@ public class SuiteRoleMembership implements Cloneable {
         if (isAll(scope)) {
             throw new SuiteAuthorizationAccessException(
                 "This %s has access to every %s.  You can't list %s instances for it.",
-                role.getDisplayName(), scope.name().toLowerCase(), scope.name().toLowerCase());
+                role.getDisplayName(), scope.getName(), scope.getName());
         }
         if (this.applicationObjectCaches.get(scope) == null) {
             this.applicationObjectCaches.put(scope,
@@ -424,7 +424,7 @@ public class SuiteRoleMembership implements Cloneable {
         if (isAll(scope)) {
             throw new SuiteAuthorizationAccessException(
                 "This %s has access to every %s.  You can't list %s identifiers for it.",
-                role.getDisplayName(), scope.name().toLowerCase(), scope.name().toLowerCase());
+                role.getDisplayName(), scope.getName(), scope.getName());
         }
         return this.identifiers.get(scope);
     }
@@ -456,7 +456,7 @@ public class SuiteRoleMembership implements Cloneable {
         if (mapping == null) {
             throw new SuiteAuthorizationAccessException(
                 "No %s mapping was provided.  Either provide one or stick to the identifier-based methods.",
-                scope.name().toLowerCase());
+                scope.getName());
         }
         return mapping;
     }

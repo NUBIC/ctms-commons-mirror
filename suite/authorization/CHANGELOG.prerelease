@@ -14,6 +14,7 @@ the library, its changes will be listed in the main CHANGELOG.
   #isAll(scopeType) method. Other generic accessors are
   #getIdentifiers(scopeType), #getApplicationObjects(scopeType), and
   #hasScope(scopeType).
+- Add ScopeType#getName and ScopeType#getPluralName display helpers.
 
 0.3.0
 -----

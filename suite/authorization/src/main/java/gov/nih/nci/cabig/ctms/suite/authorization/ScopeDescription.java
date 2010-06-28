@@ -91,7 +91,7 @@ public class ScopeDescription {
         if (isAll()) {
             throw new SuiteAuthorizationAccessException(
                 "This description indicates access to every %s.  You can't get an identifier from it.",
-                scope.name().toLowerCase());
+                scope.getName());
         }
         return identifier;
     }

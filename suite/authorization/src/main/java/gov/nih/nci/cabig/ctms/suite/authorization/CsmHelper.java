@@ -226,7 +226,7 @@ public class CsmHelper {
         if (mapping == null) {
             throw new SuiteAuthorizationProvisioningFailure(
                 "No %s mapping was provided.  Either provide one or stick to the identifier-based methods.",
-                scope.name().toLowerCase());
+                scope.getName());
         }
         return mapping;
     }
