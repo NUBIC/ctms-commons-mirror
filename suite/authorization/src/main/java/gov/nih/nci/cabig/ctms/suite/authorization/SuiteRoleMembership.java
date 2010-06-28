@@ -310,7 +310,7 @@ public class SuiteRoleMembership implements Cloneable {
         Set<ScopeType> extraScopes = new LinkedHashSet<ScopeType>();
         for (ScopeType scope : ScopeType.values()) {
             boolean applicable = this.role.getScopes().contains(scope);
-            boolean present = isScoped(scope);
+            boolean present = hasScope(scope);
             if (present && !applicable) {
                 extraScopes.add(scope);
             }
@@ -334,7 +334,7 @@ public class SuiteRoleMembership implements Cloneable {
         Set<ScopeType> missingScopes = new LinkedHashSet<ScopeType>();
         for (ScopeType scope : ScopeType.values()) {
             boolean applicable = this.role.getScopes().contains(scope);
-            boolean present = isScoped(scope);
+            boolean present = hasScope(scope);
             if (applicable && !present) {
                 missingScopes.add(scope);
             }
@@ -361,7 +361,7 @@ public class SuiteRoleMembership implements Cloneable {
      * (Not whether it <i>should</i> but whether it does.)
      */
     public boolean hasSiteScope() {
-        return isScoped(ScopeType.SITE);
+        return hasScope(ScopeType.SITE);
     }
 
     /**
@@ -369,10 +369,10 @@ public class SuiteRoleMembership implements Cloneable {
      * (Not whether it <i>should</i> but whether it does.)
      */
     public boolean hasStudyScope() {
-        return isScoped(ScopeType.STUDY);
+        return hasScope(ScopeType.STUDY);
     }
 
-    private boolean isScoped(ScopeType scope) {
+    public boolean hasScope(ScopeType scope) {
         return isAll(scope) || !getIdentifiers(scope).isEmpty();
     }
 
@@ -399,7 +399,7 @@ public class SuiteRoleMembership implements Cloneable {
     }
 
     @SuppressWarnings({ "unchecked" })
-    private List<Object> getApplicationObjects(ScopeType scope) {
+    public List<Object> getApplicationObjects(ScopeType scope) {
         if (isAll(scope)) {
             throw new SuiteAuthorizationAccessException(
                 "This %s has access to every %s.  You can't list %s instances for it.",
@@ -420,7 +420,7 @@ public class SuiteRoleMembership implements Cloneable {
         return getIdentifiers(ScopeType.STUDY);
     }
 
-    private List<String> getIdentifiers(ScopeType scope) throws SuiteAuthorizationAccessException {
+    public List<String> getIdentifiers(ScopeType scope) throws SuiteAuthorizationAccessException {
         if (isAll(scope)) {
             throw new SuiteAuthorizationAccessException(
                 "This %s has access to every %s.  You can't list %s identifiers for it.",
@@ -442,7 +442,7 @@ public class SuiteRoleMembership implements Cloneable {
         return isAll(ScopeType.STUDY);
     }
 
-    private boolean isAll(ScopeType scope) {
+    public boolean isAll(ScopeType scope) {
         Boolean value = forAll.get(scope);
         if (value == null) {
             return false;
