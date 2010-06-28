@@ -188,7 +188,7 @@ public class SuiteRoleMembership implements Cloneable {
     // them just to add one.
     @SuppressWarnings({ "unchecked" })
     private SuiteRoleMembership addScopeObjectOrIdentifier(ScopeType scope, Object objectOrIdentifier) {
-        String identifierToAdd = null;
+        String identifierToAdd;
         if (objectOrIdentifier instanceof String) {
             identifierToAdd = (String) objectOrIdentifier;
         } else if (getMapping(scope).isInstance(objectOrIdentifier)) {
@@ -201,7 +201,7 @@ public class SuiteRoleMembership implements Cloneable {
 
         if (isAll(scope)) {
             forScopeObjectsOrIdentifiers(scope, Collections.singleton(identifierToAdd));
-        } else {
+        } else if (!this.identifiers.get(scope).contains(identifierToAdd)) {
             List<String> newIs = new ArrayList<String>(this.identifiers.get(scope));
             newIs.add(identifierToAdd);
             setIdentifiers(scope, newIs);

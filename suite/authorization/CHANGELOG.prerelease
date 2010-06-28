@@ -2,6 +2,11 @@ This is a list of changes for pre-release versions of the
 suite-authorization module.  Once it merges versions with the rest of
 the library, its changes will be listed in the main CHANGELOG.
 
+0.3.1
+-----
+
+- Ensure that SuiteRoleMembership#add* does not add duplicate identifiers.
+
 0.3.0
 -----
 

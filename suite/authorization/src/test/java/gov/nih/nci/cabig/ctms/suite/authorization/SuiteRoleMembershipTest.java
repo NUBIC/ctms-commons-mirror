@@ -255,7 +255,7 @@ public class SuiteRoleMembershipTest extends TestCase {
         }
     }
 
-    ////// appending and removing
+    ////// adding and removing
 
     public void testAddSiteWhenBlank() throws Exception {
         SuiteRoleMembership m = createMembership(SuiteRole.DATA_ANALYST).addSite("F");
@@ -263,11 +263,17 @@ public class SuiteRoleMembershipTest extends TestCase {
         assertEquals("Wrong 1st site", "F", m.getSiteIdentifiers().get(0));
     }
 
-    public void testAddSiteAppendsIfExisting() throws Exception {
+    public void testAddSiteAppendsIfExistingRole() throws Exception {
         SuiteRoleMembership m = createMembership(SuiteRole.DATA_ANALYST).forSites("B").addSite("F");
         assertEquals("Wrong number of sites", 2, m.getSiteIdentifiers().size());
         assertEquals("Wrong 1st site", "B", m.getSiteIdentifiers().get(0));
         assertEquals("Wrong 1st site", "F", m.getSiteIdentifiers().get(1));
+    }
+
+    public void testAddSiteIgnoresIfExistingSite() throws Exception {
+        SuiteRoleMembership m = createMembership(SuiteRole.DATA_ANALYST).forSites("B").addSite("B");
+        assertEquals("Wrong number of sites", 1, m.getSiteIdentifiers().size());
+        assertEquals("Wrong 1st site", "B", m.getSiteIdentifiers().get(0));
     }
 
     public void testAddSiteWhenAllResetsToNotAll() throws Exception {
@@ -302,11 +308,17 @@ public class SuiteRoleMembershipTest extends TestCase {
         assertEquals("Wrong 1st study", "F", m.getStudyIdentifiers().get(0));
     }
 
-    public void testAddStudyAppendsIfExisting() throws Exception {
+    public void testAddStudyAppendsIfExistingRole() throws Exception {
         SuiteRoleMembership m = createMembership(SuiteRole.DATA_ANALYST).forStudies("B").addStudy("F");
         assertEquals("Wrong number of studies", 2, m.getStudyIdentifiers().size());
         assertEquals("Wrong 1st study", "B", m.getStudyIdentifiers().get(0));
         assertEquals("Wrong 1st study", "F", m.getStudyIdentifiers().get(1));
+    }
+
+    public void testAddStudyIgnoresIfExistingStudy() throws Exception {
+        SuiteRoleMembership m = createMembership(SuiteRole.DATA_ANALYST).forStudies("B").addStudy("B");
+        assertEquals("Wrong number of studies", 1, m.getStudyIdentifiers().size());
+        assertEquals("Wrong 1st site", "B", m.getStudyIdentifiers().get(0));
     }
 
     public void testAddStudyWhenAllResetsToNotAll() throws Exception {
