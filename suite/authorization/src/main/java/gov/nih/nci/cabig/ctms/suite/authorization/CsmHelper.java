@@ -7,6 +7,7 @@ import gov.nih.nci.security.authorization.domainobjects.ProtectionElement;
 import gov.nih.nci.security.authorization.domainobjects.ProtectionGroup;
 import gov.nih.nci.security.authorization.domainobjects.Role;
 import gov.nih.nci.security.dao.GroupSearchCriteria;
+import gov.nih.nci.security.dao.ProtectionElementSearchCriteria;
 import gov.nih.nci.security.dao.ProtectionGroupSearchCriteria;
 import gov.nih.nci.security.dao.RoleSearchCriteria;
 import gov.nih.nci.security.exceptions.CSObjectNotFoundException;
@@ -130,11 +131,16 @@ public class CsmHelper {
 
     private ProtectionElement ensureProtectionElementExists(String csmName) {
         ProtectionElement existing = null;
-        try {
-            existing = getAuthorizationManager().getProtectionElement(csmName);
-        } catch (CSObjectNotFoundException e) {
-            // fall through
+        {
+            ProtectionElement criteria = new ProtectionElement();
+            criteria.setObjectId(csmName);
+            List found = getAuthorizationManager().
+                getObjects(new ProtectionElementSearchCriteria(criteria));
+            if (!found.isEmpty()) {
+                existing = (ProtectionElement) found.get(0);
+            }
         }
+
         if (existing == null) {
             ProtectionElement newPe = new ProtectionElement();
             newPe.setProtectionElementName(csmName);

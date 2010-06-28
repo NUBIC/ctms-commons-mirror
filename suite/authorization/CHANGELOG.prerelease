@@ -15,6 +15,8 @@ the library, its changes will be listed in the main CHANGELOG.
   #getIdentifiers(scopeType), #getApplicationObjects(scopeType), and
   #hasScope(scopeType).
 - Add ScopeType#getName and ScopeType#getPluralName display helpers.
+- Change implementation of CsmHelper#getOrCreateScopeProtectionElement to
+  avoid CSM spewing bogus errors in the application log.
 
 0.3.0
 -----
