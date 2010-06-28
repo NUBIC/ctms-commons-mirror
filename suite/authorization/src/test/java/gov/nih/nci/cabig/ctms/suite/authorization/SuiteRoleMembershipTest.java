@@ -372,6 +372,12 @@ public class SuiteRoleMembershipTest extends TestCase {
         assertEquals("Wrong 1st site", "B", m.getSiteIdentifiers().get(0));
     }
 
+    public void testRemoveAllSitesScope() throws Exception {
+        SuiteRoleMembership m = createMembership(SuiteRole.DATA_ANALYST).forAllSites().notForAllSites();
+        assertFalse("Should not be for all sites", m.isAllSites());
+        assertTrue("Should have no specific sites either", m.getSiteIdentifiers().isEmpty());
+    }
+
     public void testRemoveNonExistentStudyDoesNothing() throws Exception {
         SuiteRoleMembership m = createMembership(SuiteRole.DATA_ANALYST).forStudies("F", "I").removeStudy("B");
         assertEquals("Wrong number of studies", 2, m.getStudyIdentifiers().size());
@@ -395,6 +401,12 @@ public class SuiteRoleMembershipTest extends TestCase {
             forStudies("B", "F").removeStudy(new TestStudy("F"));
         assertEquals("Wrong number of studies", 1, m.getStudyIdentifiers().size());
         assertEquals("Wrong 1st study", "B", m.getStudyIdentifiers().get(0));
+    }
+
+    public void testRemoveAllStudiesScope() throws Exception {
+        SuiteRoleMembership m = createMembership(SuiteRole.DATA_ANALYST).forAllStudies().notForAllStudies();
+        assertFalse("Should not be for all studies", m.isAllStudies());
+        assertTrue("Should have no specific studies either", m.getStudyIdentifiers().isEmpty());
     }
 
     ////// validation

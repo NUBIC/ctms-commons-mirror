@@ -255,10 +255,16 @@ public class SuiteRoleMembership implements Cloneable {
         this.applicationObjectCaches.put(scope, objects);
     }
 
+    /**
+     * Flags this membership as having the special "all sites" site scope.
+     */
     public SuiteRoleMembership forAllSites() {
         return forAll(ScopeType.SITE);
     }
 
+    /**
+     * Flags this membership as having the special "all studies" study scope.
+     */
     public SuiteRoleMembership forAllStudies() {
         return forAll(ScopeType.STUDY);
     }
@@ -266,6 +272,29 @@ public class SuiteRoleMembership implements Cloneable {
     private SuiteRoleMembership forAll(ScopeType scope) {
         clear(scope);
         this.forAll.put(scope, true);
+        return this;
+    }
+
+    /**
+     * Flags this membership as <em>not</em> having the special "all sites" site scope.
+     * Setting any specific site scope has the same effect, so you only need to call this
+     * method if you want to clear an existing for-all flag without specifying a particular scope.
+     */
+    public SuiteRoleMembership notForAllSites() {
+        return notForAll(ScopeType.SITE);
+    }
+
+    /**
+     * Flags this membership as <em>not</em> having the special "all studies" study scope.
+     * Setting any specific study scope has the same effect, so you only need to call this
+     * method if you want to clear an existing for-all flag without specifying a particular scope.
+     */
+    public SuiteRoleMembership notForAllStudies() {
+        return notForAll(ScopeType.STUDY);
+    }
+
+    private SuiteRoleMembership notForAll(ScopeType scope) {
+        this.forAll.put(scope, false);
         return this;
     }
 
