@@ -13,7 +13,7 @@ the library, its changes will be listed in the main CHANGELOG.
 -----
 
 - Ensure that SuiteRoleMembership#add* does not add duplicate identifiers.
-- Add SuiteRoleMembership#notForAll* to allow for explicitly removing the 
+- Add SuiteRoleMembership#notForAll* to allow for explicitly removing the
   special "all" scopes.
 - Expose generic scope info accessors in SuiteRoleMembership.  These
   accessors allow a degree of metaprogramming parameterized by ScopeType.
