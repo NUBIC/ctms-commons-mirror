@@ -1,6 +1,7 @@
 package gov.nih.nci.cabig.ctms.suite.authorization.csmext;
 
 import gov.nih.nci.cabig.ctms.suite.authorization.SuiteAuthorizationAccessException;
+import gov.nih.nci.cabig.ctms.tools.hibernate.MoreRestrictions;
 import gov.nih.nci.logging.api.logger.hibernate.HibernateSessionFactoryHelper;
 import gov.nih.nci.security.authorization.domainobjects.Privilege;
 import gov.nih.nci.security.authorization.domainobjects.ProtectionElement;
@@ -10,7 +11,6 @@ import gov.nih.nci.security.exceptions.CSConfigurationException;
 import gov.nih.nci.security.exceptions.CSObjectNotFoundException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -144,10 +144,9 @@ public class FasterAuthorizationDao extends AuthorizationDAOImpl {
         return protectionElementPrivilegeContextSet;
     }
 
-    // TODO: need to split up IN list
     @SuppressWarnings({ "unchecked" })
     private <T> Collection<T> getAllObjectsByIds(Session s, Class<T> entityClass, String idName, Collection<Long> ids) {
-        return s.createCriteria(entityClass).add(Restrictions.in(idName, ids)).list();
+        return s.createCriteria(entityClass).add(MoreRestrictions.in(idName, ids)).list();
     }
 
     protected SessionFactory getSessionFactory() {
