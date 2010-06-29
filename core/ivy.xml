@@ -11,8 +11,8 @@
     <dependency name="ctms-commons-base" rev="latest.integration"/>
     <dependency name="ctms-commons-lang" rev="latest.integration"/>
 
-    <dependency org="org.hibernate" name="com.springsource.org.hibernate" rev="3.3.1.GA"/>
-    <dependency org="org.hibernate" name="com.springsource.org.hibernate.annotations" rev="3.4.0.GA"/>
+    <dependency org="org.hibernate" name="com.springsource.org.hibernate" rev="${lib.hibernate.rev}"/>
+    <dependency org="org.hibernate" name="com.springsource.org.hibernate.annotations" rev="${lib.hibernate-annotations.rev}"/>
     <dependency org="javax.persistence" name="com.springsource.javax.persistence" rev="1.0.0" />
 
     <dependency org="org.springframework" name="org.springframework.beans"        rev="${lib.spring.rev}"/>

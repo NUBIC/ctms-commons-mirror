@@ -16,6 +16,10 @@
     <dependency org="org.slf4j" name="slf4j-api" rev="${lib.slf4j.rev}"/>
     <dependency org="org.apache.commons" name="com.springsource.org.apache.commons.lang" rev="${lib.jakarta-commons.lang.rev}"/>
 
+    <!-- csmext deps -->
+    <dependency org="org.hibernate" name="com.springsource.org.hibernate" rev="${lib.hibernate.rev}"/>
+    <dependency org="gov.nih.nci.security" name="clm" rev="${lib.clm.rev}"/>
+
     <!-- TEST -->
     <dependency conf="unit-test->runtime" name="ctms-commons-testing-unit" rev="latest.integration"/>
     <dependency conf="unit-test->*" org="ch.qos.logback" name="logback-classic" rev="0.9.20"/>
@@ -26,6 +30,8 @@
     <exclude module="ant"/>
     <exclude module="log4j" matcher="exact"/>
     <exclude org="org.apache.log4j"/>
+    <exclude module="com.springsource.slf4j.*" matcher="regexp"/>
     <exclude module="slf4j-simple"/>
+    <exclude module="spring" matcher="exact"/> <!-- from clm -->
   </dependencies>
 </ivy-module>
