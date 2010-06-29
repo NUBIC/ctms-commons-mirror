@@ -2,6 +2,13 @@ This is a list of changes for pre-release versions of the
 suite-authorization module.  Once it merges versions with the rest of
 the library, its changes will be listed in the main CHANGELOG.
 
+0.4.0
+-----
+
+- Add FasterAuthorizationDao as a replacement for CSM's AuthorizationDAOImpl.
+  Initial version includes a much faster version of
+  #getProtectionElementPrivilegeContextForUser .
+
 0.3.1
 -----
 

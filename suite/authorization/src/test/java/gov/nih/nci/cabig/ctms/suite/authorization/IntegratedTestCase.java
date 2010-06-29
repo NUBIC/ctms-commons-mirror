@@ -6,13 +6,19 @@ import org.dbunit.IDatabaseTester;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 
+import java.io.InputStream;
+
 /**
  * @author Rhett Sutphin
  */
 public abstract class IntegratedTestCase extends DBTestCase {
     @Override
     protected IDataSet getDataSet() throws Exception {
-        return new FlatXmlDataSet(getClass().getResourceAsStream("shared-testdata.xml"));
+        InputStream data = IntegratedTestCase.class.getResourceAsStream("shared-testdata.xml");
+        if (data == null) {
+            throw new IllegalStateException("Could not find shared testdata file");
+        }
+        return new FlatXmlDataSet(data);
     }
 
     @Override

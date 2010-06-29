@@ -1,7 +1,7 @@
 package gov.nih.nci.cabig.ctms.suite.authorization;
 
 import gov.nih.nci.cabig.ctms.CommonsError;
-import static gov.nih.nci.cabig.ctms.suite.authorization.CsmHelper.*;
+import gov.nih.nci.cabig.ctms.suite.authorization.csmext.FasterAuthorizationDao;
 import gov.nih.nci.security.AuthorizationManager;
 import gov.nih.nci.security.dao.AuthorizationDAO;
 import gov.nih.nci.security.dao.AuthorizationDAOImpl;
@@ -17,11 +17,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import static gov.nih.nci.cabig.ctms.suite.authorization.CsmHelper.SUITE_APPLICATION_NAME;
+
 /**
  * @author Rhett Sutphin
  */
 public class CsmIntegratedTestHelper {
-    private static AuthorizationDAO dao;
+    private static AuthorizationDAO originalDao;
+    private static FasterAuthorizationDao fasterDao;
     private static AuthorizationManager manager;
     private static SessionFactory sf;
 
@@ -41,14 +44,25 @@ public class CsmIntegratedTestHelper {
     }
 
     public synchronized static AuthorizationDAO getAuthorizationDao() {
-        if (dao == null) {
+        if (originalDao == null) {
             try {
-                dao = new AuthorizationDAOImpl(getSessionFactory(), SUITE_APPLICATION_NAME);
+                originalDao = new AuthorizationDAOImpl(getSessionFactory(), SUITE_APPLICATION_NAME);
             } catch (CSConfigurationException e) {
                 throw new CommonsError("Creating the CSM authorization DAO failed", e);
             }
         }
-        return dao;
+        return originalDao;
+    }
+
+    public synchronized static FasterAuthorizationDao getFasterAuthorizationDao() {
+        if (fasterDao == null) {
+            try {
+                fasterDao = new FasterAuthorizationDao(getSessionFactory(), SUITE_APPLICATION_NAME);
+            } catch (CSConfigurationException e) {
+                throw new CommonsError("Creating the CSM authorization DAO failed", e);
+            }
+        }
+        return fasterDao;
     }
 
     public static SessionFactory getSessionFactory() {
