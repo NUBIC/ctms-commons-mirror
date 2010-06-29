@@ -1,6 +1,15 @@
 ctms-commons history
 ====================
 
+1.0.5
+-----
+
+### core
+
+- Add MoreRestrictions factory for Hibernate criteria.  First feature
+  is a version of Hibernate's #in which automatically segments the
+  value list for Oracle compatibility.
+
 1.0.4
 -----
 
