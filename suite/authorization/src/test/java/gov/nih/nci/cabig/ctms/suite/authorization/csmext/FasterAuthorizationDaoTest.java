@@ -23,6 +23,12 @@ public class FasterAuthorizationDaoTest extends IntegratedTestCase {
         verifyIdenticalContextsRetrieved(-26L);
     }
 
+    public void testGetProtectionElementPrivilegeContextEmptyButLoadableForLane() throws Exception {
+        Set actual = CsmIntegratedTestHelper.getFasterAuthorizationDao().
+            getProtectionElementPrivilegeContextForUser("-20");
+        assertEquals("Should have no contexts", 0, actual.size());
+    }
+
     private void verifyIdenticalContextsRetrieved(Long userId) throws CSObjectNotFoundException {
         Set<ProtectionElementPrivilegeContext> original = CsmIntegratedTestHelper.getAuthorizationDao().
             getProtectionElementPrivilegeContextForUser(userId.toString());

@@ -146,7 +146,11 @@ public class FasterAuthorizationDao extends AuthorizationDAOImpl {
 
     @SuppressWarnings({ "unchecked" })
     private <T> Collection<T> getAllObjectsByIds(Session s, Class<T> entityClass, String idName, Collection<Long> ids) {
-        return s.createCriteria(entityClass).add(MoreRestrictions.in(idName, ids)).list();
+        if (ids.isEmpty()) {
+            return Collections.emptyList();
+        } else {
+            return s.createCriteria(entityClass).add(MoreRestrictions.in(idName, ids)).list();
+        }
     }
 
     protected SessionFactory getSessionFactory() {

@@ -1,6 +1,7 @@
 <dataset>
   <CSM_USER user_id="-26" login_name="alice" first_name="Alice" last_name="Wunderland"/>
   <CSM_USER user_id="-22" login_name="eve" first_name="Eve" last_name="Harlow"/>
+  <CSM_USER user_id="-20" login_name="lane" first_name="Lane" last_name="Divider"/>
 
   <!-- Incomplete PG/PE pairs -->
 
@@ -92,4 +93,7 @@
   <CSM_USER_GROUP user_group_id="-262" user_id="-26" group_id="4"/>
   <!-- .. and a well-formed membership in Business Administrator -->
   <CSM_USER_GROUP user_group_id="-263" user_id="-26" group_id="2"/>
+
+  <!-- Lane has only group-only memberships -->
+  <CSM_USER_GROUP user_group_id="-201" group_id="1" user_id="-20"/>
 </dataset>
