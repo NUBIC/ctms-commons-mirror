@@ -161,13 +161,13 @@ public class ProvisioningSessionIntegratedTest extends IntegratedTestCase {
 
     public void testDeleteAfterReplaceNewWorks() throws Exception {
         ProvisioningSession session = psFactory.createSession(-26);
-        session.replaceRole(psFactory.createSuiteRoleMembership(SuiteRole.STUDY_TEAM_ADMINISTRATOR).
+        session.replaceRole(psFactory.createSuiteRoleMembership(SuiteRole.LAB_DATA_USER).
             forAllSites().forAllStudies());
-        session.deleteRole(SuiteRole.STUDY_TEAM_ADMINISTRATOR);
+        session.deleteRole(SuiteRole.LAB_DATA_USER);
 
-        assertUserNotInGroup("Group assoc not deleted", "study_team_administrator", -26);
-        assertUserDoesNotHavePrivilege("Study priv not deleted", -26, "Study", "study_team_administrator");
-        assertUserDoesNotHavePrivilege("Site priv not deleted", -26, "HealthcareSite", "study_team_administrator");
+        assertUserNotInGroup("Group assoc not deleted", "lab_data_user", -26);
+        assertUserDoesNotHavePrivilege("Study priv not deleted", -26, "Study", "lab_data_user");
+        assertUserDoesNotHavePrivilege("Site priv not deleted", -26, "HealthcareSite", "lab_data_user");
     }
 
     public void testReplaceSameAfterDeleteWorks() throws Exception {
@@ -241,7 +241,7 @@ public class ProvisioningSessionIntegratedTest extends IntegratedTestCase {
 
     public void testGetProvisionableRoleMembershipReturnsIncompletePartiallyScopedMemberships() throws Exception {
         SuiteRoleMembership actual = psFactory.createSession(-26).
-            getProvisionableRoleMembership(SuiteRole.STUDY_TEAM_ADMINISTRATOR);
+            getProvisionableRoleMembership(SuiteRole.STUDY_CALENDAR_TEMPLATE_BUILDER);
         assertNotNull("Not returned", actual);
         assertFalse("Should be missing site scope", actual.hasSiteScope());
         assertTrue("Should have study scope", actual.hasStudyScope());

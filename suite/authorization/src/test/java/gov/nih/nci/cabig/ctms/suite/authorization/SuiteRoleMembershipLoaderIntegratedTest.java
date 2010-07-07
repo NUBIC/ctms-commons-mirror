@@ -30,7 +30,7 @@ public class SuiteRoleMembershipLoaderIntegratedTest extends IntegratedTestCase 
         assertEquals(2, actual.size());
         assertFalse("Invalid role present", actual.containsKey(SuiteRole.STUDY_CREATOR));
         assertTrue("Missing expected complete role", actual.containsKey(SuiteRole.BUSINESS_ADMINISTRATOR));
-        assertTrue("Missing expected incomplete role", actual.containsKey(SuiteRole.STUDY_TEAM_ADMINISTRATOR));
+        assertTrue("Missing expected incomplete role", actual.containsKey(SuiteRole.STUDY_CALENDAR_TEMPLATE_BUILDER));
     }
 
     public void testGlobalRoleMembershipCorrectlyConstructed() throws Exception {
