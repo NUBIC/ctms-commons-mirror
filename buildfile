@@ -149,7 +149,7 @@ define "ctms-commons" do
 
       task "test:wipe_db" => ["#{project.name}:test:compile", "#{project.name}:testdeps"] do
         p = csm_db_properties(project.parent.parent)
-        %w(schema seeddata).each do |n|
+        %w(purge schema seeddata).each do |n|
           info "Executing #{n}.sql on #{p['csm_db.db_type']}"
           ant('wipe_db').sql(
             :src => _(:target, :test, :resources, "csm-sql", p["csm_db.db_type"], "#{n}.sql"),
