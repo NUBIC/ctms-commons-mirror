@@ -40,15 +40,30 @@ Javadoc snapshots are at https://ctms-ci.nubic.northwestern.edu/hudson/job/ctms-
 
 #### Databases
 
-The suite-authorization module has integrated tests that are
-PostgreSQL-backed.  In order to run these tests successfully, you'll
-need to
+The suite-authorization module has integrated tests that are either
+PostgreSQL or Oracle-backed.  In order to run these tests,
+successfully, you'll need to
 
 1) Create a database for them to use
-2) Create a file named build/csm-test-connection.properties.  There's
-   a sample in that directory.
+2) Create a properties file in `build/` pointing to the
+   database. There's a sample in that directory.  Name the first one
+   of these files `csm-test-connection.properties` (more on that in a
+   moment).
 3) Run `buildr ctms-commons:suite:authorization:test:wipe_db` to
    initialize the schema.
+
+You can keep several database configurations (e.g. for testing on
+PostgreSQL vs. Oracle).  You can switch between them using the CSM_DB
+environment variable:
+
+    $ buildr ctms-commons:suite:authorization:test:wipe_db CSM_DB=csm-oracle
+    $ buildr test CSM_DB=csm-oracle
+
+This would look for the configuration in
+`build/csm-oracle.properties`.  The default for CSM_DB is
+`csm-test-connection`.
+
+##### PostgreSQL
 
 If you get an error like this:
 

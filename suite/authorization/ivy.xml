@@ -26,6 +26,7 @@
     <dependency conf="unit-test->*" org="org.slf4j" name="log4j-over-slf4j" rev="${lib.slf4j.rev}"/>
     <dependency conf="unit-test->*" org="org.dbunit" name="dbunit" rev="${lib.dbunit.rev}"/>
     <dependency conf="unit-test->*" org="postgresql" name="postgresql" rev="8.2-504.jdbc3"/>
+    <dependency conf="unit-test->*" org="com.oracle.jdbc" name="com.springsource.oracle.jdbc" rev="10.2.0.2"/>
 
     <exclude module="ant"/>
     <exclude module="log4j" matcher="exact"/>

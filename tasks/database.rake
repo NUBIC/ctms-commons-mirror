@@ -3,6 +3,10 @@ module DatabaseSetup
     "postgresql" => {
       "driver" => "org.postgresql.Driver",
       "dialect" => "org.hibernate.dialect.PostgreSQLDialect"
+    },
+    "oracle" => {
+      "driver" => "oracle.jdbc.driver.OracleDriver",
+      "dialect" => "org.hibernate.dialect.Oracle10gDialect"
     }
   }
 
@@ -30,6 +34,8 @@ module DatabaseSetup
           case url
           when /postgresql/i
             "postgresql"
+          when /oracle/i
+            "oracle"
           else
             raise "Unable to guess database type from #{url}.  " <<
               "Please specify \"db_type\" in #{filename}."
