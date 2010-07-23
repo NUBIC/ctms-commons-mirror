@@ -1,6 +1,13 @@
 ctms-commons history
 ====================
 
+1.0.6
+-----
+
+### lang
+
+- Support constructor initialization in StaticNowFactory.
+
 1.0.5
 -----
 

@@ -6,12 +6,16 @@ import java.sql.Timestamp;
 /**
  * Test implementation of {@link NowFactory}.
  *
- * TODO: move to the testing module when it exists.
- *
  * @author Rhett Sutphin
  */
 public class StaticNowFactory extends NowFactory {
     private Timestamp now;
+
+    public StaticNowFactory() { }
+
+    public StaticNowFactory(Timestamp now) {
+        this.now = now;
+    }
 
     @Override
     public Date getNow() {
