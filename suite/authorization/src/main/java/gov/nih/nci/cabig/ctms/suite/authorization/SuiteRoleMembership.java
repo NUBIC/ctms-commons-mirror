@@ -36,7 +36,7 @@ public class SuiteRoleMembership implements Cloneable {
      * Cache of the actual objects related to identifiers.  Invariant: the list of objects for a
      * given scope will either match the corresponding identifiers or be null.
      */
-    private Map<ScopeType, List<Object>> applicationObjectCaches;
+    private Map<ScopeType, List<?>> applicationObjectCaches;
     private Map<ScopeType, Boolean> forAll;
 
     /**
@@ -54,7 +54,7 @@ public class SuiteRoleMembership implements Cloneable {
         this.mappings.put(ScopeType.STUDY, studyMapping);
 
         this.identifiers = new HashMap<ScopeType, List<String>>();
-        this.applicationObjectCaches = new HashMap<ScopeType, List<Object>>();
+        this.applicationObjectCaches = new HashMap<ScopeType, List<?>>();
         this.forAll = new HashMap<ScopeType, Boolean>();
 
         clear(ScopeType.SITE);
@@ -386,7 +386,7 @@ public class SuiteRoleMembership implements Cloneable {
      * Returns the application site objects representing the scope of this role.  Invoking this
      * method may result in an object resolve.
      */
-    public synchronized List<Object> getSites() {
+    public synchronized List<?> getSites() {
         return getApplicationObjects(ScopeType.SITE);
     }
 
@@ -394,12 +394,12 @@ public class SuiteRoleMembership implements Cloneable {
      * Returns the application site objects representing the scope of this role.  Invoking this
      * method may result in an object resolve.
      */
-    public synchronized List<Object> getStudies() {
+    public synchronized List<?> getStudies() {
         return getApplicationObjects(ScopeType.STUDY);
     }
 
     @SuppressWarnings({ "unchecked" })
-    public List<Object> getApplicationObjects(ScopeType scope) {
+    public List<?> getApplicationObjects(ScopeType scope) {
         if (isAll(scope)) {
             throw new SuiteAuthorizationAccessException(
                 "This %s has access to every %s.  You can't list %s instances for it.",
@@ -521,7 +521,7 @@ public class SuiteRoleMembership implements Cloneable {
             throw new CommonsError("Clone is supported", e);
         }
 
-        clone.applicationObjectCaches = new HashMap<ScopeType, List<Object>>();
+        clone.applicationObjectCaches = new HashMap<ScopeType, List<?>>();
         clone.identifiers = new HashMap<ScopeType, List<String>>();
         for (Map.Entry<ScopeType, List<String>> entry : this.identifiers.entrySet()) {
             clone.identifiers.put(entry.getKey(), new ArrayList<String>(entry.getValue()));

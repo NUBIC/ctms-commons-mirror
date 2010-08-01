@@ -5,6 +5,8 @@ the library, its changes will be listed in the main CHANGELOG.
 0.4.3
 -----
 
+- Loosen generic type on SuiteRoleMembership scope objects so the lists are
+  castable to collections of an application-specific type.
 - Internal: support running integrated tests on Oracle.
 
 0.4.2

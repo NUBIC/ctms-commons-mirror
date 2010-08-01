@@ -5,12 +5,12 @@ import gov.nih.nci.cabig.ctms.suite.authorization.domain.TestSiteMapping;
 import gov.nih.nci.cabig.ctms.suite.authorization.domain.TestStudy;
 import gov.nih.nci.cabig.ctms.suite.authorization.domain.TestStudyMapping;
 import gov.nih.nci.cabig.ctms.testing.MockRegistry;
-import gov.nih.nci.security.authorization.domainobjects.Role;
 import junit.framework.TestCase;
-import static org.easymock.classextension.EasyMock.*;
 
 import java.util.Arrays;
 import java.util.List;
+
+import static org.easymock.classextension.EasyMock.*;
 
 /**
  * @author Rhett Sutphin
@@ -33,6 +33,34 @@ public class SuiteRoleMembershipTest extends TestCase {
     public void testRoleIsAccessible() throws Exception {
         assertEquals(SuiteRole.BUSINESS_ADMINISTRATOR,
             createMembership(SuiteRole.BUSINESS_ADMINISTRATOR).getRole());
+    }
+
+    @SuppressWarnings({"UnusedDeclaration"})
+    public void testSiteListIsCastableToSpecificApplicationType() throws Exception {
+        List<TestSite> sites =
+            (List<TestSite>) createMembership(SuiteRole.AE_REPORTER).getSites();
+        // testing that this cast is compilable
+    }
+
+    @SuppressWarnings({"UnusedDeclaration"})
+    public void testSiteListItemIsCastableToSpecificApplicationType() throws Exception {
+        TestSite site =
+            (TestSite) createMembership(SuiteRole.AE_REPORTER).forSites(new TestSite("F")).getSites().get(0);
+        // testing that this cast is compilable
+    }
+
+    @SuppressWarnings({"UnusedDeclaration"})
+    public void testStudyListIsCastableToSpecificApplicationType() throws Exception {
+        List<TestStudy> studies =
+            (List<TestStudy>) createMembership(SuiteRole.AE_REPORTER).getStudies();
+        // testing that this cast is compilable
+    }
+
+    @SuppressWarnings({"UnusedDeclaration"})
+    public void testStudyListItemIsCastableToSpecificApplicationType() throws Exception {
+        TestStudy study =
+            (TestStudy) createMembership(SuiteRole.AE_REPORTER).forStudies(new TestStudy("T")).getStudies().get(0);
+        // testing that this cast is compilable
     }
 
     ////// forSites
@@ -730,6 +758,7 @@ public class SuiteRoleMembershipTest extends TestCase {
         // no exception
     }
 
+    @SuppressWarnings({"UnusedDeclaration"})
     public void testCloneWorksWithoutMappings() throws Exception {
         SuiteRoleMembership actual = new SuiteRoleMembership(SuiteRole.DATA_ANALYST, null, null).clone();
         // no exception
