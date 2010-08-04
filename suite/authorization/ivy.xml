@@ -15,6 +15,7 @@
 
     <dependency org="org.slf4j" name="slf4j-api" rev="${lib.slf4j.rev}"/>
     <dependency org="org.apache.commons" name="com.springsource.org.apache.commons.lang" rev="${lib.jakarta-commons.lang.rev}"/>
+    <dependency org="net.sourceforge.collections" name="collections-generic" rev="${lib.generic-commons-collections.rev}"/>
 
     <!-- csmext deps -->
     <dependency org="org.hibernate" name="com.springsource.org.hibernate" rev="${lib.hibernate.rev}"/>
