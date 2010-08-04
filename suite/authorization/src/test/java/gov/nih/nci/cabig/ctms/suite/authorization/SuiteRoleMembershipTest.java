@@ -10,6 +10,7 @@ import junit.framework.TestCase;
 import java.util.Arrays;
 import java.util.List;
 
+import static gov.nih.nci.cabig.ctms.testing.MoreJUnitAssertions.assertContains;
 import static org.easymock.classextension.EasyMock.*;
 
 /**
@@ -664,6 +665,218 @@ public class SuiteRoleMembershipTest extends TestCase {
     ) {
         assertEquals(message + ": wrong kind", expectedKind, actual.getKind());
         assertEquals(message + ": wrong scope description", expectedSD, actual.getScopeDescription());
+    }
+
+    ////// intersect
+
+    public void testIntersectWhenEqualIsEqual() throws Exception {
+        SuiteRoleMembership a = createMembership(SuiteRole.DATA_READER).
+            forAllStudies().forSites("A", "F");
+        SuiteRoleMembership b = a.clone();
+
+        SuiteRoleMembership actual = a.intersect(b);
+
+        assertTrue("Should be all studies", actual.isAllStudies());
+
+        assertEquals("Wrong number of overlapping sites", 2, actual.getSiteIdentifiers().size());
+        assertContains("Wrong site overlap", actual.getSiteIdentifiers(), "A");
+        assertContains("Wrong site overlap", actual.getSiteIdentifiers(), "F");
+
+        assertEquals("Not commutative", actual, b.intersect(a));
+    }
+
+    public void testIntersectForConcreteSiteLists() throws Exception {
+        SuiteRoleMembership a = createMembership(SuiteRole.STUDY_QA_MANAGER).forSites("A", "B", "C");
+        SuiteRoleMembership b = createMembership(SuiteRole.STUDY_QA_MANAGER).forSites("A", "C", "D", "E");
+        
+        SuiteRoleMembership actual = a.intersect(b);
+        
+        assertEquals("Wrong number of overlapping sites", 2, actual.getSiteIdentifiers().size());
+        assertContains("Missing overlap", actual.getSiteIdentifiers(), "A");
+        assertContains("Missing overlap", actual.getSiteIdentifiers(), "C");
+        assertEquals("Not commutative", actual, b.intersect(a));
+    }
+
+    public void testIntersectForConcreteSiteVsAllSites() throws Exception {
+        SuiteRoleMembership a = createMembership(SuiteRole.STUDY_QA_MANAGER).forAllSites();
+        SuiteRoleMembership b = createMembership(SuiteRole.STUDY_QA_MANAGER).forSites("A", "C", "D", "E");
+        
+        SuiteRoleMembership actual = a.intersect(b);
+        
+        assertEquals("Wrong number of overlapping sites", 4, actual.getSiteIdentifiers().size());
+        assertContains("Missing overlap", actual.getSiteIdentifiers(), "A");
+        assertContains("Missing overlap", actual.getSiteIdentifiers(), "C");
+        assertContains("Missing overlap", actual.getSiteIdentifiers(), "D");
+        assertContains("Missing overlap", actual.getSiteIdentifiers(), "E");
+        assertEquals("Not commutative", actual, b.intersect(a));
+    }
+
+    public void testIntersectForAllVsAllSites() throws Exception {
+        SuiteRoleMembership a = createMembership(SuiteRole.STUDY_QA_MANAGER).forAllSites();
+        SuiteRoleMembership b = createMembership(SuiteRole.STUDY_QA_MANAGER).forAllSites();
+        
+        SuiteRoleMembership actual = a.intersect(b);
+        assertTrue("Should be for all sites", actual.isAllSites());
+        assertEquals("Not commutative", actual, b.intersect(a));
+    }
+
+    public void testIntersectionNullForNoCommonSites() throws Exception {
+        SuiteRoleMembership a = createMembership(SuiteRole.STUDY_QA_MANAGER).forSites("A", "B");
+        SuiteRoleMembership b = createMembership(SuiteRole.STUDY_QA_MANAGER).forSites("C", "D", "E");
+    
+        assertNull("No overlap", a.intersect(b));
+        assertNull("Not commutative", b.intersect(a));
+    }
+
+    public void testIntersectForConcreteStudyLists() throws Exception {
+        SuiteRoleMembership a = createMembership(SuiteRole.STUDY_CALENDAR_TEMPLATE_BUILDER).
+            forAllSites().forStudies("A", "B", "C");
+        SuiteRoleMembership b = createMembership(SuiteRole.STUDY_CALENDAR_TEMPLATE_BUILDER).
+            forAllSites().forStudies("A", "C", "D", "E");
+        
+        SuiteRoleMembership actual = a.intersect(b);
+        
+        assertEquals("Wrong number of overlapping studies", 2, actual.getStudyIdentifiers().size());
+        assertContains("Missing overlap", actual.getStudyIdentifiers(), "A");
+        assertContains("Missing overlap", actual.getStudyIdentifiers(), "C");
+        assertEquals("Not commutative", actual, b.intersect(a));
+    }
+
+    public void testIntersectForConcreteStudyVsAllStudies() throws Exception {
+        SuiteRoleMembership a = createMembership(SuiteRole.STUDY_CALENDAR_TEMPLATE_BUILDER).
+            forAllSites().forAllStudies();
+        SuiteRoleMembership b = createMembership(SuiteRole.STUDY_CALENDAR_TEMPLATE_BUILDER).
+            forAllSites().forStudies("A", "C", "D", "E");
+        
+        SuiteRoleMembership actual = a.intersect(b);
+        
+        assertEquals("Wrong number of overlapping studies", 4, actual.getStudyIdentifiers().size());
+        assertContains("Missing overlap", actual.getStudyIdentifiers(), "A");
+        assertContains("Missing overlap", actual.getStudyIdentifiers(), "C");
+        assertContains("Missing overlap", actual.getStudyIdentifiers(), "D");
+        assertContains("Missing overlap", actual.getStudyIdentifiers(), "E");
+        assertEquals("Not commutative", actual, b.intersect(a));
+    }
+
+    public void testIntersectForAllVsAllStudies() throws Exception {
+        SuiteRoleMembership a = createMembership(SuiteRole.STUDY_CALENDAR_TEMPLATE_BUILDER).
+            forAllSites().forAllStudies();
+        SuiteRoleMembership b = createMembership(SuiteRole.STUDY_CALENDAR_TEMPLATE_BUILDER).
+            forAllSites().forAllStudies();
+        
+        SuiteRoleMembership actual = a.intersect(b);
+        assertTrue("Should be for all studies", actual.isAllStudies());
+        assertEquals("Not commutative", actual, b.intersect(a));
+    }
+
+    public void testIntersectionNullForNoCommonStudies() throws Exception {
+        SuiteRoleMembership a = createMembership(SuiteRole.DATA_READER).
+            forAllSites().forStudies("A", "B");
+        SuiteRoleMembership b = createMembership(SuiteRole.DATA_READER).
+            forAllSites().forStudies("C", "D", "E");
+    
+        assertNull("No overlap", a.intersect(b));
+        assertNull("Not commutative", b.intersect(a));
+    }
+
+    public void testIntersectionForComplexCase() throws Exception {
+        SuiteRoleMembership a = createMembership(SuiteRole.DATA_READER).
+            forSites("4", "7", "12").forStudies("A", "B");
+        SuiteRoleMembership b = createMembership(SuiteRole.DATA_READER).
+            forSites("12", "7", "3").forStudies("E", "A", "D");
+
+        SuiteRoleMembership actual = a.intersect(b);
+
+        assertEquals("Wrong number of overlapping studies: ", 1, actual.getStudyIdentifiers().size());
+        assertContains("Wrong study overlap", actual.getStudyIdentifiers(), "A");
+
+        assertEquals("Wrong number of overlapping sites", 2, actual.getSiteIdentifiers().size());
+        assertContains("Wrong site overlap", actual.getSiteIdentifiers(), "12");
+        assertContains("Wrong site overlap", actual.getSiteIdentifiers(), "7");
+
+        assertEquals("Not commutative", actual, b.intersect(a));
+    }
+
+    public void testIntersectIgnoresRole() throws Exception {
+        SuiteRoleMembership a = createMembership(SuiteRole.DATA_READER).
+            forAllSites().forStudies("A", "B", "C");
+        SuiteRoleMembership b = createMembership(SuiteRole.STUDY_CALENDAR_TEMPLATE_BUILDER).
+            forAllSites().forStudies("C", "B", "E");
+
+        SuiteRoleMembership actual = a.intersect(b);
+
+        assertTrue("Intersection is all sites", actual.isAllSites());
+
+        assertEquals("Wrong number of overlapping studies", 2, actual.getStudyIdentifiers().size());
+        assertContains("Wrong study overlap", actual.getStudyIdentifiers(), "C");
+        assertContains("Wrong study overlap", actual.getStudyIdentifiers(), "B");
+
+        assertEquals("Not commutative", actual, b.intersect(a));
+    }
+
+    public void testIntersectionWithUnscopedRolePreservesAllScope() throws Exception {
+        SuiteRoleMembership a = createMembership(SuiteRole.DATA_READER).
+            forSites("T").forStudies("A", "B", "C");
+        SuiteRoleMembership b = createMembership(SuiteRole.SYSTEM_ADMINISTRATOR);
+
+        SuiteRoleMembership actual = a.intersect(b);
+
+        assertEquals("Wrong number of overlapping sites", 1, actual.getSiteIdentifiers().size());
+        assertContains("Wrong site overlap", actual.getSiteIdentifiers(), "T");
+
+        assertEquals("Wrong number of overlapping studies", 3, actual.getStudyIdentifiers().size());
+        assertContains("Wrong study overlap", actual.getStudyIdentifiers(), "A");
+        assertContains("Wrong study overlap", actual.getStudyIdentifiers(), "B");
+        assertContains("Wrong study overlap", actual.getStudyIdentifiers(), "C");
+
+        assertEquals("Not commutative", actual, b.intersect(a));
+    }
+
+    public void testIntersectionWithLessScopedRolePreservesAllScope() throws Exception {
+        SuiteRoleMembership a = createMembership(SuiteRole.USER_ADMINISTRATOR).forSites("T");
+        SuiteRoleMembership b = createMembership(SuiteRole.DATA_READER).
+            forAllSites().forStudies("A", "B", "C");
+
+        SuiteRoleMembership actual = a.intersect(b);
+
+        assertEquals("Wrong number of overlapping sites", 1, actual.getSiteIdentifiers().size());
+        assertContains("Wrong site overlap", actual.getSiteIdentifiers(), "T");
+
+        assertEquals("Wrong number of overlapping studies", 3, actual.getStudyIdentifiers().size());
+        assertContains("Wrong study overlap", actual.getStudyIdentifiers(), "A");
+        assertContains("Wrong study overlap", actual.getStudyIdentifiers(), "B");
+        assertContains("Wrong study overlap", actual.getStudyIdentifiers(), "C");
+
+        assertEquals("Not commutative", actual, b.intersect(a));
+    }
+
+    public void testIntersectionOfTwoUnscopedRolesIsEmptyMembership() throws Exception {
+        SuiteRoleMembership a = createMembership(SuiteRole.BUSINESS_ADMINISTRATOR);
+        SuiteRoleMembership b = createMembership(SuiteRole.DATA_IMPORTER);
+
+        SuiteRoleMembership actual = a.intersect(b);
+
+        assertNotNull(actual);
+        assertFalse("Should have no scope info", actual.isAllSites());
+        assertFalse("Should have no scope info", actual.isAllStudies());
+        assertEquals("Should have no scope info", 0, actual.getSiteIdentifiers().size());
+        assertEquals("Should have no scope info", 0, actual.getStudyIdentifiers().size());
+    }
+
+    public void testIntersectWithSameRoleGivesIntersectionWithRole() throws Exception {
+        SuiteRoleMembership a = createMembership(SuiteRole.STUDY_QA_MANAGER).forAllSites();
+        SuiteRoleMembership b = createMembership(SuiteRole.STUDY_QA_MANAGER).forSites("B");
+
+        assertEquals("Role not set", SuiteRole.STUDY_QA_MANAGER, a.intersect(b).getRole());
+        assertEquals("Not commutative", SuiteRole.STUDY_QA_MANAGER, b.intersect(a).getRole());
+    }
+
+    public void testIntersectWithDifferentRoleGivesIntersectionWithoutRole() throws Exception {
+        SuiteRoleMembership a = createMembership(SuiteRole.STUDY_SITE_PARTICIPATION_ADMINISTRATOR).forAllSites();
+        SuiteRoleMembership b = createMembership(SuiteRole.STUDY_QA_MANAGER).forSites("B");
+
+        assertNull("Role should not be set", a.intersect(b).getRole());
+        assertNull("Not commutative", b.intersect(a).getRole());
     }
 
     ////// optional mappings

@@ -1,6 +1,7 @@
 package gov.nih.nci.cabig.ctms.suite.authorization;
 
 import gov.nih.nci.cabig.ctms.CommonsError;
+import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +48,14 @@ public class SuiteRoleMembership implements Cloneable {
         SuiteRole role,
         SiteMapping siteMapping,
         StudyMapping studyMapping
+    ) {
+        this(role, (IdentifiableInstanceMapping) siteMapping, (IdentifiableInstanceMapping) studyMapping);
+    }
+
+    private SuiteRoleMembership(
+        SuiteRole role,
+        IdentifiableInstanceMapping siteMapping,
+        IdentifiableInstanceMapping studyMapping
     ) {
         this.role = role;
         this.mappings = new HashMap<ScopeType, IdentifiableInstanceMapping>();
@@ -512,6 +521,65 @@ public class SuiteRoleMembership implements Cloneable {
         return new SuiteRoleMembership(getRole(), null, null).diff(this);
     }
 
+    /**
+     * Returns a SRM containing the scope which applies to both this SRM
+     * and the other.  If they have no common scope, it returns null.
+     * For roles with multiple scope types, there must be overlap in each
+     * scope in order for an intersection to be returned.  When intersecting
+     * SRMs with potential scopes, the more-specific scope information will
+     * be included in the result.  (See the tests for examples.)
+     */
+    public SuiteRoleMembership intersect(SuiteRoleMembership other) {
+        SuiteRoleMembership intersection = new SuiteRoleMembership(
+            this.getRole() == other.getRole() ? this.getRole() : null,
+            mappings.get(ScopeType.SITE), mappings.get(ScopeType.STUDY));
+
+        for (ScopeType scopeType : ScopeType.values()) {
+            if (!intersectScope(scopeType, other, intersection)) return null;
+        }
+
+        return intersection;
+    }
+
+    // returns false if there's no intersection; updates "to" otherwise.
+    private boolean intersectScope(ScopeType scopeType, SuiteRoleMembership other, SuiteRoleMembership to) {
+        if (this.getRole().getScopes().contains(scopeType) && !other.getRole().getScopes().contains(scopeType)) {
+            copyScope(scopeType, this, to);
+        } else if (!this.getRole().getScopes().contains(scopeType) && other.getRole().getScopes().contains(scopeType)) {
+            copyScope(scopeType, other, to);
+        } else if (this.getRole().getScopes().contains(scopeType)) { // applicable to both
+            if (this.isAll(scopeType)) {
+                if (other.isAll(scopeType)) {
+                    to.forAll(scopeType);
+                } else {
+                    copyScope(scopeType, other, to);
+                }
+            } else {
+                if (other.isAll(scopeType)) {
+                    copyScope(scopeType, this, to);
+                } else {
+                    Collection<String> scopeIntersection = CollectionUtils.intersection(
+                        this.getIdentifiers(scopeType), other.getIdentifiers(scopeType));
+                    if (scopeIntersection.isEmpty()) {
+                        return false;
+                    } else {
+                        to.setIdentifiers(scopeType,
+                            new ArrayList<String>(scopeIntersection));
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    private void copyScope(ScopeType scopeType, SuiteRoleMembership from, SuiteRoleMembership to) {
+        if (from.isAll(scopeType)) {
+            to.forAll(scopeType);
+        } else {
+            to.setIdentifiers(scopeType, new ArrayList<String>(from.getIdentifiers(scopeType)));
+        }
+    }
+
     @Override
     public SuiteRoleMembership clone() {
         SuiteRoleMembership clone;
@@ -583,5 +651,30 @@ public class SuiteRoleMembership implements Cloneable {
         public ScopeDescription getScopeDescription() {
             return scopeDescription;
         }
+    }
+
+    ////// OBJECT METHODS
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SuiteRoleMembership that = (SuiteRoleMembership) o;
+
+        if (forAll != null ? !forAll.equals(that.forAll) : that.forAll != null) return false;
+        if (identifiers != null ? !identifiers.equals(that.identifiers) : that.identifiers != null)
+            return false;
+        if (role != that.role) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = role != null ? role.hashCode() : 0;
+        result = 31 * result + (identifiers != null ? identifiers.hashCode() : 0);
+        result = 31 * result + (forAll != null ? forAll.hashCode() : 0);
+        return result;
     }
 }
