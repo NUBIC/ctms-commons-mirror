@@ -522,12 +522,21 @@ public class SuiteRoleMembership implements Cloneable {
     }
 
     /**
-     * Returns a SRM containing the scope which applies to both this SRM
-     * and the other.  If they have no common scope, it returns null.
+     * Returns an instance containing the scope which applies to both this
+     * instance and the other.  If they have no common scope, it returns null.
      * For roles with multiple scope types, there must be overlap in each
-     * scope in order for an intersection to be returned.  When intersecting
-     * SRMs with potential scopes, the more-specific scope information will
-     * be included in the result.  (See the tests for examples.)
+     * scope in order for an intersection to be returned.
+     * <p>
+     * When intersecting SRMs with different scope types, the more-specific
+     * scope information will be included in the result.  E.g., when
+     * intersecting a (site scoped) Study QA Manager membership with a (site
+     * and study scoped) Study Calendar Template Builder, the the intersection
+     * will reflect the study scope of the latter.
+     * <p>
+     * When intersecting two memberships for different roles, the role of the 
+     * resulting SRM will be null.
+     * <p>
+     * (See the tests for more examples.)
      */
     public SuiteRoleMembership intersect(SuiteRoleMembership other) {
         SuiteRoleMembership intersection = new SuiteRoleMembership(
