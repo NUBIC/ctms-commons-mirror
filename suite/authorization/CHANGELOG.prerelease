@@ -2,6 +2,12 @@ This is a list of changes for pre-release versions of the
 suite-authorization module.  Once it merges versions with the rest of
 the library, its changes will be listed in the main CHANGELOG.
 
+0.5.0
+-----
+- Add CsmHelper#renameScopePair to allow applications to update the PG/PE
+  pair for a scope object when its identifier changes.  (This is mostly
+  important for standalone deployments.)
+
 0.4.3
 -----
 

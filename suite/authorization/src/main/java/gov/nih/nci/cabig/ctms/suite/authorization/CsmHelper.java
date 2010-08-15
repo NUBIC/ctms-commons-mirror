@@ -78,6 +78,33 @@ public class CsmHelper {
     }
 
     /**
+     * Renames the PG/PE pair for the given scope and identifier, if it already exists.  If it
+     * doesn't exist, it does nothing.
+     */
+    public void renameScopePair(ScopeType scope, String oldIdentifier, String newIdentifier) {
+        ScopeDescription alt  = ScopeDescription.createForOne(scope, oldIdentifier);
+        ScopeDescription neue = ScopeDescription.createForOne(scope, newIdentifier);
+
+        try {
+            ProtectionElement existingPE = getProtectionElement(alt.getCsmName());
+            if (existingPE != null) {
+                existingPE.setObjectId(neue.getCsmName());
+                existingPE.setProtectionElementName(neue.getCsmName());
+                getAuthorizationManager().modifyProtectionElement(existingPE);
+            }
+
+            ProtectionGroup existingPG = getProtectionGroup(alt.getCsmName());
+            if (existingPG != null) {
+                existingPG.setProtectionGroupName(neue.getCsmName());
+                getAuthorizationManager().modifyProtectionGroup(existingPG);
+            }
+        } catch (CSTransactionException e) {
+            throw new SuiteAuthorizationAccessException(
+                "Unable to rename PG/PE pair %s to %s", e, alt.getCsmName(), neue.getCsmName());
+        }
+    }
+
+    /**
      * Returns the CSM group object for the given suite logical role.  It must already exist.
      *
      * @throws SuiteAuthorizationAccessException if anything other than exactly one CSM group is
@@ -130,16 +157,7 @@ public class CsmHelper {
     }
 
     private ProtectionElement ensureProtectionElementExists(String csmName) {
-        ProtectionElement existing = null;
-        {
-            ProtectionElement criteria = new ProtectionElement();
-            criteria.setObjectId(csmName);
-            List found = getAuthorizationManager().
-                getObjects(new ProtectionElementSearchCriteria(criteria));
-            if (!found.isEmpty()) {
-                existing = (ProtectionElement) found.get(0);
-            }
-        }
+        ProtectionElement existing = getProtectionElement(csmName);
 
         if (existing == null) {
             ProtectionElement newPe = new ProtectionElement();
@@ -160,6 +178,25 @@ public class CsmHelper {
             }
         }
         return existing;
+    }
+
+    /**
+     * Get a single PE by object ID, or return null.
+     */
+    private ProtectionElement getProtectionElement(String objectId) {
+        ProtectionElement criteria = new ProtectionElement();
+        criteria.setObjectId(objectId);
+        List matches = getAuthorizationManager().
+            getObjects(new ProtectionElementSearchCriteria(criteria));
+        if (matches.size() == 0) {
+            return null;
+        } else if (matches.size() == 1) {
+            return (ProtectionElement) matches.get(0);
+        } else {
+            throw new CommonsError(
+                "There are two or more PEs with object ID " +
+                    objectId + ".  This shouldn't be possible.");
+        }
     }
 
     private ProtectionGroup ensureProtectionGroupExists(String csmName) {

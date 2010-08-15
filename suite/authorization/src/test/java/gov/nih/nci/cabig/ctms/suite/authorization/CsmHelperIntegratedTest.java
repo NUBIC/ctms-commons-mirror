@@ -1,10 +1,8 @@
 package gov.nih.nci.cabig.ctms.suite.authorization;
 
-import gov.nih.nci.cabig.ctms.suite.authorization.domain.TestSite;
 import gov.nih.nci.cabig.ctms.suite.authorization.domain.TestSiteMapping;
 import gov.nih.nci.cabig.ctms.suite.authorization.domain.TestStudy;
 import gov.nih.nci.cabig.ctms.suite.authorization.domain.TestStudyMapping;
-import static gov.nih.nci.cabig.ctms.suite.authorization.CsmIntegratedTestHelper.getAuthorizationDao;
 import gov.nih.nci.security.authorization.domainobjects.Group;
 import gov.nih.nci.security.authorization.domainobjects.ProtectionElement;
 import gov.nih.nci.security.authorization.domainobjects.ProtectionGroup;
@@ -12,6 +10,8 @@ import gov.nih.nci.security.authorization.domainobjects.Role;
 import gov.nih.nci.security.exceptions.CSObjectNotFoundException;
 
 import java.util.Set;
+
+import static gov.nih.nci.cabig.ctms.suite.authorization.CsmIntegratedTestHelper.*;
 
 /**
  * @author Rhett Sutphin
@@ -197,6 +197,66 @@ public class CsmHelperIntegratedTest extends IntegratedTestCase {
             assertEquals("Wrong message",
                 "No study mapping was provided.  Either provide one or stick to the identifier-based methods.",
                 e.getMessage());
+        }
+    }
+
+    public void testRenameScopePairRenamesExistingProtectionElement() throws Exception {
+        csmHelper.renameScopePair(ScopeType.STUDY, "CRM114", "CRM006");
+
+        try {
+            ProtectionElement pe = getAuthorizationDao().getProtectionElement("Study.CRM006");
+            assertNotNull("PE with new object ID not found", pe);
+            assertEquals("PE with new object ID isn't the original",
+                new Long(-1L), pe.getProtectionElementId());
+            assertEquals("PE with new object ID does not have updated name",
+                "Study.CRM006", pe.getProtectionElementName());
+        } catch (CSObjectNotFoundException e) {
+            fail("PE not found under new name: " + e);
+        }
+
+        assertProtectionElementNotPresent("PE with old name still present", "Study.CRM114");
+    }
+
+    public void testRenameScopePairRenamesExistingProtectionGroup() throws Exception {
+        csmHelper.renameScopePair(ScopeType.SITE, "MI001", "MI002");
+
+        try {
+            ProtectionGroup pg = getAuthorizationDao().getProtectionGroup("HealthcareSite.MI002");
+            assertNotNull("PG with new name not found", pg);
+            assertEquals("PG with new name isn't the original", 
+                new Long(-2L), pg.getProtectionGroupId());
+        } catch (CSObjectNotFoundException e) {
+            fail("PG not found under new name: " + e);
+        }
+
+        assertProtectionGroupNotPresent("PG with old name still present", "HealthcareSite.MI001");
+    }
+
+    public void testRenameScopePairDoesNothingForNonExistentPair() throws Exception {
+        csmHelper.renameScopePair(ScopeType.SITE, "IL036", "IL037");
+
+        assertProtectionElementNotPresent("PE with old name created", "HealthcareSite.IL036");
+        assertProtectionGroupNotPresent("PG with old name created", "HealthcareSite.IL036");
+
+        assertProtectionElementNotPresent("PE with new name created", "HealthcareSite.IL037");
+        assertProtectionGroupNotPresent("PG with new name created", "HealthcareSite.IL037");
+    }
+
+    private void assertProtectionElementNotPresent(String message, String name) {
+        try {
+            getAuthorizationDao().getProtectionElement(name);
+            fail(message);
+        } catch (CSObjectNotFoundException e) {
+            // expected
+        }
+    }
+
+    private void assertProtectionGroupNotPresent(String message, String name) {
+        try {
+            getAuthorizationDao().getProtectionGroup(name);
+            fail(message);
+        } catch (CSObjectNotFoundException e) {
+            // expected
         }
     }
 }
