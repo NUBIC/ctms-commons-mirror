@@ -316,6 +316,15 @@ public class SuiteRoleMembership implements Cloneable {
      * @see #checkComplete
      */
     public void validate() throws SuiteAuthorizationValidationException {
+        String msg = determineInvalidityReason();
+        if (msg != null) throw new SuiteAuthorizationValidationException(msg);
+    }
+
+    private boolean isValid() {
+        return determineInvalidityReason() == null;
+    }
+
+    private String determineInvalidityReason() {
         Set<ScopeType> extraScopes = new LinkedHashSet<ScopeType>();
         for (ScopeType scope : ScopeType.values()) {
             boolean applicable = this.role.getScopes().contains(scope);
@@ -325,11 +334,12 @@ public class SuiteRoleMembership implements Cloneable {
             }
         }
 
+        String msg = null;
         if (!extraScopes.isEmpty()) {
-            throw new SuiteAuthorizationValidationException(
-                "The %s role is not scoped to %s.",
+            msg = String.format("The %s role is not scoped to %s.",
                 role.getDisplayName(), scopeNameList(extraScopes));
         }
+        return msg;
     }
 
     /**
@@ -340,6 +350,15 @@ public class SuiteRoleMembership implements Cloneable {
      * @see SuiteRole#getScopes()
      */
     public void checkComplete() throws SuiteAuthorizationValidationException {
+        String msg = determineIncompletenessReason();
+        if (msg != null) throw new SuiteAuthorizationValidationException(msg);
+    }
+
+    private boolean isComplete() {
+        return determineIncompletenessReason() == null;
+    }
+
+    private String determineIncompletenessReason() {
         Set<ScopeType> missingScopes = new LinkedHashSet<ScopeType>();
         for (ScopeType scope : ScopeType.values()) {
             boolean applicable = this.role.getScopes().contains(scope);
@@ -349,12 +368,14 @@ public class SuiteRoleMembership implements Cloneable {
             }
         }
 
+        String msg = null;
         if (!missingScopes.isEmpty()) {
             String msMsg = scopeNameList(missingScopes);
-            throw new SuiteAuthorizationValidationException(
+            msg = String.format(
                 "The %s role is scoped to %s.  Please specify the %s scope%s.",
                 role.getDisplayName(), msMsg, msMsg, missingScopes.size() == 1 ? "" : "s");
         }
+        return msg;
     }
 
     private String scopeNameList(Set<ScopeType> scopes) {
@@ -685,5 +706,30 @@ public class SuiteRoleMembership implements Cloneable {
         result = 31 * result + (identifiers != null ? identifiers.hashCode() : 0);
         result = 31 * result + (forAll != null ? forAll.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder().append(getClass().getSimpleName()).
+            append('[').append(getRole().getDisplayName());
+        for (ScopeType scopeType : ScopeType.values()) {
+            if (hasScope(scopeType)) {
+                sb.append("; ");
+                if (isAll(scopeType)) {
+                    sb.append("All ").append(scopeType.getPluralName());
+                } else {
+                    sb.append(scopeType.getPluralName()).append('=').
+                        append(getIdentifiers(scopeType));
+                }
+            }
+        }
+        if (!isValid()) {
+            sb.append("; invalid");
+        }
+        if (!isComplete()) {
+            sb.append("; incomplete");
+        }
+
+        return sb.append(']').toString();
     }
 }

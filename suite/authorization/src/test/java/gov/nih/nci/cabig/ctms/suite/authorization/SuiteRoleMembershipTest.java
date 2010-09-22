@@ -977,6 +977,45 @@ public class SuiteRoleMembershipTest extends TestCase {
         // no exception
     }
 
+    ////// toString
+
+    public void testToStringForGlobalRole() throws Exception {
+        assertEquals("SuiteRoleMembership[System Administrator]",
+            createMembership(SuiteRole.SYSTEM_ADMINISTRATOR).toString());
+    }
+
+    public void testToStringWithAllSitesAccess() throws Exception {
+        assertEquals("SuiteRoleMembership[Study QA Manager; All sites]",
+            createMembership(SuiteRole.STUDY_QA_MANAGER).forAllSites().toString());
+    }
+
+    public void testToStringWithSomeSiteAccess() throws Exception {
+        assertEquals("SuiteRoleMembership[Study QA Manager; sites=[A, C]]",
+            createMembership(SuiteRole.STUDY_QA_MANAGER).forSites("A", "C").toString());
+    }
+
+    public void testToStringWithAllStudiesAccess() throws Exception {
+        assertEquals("SuiteRoleMembership[Data Reader; sites=[A, C]; All studies]",
+            createMembership(SuiteRole.DATA_READER).
+                forSites("A", "C").forAllStudies().toString());
+    }
+
+    public void testToStringWithSomeStudiesAccess() throws Exception {
+        assertEquals("SuiteRoleMembership[Data Reader; sites=[A, C]; studies=[I]]",
+            createMembership(SuiteRole.DATA_READER).
+                forSites("A", "C").forStudies("I").toString());
+    }
+
+    public void testToStringWithPartialProvisioning() throws Exception {
+        assertEquals("SuiteRoleMembership[Data Reader; studies=[G, E]; incomplete]",
+            createMembership(SuiteRole.DATA_READER).forStudies("G", "E").toString());
+    }
+
+    public void testToStringWithExtraProvisioning() throws Exception {
+        assertEquals("SuiteRoleMembership[System Administrator; studies=[G, E]; invalid]",
+            createMembership(SuiteRole.SYSTEM_ADMINISTRATOR).forStudies("G", "E").toString());
+    }
+
     ////// HELPERS
 
     private SuiteRoleMembership createMembership(SuiteRole role) {
