@@ -1,6 +1,6 @@
 This is a list of changes for pre-release versions of the
-suite-authorization module.  Once it merges versions with the rest of
-the library, its changes will be listed in the main CHANGELOG.
+suite-authorization module.  0.5.0 was the last pre-release version. Starting
+with ctms-commons 1.0.6, suite-authorization is just another module.
 
 0.5.0
 -----
