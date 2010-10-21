@@ -1,0 +1,40 @@
+require 'yaml'
+
+BUILD_YAML = 'build.yaml'
+
+def blank?(s)
+  s.nil? || s.strip.empty?
+end
+
+namespace :buildr do
+  task :ensure_gem_dependencies_satisfied do
+    loaded = YAML::load( File.open( BUILD_YAML) )
+
+    unless loaded
+      fail bordered_message("Failed to load build.yaml.")
+    end
+
+    gem_deps = loaded['gems'] || []
+
+    gem_deps.each do |dep|
+      name, version = dep.split(' ')
+      unless blank?(name)
+        blank?(version) ? `gem list -i #{name}` : `gem list -i #{name} -v '#{version}'`
+        unless $? == 0
+          puts bordered_message("Installing #{name} #{version}")
+          blank?(version) ? system("gem install #{name}") : system("gem install #{name} -v '#{version}'")
+          unless $? == 0
+            fail bordered_message("Install failed.\nPlease fix the problem and try again or manually install #{name} #{version}.")
+          end
+        end
+      end
+    end
+  end
+
+  def bordered_message(msg)
+    len = msg.split("\n").collect { |l| l.size }.max
+    ['=' * len, msg, '=' * len].join("\n")
+  end
+end
+
+task :default => :'buildr:ensure_gem_dependencies_satisfied'
