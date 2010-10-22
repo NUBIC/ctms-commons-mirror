@@ -8,10 +8,7 @@ import gov.nih.nci.security.exceptions.CSObjectNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Retrieves {@link SuiteRoleMembership}s from CSM.
@@ -48,9 +45,7 @@ public class SuiteRoleMembershipLoader {
     }
 
     private Map<SuiteRole, SuiteRoleMembership> getRoleMemberships(long userId, boolean forProvisioning) {
-        Map<SuiteRole, SuiteRoleMembership> memberships = new LinkedHashMap<SuiteRole, SuiteRoleMembership>();
-        memberships.putAll(readUnscopedRoles(userId));
-        memberships.putAll(readScopedRoles(userId));
+        Map<SuiteRole, SuiteRoleMembership> memberships = readMemberships(userId);
         for (Iterator<Map.Entry<SuiteRole, SuiteRoleMembership>> it = memberships.entrySet().iterator(); it.hasNext();) {
             Map.Entry<SuiteRole, SuiteRoleMembership> entry = it.next();
             try {
@@ -67,8 +62,19 @@ public class SuiteRoleMembershipLoader {
     }
 
     @SuppressWarnings({ "unchecked" })
-    private Map<SuiteRole, SuiteRoleMembership> readUnscopedRoles(long userId) {
+    private Map<SuiteRole, SuiteRoleMembership> readMemberships(long userId) {
         Map<SuiteRole, SuiteRoleMembership> result = new LinkedHashMap<SuiteRole, SuiteRoleMembership>();
+        for (SuiteRole r : readRoles(userId)) {
+            if (!result.containsKey(r)) {
+                result.put(r, createRoleMembership(r));
+            }
+        }       
+        enhanceRoleMemberships(userId, result);
+        return result;
+    }
+
+    private Collection<SuiteRole> readRoles(long userId) {
+        Collection<SuiteRole> result = new LinkedList<SuiteRole>();
         Set<Group> groups;
         try {
             groups = getAuthorizationManager().getGroups(Long.toString(userId));
@@ -77,16 +83,12 @@ public class SuiteRoleMembershipLoader {
         }
         for (Group group : groups) {
             SuiteRole r = SuiteRole.getByCsmName(group.getGroupName());
-            if (!r.isScoped()) {
-                result.put(r, createRoleMembership(r));
-            }
+            result.add(r);
         }
         return result;
     }
 
-    @SuppressWarnings({ "unchecked" })
-    private Map<SuiteRole, SuiteRoleMembership> readScopedRoles(long userId) {
-        Map<SuiteRole, SuiteRoleMembership> result = new LinkedHashMap<SuiteRole, SuiteRoleMembership>();
+    private void enhanceRoleMemberships(long userId, Map<SuiteRole, SuiteRoleMembership> memberships) {
         Set<ProtectionElementPrivilegeContext> contexts;
         try {
             contexts = getAuthorizationManager().getProtectionElementPrivilegeContextForUser(Long.toString(userId));
@@ -98,26 +100,24 @@ public class SuiteRoleMembershipLoader {
             ScopeDescription sd = ScopeDescription.createFrom(context.getProtectionElement());
             for (Object p : context.getPrivileges()) {
                 SuiteRole role = SuiteRole.getByCsmName(((Privilege) p).getName());
-                if (!result.containsKey(role)) {
-                    result.put(role, createRoleMembership(role));
+                if (!memberships.containsKey(role)) {
+                    memberships.put(role, createRoleMembership(role));
                 }
                 if (sd.isAll()) {
                     if (sd.getScope() == ScopeType.SITE) {
-                        result.get(role).forAllSites();
+                        memberships.get(role).forAllSites();
                     } else if (sd.getScope() == ScopeType.STUDY) {
-                        result.get(role).forAllStudies();
+                        memberships.get(role).forAllStudies();
                     }
                 } else {
                     if (sd.getScope() == ScopeType.SITE) {
-                        result.get(role).addSite(sd.getIdentifier());
+                        memberships.get(role).addSite(sd.getIdentifier());
                     } else if (sd.getScope() == ScopeType.STUDY) {
-                        result.get(role).addStudy(sd.getIdentifier());
+                        memberships.get(role).addStudy(sd.getIdentifier());
                     }
                 }
             }
         }
-
-        return result;
     }
 
     private SuiteRoleMembership createRoleMembership(SuiteRole role) {

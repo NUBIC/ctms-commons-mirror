@@ -27,9 +27,9 @@ public class SuiteRoleMembershipLoaderIntegratedTest extends IntegratedTestCase 
 
     public void testIncompleteRoleMembershipsIncludedOnRequest() throws Exception {
         Map<SuiteRole, SuiteRoleMembership> actual = helper.getProvisioningRoleMemberships(-26);
-        assertEquals(2, actual.size());
-        assertFalse("Invalid role present", actual.containsKey(SuiteRole.STUDY_CREATOR));
+        assertEquals(3, actual.size());
         assertTrue("Missing expected complete role", actual.containsKey(SuiteRole.BUSINESS_ADMINISTRATOR));
+        assertTrue("Missing expected incomplete role", actual.containsKey(SuiteRole.STUDY_CREATOR));
         assertTrue("Missing expected incomplete role", actual.containsKey(SuiteRole.STUDY_CALENDAR_TEMPLATE_BUILDER));
     }
 
