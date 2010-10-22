@@ -1,7 +1,7 @@
 require 'yaml'
 
 BUILD_YAML = 'build.yaml'
-BUILDR_VERSION = '1.4.3'
+BUILDR_VERSION = '1.3.5'
 
 def blank?(s)
   s.nil? || s.strip.empty?
