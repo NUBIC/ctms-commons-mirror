@@ -1,6 +1,13 @@
 ctms-commons history
 ====================
 
+1.0.7
+-----
+### suite-authorization
+
+- Changed SuiteRoleMembershipLoader#getProvisioningRoleMemberships to include
+  scopeable memberships that have no study or site scopes.
+
 1.0.6
 -----
 
