@@ -1,12 +1,28 @@
 require 'yaml'
 
 BUILD_YAML = 'build.yaml'
+BUILDR_VERSION = '1.4.3'
 
 def blank?(s)
   s.nil? || s.strip.empty?
 end
 
+def install_gem(name, version)
+  puts bordered_message("Installing #{name} #{version}")
+  version ? system("gem install #{name} -v '#{version}'") : system("gem install #{name}")
+  unless $? == 0
+    fail bordered_message("Install failed.\nPlease fix the problem and try again or manually install #{name} #{version}.")
+  end
+end
+
 namespace :buildr do
+  task :ensure_buildr_available do
+    name, version = 'buildr', BUILDR_VERSION
+    unless Gem.available?(name, version)
+      install_gem(name, version)
+    end
+  end
+
   task :ensure_gem_dependencies_satisfied do
     loaded = YAML::load( File.open( BUILD_YAML) )
 
@@ -17,15 +33,10 @@ namespace :buildr do
     gem_deps = loaded['gems'] || []
 
     gem_deps.each do |dep|
-      name, version = dep.split(' ')
-      unless blank?(name)
-        blank?(version) ? `gem list -i #{name}` : `gem list -i #{name} -v '#{version}'`
-        unless $? == 0
-          puts bordered_message("Installing #{name} #{version}")
-          blank?(version) ? system("gem install #{name}") : system("gem install #{name} -v '#{version}'")
-          unless $? == 0
-            fail bordered_message("Install failed.\nPlease fix the problem and try again or manually install #{name} #{version}.")
-          end
+      name, version = dep.split(' ').collect{|e| blank?(e) ? nil : e}
+      if name
+        unless Gem.available?(name, version)
+          install_gem(name, version)
         end
       end
     end
@@ -37,4 +48,4 @@ namespace :buildr do
   end
 end
 
-task :default => :'buildr:ensure_gem_dependencies_satisfied'
+task :default => [:'buildr:ensure_buildr_available', :'buildr:ensure_gem_dependencies_satisfied']
