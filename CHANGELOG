@@ -3,10 +3,11 @@ ctms-commons history
 
 1.0.7
 -----
+
 ### suite-authorization
 
-- Changed SuiteRoleMembershipLoader#getProvisioningRoleMemberships to include
-  scopeable memberships that have no study or site scopes.
+- Change SuiteRoleMembershipLoader#getProvisioningRoleMemberships to
+  include scopeable memberships that have no study or site scopes.
 
 1.0.6
 -----
@@ -17,8 +18,8 @@ ctms-commons history
 
 ### suite-authorization
 
-- Promote to released-module status (last pre-release was 0.5.0).  For earlier
-  changes, see suite/authorization/CHANGELOG.prerelease.
+- Promote to released-module status (last pre-release was 0.5.0).  For
+  earlier changes, see suite/authorization/CHANGELOG.prerelease.
 - Add `SuiteRoleMembership#toString`.
 
 1.0.5
