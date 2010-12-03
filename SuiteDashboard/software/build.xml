@@ -193,6 +193,13 @@
 		</fileset>
 	</path>
 
+    <target name="compile">
+        <copy-resources src="${main.src.resources}" dest="${classes.dir}/resources" filter="true"/>
+        <javac srcdir="${main.src}" destdir="${classes.dir}" classpathref="main.classpath" debug="true" source="1.5" target="1.5"/>
+        <copy-resources src="${classes.dir}" dest="${war.dir}/WEB-INF/classes" filter="false"/>
+        <copy-resources src="${webapp.dir}" dest="${war.dir}"  filter="false" />
+    </target>
+
     <target name="war" depends="clean, init, load-ivy, version, source">
         <!-- compile -->
         <ivyResolve confs="default" libdir="${lib.dir}" resolveid="[org]-[module]"/>

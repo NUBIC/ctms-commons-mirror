@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="csmLocalPoolDataSource" lazy-init="true" class="org.apache.commons.dbcp.BasicDataSource"
+        p:driverClassName="s[csm.datasource.driver]"
+        p:maxActive="5" p:maxIdle="2"
+        p:maxWait="180000"
+        p:removeAbandoned="true"
+        p:removeAbandonedTimeout="300"
+        p:logAbandoned="true"
+        p:testWhileIdle="true"
+        p:testOnReturn="true"
+        p:timeBetweenEvictionRunsMillis="300000"
+        p:minEvictableIdleTimeMillis="600000"
+        p:url="s[csm.datasource.url]"
+        p:username="s[csm.datasource.username]"
+        p:password="s[csm.datasource.password]" />
+
+</beans>
