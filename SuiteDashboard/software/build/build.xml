@@ -324,7 +324,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/branches/automation-1.7.1
 		</ant>
 
         <!-- Copy war to dist.exploded.dir -->
-        <copy file="${software.dir}/build/dist/${SuiteDashboard-webapp.file.name}" todir="${SuiteDashboard-webapp.dist.dir}" overwrite="true" />
+        <copy file="${software.dir}/build/distLocal/${SuiteDashboard-webapp.file.name}" todir="${SuiteDashboard-webapp.dist.dir}" overwrite="true" />
 
 	</target>
 
