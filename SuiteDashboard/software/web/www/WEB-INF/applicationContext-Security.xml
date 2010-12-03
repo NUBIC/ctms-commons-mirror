@@ -130,8 +130,8 @@
     </bean>
 
     <bean id="casAuthoritiesPopulator" class="gov.nih.nci.cabig.ccts.security.WebSSOAuthoritiesPopulator" lazy-init="true">
-        <property name="hostCertificate" value="s[hostCertificate]"/>
-        <property name="hostKey" value="s[hostKey]"/>
+        <property name="hostCertificate" value="s[grid.secure.cert.location]"/>
+        <property name="hostKey" value="s[grid.secure.key.location]"/>
     </bean>
 
     <bean id="serviceProperties" class="org.acegisecurity.ui.cas.ServiceProperties" lazy-init="true">

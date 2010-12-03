@@ -703,7 +703,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/branches/automation-1.7.1
 		<delete file="${tomcat.home}/webapps/${SuiteDashboard-webapp.war.file}"/>
 		<copy file="${SuiteDashboard-webapp.dir.dist}/${SuiteDashboard-webapp.war.file}" todir="${tomcat.home}/webapps" overwrite="true" />
         <unwar src="${SuiteDashboard-webapp.dir.dist}/${SuiteDashboard-webapp.war.file}" dest="${tomcat.home}/webapps/suite-dashboard"/>
-        <copy file="${tomcat.home}/webapps/suite-dashboard/WEB-INF/classes/resources/app.template.properties" tofile="${tomcat.home}/webapps/suite-dashboard/WEB-INF/classes/resources/app.properties" overwrite="true"/>
+        <!--<copy file="${tomcat.home}/webapps/suite-dashboard/WEB-INF/classes/resources/app.template.properties" tofile="${tomcat.home}/webapps/suite-dashboard/WEB-INF/classes/resources/app.properties" overwrite="true"/>-->
 
         <replace file="${tomcat.home}/webapps/suite-dashboard/WEB-INF/classes/resources/app.properties" token="@tomcat.hostname@" value="${tomcat.hostname}" />
         <replace file="${tomcat.home}/webapps/suite-dashboard/WEB-INF/classes/resources/app.properties" token="@tomcat.port.ssl@" value="${tomcat.port.ssl}" />
@@ -716,6 +716,12 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/branches/automation-1.7.1
         <replace file="${tomcat.home}/webapps/suite-dashboard/WEB-INF/classes/resources/app.properties" token="@CSM_DB_DIALECT@" value="${database.csm.dialect}" />
         <replace file="${tomcat.home}/webapps/suite-dashboard/WEB-INF/classes/resources/app.properties" token="@CSM_DB_DRIVER@" value="${database.csm.driver}" />
 
+        <replace file="${tomcat.home}/webapps/suite-dashboard/WEB-INF/classes/resources/app.properties" token="@tomcat.grid.secure.cert.location@" value="${tomcat.grid.secure.cert.location}" />
+        <replace file="${tomcat.home}/webapps/suite-dashboard/WEB-INF/classes/resources/app.properties" token="@tomcat.grid.secure.key.location@" value="${tomcat.grid.secure.key.location}" />
+
+        <replace file="${tomcat.home}/webapps/suite-dashboard/WEB-INF/classes/resources/app.properties" token="@websso.hostname@" value="${websso.hostname}" />
+        <replace file="${tomcat.home}/webapps/suite-dashboard/WEB-INF/classes/resources/app.properties" token="@websso.port@" value="${websso.port}" />
+
 		<!--  Many NCI applications require clm for csm, so you can point this to where you have the version you want to use
 		<copy file="${bda-utils.dir}/clm-3.2.jar" todir="${tomcat.home}/server/${tomcat.server.name}/lib" overwrite="true" />
 		-->
@@ -723,7 +729,17 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/branches/automation-1.7.1
 	</target>
 
 	<target name="install:tomcat:SuiteDashboard-webapp:configure" description="Configure SuiteDashboard-webapp application, copies over externalized properties or configurations that are not part of the tomcat configuration" unless="exclude.tomcat" depends="common:init">
-		<!-- configure datasource -->
+        <echo message="---------------------------"></echo> 
+        <echo message="Preparing property files..."></echo>
+        <echo message="---------------------------"></echo>
+        <switch value="${database.type}">
+            <case value="oracle">
+                <copy file="${tomcat.home}/webapps/suite-dashboard/WEB-INF/classes/resources/app.template.oralce.properties" tofile="${tomcat.home}/webapps/suite-dashboard/WEB-INF/classes/resources/app.properties" overwrite="true"/>            
+            </case>
+            <case value="postgresql">
+                <copy file="${tomcat.home}/webapps/suite-dashboard/WEB-INF/classes/resources/app.template.postgres.properties" tofile="${tomcat.home}/webapps/suite-dashboard/WEB-INF/classes/resources/app.properties" overwrite="true"/>
+            </case>
+        </switch>
 	</target>
 
 	<target name="install:tomcat:SuiteDashboard-webapp:re-configure" description="Configure SuiteDashboard-webapp application, copies over externalized properties or configurations that are not part of the tomcat configuration" unless="exclude.tomcat" depends="common:init">
