@@ -703,7 +703,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/branches/automation-1.7.1
 		<delete file="${tomcat.home}/webapps/${SuiteDashboard-webapp.war.file}"/>
 		<copy file="${SuiteDashboard-webapp.dir.dist}/${SuiteDashboard-webapp.war.file}" todir="${tomcat.home}/webapps" overwrite="true" />
         <unwar src="${SuiteDashboard-webapp.dir.dist}/${SuiteDashboard-webapp.war.file}" dest="${tomcat.home}/webapps/suite-dashboard"/>
-        <copy file="${tomcat.home}/webapps/suite-dashboard/WEB-INF/classes/resources/app.template.properties" tofile="${tomcat.home}/webapps/suite-dashboard/WEB-INF/classes/resources/app.properties" />
+        <copy file="${tomcat.home}/webapps/suite-dashboard/WEB-INF/classes/resources/app.template.properties" tofile="${tomcat.home}/webapps/suite-dashboard/WEB-INF/classes/resources/app.properties" overwrite="true"/>
 
         <replace file="${tomcat.home}/webapps/suite-dashboard/WEB-INF/classes/resources/app.properties" token="@tomcat.hostname@" value="${tomcat.hostname}" />
         <replace file="${tomcat.home}/webapps/suite-dashboard/WEB-INF/classes/resources/app.properties" token="@tomcat.port.ssl@" value="${tomcat.port.ssl}" />
