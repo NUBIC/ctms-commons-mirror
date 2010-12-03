@@ -713,6 +713,8 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/branches/automation-1.7.1
         <replace file="${tomcat.home}/webapps/suite-dashboard/WEB-INF/classes/resources/app.properties" token="@CSM_DB_HOST@" value="${database.csm.host}" />
         <replace file="${tomcat.home}/webapps/suite-dashboard/WEB-INF/classes/resources/app.properties" token="@CSM_DB_PORT@" value="${database.csm.port}" />
         <replace file="${tomcat.home}/webapps/suite-dashboard/WEB-INF/classes/resources/app.properties" token="@CSM_DB_NAME@" value="${database.csm.name}" />
+        <replace file="${tomcat.home}/webapps/suite-dashboard/WEB-INF/classes/resources/app.properties" token="@CSM_DB_DIALECT@" value="${database.csm.dialect}" />
+        <replace file="${tomcat.home}/webapps/suite-dashboard/WEB-INF/classes/resources/app.properties" token="@CSM_DB_DRIVER@" value="${database.csm.driver}" />
 
 		<!--  Many NCI applications require clm for csm, so you can point this to where you have the version you want to use
 		<copy file="${bda-utils.dir}/clm-3.2.jar" todir="${tomcat.home}/server/${tomcat.server.name}/lib" overwrite="true" />
