@@ -60,10 +60,6 @@ public class WebSSOAuthoritiesPopulator implements CasAuthoritiesPopulator {
 
         WebSSOUser user = null;
         try {
-            System.out.println("---------------");
-            System.out.println(casUserId + " //// " + userName);
-            System.out.println("---------------");
-            
             user = new WebSSOUser(casUserId, new GrantedAuthority[] {new GrantedAuthorityImpl("ROLE_USER")});
         } catch (UsernameNotFoundException ex) {
             throw new AuthenticationCredentialsNotFoundException(ex.getMessage(), ex);
@@ -74,7 +70,6 @@ public class WebSSOAuthoritiesPopulator implements CasAuthoritiesPopulator {
         user.setDelegatedEPR(attrMap.get(CAGRID_SSO_DELEGATION_SERVICE_EPR));
         user.setFirstName(attrMap.get(CAGRID_SSO_FIRST_NAME));
         user.setLastName(attrMap.get(CAGRID_SSO_LAST_NAME));
-        user.setOriginalUsername(userName);
 
         // Get the delegated credential and store it in the UserDetails object
         // This will be available later in the Authenticaiton object
@@ -88,6 +83,7 @@ public class WebSSOAuthoritiesPopulator implements CasAuthoritiesPopulator {
             log.error("Could not retreive user credential from CDS service", e);
         }
 
+        user.setOriginalUsername(userName);
         return user;
     }
 
