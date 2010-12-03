@@ -37,10 +37,6 @@ public class WebSSOAuthoritiesPopulator implements CasAuthoritiesPopulator {
     Logger log = Logger.getLogger(WebSSOAuthoritiesPopulator.class);
 
     public UserDetails getUserDetails(String casUserId) throws AuthenticationException {
-
-        System.out.println("---------------");
-        System.out.println(casUserId);
-        System.out.println("---------------");
         
         Map<String, String> attrMap = new HashMap<String, String>();
         StringTokenizer stringTokenizer = new StringTokenizer(casUserId, ATTRIBUTE_DELIMITER);
@@ -64,6 +60,10 @@ public class WebSSOAuthoritiesPopulator implements CasAuthoritiesPopulator {
 
         WebSSOUser user = null;
         try {
+            System.out.println("---------------");
+            System.out.println(casUserId + " //// " + userName);
+            System.out.println("---------------");
+            
             user = new WebSSOUser(casUserId, new GrantedAuthority[] {new GrantedAuthorityImpl("ROLE_USER")});
         } catch (UsernameNotFoundException ex) {
             throw new AuthenticationCredentialsNotFoundException(ex.getMessage(), ex);
