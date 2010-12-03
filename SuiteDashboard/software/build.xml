@@ -163,7 +163,7 @@
     <target name="init" depends="create-repo" description="creates the directories necessary for the exploded war">
         <mkdir dir="${lib.dir}"/>
         <mkdir dir="${classes.dir}" />
-        <mkdir dir="${dist.dir}" />
+        <mkdir dir="${mydist.dir}" />
         <mkdir dir="${war.dir}"/>
         <mkdir dir="${war.dir}/WEB-INF" />
         <mkdir dir="${war.dir}/WEB-INF/lib"/>
@@ -176,10 +176,10 @@
              Cleans the directory associated to keep exploded suite-dashboard files
      =============================================================-->
     <target name="clean">
-        <delete dir="${war.dir}" verbose="true"/>
-        <delete dir="${dist.dir}" verbose="true"/>
-        <delete dir="${classes.dir}" verbose="true"/>
-        <delete dir="${lib.dir}" verbose="true"/>
+        <delete dir="${war.dir}" verbose="false"/>
+        <delete dir="${mydist.dir}" verbose="false"/>
+        <delete dir="${classes.dir}" verbose="false"/>
+        <delete dir="${lib.dir}" verbose="false"/>
     </target>
 
 
@@ -216,7 +216,7 @@
         <copy-resources src="${classes.dir}" dest="${war.dir}/WEB-INF/classes" filter="false"/>
         <copy-resources src="${webapp.dir}" dest="${war.dir}"  filter="false" />
         <copy-resources src="${lib.dir}" dest="${war.dir}/WEB-INF/lib" filter="false"/>
-        <war destfile="${dist.dir}/${war.filename}" basedir="${war.dir}" level="9" webxml="${webapp.dir}/WEB-INF/web.xml"/>
+        <war destfile="${mydist.dir}/${war.filename}" basedir="${war.dir}" level="9" webxml="${webapp.dir}/WEB-INF/web.xml"/>
 
         <echo message="------------------ WARing END ------------------"/> 
     </target>
@@ -244,7 +244,7 @@
     <target name="publish" depends="war"
     		description="--> publish this project in the ivy repository">
     	<echo message="Executing in ${ant.project.name}" />
-    	<ivyPublish artifactspattern="${dist.dir}/[artifact].[ext]"
+    	<ivyPublish artifactspattern="${mydist.dir}/[artifact].[ext]"
     		resolver="${ivy.remote.publish.resolver}"
     		pubrevision="${version}"
     		status="release"
@@ -257,7 +257,7 @@
          ================================= -->
     <target name="publish-local" depends="local-version, war" description="--> publish this project in the local ivy repository">
     	<echo message="Executing in ${ant.project.name}" />
-    	<ivyPublish artifactspattern="${dist.dir}/[artifact].[ext]"
+    	<ivyPublish artifactspattern="${mydist.dir}/[artifact].[ext]"
     		resolver="${ivy.local.publish.resolver}"
     		pubrevision="${version}"
     		status="integration"
