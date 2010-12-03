@@ -202,6 +202,8 @@
     </target>
 
     <target name="war" depends="clean, init, load-ivy, version, source">
+        <echo message="------------------ WARing START ------------------"/>
+
         <!-- compile -->
         <ivyResolve confs="default" libdir="${lib.dir}" resolveid="[org]-[module]"/>
         <copy-resources src="${main.src.resources}" dest="${classes.dir}/resources" filter="true"/>
@@ -215,6 +217,8 @@
         <copy-resources src="${webapp.dir}" dest="${war.dir}"  filter="false" />
         <copy-resources src="${lib.dir}" dest="${war.dir}/WEB-INF/lib" filter="false"/>
         <war destfile="${dist.dir}/${war.filename}" basedir="${war.dir}" level="9" webxml="${webapp.dir}/WEB-INF/web.xml"/>
+
+        <echo message="------------------ WARing END ------------------"/> 
     </target>
 
 
