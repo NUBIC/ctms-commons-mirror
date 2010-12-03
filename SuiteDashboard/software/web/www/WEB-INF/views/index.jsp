@@ -28,7 +28,7 @@
         <div class="header-right">
             <div class="welcome_user">${not empty user ? user.firstName : ''} ${not empty user ? user.lastName : ''}</div>
             <div class="button-wrap ">
-                <%--<div class="grey button"><a href="<c:url value="/j_acegi_logout"/>">Log Out</a></div>--%>
+                <div class="grey button"><a href="<c:url value="${urls['webSSO.server.baseUrl']}/logout"/>">Log Out</a></div>
             </div>
         </div>
     </div>
