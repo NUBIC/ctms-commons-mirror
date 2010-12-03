@@ -8,13 +8,21 @@
 			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd"
         default-lazy-init="true">
 
+
+    <tx:annotation-driven proxy-target-class="true"/>
+    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager" autowire="byName"/>
+    <bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate"
+          autowire="byType">
+          <property name="transactionManager" ref="transactionManager"/>
+    </bean>
+
     <bean id="wonderfulNamingStrategy" class="gov.nih.nci.cabig.ccts.hibernate.NamingStrategy">
         <property name="uppercaseColumnNames">
             <value>empty_empty</value>
         </property>
     </bean>
 
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean" autowire="byName" depends-on="auditInterceptor">
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean" autowire="byName">
         <property name="dataSource" ref="csmLocalPoolDataSource" />
         <property name="namingStrategy" ref="wonderfulNamingStrategy" />
         <property name="annotatedClasses">

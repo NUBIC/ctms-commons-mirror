@@ -36,6 +36,7 @@
 
 <div id="container">
     <div id="wrapper">
+        <c:if test="${exists}">
         <div id="content">
             <ul>
                 <li class="top_left"><a href="${urls['caaers.url']}"><img src="images/caaers.png"/></a></li>
@@ -45,6 +46,12 @@
                 <div class="clear"></div>
             </ul>
         </div>
+        </c:if>
+        <c:if test="${not exists}">
+            <div id="content" style="color:red; font-weight:normal; font-size:11px;">
+                User does not exist.
+            </div>
+        </c:if>
         <div class="clear"></div>
     </div>
     <div class="footer">caBIG Clinical Trials Suite</div>

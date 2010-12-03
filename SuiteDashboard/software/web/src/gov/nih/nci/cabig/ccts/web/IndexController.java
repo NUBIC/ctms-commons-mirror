@@ -1,5 +1,6 @@
 package gov.nih.nci.cabig.ccts.web;
 
+import gov.nih.nci.cabig.ccts.dao.UserDao;
 import gov.nih.nci.cabig.ccts.security.WebSSOUser;
 import org.acegisecurity.Authentication;
 import org.acegisecurity.context.SecurityContextHolder;
@@ -11,6 +12,9 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class IndexController extends AbstractController {
+
+    private UserDao userDao;
+
     @Override
     protected ModelAndView handleRequestInternal(HttpServletRequest req, HttpServletResponse res) throws Exception {
         Properties p = new Properties();
@@ -24,7 +28,19 @@ public class IndexController extends AbstractController {
         Authentication a = SecurityContextHolder.getContext().getAuthentication();
         if (a != null) user = (WebSSOUser)a.getPrincipal();
         mvc.addObject("user", user);
-        
+
+        boolean exists = userDao.userExists("SYSTEM_ADMIN");
+        mvc.addObject("exists", exists);
+        // System.out.println("User exists: " + exists);
+
         return mvc;
+    }
+
+    public UserDao getUserDao() {
+        return userDao;
+    }
+
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
     }
 }
