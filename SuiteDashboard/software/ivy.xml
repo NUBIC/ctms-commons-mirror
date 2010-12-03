@@ -73,6 +73,12 @@
 
         <!-- Build only dependency -->
         <dependency org="javax.servlet" name="servlet-api" rev="2.3" conf="build->default(*);test->default(*)"/>
+        <dependency org="taglibs" name="standard" rev="1.1.2" />
+        <dependency org="jstl" name="jstl" rev="1.1.2" />
+        <dependency org="commons-dbcp" name="commons-dbcp" rev="1.2.1" >
+            <exclude module="xml-apis" conf="*"/>
+            <exclude module="xerces" conf="*"/>
+        </dependency>
 
         <!-- Caching Related -->
         <dependency org="net.sf.ehcache" name="ehcache-web" rev="1.6.0-beta2" />

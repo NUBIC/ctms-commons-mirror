@@ -1,6 +1,7 @@
 package gov.nih.nci.cabig.ccts.web;
 
 import gov.nih.nci.cabig.ccts.dao.UserDao;
+import gov.nih.nci.cabig.ccts.security.SecurityUtils;
 import gov.nih.nci.cabig.ccts.security.WebSSOUser;
 import org.acegisecurity.Authentication;
 import org.acegisecurity.context.SecurityContextHolder;
@@ -25,13 +26,12 @@ public class IndexController extends AbstractController {
         mvc.addObject("urls", p);
 
         WebSSOUser user = null;
-        Authentication a = SecurityContextHolder.getContext().getAuthentication();
+        Authentication a = SecurityUtils.getAuthentication();
         if (a != null) user = (WebSSOUser)a.getPrincipal();
         mvc.addObject("user", user);
 
-        boolean exists = userDao.userExists("SYSTEM_ADMIN");
+        boolean exists = userDao.userExists(SecurityUtils.getUserLoginName());
         mvc.addObject("exists", exists);
-        // System.out.println("User exists: " + exists);
 
         return mvc;
     }
