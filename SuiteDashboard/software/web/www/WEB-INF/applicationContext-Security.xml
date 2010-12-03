@@ -8,7 +8,7 @@
             <value>
                 CONVERT_URL_TO_LOWERCASE_BEFORE_COMPARISON
                 PATTERN_TYPE_APACHE_ANT
-                /**=channelProcessingFilter,httpSessionContextIntegrationFilter,webSSOAuthenticationProcessingFilter,securityContextHolderAwareRequestFilter,webSSOExceptionTranslationFilter,webSSOFilterSecurityInterceptor
+                /**=channelProcessingFilter,httpSessionContextIntegrationFilter,webSSOLogoutFilter, webSSOAuthenticationProcessingFilter,securityContextHolderAwareRequestFilter,webSSOExceptionTranslationFilter,webSSOFilterSecurityInterceptor
             </value>
         </property>
     </bean>

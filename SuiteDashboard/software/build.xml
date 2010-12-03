@@ -18,7 +18,8 @@
         <sequential>
             <filter token="project.version" value="${dashboard.version}" />
             <filter token="buildNumber" value="${today}" />
-            <copy todir="@{dest}" filtering="@{filter}">
+            <echo message="COPY @{src} TO @{dest}" />
+            <copy todir="@{dest}" filtering="@{filter}" verbose="false" overwrite="true">
                 <fileset dir="@{src}" includes="**/*.*">
                     <exclude name=".svn"/>
                 </fileset>
@@ -198,7 +199,7 @@
         <javac srcdir="${main.src}" destdir="${classes.dir}" classpathref="main.classpath" debug="true" source="1.5" target="1.5"/>
         <copy-resources src="${classes.dir}" dest="${war.dir}/WEB-INF/classes" filter="false"/>
         <copy-resources src="${lib.dir}" dest="${war.dir}/WEB-INF/lib" filter="false"/>
-        <copy-resources src="${webapp.dir}" dest="${war.dir}"  filter="false" />
+        <copy-resources src="${webapp.dir}" dest="${war.dir}"  filter="true" />
     </target>
 
     <target name="war" depends="clean, init, load-ivy, version, source">
@@ -214,7 +215,7 @@
         <ivy:retrieve pattern="${war.dir}/WEB-INF/lib/[artifact]-[revision].[ext]"  haltonfailure="false" settingsRef="dashboard.ivy.instance"/>
         <ivy:retrieve pattern="${war.dir}/WEB-INF/[artifact].[ext]"  haltonfailure="false" settingsRef="dashboard.ivy.instance" type="properties" />
         <copy-resources src="${classes.dir}" dest="${war.dir}/WEB-INF/classes" filter="false"/>
-        <copy-resources src="${webapp.dir}" dest="${war.dir}"  filter="false" />
+        <copy-resources src="${webapp.dir}" dest="${war.dir}"  filter="true" />
         <copy-resources src="${lib.dir}" dest="${war.dir}/WEB-INF/lib" filter="false"/>
         <war destfile="${mydist.dir}/${war.filename}" basedir="${war.dir}" level="9" webxml="${webapp.dir}/WEB-INF/web.xml"/>
 
