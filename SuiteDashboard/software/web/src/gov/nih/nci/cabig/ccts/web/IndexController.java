@@ -30,7 +30,7 @@ public class IndexController extends AbstractController {
         if (a != null) user = (WebSSOUser)a.getPrincipal();
         mvc.addObject("user", user);
 
-        boolean exists = userDao.userExists(SecurityUtils.getUserLoginName());
+        boolean exists = userDao.userExists(user.getOriginalUsername());
         mvc.addObject("exists", exists);
 
         System.out.println(SecurityUtils.getUserLoginName() + " " + exists);

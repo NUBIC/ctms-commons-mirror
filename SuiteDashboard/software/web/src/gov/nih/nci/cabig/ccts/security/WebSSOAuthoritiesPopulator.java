@@ -38,6 +38,10 @@ public class WebSSOAuthoritiesPopulator implements CasAuthoritiesPopulator {
 
     public UserDetails getUserDetails(String casUserId) throws AuthenticationException {
 
+        System.out.println("---------------");
+        System.out.println(casUserId);
+        System.out.println("---------------");
+        
         Map<String, String> attrMap = new HashMap<String, String>();
         StringTokenizer stringTokenizer = new StringTokenizer(casUserId, ATTRIBUTE_DELIMITER);
         while (stringTokenizer.hasMoreTokens()) {
@@ -70,6 +74,7 @@ public class WebSSOAuthoritiesPopulator implements CasAuthoritiesPopulator {
         user.setDelegatedEPR(attrMap.get(CAGRID_SSO_DELEGATION_SERVICE_EPR));
         user.setFirstName(attrMap.get(CAGRID_SSO_FIRST_NAME));
         user.setLastName(attrMap.get(CAGRID_SSO_LAST_NAME));
+        user.setOriginalUsername(userName);
 
         // Get the delegated credential and store it in the UserDetails object
         // This will be available later in the Authenticaiton object

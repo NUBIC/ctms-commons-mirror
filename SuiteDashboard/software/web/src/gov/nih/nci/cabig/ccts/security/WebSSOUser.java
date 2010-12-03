@@ -15,6 +15,7 @@ public class WebSSOUser extends User {
     private String delegatedEPR;
     private String firstName;
     private String lastName;
+    private String originalUsername;
 
     private GlobusCredential gridCredential;
 
@@ -72,5 +73,13 @@ public class WebSSOUser extends User {
 
     public void setGridCredential(GlobusCredential gridCredential) {
         this.gridCredential = gridCredential;
+    }
+
+    public String getOriginalUsername() {
+        return originalUsername;
+    }
+
+    public void setOriginalUsername(String originalUsername) {
+        this.originalUsername = originalUsername;
     }
 }
