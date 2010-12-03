@@ -54,7 +54,7 @@
         </c:if>
         <div class="clear"></div>
     </div>
-    <div class="footer"><div id="build-name">${buildInfo.buildName}</div></div>
+    <div class="footer"><div id="build-name">caBIG Clinical Trials Suite</div></div>
 </div>
 
 </body>
