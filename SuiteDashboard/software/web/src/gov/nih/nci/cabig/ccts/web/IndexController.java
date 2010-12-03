@@ -33,6 +33,8 @@ public class IndexController extends AbstractController {
         boolean exists = userDao.userExists(SecurityUtils.getUserLoginName());
         mvc.addObject("exists", exists);
 
+        System.out.println(SecurityUtils.getUserLoginName() + " " + exists);
+
         return mvc;
     }
 
