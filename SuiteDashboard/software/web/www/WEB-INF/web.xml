@@ -41,7 +41,6 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-<!--
     <filter>
         <filter-name>BeansInRequestFilter</filter-name>
         <filter-class>gov.nih.nci.cabig.ctms.web.filters.BeansInRequestFilter</filter-class>
@@ -55,7 +54,6 @@
         <filter-name>BeansInRequestFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
--->
 
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>

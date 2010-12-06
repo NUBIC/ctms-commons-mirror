@@ -1,26 +1,15 @@
 <ivy-module version="2.0">
 
-    <info organisation="gov.nih.nci.cabig.ccts"
-          module="suite-dashboard"
-          status="integration"/>
-
+    <info organisation="gov.nih.nci.cabig.ccts" module="suite-dashboard" status="integration"/>
 
     <configurations>
-        <conf name="default" visibility="public" extends="publish,runtime"
-              description="Dependencies needed for default setting"  />
-        <conf name="build" visibility="public"
-              description="Dependencies required for build time, all classpath should have this"/>
-        <conf name="publish" visibility="public"
-              description="Dependencies along with this module is published in repository" />
-        <conf name="distGrid" visibility="public" extends="publish"
-              description="Dependencies that are required in grid distribution of this module" />
-        <conf name="dist" visibility="public" extends="publish"
-              description="Dependencies needed for standalone distribution" />
-        <conf name="runtime" visibility="public"
-              description="The dependencies that are needed for runtime" extends="build" />
-        <conf name="test" visibility="public"
-              description="Dependencies needed for testing purposes"/>
-
+        <conf name="default" visibility="public" extends="publish,runtime" description="Dependencies needed for default setting"  />
+        <conf name="build" visibility="public" description="Dependencies required for build time, all classpath should have this"/>
+        <conf name="publish" visibility="public" description="Dependencies along with this module is published in repository" />
+        <conf name="distGrid" visibility="public" extends="publish" description="Dependencies that are required in grid distribution of this module" />
+        <conf name="dist" visibility="public" extends="publish" description="Dependencies needed for standalone distribution" />
+        <conf name="runtime" visibility="public" description="The dependencies that are needed for runtime" extends="build" />
+        <conf name="test" visibility="public" description="Dependencies needed for testing purposes"/>
     </configurations>
 
     <!--  Items to be published  -->
@@ -69,7 +58,6 @@
         <exclude conf="distGrid" org="*" name="puretls" />
         <exclude conf="runtime,dist,distGrid" module="xmlParserAPIs" rev="2.0.2"/>
         <exclude conf="dist,distGrid" module="subject" />
-        <!--<exclude conf="*" org="org.slf4j" name="slf4j-log4j12"/>-->
 
         <!-- Build only dependency -->
         <dependency org="javax.servlet" name="servlet-api" rev="2.3" conf="build->default(*);test->default(*)"/>
@@ -98,8 +86,11 @@
         </dependency>
         <dependency org="org.acegisecurity" name="acegi-security" rev="1.0.7"  />
 
-        <dependency org="postgresql" name="postgresql" rev="8.2-504.jdbc3"  />
+        <dependency org="org.slf4j" name="slf4j-api" rev="1.5.11"  />
+        <dependency org="org.slf4j" name="slf4j-log4j12" rev="1.5.11"  />
         
+        <dependency org="postgresql" name="postgresql" rev="8.2-504.jdbc3"  />
+
         <dependency org="commons-dbcp" name="commons-dbcp" rev="1.2.1" >
             <exclude module="xml-apis" conf="*"/>
             <exclude module="xerces" conf="*"/>

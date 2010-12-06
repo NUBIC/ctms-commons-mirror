@@ -231,7 +231,7 @@
         <echo message="------------------ WARing END ------------------"/> 
     </target>
 
-    <target name="warIt" depends="version">
+    <target name="warit" depends="version">
         <echo message="------------------ WAR2ing START ------------------"/>
 
         <!-- compile -->
