@@ -54,7 +54,7 @@
         </c:if>
         <div class="clear"></div>
     </div>
-    <div class="footer"><div id="build-name">${buildInfo}</div></div>
+    <div class="footer"><div id="build-name">${buildInfo.applicationName} ${buildInfo.versionNumber}</div></div>
 </div>
 
 </body>

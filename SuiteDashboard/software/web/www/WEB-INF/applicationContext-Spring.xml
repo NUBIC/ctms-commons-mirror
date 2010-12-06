@@ -16,7 +16,7 @@
     <bean id="buildInfo" class="gov.nih.nci.cabig.ctms.tools.BuildInfo">
         <property name="applicationName"><value>caBIG Clinical Trials Suite</value></property>
         <property name="versionNumber"><value>@project.version@</value></property>
-        <property name="timestamp"><value>@buildNumber@</value></property>
+        <!--<property name="timestamp"><value>@buildNumber@</value></property>-->
     </bean>
 
 </beans>
