@@ -69,7 +69,7 @@
         <exclude conf="distGrid" org="*" name="puretls" />
         <exclude conf="runtime,dist,distGrid" module="xmlParserAPIs" rev="2.0.2"/>
         <exclude conf="dist,distGrid" module="subject" />
-        <exclude conf="*" org="org.slf4j" name="slf4j-log4j12"/>
+        <!--<exclude conf="*" org="org.slf4j" name="slf4j-log4j12"/>-->
 
         <!-- Build only dependency -->
         <dependency org="javax.servlet" name="servlet-api" rev="2.3" conf="build->default(*);test->default(*)"/>

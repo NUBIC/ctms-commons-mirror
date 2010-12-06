@@ -14,13 +14,26 @@
     <macrodef name="copy-resources" description="copies files from src to dest, with filtering">
         <attribute name="src" />
         <attribute name="dest"/>
+        <sequential>
+            <echo message="COPY @{src} TO @{dest}" />
+            <copy todir="@{dest}" filtering="false" verbose="false" overwrite="true">
+                <fileset dir="@{src}" includes="**/*.*">
+                    <exclude name=".svn"/>
+                </fileset>
+            </copy>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="copy-xml-resources" description="copies files from src to dest, with filtering">
+        <attribute name="src" />
+        <attribute name="dest"/>
         <attribute name="filter" />
         <sequential>
             <filter token="project.version" value="${dashboard.version}" />
             <filter token="buildNumber" value="${today}" />
             <echo message="COPY @{src} TO @{dest}" />
-            <copy todir="@{dest}" filtering="@{filter}" verbose="false" overwrite="true">
-                <fileset dir="@{src}" includes="**/*.*">
+            <copy todir="@{dest}" filtering="@{filter}" verbose="true" overwrite="true">
+                <fileset dir="@{src}" includes="**/*.xml">
                     <exclude name=".svn"/>
                 </fileset>
             </copy>
@@ -98,15 +111,10 @@
          target : version
              Will generate a new verion number for publishing in release repository
      ========================================================================= -->
-    <target name="version" depends="ivy-new-version"
-            description="Will generate a new verion number for publishing in release repository">
+    <target name="version" depends="ivy-new-version" description="Will generate a new verion number for publishing in release repository">
         <echo message="Executing in ${ant.project.name}" />
-        <tstamp>
-            <format property="today" pattern="yyyy-MM-dd hh:mm:ss" />
-        </tstamp>
-        <!-- create version file in classpath for later inclusion in jar -->
+        <tstamp><format property="today" pattern="yyyy-MM-dd hh:mm:ss" /></tstamp>
         <echo message="version=${ivy.new.revision}" file="${classes.dir}/${ant.project.name}.properties" append="false" />
-        <!-- load generated version properties file -->
         <property file="${classes.dir}/${ant.project.name}.properties" />
     </target>
 
@@ -195,11 +203,11 @@
 	</path>
 
     <target name="compile">
-        <copy-resources src="${main.src.resources}" dest="${classes.dir}/resources" filter="true"/>
+        <copy-resources src="${main.src.resources}" dest="${classes.dir}/resources"/>
         <javac srcdir="${main.src}" destdir="${classes.dir}" classpathref="main.classpath" debug="true" source="1.5" target="1.5"/>
-        <copy-resources src="${classes.dir}" dest="${war.dir}/WEB-INF/classes" filter="false"/>
-        <copy-resources src="${lib.dir}" dest="${war.dir}/WEB-INF/lib" filter="false"/>
-        <copy-resources src="${webapp.dir}" dest="${war.dir}"  filter="true" />
+        <copy-resources src="${classes.dir}" dest="${war.dir}/WEB-INF/classes"/>
+        <copy-resources src="${lib.dir}" dest="${war.dir}/WEB-INF/lib"/>
+        <copy-resources src="${webapp.dir}" dest="${war.dir}"/>
     </target>
 
     <target name="war" depends="clean, init, load-ivy, version, source">
@@ -207,19 +215,37 @@
 
         <!-- compile -->
         <ivyResolve confs="default" libdir="${lib.dir}" resolveid="[org]-[module]"/>
-        <copy-resources src="${main.src.resources}" dest="${classes.dir}/resources" filter="true"/>
+        <copy-resources src="${main.src.resources}" dest="${classes.dir}/resources" />
         <javac srcdir="${main.src}" destdir="${classes.dir}" classpathref="main.classpath" debug="true" source="1.5" target="1.5"/>
 
         <!-- WAR -->
         <ivy:resolve file="${ivy.file}" conf="distGrid" haltonfailure="false" settingsRef="dashboard.ivy.instance"/>
         <ivy:retrieve pattern="${war.dir}/WEB-INF/lib/[artifact]-[revision].[ext]"  haltonfailure="false" settingsRef="dashboard.ivy.instance"/>
         <ivy:retrieve pattern="${war.dir}/WEB-INF/[artifact].[ext]"  haltonfailure="false" settingsRef="dashboard.ivy.instance" type="properties" />
-        <copy-resources src="${classes.dir}" dest="${war.dir}/WEB-INF/classes" filter="false"/>
-        <copy-resources src="${webapp.dir}" dest="${war.dir}"  filter="true" />
-        <copy-resources src="${lib.dir}" dest="${war.dir}/WEB-INF/lib" filter="false"/>
+        <copy-resources src="${classes.dir}" dest="${war.dir}/WEB-INF/classes" />
+        <copy-resources src="${webapp.dir}" dest="${war.dir}"  />
+        <copy-xml-resources src="${webapp.dir}" dest="${war.dir}"  filter="true" />
+        <copy-resources src="${lib.dir}" dest="${war.dir}/WEB-INF/lib" />
         <war destfile="${mydist.dir}/${war.filename}" basedir="${war.dir}" level="9" webxml="${webapp.dir}/WEB-INF/web.xml"/>
 
         <echo message="------------------ WARing END ------------------"/> 
+    </target>
+
+    <target name="warIt" depends="version">
+        <echo message="------------------ WAR2ing START ------------------"/>
+
+        <!-- compile -->
+        <copy-resources src="${main.src.resources}" dest="${classes.dir}/resources" />
+        <javac srcdir="${main.src}" destdir="${classes.dir}" classpathref="main.classpath" debug="true" source="1.5" target="1.5"/>
+
+        <!-- WAR -->
+        <copy-resources src="${classes.dir}" dest="${war.dir}/WEB-INF/classes" />
+        <copy-resources src="${webapp.dir}" dest="${war.dir}" />
+        <copy-xml-resources src="${webapp.dir}" dest="${war.dir}"  filter="true" />
+        <copy-resources src="${lib.dir}" dest="${war.dir}/WEB-INF/lib" />
+        <war destfile="${mydist.dir}/${war.filename}" basedir="${war.dir}" level="9" webxml="${webapp.dir}/WEB-INF/web.xml"/>
+
+        <echo message="------------------ WAR2ing END ------------------"/>
     </target>
 
 
@@ -228,7 +254,6 @@
              Will generate the source file
      =============================================================-->
     <target name="source">
-
        <jar destfile="${src.jar.file}">
           <fileset dir="${src.dir}" />
              <manifest>
@@ -236,7 +261,6 @@
                     <attribute name="Build-Version" value="${version}" />
             </manifest>
         </jar>
-
     </target>
 
     <!-- =================================
