@@ -728,8 +728,8 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/branches/automation-1.7.1
         <replace file="${tomcat.home}/webapps/suite-dashboard/WEB-INF/classes/resources/app.properties" token="@CSM_DB_DIALECT@" value="${database.csm.dialect}" />
         <replace file="${tomcat.home}/webapps/suite-dashboard/WEB-INF/classes/resources/app.properties" token="@CSM_DB_DRIVER@" value="${database.csm.driver}" />
 
-        <replace file="${tomcat.home}/webapps/suite-dashboard/WEB-INF/classes/resources/app.properties" token="@tomcat.grid.secure.cert.location@" value="${tomcat.grid.secure.cert.location}" />
-        <replace file="${tomcat.home}/webapps/suite-dashboard/WEB-INF/classes/resources/app.properties" token="@tomcat.grid.secure.key.location@" value="${tomcat.grid.secure.key.location}" />
+        <replace file="${tomcat.home}/webapps/suite-dashboard/WEB-INF/classes/resources/app.properties" token="@tomcat.grid.secure.cert.location@" value="${tomcat.home}/conf/${tomcat.grid.secure.cert.file}" />
+        <replace file="${tomcat.home}/webapps/suite-dashboard/WEB-INF/classes/resources/app.properties" token="@tomcat.grid.secure.key.location@" value="${tomcat.home}/conf/${tomcat.grid.secure.key.file}" />
 
         <replace file="${tomcat.home}/webapps/suite-dashboard/WEB-INF/classes/resources/app.properties" token="@websso.hostname@" value="${websso.hostname}" />
         <replace file="${tomcat.home}/webapps/suite-dashboard/WEB-INF/classes/resources/app.properties" token="@websso.port@" value="${websso.port}" />
