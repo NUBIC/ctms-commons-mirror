@@ -86,8 +86,7 @@ namespace :publish do
     end
   end
 
-  # TODO: this is not working
-  task :build => [task("clean"), task("package")]
+  task :build => ["rake:clean", "rake:package"]
 
   task :copy => [:check_clean_repo, :repo] do
     publish_repo = task("publish:repo").path
