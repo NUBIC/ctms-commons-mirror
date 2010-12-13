@@ -1,13 +1,13 @@
 package gov.nih.nci.cabig.ctms.tools;
 
-import static gov.nih.nci.cabig.ctms.tools.DataSourceSelfDiscoveringPropertiesFactoryBean.*;
 import gov.nih.nci.cabig.ctms.CommonsConfigurationException;
+import junit.framework.Assert;
+import junit.framework.TestCase;
 
 import java.io.File;
 import java.util.Properties;
 
-import junit.framework.Assert;
-import junit.framework.TestCase;
+import static gov.nih.nci.cabig.ctms.tools.DataSourceSelfDiscoveringPropertiesFactoryBean.*;
 
 /**
  * @author Rhett Sutphin
@@ -20,7 +20,10 @@ public class DataSourceSelfDiscoveringPropertiesFactoryBeanTest extends TestCase
     protected void setUp() throws Exception {
         super.setUp();
         thisDir = new File(getClass().getResource("/").toURI());
-        System.setProperty("catalina.home", thisDir.getCanonicalPath() + "/../resources");
+        System.setProperty("catalina.base",
+            new File(thisDir, "../resources/catalina_base").getCanonicalPath());
+        System.setProperty("catalina.home",
+            new File(thisDir, "../resources/catalina_home").getCanonicalPath());
 
         factoryBean = new TestDataSourcePropertiesFactoryBean();
         factoryBean.setDatabaseConfigurationName("empty");
@@ -85,9 +88,15 @@ public class DataSourceSelfDiscoveringPropertiesFactoryBeanTest extends TestCase
         factoryBean.getObject();
         
         assertNotNull("Locations not preserved", factoryBean.getSearchedLocations());
-        assertEquals("Wrong number of locations", 3, factoryBean.getSearchedLocations().size());
+        assertEquals("Wrong number of locations", 4, factoryBean.getSearchedLocations().size());
         assertTrue("Missing one of the expected paths",
             factoryBean.getSearchedLocations().contains("/etc/vesuvius/empty.properties"));
+    }
+
+    public void testCatalinaBasePreferredOverCatalinaHome() throws Exception {
+        factoryBean.setApplicationDirectoryName("etna");
+        factoryBean.setDatabaseConfigurationName(null);
+        assertLoadedProperties("jdbc:db:etna", "java.lang.String", "base-user", "pass-default");
     }
 
     private void assertLoadedProperties(

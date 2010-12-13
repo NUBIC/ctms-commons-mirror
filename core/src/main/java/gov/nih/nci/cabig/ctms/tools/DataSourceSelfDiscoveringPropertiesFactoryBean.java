@@ -54,26 +54,26 @@ public class DataSourceSelfDiscoveringPropertiesFactoryBean extends DatabaseConf
     }
 
     protected List<File> searchDirectories() {
-        String userHome = System.getProperty("user.home");
-        String catalinaHome = System.getProperty("catalina.home");
-
         List<File> dirs = new LinkedList<File>();
 
-        if (catalinaHome != null) {
-            dirs.add(new File(catalinaHome, String.format("conf/%s", getApplicationDirectoryName())));
-        } else {
-            log.debug("catalina.home not set -- will not search");
-        }
-
-        if (userHome != null) {
-            dirs.add(new File(userHome, String.format(".%s", getApplicationDirectoryName())));
-        } else {
-            log.debug("user.home not set -- will not search");
-        }
-
+        addPropertyBasedSearchDirectory(dirs, "catalina.base", "conf/%s");
+        addPropertyBasedSearchDirectory(dirs, "catalina.home", "conf/%s");
+        addPropertyBasedSearchDirectory(dirs, "user.home", ".%s");
         dirs.add(new File(String.format("/etc/%s", getApplicationDirectoryName())));
 
         return dirs;
+    }
+
+    private void addPropertyBasedSearchDirectory(
+        List<File> searchDirs, String directoryProperty, String subPathFormat
+    ) {
+        String propertyValue = System.getProperty(directoryProperty);
+        if (propertyValue == null) {
+            log.debug("{} not set -- will not search", directoryProperty);
+        } else {
+            searchDirs.add(new File(propertyValue,
+                String.format(subPathFormat, getApplicationDirectoryName())));
+        }
     }
 
     private void findProperties() {

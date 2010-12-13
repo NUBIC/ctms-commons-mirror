@@ -1,6 +1,16 @@
 ctms-commons history
 ====================
 
+1.0.8
+-----
+
+### core
+
+- Include `catalina.base` on the search path for
+  DataSourceSelfDiscoveringPropertiesFactoryBean.  This is more correct
+  than `catalina.home`, but the latter is left for backwards compatibility.
+  (In most cases they will be the same.)
+
 1.0.7
 -----
 
