@@ -3,7 +3,7 @@ require 'buildr_bnd'
 repositories.remote << Buildr::Bnd.remote_repository
 require 'buildr/ivy_extension'
 
-CTMS_COMMONS_VERSION = "1.0.8.RELEASE"
+CTMS_COMMONS_VERSION = "1.0.9.DEV"
 CTMS_COMMONS_IVY_ORG = "gov.nih.nci.cabig.ctms"
 
 # All modules use the same ivy4r config
