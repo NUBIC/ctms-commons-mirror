@@ -113,7 +113,7 @@
      ========================================================================= -->
     <target name="version" depends="ivy-new-version" description="Will generate a new verion number for publishing in release repository">
         <echo message="Executing in ${ant.project.name}" />
-        <tstamp><format property="today" pattern="yyyy-MM-dd hh:mm:ss" /></tstamp>
+        <tstamp><format property="today" pattern="yyyy-MM-dd hh:mm:ss.mmm" /></tstamp>
         <echo message="version=${ivy.new.revision}" file="${classes.dir}/${ant.project.name}.properties" append="false" />
         <property file="${classes.dir}/${ant.project.name}.properties" />
     </target>

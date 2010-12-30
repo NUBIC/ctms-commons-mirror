@@ -3,7 +3,8 @@
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
 
     <appender name="file" class="org.apache.log4j.RollingFileAppender">
-        <param name="maxBackupIndex" value="20"/>
+        <param name="maxBackupIndex" value="5"/>
+        <param name="maxFileSize" value="512MB"/>
         <param name="file" value="${catalina.home}/logs/suite-dashboard.log"/>
         <param name="threshold" value="DEBUG"/>
         <param name="append" value="true"/>
