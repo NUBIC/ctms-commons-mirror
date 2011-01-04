@@ -143,8 +143,16 @@
         <dependency org="gov.nih.nci.cabig.ctms" name="ctms-commons-base" rev="${ctms.version}" force="true"  transitive="false" />
         <dependency org="gov.nih.nci.cabig.ctms" name="ctms-commons-core" rev="${ctms.version}" force="true"  transitive="false" />
         <dependency org="gov.nih.nci.cabig.ctms" name="ctms-commons-lang" rev="${ctms.version}" force="true"  transitive="false" />
+        <dependency org="gov.nih.nci.cabig.ctms" name="ctms-commons-suite-authorization" rev="${ctms.version}" transitive="false" />
         <dependency org="gov.nih.nci.cabig.ctms" name="ctms-commons-acegi-csm" rev="${ctms.version}" force="true" transitive="false" />
-        
+
+        <dependency org="gov.nih.nci.security" name="csm" rev="4.2">
+            <artifact name="csmapi" type="jar" conf="*"/>
+            <exclude org="org.hibernate" />
+            <exclude org="org.springframework"/>
+        </dependency>
+        <dependency org="c3p0" name="c3p0" rev="0.8.5.2" />
+
         <!-- Apache Commons -->
         <dependency org="commons-lang" name="commons-lang" rev="2.4" />
 

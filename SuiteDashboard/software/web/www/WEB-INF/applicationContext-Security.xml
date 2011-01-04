@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+						http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+						http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+						http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
 
     <bean id="filterChainProxy" class="org.acegisecurity.util.FilterChainProxy">
         <property name="filterInvocationDefinitionSource">
@@ -129,9 +135,14 @@
         <property name="trustStore" value="s[webSSO.trustStore]"/>
     </bean>
 
+    <bean id="csmUserDetailsService" class="gov.nih.nci.cabig.ccts.security.CSMUserDetailsServiceImpl" lazy-init="true">
+        <property name="csmUserProvisioningManager" ref="csmUserProvisioningManager"/>
+    </bean>
+
     <bean id="casAuthoritiesPopulator" class="gov.nih.nci.cabig.ccts.security.WebSSOAuthoritiesPopulator" lazy-init="true">
         <property name="hostCertificate" value="s[grid.secure.cert.location]"/>
         <property name="hostKey" value="s[grid.secure.key.location]"/>
+        <property name="userDetailsService" ref="csmUserDetailsService" />
     </bean>
 
     <bean id="serviceProperties" class="org.acegisecurity.ui.cas.ServiceProperties" lazy-init="true">
@@ -140,5 +151,68 @@
     </bean>
     
     <bean id="casProxyDecider" class="org.acegisecurity.providers.cas.proxy.RejectProxyTickets" lazy-init="true"/>
-    
+
+    <!--CSM -->
+
+    <bean id="csmApplicationContextName" class="java.lang.String">
+        <constructor-arg value="CTMS_SUITE"/>
+    </bean>
+
+    <util:map id="connectionProperties" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="hibernate.connection.url" value="s[csm.datasource.url]"></entry>
+        <entry key="hibernate.connection.driver_class" value="s[csm.datasource.driver]"></entry>
+        <entry key="hibernate.dialect" value="s[csm.datasource.dialect]"></entry>
+        <entry key="hibernate.connection.username" value="s[csm.datasource.username]"></entry>
+        <entry key="hibernate.connection.password" value="s[csm.datasource.password]"></entry>
+        <entry key="hibernate.connection.release_mode" value="after_transaction"></entry>
+        <entry key="hibernate.c3p0.min_size" value="2"></entry>
+        <entry key="hibernate.c3p0.max_size" value="5"></entry>
+        <entry key="hibernate.c3p0.timeout" value="300"></entry>
+        <entry key="hibernate.c3p0.max_statements" value="50"></entry>
+        <entry key="hibernate.c3p0.idle_test_period" value="3000"></entry>
+    </util:map>
+
+    <bean id="csmSessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <property name="dataSource" ref="csmLocalPoolDataSource"/>
+        <property name="mappingResources">
+            <list>
+                <value>gov/nih/nci/security/authorization/domainobjects/InstanceLevelMappingElement.hbm.xml</value>
+                <value>gov/nih/nci/security/authorization/domainobjects/Privilege.hbm.xml</value>
+                <value>gov/nih/nci/security/authorization/domainobjects/Application.hbm.xml</value>
+                <value>gov/nih/nci/security/authorization/domainobjects/FilterClause.hbm.xml</value>
+                <value>gov/nih/nci/security/authorization/domainobjects/Role.hbm.xml</value>
+                <value>gov/nih/nci/security/dao/hibernate/RolePrivilege.hbm.xml</value>
+                <value>gov/nih/nci/security/dao/hibernate/UserGroup.hbm.xml</value>
+                <value>gov/nih/nci/security/dao/hibernate/ProtectionGroupProtectionElement.hbm.xml</value>
+                <value>gov/nih/nci/security/authorization/domainobjects/Group.hbm.xml</value>
+                <value>gov/nih/nci/security/authorization/domainobjects/User.hbm.xml</value>
+                <value>gov/nih/nci/security/authorization/domainobjects/ProtectionGroup.hbm.xml</value>
+                <value>gov/nih/nci/security/authorization/domainobjects/ProtectionElement.hbm.xml</value>
+                <value>gov/nih/nci/security/authorization/domainobjects/UserGroupRoleProtectionGroup.hbm.xml</value>
+                <value>gov/nih/nci/security/authorization/domainobjects/UserProtectionElement.hbm.xml</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <bean class="gov.nih.nci.cabig.ctms.tools.spring.HibernatePropertiesFactoryBean">
+                <property name="properties">
+                    <props>
+                        <prop key="hibernate.connection.release_mode">auto</prop>
+                        <prop key="hibernate.dialect">s[csm.datasource.dialect]</prop>
+                    </props>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="fasterAuthorizationDao" class="gov.nih.nci.cabig.ctms.suite.authorization.csmext.FasterAuthorizationDao">
+        <constructor-arg index="0" ref="csmSessionFactory"/>
+        <constructor-arg index="1" ref="csmApplicationContextName"/>
+    </bean>
+
+    <bean id="csmUserProvisioningManager" class="gov.nih.nci.security.provisioning.AuthorizationManagerImpl">
+        <constructor-arg index="0" ref="csmApplicationContextName"/>
+        <constructor-arg index="1" ref="connectionProperties"/>
+        <property name="authorizationDAO" ref="fasterAuthorizationDao"/>
+    </bean>
+
 </beans>

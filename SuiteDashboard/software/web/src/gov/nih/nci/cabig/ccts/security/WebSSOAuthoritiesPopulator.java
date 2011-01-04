@@ -7,6 +7,7 @@ import org.acegisecurity.GrantedAuthority;
 import org.acegisecurity.GrantedAuthorityImpl;
 import org.acegisecurity.providers.cas.CasAuthoritiesPopulator;
 import org.acegisecurity.userdetails.UserDetails;
+import org.acegisecurity.userdetails.UserDetailsService;
 import org.acegisecurity.userdetails.UsernameNotFoundException;
 import org.apache.log4j.Logger;
 import org.cagrid.gaards.cds.client.CredentialDelegationServiceClient;
@@ -26,6 +27,7 @@ public class WebSSOAuthoritiesPopulator implements CasAuthoritiesPopulator {
 
     private String hostCertificate;
     private String hostKey;
+    private UserDetailsService userDetailsService;
 
     public static final String ATTRIBUTE_DELIMITER = "$";
     public static final String KEY_VALUE_PAIR_DELIMITER = "^";
@@ -60,12 +62,14 @@ public class WebSSOAuthoritiesPopulator implements CasAuthoritiesPopulator {
 
         WebSSOUser user = null;
         try {
-            user = new WebSSOUser(casUserId, new GrantedAuthority[] {new GrantedAuthorityImpl("ROLE_USER")});
+            // casUserId = "UserSuper";
+            UserDetails ud = userDetailsService.loadUserByUsername(casUserId);
+            ud.getAuthorities()[ud.getAuthorities().length] = new GrantedAuthorityImpl("ROLE_USER");
+            user = new WebSSOUser(ud);
         } catch (UsernameNotFoundException ex) {
             throw new AuthenticationCredentialsNotFoundException(ex.getMessage(), ex);
         }
 
-        //WebSSOUser user = new WebSSOUser(userDetailsService.loadUserByUsername(gridIdentity));
         user.setGridId(gridIdentity);
         user.setDelegatedEPR(attrMap.get(CAGRID_SSO_DELEGATION_SERVICE_EPR));
         user.setFirstName(attrMap.get(CAGRID_SSO_FIRST_NAME));
@@ -101,5 +105,13 @@ public class WebSSOAuthoritiesPopulator implements CasAuthoritiesPopulator {
 
     public void setHostKey(String hostKey) {
         this.hostKey = hostKey;
+    }
+
+    public UserDetailsService getUserDetailsService() {
+        return userDetailsService;
+    }
+
+    public void setUserDetailsService(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
     }
 }
