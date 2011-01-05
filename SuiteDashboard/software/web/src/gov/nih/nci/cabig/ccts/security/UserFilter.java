@@ -42,7 +42,6 @@ public final class UserFilter implements Filter {
         WebSSOUser user = null;
         Authentication a = SecurityUtils.getAuthentication();
         if (a != null) user = (WebSSOUser)a.getPrincipal();
-        httpRequest.setAttribute("user", user);
 
         Map<String, String> roles = new HashMap<String, String>();
         for (UserGroupType r : UserGroupType.values()) {
@@ -50,8 +49,11 @@ public final class UserFilter implements Filter {
         }
 
         List rolesAsArray = new ArrayList();
+        log.debug(String.format(">>> User has %d roles.", user.getAuthorities().length));
+
         for (GrantedAuthority role : user.getAuthorities()) {
             String r = roles.get(role.getAuthority());
+            log.debug(String.format(">>> Role: %s", r));
             if (r != null) rolesAsArray.add(r);
         }
 
@@ -60,6 +62,7 @@ public final class UserFilter implements Filter {
             exists = getUserDao().userExists(user.getOriginalUsername());
         }
 
+        httpRequest.getSession().setAttribute("user", user);
         httpRequest.getSession().setAttribute("exists", exists);
         httpRequest.getSession().setAttribute("roles", rolesAsArray);
 	}
