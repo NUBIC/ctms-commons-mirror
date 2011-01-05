@@ -25,10 +25,14 @@ public class CSMUserDetailsServiceImpl extends CSMUserDetailsService {
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException, DataAccessException {
         logger.debug((new StringBuilder()).append("Getting user details for ").append(userName).toString());
 
+        System.out.println("get user: " + userName);
+
         GrantedAuthority authorities[] = null;
         UserProvisioningManager mgr = getCsmUserProvisioningManager();
         gov.nih.nci.security.authorization.domainobjects.User loadedUser = null;
         Set groups;
+
+        System.out.println("Manager" + mgr);
 
 /*
         boolean accountNonExpired = true;
@@ -37,6 +41,7 @@ public class CSMUserDetailsServiceImpl extends CSMUserDetailsService {
 
         try {
             loadedUser = mgr.getUser(userName);
+            System.out.println("LoadedUser:" + loadedUser);
             if (loadedUser == null) {
                 throw new UsernameNotFoundException("User does not exist in CSM.");
             }
