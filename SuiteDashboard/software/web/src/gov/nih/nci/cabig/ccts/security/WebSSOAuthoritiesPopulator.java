@@ -66,7 +66,7 @@ public class WebSSOAuthoritiesPopulator implements CasAuthoritiesPopulator {
         WebSSOUser user = null;
         try {
             // casUserId = "UserSuper";
-            UserDetails ud = userDetailsService.loadUserByUsername(casUserId);
+            UserDetails ud = userDetailsService.loadUserByUsername(userName);
             ud.getAuthorities()[ud.getAuthorities().length] = new GrantedAuthorityImpl("ROLE_USER");
             user = new WebSSOUser(ud);
         } catch (UsernameNotFoundException ex) {
