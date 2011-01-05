@@ -37,16 +37,22 @@ public final class UserFilter implements Filter {
 	private void prepareUser(HttpServletRequest httpRequest) {
         if (httpRequest.getSession().getAttribute("roles") != null) return;
 
-        log.debug("Adjusting roles names...");
+        log.debug(">>> Adjusting roles names...");
 
         WebSSOUser user = null;
         Authentication a = SecurityUtils.getAuthentication();
         if (a != null) user = (WebSSOUser)a.getPrincipal();
 
+        log.debug(">>> User: " + user);
+        log.debug(">>> User Authorities: " + user.getAuthorities());
+        log.debug(">>> UserGroupType size : " + UserGroupType.values().length);
+
         Map<String, String> roles = new HashMap<String, String>();
         for (UserGroupType r : UserGroupType.values()) {
             roles.put(r.getCsmName(), r.getDisplayName());
         }
+
+        log.debug(">>> Roles size : " + roles.size());
 
         List rolesAsArray = new ArrayList();
         log.debug(String.format(">>> User has %d roles.", user.getAuthorities().length));
