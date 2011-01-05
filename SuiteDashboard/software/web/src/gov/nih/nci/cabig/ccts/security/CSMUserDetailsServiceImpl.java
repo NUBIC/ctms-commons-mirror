@@ -25,14 +25,14 @@ public class CSMUserDetailsServiceImpl extends CSMUserDetailsService {
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException, DataAccessException {
         logger.debug((new StringBuilder()).append("Getting user details for ").append(userName).toString());
 
-        System.out.println("get user: " + userName);
+        logger.debug(">>> Get user:" + userName);
 
         GrantedAuthority authorities[] = null;
         UserProvisioningManager mgr = getCsmUserProvisioningManager();
         gov.nih.nci.security.authorization.domainobjects.User loadedUser = null;
         Set groups;
 
-        System.out.println("Manager" + mgr);
+        logger.debug(">>> Manager: " + mgr);
 
 /*
         boolean accountNonExpired = true;
@@ -41,7 +41,7 @@ public class CSMUserDetailsServiceImpl extends CSMUserDetailsService {
 
         try {
             loadedUser = mgr.getUser(userName);
-            System.out.println("LoadedUser:" + loadedUser);
+            logger.debug(">>> LoadedUser: " + loadedUser);
             if (loadedUser == null) {
                 throw new UsernameNotFoundException("User does not exist in CSM.");
             }
@@ -59,13 +59,13 @@ public class CSMUserDetailsServiceImpl extends CSMUserDetailsService {
             for (Iterator i = groups.iterator(); i.hasNext();) {
                 Group group = (Group) i.next();
                 authorities[idx] = new GrantedAuthorityImpl(group.getGroupName());
-                System.out.println("A: " + group.getGroupName());
+                logger.debug(">>> Authority: " + group.getGroupName());
                 idx++;
             }
 
-            logger.debug("Found: " + groups.size() + " authorities.");
+            logger.debug(">>> Found: " + groups.size() + " authorities.");
             authorities[idx] = new GrantedAuthorityImpl("ROLE_USER");
-            logger.debug("Total authorities: " + groups.size());
+            logger.debug(">>> Total authorities: " + groups.size());
         }
 
         User user = new User(userName, "ignored_password", true, true, true, true, authorities);

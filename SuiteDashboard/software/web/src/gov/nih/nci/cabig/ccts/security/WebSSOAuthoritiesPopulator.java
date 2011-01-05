@@ -59,14 +59,15 @@ public class WebSSOAuthoritiesPopulator implements CasAuthoritiesPopulator {
             log.error(CAGRID_SSO_GRID_IDENTITY + " is null");
         }
 
-        System.out.println("1." + userName);
-        System.out.println("2." + casUserId);
+        log.debug(">>> userName: " + userName);
+        log.debug(">>> casUserId: " + casUserId);
 
         WebSSOUser user = null;
         try {
             UserDetails ud = userDetailsService.loadUserByUsername(userName);
             user = new WebSSOUser(ud);
         } catch (UsernameNotFoundException ex) {
+            log.error(ex.getMessage());
             throw new AuthenticationCredentialsNotFoundException(ex.getMessage(), ex);
         }
 
