@@ -68,14 +68,14 @@
             <exclude module="xerces" conf="*"/>
         </dependency>
 
-        <!-- Caching Related -->
+        <!-- Caching -->
         <dependency org="net.sf.ehcache" name="ehcache-web" rev="1.6.0-beta2" />
         <dependency org="net.sf.ehcache" name="ehcache" rev="1.5.0" force="true"/>
 
-        <!-- Site Mesh for skining -->
+        <!-- Site Mesh for templates -->
         <dependency org="opensymphony" name="sitemesh" rev="2.2.1" />
 
-        <!-- ========= Spring and Spring Modules =============== -->
+        <!-- ========= Spring =============== -->
         <dependency org="org.springframework" name="spring" rev="2.5.6" force="true" />
         <dependency org="org.springframework" name="spring-aspects" rev="2.5.6" force="true" />
         <dependency org="org.springframework" name="spring-aop" rev="2.5.6" force="true"/>
@@ -96,7 +96,7 @@
             <exclude module="xerces" conf="*"/>
         </dependency>
 
-        <!-- JSTL   dependency -->
+        <!-- JSTL -->
         <dependency org="jstl" name="jstl" rev="1.1.2" force="true"/>
         <dependency org="taglibs" name="standard" rev="1.1.2" force="true"/>
 
