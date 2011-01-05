@@ -18,9 +18,9 @@
     <link rel="stylesheet" href="<c:url value="/css/index.css" />" type="text/css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js" type="text/javascript"></script>
     <script src="<c:url value="/js/index.js" />"></script>
-    <script src="<c:url value="/js/wz_tooltip.js" />"></script>
 </head>
 <body>
+<script src="<c:url value="/js/wz_tooltip.js" />"></script>
 
 <script>
 function showUserRolesToolTip(text, title) {
@@ -60,7 +60,7 @@ function showUserRolesToolTip(text, title) {
     <div id="header_container">
         <img src="images/suite_logo.png" width="290" height="71" alt="caBIG Clinical Trials Suite"/>
         <div class="header-right">
-            <div class="welcome_user"><a onmouseover="showUserRolesToolTip($('USER_ROLES').innerHTML, '')" onmouseout="tt_Hide();">${not empty user ? user.firstName : ''} ${not empty user ? user.lastName : ''}</a></div>
+            <div class="welcome_user"><a onmouseover="showUserRolesToolTip(jQuery('#USER_ROLES').html(), '')" onmouseout="tt_Hide();">${not empty user ? user.firstName : ''} ${not empty user ? user.lastName : ''}</a></div>
             <div class="button-wrap ">
                 <div class="grey button"><a href="<c:url value="/j_acegi_logout"/>">Log Out</a></div>
             </div>
