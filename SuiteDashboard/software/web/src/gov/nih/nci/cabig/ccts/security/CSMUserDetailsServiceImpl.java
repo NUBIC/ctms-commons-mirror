@@ -54,7 +54,7 @@ public class CSMUserDetailsServiceImpl extends CSMUserDetailsService {
         if (groups == null || groups.size() == 0) {
             authorities = new GrantedAuthority[0];
         } else {
-            authorities = new GrantedAuthority[groups.size()];
+            authorities = new GrantedAuthority[groups.size() + 1];
             int idx = 0;
             for (Iterator i = groups.iterator(); i.hasNext();) {
                 Group group = (Group) i.next();
@@ -62,6 +62,10 @@ public class CSMUserDetailsServiceImpl extends CSMUserDetailsService {
                 System.out.println("A: " + group.getGroupName());
                 idx++;
             }
+
+            logger.debug("Found: " + groups.size() + " authorities.");
+            authorities[idx] = new GrantedAuthorityImpl("ROLE_USER");
+            logger.debug("Total authorities: " + groups.size());
         }
 
         User user = new User(userName, "ignored_password", true, true, true, true, authorities);

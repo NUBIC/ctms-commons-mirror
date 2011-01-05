@@ -52,7 +52,6 @@ public class WebSSOAuthoritiesPopulator implements CasAuthoritiesPopulator {
 
         String gridIdentity = attrMap.get(CAGRID_SSO_GRID_IDENTITY);
 
-        //parse and grab username from grid identity.
         String userName = "";
         if (gridIdentity != null) {
             userName = gridIdentity.substring(gridIdentity.indexOf("/CN=") + 4, gridIdentity.length());
@@ -65,9 +64,7 @@ public class WebSSOAuthoritiesPopulator implements CasAuthoritiesPopulator {
 
         WebSSOUser user = null;
         try {
-            // casUserId = "UserSuper";
             UserDetails ud = userDetailsService.loadUserByUsername(userName);
-            ud.getAuthorities()[ud.getAuthorities().length] = new GrantedAuthorityImpl("ROLE_USER");
             user = new WebSSOUser(ud);
         } catch (UsernameNotFoundException ex) {
             throw new AuthenticationCredentialsNotFoundException(ex.getMessage(), ex);
@@ -78,8 +75,6 @@ public class WebSSOAuthoritiesPopulator implements CasAuthoritiesPopulator {
         user.setFirstName(attrMap.get(CAGRID_SSO_FIRST_NAME));
         user.setLastName(attrMap.get(CAGRID_SSO_LAST_NAME));
 
-        // Get the delegated credential and store it in the UserDetails object
-        // This will be available later in the Authenticaiton object
         try {
             GlobusCredential hostCredential = new GlobusCredential(hostCertificate, hostKey);
             DelegatedCredentialReference delegatedCredentialReference = (DelegatedCredentialReference) Utils.deserializeObject(new StringReader(attrMap.get(CAGRID_SSO_DELEGATION_SERVICE_EPR)), DelegatedCredentialReference.class, CredentialDelegationServiceClient.class.getResourceAsStream("client-config.wsdd"));
@@ -87,7 +82,7 @@ public class WebSSOAuthoritiesPopulator implements CasAuthoritiesPopulator {
             GlobusCredential userCredential = delegatedCredentialUserClient.getDelegatedCredential();
             user.setGridCredential(userCredential);
         } catch (Exception e) {
-            log.error("Could not retreive user credential from CDS service", e);
+            log.error("Could not retrieve user credential from CDS service", e);
         }
 
         user.setOriginalUsername(userName);
