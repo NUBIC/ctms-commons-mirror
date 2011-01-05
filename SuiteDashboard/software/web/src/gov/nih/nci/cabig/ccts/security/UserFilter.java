@@ -42,6 +42,7 @@ public final class UserFilter implements Filter {
         if (a != null) user = (WebSSOUser)a.getPrincipal();
         else {
             log.debug(">>> No authentication information.");
+            return;
         }
 
         log.debug(">>> User: " + user);
