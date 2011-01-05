@@ -18,9 +18,30 @@
     <link rel="stylesheet" href="<c:url value="/css/index.css" />" type="text/css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js" type="text/javascript"></script>
     <script src="<c:url value="/js/index.js" />"></script>
-
+    <script src="<c:url value="/js/wz_tooltip.js" />"></script>
 </head>
 <body>
+
+<script>
+function showUserRolesToolTip(text, title) {
+    Tip(text,
+            WIDTH, 300,
+            TITLE, title,
+            SHADOW, false,
+            FADEIN, 300,
+            FADEOUT, 300,
+            STICKY, 1,
+            CLOSEBTN, false,
+            CLICKCLOSE, false,
+            OPACITY, 95,
+            FONTCOLOR, "#fff",
+            BORDERCOLOR, "#fff",
+            BGCOLOR, "#444",
+            PADDING, 15,
+            FONTSIZE, "12px"
+    );
+}
+</script>
 
 <div id="USER_ROLES" style="display:none;">
     <ol>
@@ -39,7 +60,7 @@
     <div id="header_container">
         <img src="images/suite_logo.png" width="290" height="71" alt="caBIG Clinical Trials Suite"/>
         <div class="header-right">
-            <div class="welcome_user">${not empty user ? user.firstName : ''} ${not empty user ? user.lastName : ''}</div>
+            <div class="welcome_user"><a onmouseover="showUserRolesToolTip($('USER_ROLES').innerHTML, '')" onmouseout="tt_Hide();">${not empty user ? user.firstName : ''} ${not empty user ? user.lastName : ''}</a></div>
             <div class="button-wrap ">
                 <div class="grey button"><a href="<c:url value="/j_acegi_logout"/>">Log Out</a></div>
             </div>
