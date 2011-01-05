@@ -35,13 +35,14 @@ public final class UserFilter implements Filter {
 	}
 
 	private void prepareUser(HttpServletRequest httpRequest) {
-        if (httpRequest.getSession().getAttribute("roles") != null) return;
-
         log.debug(">>> Adjusting roles names...");
 
         WebSSOUser user = null;
         Authentication a = SecurityUtils.getAuthentication();
         if (a != null) user = (WebSSOUser)a.getPrincipal();
+        else {
+            log.debug(">>> No authentication information.");
+        }
 
         log.debug(">>> User: " + user);
         log.debug(">>> User Authorities: " + user.getAuthorities());
