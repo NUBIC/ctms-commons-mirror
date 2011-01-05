@@ -60,6 +60,9 @@ public class WebSSOAuthoritiesPopulator implements CasAuthoritiesPopulator {
             log.error(CAGRID_SSO_GRID_IDENTITY + " is null");
         }
 
+        System.out.println("1." + userName);
+        System.out.println("2." + casUserId);
+
         WebSSOUser user = null;
         try {
             // casUserId = "UserSuper";
