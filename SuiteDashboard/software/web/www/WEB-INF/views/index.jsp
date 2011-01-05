@@ -45,10 +45,10 @@ function showUserRolesToolTip(text, title) {
 
 <div id="USER_ROLES" style="display:none;">
     <ol>
-        <c:if test="${fn:length(user.authorities) > 0}">
+        <c:if test="${fn:length(roles) > 0}">
             <b style="font-size:14px">Roles:</b><br><br>
             <div style='color:yellow;'>
-                <c:forEach items="${user.authorities}" var="a">
+                <c:forEach items="${roles}" var="a">
                     <li>${a}</li>
                 </c:forEach>
             </div>

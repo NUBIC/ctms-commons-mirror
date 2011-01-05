@@ -1,9 +1,9 @@
 package gov.nih.nci.cabig.ccts.security;
 
 import gov.nih.nci.cabig.ccts.dao.UserDao;
+import gov.nih.nci.cabig.ccts.domain.UserGroupType;
 import org.acegisecurity.Authentication;
-import org.acegisecurity.context.SecurityContext;
-import org.acegisecurity.context.SecurityContextHolder;
+import org.acegisecurity.GrantedAuthority;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -11,6 +11,10 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public final class UserFilter implements Filter {
 
@@ -31,16 +35,33 @@ public final class UserFilter implements Filter {
 	}
 
 	private void prepareUser(HttpServletRequest httpRequest) {
+        if (httpRequest.getSession().getAttribute("roles") != null) return;
+
+        log.debug("Adjusting roles names...");
+
         WebSSOUser user = null;
         Authentication a = SecurityUtils.getAuthentication();
         if (a != null) user = (WebSSOUser)a.getPrincipal();
         httpRequest.setAttribute("user", user);
 
+        Map<String, String> roles = new HashMap<String, String>();
+        for (UserGroupType r : UserGroupType.values()) {
+            roles.put(r.getCsmName(), r.getDisplayName());
+        }
+
+        List rolesAsArray = new ArrayList();
+        for (GrantedAuthority role : user.getAuthorities()) {
+            String r = roles.get(role.getAuthority());
+            if (r != null) rolesAsArray.add(r);
+        }
+
         boolean exists = false;
         if (user != null) {
             exists = getUserDao().userExists(user.getOriginalUsername());
         }
-        httpRequest.setAttribute("exists", exists);
+
+        httpRequest.getSession().setAttribute("exists", exists);
+        httpRequest.getSession().setAttribute("roles", rolesAsArray);
 	}
 
     public UserDao getUserDao() {
