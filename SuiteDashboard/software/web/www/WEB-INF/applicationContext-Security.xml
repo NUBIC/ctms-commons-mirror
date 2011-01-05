@@ -14,9 +14,13 @@
             <value>
                 CONVERT_URL_TO_LOWERCASE_BEFORE_COMPARISON
                 PATTERN_TYPE_APACHE_ANT
-                /**=channelProcessingFilter,httpSessionContextIntegrationFilter,webSSOLogoutFilter, webSSOAuthenticationProcessingFilter,securityContextHolderAwareRequestFilter,webSSOExceptionTranslationFilter,webSSOFilterSecurityInterceptor
+                /**=channelProcessingFilter,httpSessionContextIntegrationFilter,webSSOLogoutFilter, webSSOAuthenticationProcessingFilter,securityContextHolderAwareRequestFilter,webSSOExceptionTranslationFilter,webSSOFilterSecurityInterceptor,userFilter
             </value>
         </property>
+    </bean>
+
+    <bean id="userFilter" class="gov.nih.nci.cabig.ccts.security.UserFilter">
+        <property name="userDao" ref="userDao" />
     </bean>
 
     <bean id="accessDecisionManager" class="org.acegisecurity.vote.UnanimousBased">

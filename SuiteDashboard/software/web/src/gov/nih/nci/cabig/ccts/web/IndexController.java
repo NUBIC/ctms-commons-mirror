@@ -14,8 +14,6 @@ import java.util.Properties;
 
 public class IndexController extends AbstractController {
 
-    private UserDao userDao;
-
     @Override
     protected ModelAndView handleRequestInternal(HttpServletRequest req, HttpServletResponse res) throws Exception {
         Properties p = new Properties();
@@ -25,26 +23,7 @@ public class IndexController extends AbstractController {
         is.close();
         ModelAndView mvc = new ModelAndView("/WEB-INF/views/index.jsp");
         mvc.addObject("urls", p);
-
-        WebSSOUser user = null;
-        Authentication a = SecurityUtils.getAuthentication();
-        if (a != null) user = (WebSSOUser)a.getPrincipal();
-        mvc.addObject("user", user);
-
-        boolean exists = false;
-        if (user != null) {
-            exists = userDao.userExists(user.getOriginalUsername());
-        }
-        mvc.addObject("exists", exists);
-
         return mvc;
     }
 
-    public UserDao getUserDao() {
-        return userDao;
-    }
-
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
-    }
 }
