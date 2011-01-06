@@ -16,7 +16,7 @@
                 <li>${urls['c3pr.url']}/Create Study
                 <tags:UserTag roleName="study_qa_manager">
                     <li>${urls['c3pr.url']}/Manage Study
-                    ${urls['caaers.url']}/Manage-Study
+                    <li>${urls['caaers.url']}/Manage-Study
                 </tags:UserTag>
             </tags:UserTag>
 
