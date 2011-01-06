@@ -54,9 +54,9 @@ $(document).ready(function(){
 
             <tags:UserTag roleName="study_subject_calendar_manager">
                 <tags:UserTag roleName="study_subject_calendar_manager">
-                    <li class="fade" style="opacity: 0.7;"><a href="${urls['psc.url']}/pages/cal/studyList"><div class="img"><img src="images/create_subject.png"></div>Manage Calendars</a></li>
+                    <li class="fade" style="opacity: 0.7;"><a href="${urls['psc.url']}/pages/cal/studyList"><div class="img"><img src="images/quicklinks/manageCalendar.png"></div>Manage Calendars</a></li>
                 </tags:UserTag>
-                <li class="fade" style="opacity: 0.7;"><a href="${urls['psc.url']}/pages/report/scheduledActivitiesReport"><div class="img"><img src="images/create_subject.png"></div>Schedule Activities</a></li>
+                <li class="fade" style="opacity: 0.7;"><a href="${urls['psc.url']}/pages/report/scheduledActivitiesReport"><div class="img"><img src="images/quicklinks/schedule.png"></div>Schedule Activities</a></li>
             </tags:UserTag>
 
             <tags:UserTag roleName="ae_expedited_report_reviewer">
@@ -66,21 +66,21 @@ $(document).ready(function(){
             </tags:UserTag>
 
             <tags:UserTag roleName="supplemental_study_information_manager">
-                <li class="fade" style="opacity: 0.7;"><a href="${urls['caaers.url']}/pages/study/search"><div class="img"><img src="images/create_subject.png"></div>Update Study Adverse Event Requirements</a></li>
+                <li class="fade" style="opacity: 0.7;"><a href="${urls['caaers.url']}/pages/study/search"><div class="img"><img src="images/searchStudy.png"></div>Update Study Adverse Event Requirements</a></li>
             </tags:UserTag>
 
             <tags:UserTag roleName="user_administrator">
                 <tags:UserTag roleName="person_and_organization_information_manager">
-                    <li class="fade" style="opacity: 0.7;"><a href="${urls['caaers.url']}/pages/admin/createUser"><div class="img"><img src="images/create_subject.png"></div>Create Personnel</a></li>
+                    <li class="fade" style="opacity: 0.7;"><a href="${urls['caaers.url']}/pages/admin/createUser"><div class="img"><img src="images/quicklinks/createPersonnel.png"></div>Create Personnel</a></li>
                 </tags:UserTag>
             </tags:UserTag>
 
             <tags:UserTag roleName="lab_data_user">
-                <li class="fade" style="opacity: 0.7;"><a href="${urls['labviewer.url']}/"><div class="img"><img src="images/create_subject.png"></div>Manage Labs</a></li>
+                <li class="fade" style="opacity: 0.7;"><a href="${urls['labviewer.url']}/"><div class="img"><img src="images/quicklinks/viewLabs.png"></div>Manage Labs</a></li>
             </tags:UserTag>
 
             <tags:UserTag roleName="ae_rule_and_report_manager">
-                <li class="fade" style="opacity: 0.7;"><a href="${urls['caaers.url']}/pages/rule/list"><div class="img"><img src="images/create_subject.png"></div>Manage Safety Reporting Requirements</a></li>
+                <li class="fade" style="opacity: 0.7;"><a href="${urls['caaers.url']}/pages/rule/list"><div class="img"><img src="images/quicklinks/listRules.png"></div>Manage Safety Reporting Requirements</a></li>
             </tags:UserTag>
         </div>
         <div id="quicklinks_footer"></div>
