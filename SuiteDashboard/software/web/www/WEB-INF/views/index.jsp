@@ -34,22 +34,22 @@ $(document).ready(function(){
         <div id="quicklinks_top">Quick Links</div>
         <div id="quicklinks">
             <tags:UserTag roleName="study_creator">
-                <li class="fade" style="opacity: 0.7;"><a href="${urls['c3pr.url']}/pages/study/createStudy"><div class="img"><img src="images/create_subject.png"></div>Create Study</a></li>
+                <li class="fade" style="opacity: 0.7;"><a href="${urls['c3pr.url']}/pages/study/createStudy"><div class="img"><img src="images/quicklinks/createStudy.png"></div>Create Study</a></li>
                 <tags:UserTag roleName="study_qa_manager">
-                    <li class="fade" style="opacity: 0.7;"><a href="${urls['c3pr.url']}/pages/study/searchStudy"><div class="img"><img src="images/create_subject.png"></div>Manage Study</a></li>
-                    <li class="fade" style="opacity: 0.7;"><a href="${urls['caaers.url']}/pages/study/search"><div class="img"><img src="images/create_subject.png"></div>Manage Study</a></li>
+                    <li class="fade" style="opacity: 0.7;"><a href="${urls['c3pr.url']}/pages/study/searchStudy"><div class="img"><img src="images/quicklinks/searchStudy.png"></div>Manage Study</a></li>
+                    <li class="fade" style="opacity: 0.7;"><a href="${urls['caaers.url']}/pages/study/search"><div class="img"><img src="images/quicklinks/searchStudy.png"></div>Manage Study</a></li>
                 </tags:UserTag>
             </tags:UserTag>
 
             <tags:UserTag roleName="registrar">
                 <li class="fade" style="opacity: 0.7;"><a href="${urls['c3pr.url']}/pages/personAndOrganization/participant/createParticipant"><div class="img"><img src="images/create_subject.png"></div>Register Subject</a></li>
                 <tags:UserTag roleName="registration_qa_manager">
-                    <li class="fade" style="opacity: 0.7;"><a href="${urls['c3pr.url']}/pages/registration/searchRegistration"><div class="img"><img src="images/create_subject.png"></div>Manage Registrations</a></li>
+                    <li class="fade" style="opacity: 0.7;"><a href="${urls['c3pr.url']}/pages/registration/searchRegistration"><div class="img"><img src="images/quicklinks/manageRegistration.png"></div>Manage Registrations</a></li>
                 </tags:UserTag>
             </tags:UserTag>
 
             <tags:UserTag roleName="ae_reporter">
-                <li class="fade" style="opacity: 0.7;"><a href="${urls['caaers.url']}/pages/ae/captureRoutine"><div class="img"><img src="images/create_subject.png"></div>Report Adverse Events</a></li>
+                <li class="fade" style="opacity: 0.7;"><a href="${urls['caaers.url']}/pages/ae/captureRoutine"><div class="img"><img src="images/quicklinks/captureAE.png"></div>Report Adverse Events</a></li>
             </tags:UserTag>
 
             <tags:UserTag roleName="study_subject_calendar_manager">
@@ -61,7 +61,7 @@ $(document).ready(function(){
 
             <tags:UserTag roleName="ae_expedited_report_reviewer">
                 <tags:UserTag roleName="ae_study_data_reviewer">
-                    <li class="fade" style="opacity: 0.7;"><a href="${urls['caaers.url']}/pages/ae/routingAndReview"><div class="img"><img src="images/create_subject.png"></div>Review Adverse Events</a></li>
+                    <li class="fade" style="opacity: 0.7;"><a href="${urls['caaers.url']}/pages/ae/routingAndReview"><div class="img"><img src="images/quicklinks/routingAndReview.png"></div>Review Adverse Events</a></li>
                 </tags:UserTag>
             </tags:UserTag>
 
