@@ -66,7 +66,7 @@ $(document).ready(function(){
             </tags:UserTag>
 
             <tags:UserTag roleName="supplemental_study_information_manager">
-                <li class="fade" style="opacity: 0.7;"><a href="${urls['caaers.url']}/pages/study/search"><div class="img"><img src="images/searchStudy.png"></div>Update Study Adverse Event Requirements</a></li>
+                <li class="fade" style="opacity: 0.7;"><a href="${urls['caaers.url']}/pages/study/search"><div class="img"><img src="images/quicklinks/searchStudy.png"></div>Update Study Adverse Event Requirements</a></li>
             </tags:UserTag>
 
             <tags:UserTag roleName="user_administrator">
