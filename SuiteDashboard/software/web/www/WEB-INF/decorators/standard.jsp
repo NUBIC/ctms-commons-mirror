@@ -72,10 +72,8 @@ function showUserRolesToolTip(text, title) {
 </div>
 
 <div id="container">
-    <div id="wrapper">
-        <decorator:body/>
-        <div class="clear"></div>
-    </div>
+    <decorator:body/>
+    <div class="clear"></div>
     <div class="footer"><div id="build-name">${buildInfo}</div></div>
 </div>
 
