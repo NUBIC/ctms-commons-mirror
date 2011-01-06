@@ -11,9 +11,28 @@
         <li class="bottom_right"><a href="${urls['labviewer.url']}" target="_blank"><img src="images/labviewer.png"/></a></li>
     </ul>
 
-    <tags:UserTag roleName="study_creator">
-        User has the [study_creator] role.
-    </tags:UserTag>
+    <ul>
+            <tags:UserTag roleName="study_creator">
+                <li>${urls['c3pr.url']}/Create Study
+                <tags:UserTag roleName="study_qa_manager">
+                    <li>${urls['c3pr.url']}/Manage Study
+                    ${urls['caaers.url']}/Manage-Study
+                </tags:UserTag>
+            </tags:UserTag>
+
+            <tags:UserTag roleName="registrar">
+                <li>${urls['c3pr.url']}/Register Subject
+                <tags:UserTag roleName="registration_qa_manager">
+                    <li>${urls['c3pr.url']}/Manage Registrations
+                </tags:UserTag>
+            </tags:UserTag>
+
+            <tags:UserTag roleName="ae_reporter">
+                <li>${urls['caaers.url']}/Create-Expedited-Report
+                <li>${urls['caaers.url']}/Enter Adverse Event Information
+                <li>${urls['caaers.url']}/Enter Adverse Event
+            </tags:UserTag>
+    </ul>
 
     <div class="clear"></div>
 </div>
