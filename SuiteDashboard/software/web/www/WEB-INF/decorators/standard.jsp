@@ -79,11 +79,11 @@ function showUserRolesToolTip(text, title) {
 
 <script>
     var logoutLinks = [
-    '<c:url value="/j_acegi_logout">',
-    '${caaers.url}/j_acegi_logout',
-    '${c3pr.url}/j_acegi_logout',
-    '${psc.url}/j_acegi_logout',
-    '${labviewer.url}/logout'];
+    '<c:url value="/j_acegi_logout" />',
+    '${urls['caaers.url']}/j_acegi_logout',
+    '${urls['c3pr.url']}/j_acegi_logout',
+    '${urls['psc.url']}/j_acegi_logout',
+    '${urls['labviewer.url']}/logout'];
 
     function logout() {
         for (i = 0; i < logoutLinks.length; i++) {
