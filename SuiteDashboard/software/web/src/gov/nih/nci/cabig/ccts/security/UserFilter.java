@@ -11,10 +11,8 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.InputStream;
+import java.util.*;
 
 public final class UserFilter implements Filter {
 
@@ -31,8 +29,23 @@ public final class UserFilter implements Filter {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
         prepareUser(httpRequest);
+        loadLinks(httpRequest);
         chain.doFilter(httpRequest, httpResponse);
 	}
+
+    private void loadLinks(HttpServletRequest r) {
+        Properties p = new Properties();
+        String urls = r.getSession().getServletContext().getInitParameter("app.properties");
+        InputStream is = UserFilter.class.getClassLoader().getResourceAsStream("/resources/" + urls);
+        try {
+            p.load(is);
+            is.close();
+        } catch (IOException e) {
+            log.error(">>> Links nod loaded: " + e.getMessage());
+            e.printStackTrace();
+        }
+        r.getSession().setAttribute("urls", p);
+    }
 
 	private void prepareUser(HttpServletRequest httpRequest) {
         log.debug(">>> Adjusting roles names...");
