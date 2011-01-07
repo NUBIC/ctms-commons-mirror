@@ -65,7 +65,7 @@ function showUserRolesToolTip(text, title) {
         <div class="header-right">
             <div class="welcome_user"><a onmouseover="showUserRolesToolTip(jQuery('#USER_ROLES').html(), '')" onmouseout="tt_Hide();">${not empty user ? user.firstName : ''} ${not empty user ? user.lastName : ''}</a></div>
             <div class="button-wrap ">
-                <div class="grey button"><a href='<c:url value="/j_acegi_logout"/>'>Log Out</a></div>
+                <div class="grey button"><a href='#' onclick="logout();">Log Out</a></div>
             </div>
         </div>
     </div>
@@ -83,7 +83,14 @@ function showUserRolesToolTip(text, title) {
     '${caaers.url}/j_acegi_logout',
     '${c3pr.url}/j_acegi_logout',
     '${psc.url}/j_acegi_logout',
-    '${labviewer.url}/logout']
+    '${labviewer.url}/logout'];
+
+    function logout() {
+        for (i = 0; i < logoutLinks.length; i++) {
+            alert(logoutLinks[i]);
+            // jQuery.ajax({url: logoutLinks[i]});
+        }
+    }
 </script>
 
 </body>
