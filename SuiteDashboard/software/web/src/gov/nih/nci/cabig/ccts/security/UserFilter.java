@@ -38,6 +38,7 @@ public final class UserFilter implements Filter {
         String urls = r.getSession().getServletContext().getInitParameter("app.properties");
         InputStream is = UserFilter.class.getClassLoader().getResourceAsStream("/resources/" + urls);
         try {
+            log.debug(">>> Loading properties...");
             p.load(is);
             is.close();
         } catch (IOException e) {
