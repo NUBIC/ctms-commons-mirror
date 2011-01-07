@@ -79,7 +79,6 @@ function showUserRolesToolTip(text, title) {
 
 <script>
     var logoutLinks = [
-    '<c:url value="/j_acegi_logout" />',
     '${urls['caaers.url']}/j_acegi_logout',
     '${urls['c3pr.url']}/j_acegi_logout',
     '${urls['psc.url']}/j_acegi_logout',
@@ -96,7 +95,7 @@ function showUserRolesToolTip(text, title) {
                          complete: function(data){}
             });
         }
-        window.location('<c:url value="/j_acegi_logout" />');
+        window.location = '<c:url value="/j_acegi_logout" />';
     }
 </script>
 
