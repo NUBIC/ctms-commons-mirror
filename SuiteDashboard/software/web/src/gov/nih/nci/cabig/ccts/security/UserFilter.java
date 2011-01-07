@@ -42,7 +42,7 @@ public final class UserFilter implements Filter {
             p.load(is);
             is.close();
         } catch (IOException e) {
-            log.error(">>> Links nod loaded: " + e.getMessage());
+            log.error(">>> Links not loaded: " + e.getMessage());
             e.printStackTrace();
         }
         r.getSession().setAttribute("urls", p);
