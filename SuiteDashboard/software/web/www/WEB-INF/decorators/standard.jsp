@@ -77,5 +77,14 @@ function showUserRolesToolTip(text, title) {
     <div class="footer"><div id="build-name">${buildInfo}</div></div>
 </div>
 
+<script>
+    var logoutLinks = [
+    '<c:url value="/j_acegi_logout">',
+    '${caaers.url}/j_acegi_logout',
+    '${c3pr.url}/j_acegi_logout',
+    '${psc.url}/j_acegi_logout',
+    '${labviewer.url}/logout']
+</script>
+
 </body>
 </html>
