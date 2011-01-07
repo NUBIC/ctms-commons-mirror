@@ -87,8 +87,8 @@ function showUserRolesToolTip(text, title) {
 
     function logout() {
         for (i = 0; i < logoutLinks.length; i++) {
-            alert(logoutLinks[i]);
-            // jQuery.ajax({url: logoutLinks[i]});
+            // alert(logoutLinks[i]);
+            jQuery.ajax({url: logoutLinks[i]});
         }
     }
 </script>
