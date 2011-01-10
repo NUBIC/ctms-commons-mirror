@@ -1,5 +1,5 @@
 gems:
-- buildr =1.3.5
+- buildr =1.4.4
 - buildr-iidea =0.0.4
 - buildr-bnd =0.0.3
 - ivy4r =0.12.6
