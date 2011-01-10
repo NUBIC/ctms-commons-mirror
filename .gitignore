@@ -9,3 +9,5 @@ publish-repo
 
 build/*.properties
 *.log
+
+grid/*/*/*/build
