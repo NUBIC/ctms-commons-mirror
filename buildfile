@@ -1,7 +1,9 @@
 require 'buildr_iidea'
 require 'buildr_bnd'
-repositories.remote << Buildr::Bnd.remote_repository
 require 'buildr/ivy_extension'
+
+repositories.remote << "http://repo1.maven.org/maven2"
+repositories.remote << Buildr::Bnd.remote_repository
 
 CTMS_COMMONS_VERSION = "1.0.9.DEV"
 CTMS_COMMONS_IVY_ORG = "gov.nih.nci.cabig.ctms"
