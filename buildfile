@@ -20,6 +20,7 @@ desc "Shared libraries for caBIG CTMS projects"
 define "ctms-commons" do
   project.version = CTMS_COMMONS_VERSION
   project.group = CTMS_COMMONS_IVY_ORG
+  project.compile.using(:javac)
   project.compile.options.target = "1.5"
   project.compile.options.source = "1.5"
   project.iml.excluded_directories << IVY_HOME
@@ -174,17 +175,17 @@ define "ctms-commons" do
   end
 
   doc_projects = projects(%w(base lang core web suite:authorization))
-  javadoc.from(doc_projects)
+  doc.from projects(*doc_projects)
   task :all_javadocdeps => doc_projects.collect { |p| p.task(:javadocdeps) } do
     doc_projects.each do |p|
       confs = [p.ivy.test_conf, p.ivy.compile_conf].flatten.uniq
       if deps = p.ivy.deps(confs)
-        project.javadoc.with deps
+        project.doc.with deps
         info "Ivy adding javadoc dependencies from #{p} '#{confs.join(', ')}' to project '#{project.name}'"
       end
     end
   end
-  project.task :javadoc => :all_javadocdeps
+  doc.enhance [:all_javadocdeps]
 
   # The following submodules exist but are not part of the
   # whole-project build-release process.  This should be fixed at some
