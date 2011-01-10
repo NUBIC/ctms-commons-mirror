@@ -66,6 +66,12 @@ public class ScopeDescriptionTest extends TestCase {
         assertEquals("Wrong scope", ScopeType.STUDY, created.getScope());
     }
 
+    public void testCreateScopeFromSingleStudyProtectionElementNameThatContainsDots() throws Exception {
+        ScopeDescription created = ScopeDescription.createFromCsmName("Study.T.U.V");
+        assertEquals("Wrong ident", "T.U.V", created.getIdentifier());
+        assertEquals("Wrong scope", ScopeType.STUDY, created.getScope());
+    }
+
     public void testCreateScopeFromAllStudyProtectionElement() throws Exception {
         ScopeDescription created = ScopeDescription.createFromCsmName("Study");
         assertEquals("Wrong scope", ScopeType.STUDY, created.getScope());
@@ -91,6 +97,11 @@ public class ScopeDescriptionTest extends TestCase {
 
     public void testGetCsmNameForOneStudy() throws Exception {
         assertEquals("Study.B", ScopeDescription.createForOne(ScopeType.STUDY, "B").getCsmName());
+    }
+
+    public void testGetCsmNameForOneStudyWithDots() throws Exception {
+        assertEquals("Study.B.C.D",
+            ScopeDescription.createForOne(ScopeType.STUDY, "B.C.D").getCsmName());
     }
 
     public void testAccessingIdentForAllScopeFails() throws Exception {
