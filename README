@@ -30,6 +30,9 @@ associated entry in the changelog.
 This library is built with buildr.  As of this writing, it works with
 buildr 1.3.5 on jruby 1.4.0.  It uses ivy4r for ivy integration.
 
+To set up a new development environment, install jruby and then use
+jruby to run `install_gems.rb` in the root of the project.
+
 #### CI
 
 The CI build is at https://ctms-ci.nubic.northwestern.edu/hudson/job/ctms-commons/ .
