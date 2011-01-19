@@ -62,16 +62,12 @@ $(document).ready(function(){
                 <li class="fade" style="opacity: 0.7;"><a target="_blank" href="${urls['psc.url']}/pages/cal/studyList"><div class="img"><img src="images/quicklinks/manageCalendar.png"></div>Manage Calendars</a></li>
             </tags:UserTag>
 
-            <tags:UserTag roleName="ae_study_data_reviewer">
+            <tags:UserTag roleName="supplemental_study_information_manager">
                 <li class="fade" style="opacity: 0.7;"><a target="_blank" href="${urls['caaers.url']}/pages/study/search"><div class="img"><img src="images/quicklinks/searchStudy.png"></div>Update Study Adverse Event Requirements</a></li>
             </tags:UserTag>
 
             <tags:UserTag roleName="ae_expedited_report_reviewer || ae_study_data_reviewer">
                 <li class="fade" style="opacity: 0.7;"><a target="_blank" href="${urls['caaers.url']}/pages/ae/routingAndReview"><div class="img"><img src="images/quicklinks/routingAndReview.png"></div>Review Adverse Events</a></li>
-            </tags:UserTag>
-
-            <tags:UserTag roleName="supplemental_study_information_manager">
-                <li class="fade" style="opacity: 0.7;"><a target="_blank" href="${urls['caaers.url']}/pages/study/search"><div class="img"><img src="images/quicklinks/searchStudy.png"></div>Update Study Adverse Event Requirements</a></li>
             </tags:UserTag>
 
             <tags:UserTag roleName="user_administrator || person_and_organization_information_manager">
