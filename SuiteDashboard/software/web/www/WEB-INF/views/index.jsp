@@ -38,7 +38,7 @@ $(document).ready(function(){
                 <li class="fade" style="opacity: 0.7;"><a target="_blank" href="${urls['c3pr.url']}/pages/study/createStudy"><div class="img"><img src="images/quicklinks/createStudy.png"></div>Create Study</a></li>
             </tags:UserTag>
 
-            <tags:UserTag roleName="study_creator || study_qa_manager || supplemental_study_information_manager || study_site_participation_administrator">
+            <tags:UserTag roleName="study_creator || study_qa_manager || supplemental_study_information_manager || study_site_participation_administrator || study_team_administrator">
                 <li class="fade" style="opacity: 0.7;"><a target="_blank" href="${urls['c3pr.url']}/pages/study/searchStudy"><div class="img"><img src="images/quicklinks/searchStudy.png"></div>Manage Study</a></li>
             </tags:UserTag>
 
