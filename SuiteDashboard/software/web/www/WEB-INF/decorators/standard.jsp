@@ -4,7 +4,7 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <title>Suite Dashoard || <decorator:title/></title>
+    <title>Suite Dashboard || <decorator:title/></title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
     <!--[if IE]>
     <style type="text/css" media="screen">
