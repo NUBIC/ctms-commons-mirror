@@ -25,9 +25,6 @@ public class SuiteRoleMembershipLoader {
 
     /**
      * Returns all the complete {@link SuiteRoleMembership}s for a user, indexed by {@link SuiteRole}.
-     * <p>
-     * This is an alternative to using the CSM API to acquire this information piecemeal.  Pros:
-     * automatically excludes invalid or incomplete memberships.  Cons: Less future-proof.
      */
     public Map<SuiteRole, SuiteRoleMembership> getRoleMemberships(long userId) {
         return getRoleMemberships(userId, false);
@@ -37,8 +34,8 @@ public class SuiteRoleMembershipLoader {
      * Returns all the {@link SuiteRoleMembership}s for a user, indexed by {@link SuiteRole}.
      * <p>
      * Includes incomplete memberships (e.g., memberships for study-scoped roles that are missing
-     * study scoping information).  This method should not be used for authorization; only for
-     * provisioning.
+     * study scoping information).  This method <b>must not be used for authorization</b>; only
+     * for provisioning.
      */
     public Map<SuiteRole, SuiteRoleMembership> getProvisioningRoleMemberships(long userId) {
         return getRoleMemberships(userId, true);
