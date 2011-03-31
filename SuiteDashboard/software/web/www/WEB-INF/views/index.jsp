@@ -20,8 +20,8 @@ $(document).ready(function(){
         <div id="main-nav_top"></div>
         <div id="main-nav_stretch">
             <ul class="content">
-                <li class="fade" style="opacity: 0.7;"><a href="${urls['caaers.url']}" target="_blank"><img src="images/caaers.png"></a></li>
                 <li class="fade" style="opacity: 0.7;"><a href="${urls['c3pr.url']}" target="_blank"><img src="images/c3pr.png"></a></li>
+                <li class="fade" style="opacity: 0.7;"><a href="${urls['caaers.url']}" target="_blank"><img src="images/caaers.png"></a></li>
                 <li class="fade" style="opacity: 0.7;"><a href="${urls['psc.url']}" target="_blank"><img src="images/psc.png"></a></li>
                 <li class="fade" style="opacity: 0.7;"><a href="${urls['labviewer.url']}" target="_blank"><img src="images/labviewer.png"></a></li>
                 <div class="clear"></div>
