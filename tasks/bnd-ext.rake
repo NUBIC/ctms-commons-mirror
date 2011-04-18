@@ -2,7 +2,22 @@ require 'buildr'
 
 # Helper methods for building bundles using buildr-bnd.
 
+module AutoconfigureBundles
+  include Buildr::Extension
+
+  after_define do |project|
+    bundle = project.packages.detect { |pkg| Buildr::Bnd::BundleTask === pkg }
+    if bundle
+      bundle["Export-Package"] ||= project.bnd_export_package
+      bundle["Import-Package"] ||= project.bnd_import_package
+    end
+  end
+end
+
+
 class Buildr::Project
+  include AutoconfigureBundles
+
   def java_packages
     @java_packages ||= Dir[ File.join( _(:source, :main, :java), "**/*.java" ) ].collect { |f|
       File.read(f).scan(/package\s+(\S+);/).flatten.first
@@ -15,15 +30,5 @@ class Buildr::Project
 
   def bnd_import_package
     "gov.nih.nci.*, *;resolution:=optional"
-  end
-
-  def configure_bundle(bundle, options = {})
-    unless options.has_key?(:resources)
-      options[:resources] = File.exist?(_(:source, :main, :resources))
-    end
-
-    bundle["Export-Package"] = bnd_export_package
-    bundle["Import-Package"] = bnd_import_package
-    bundle["Include-Resource"] = _(:target, :resources) if options[:resources]
   end
 end

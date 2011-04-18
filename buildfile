@@ -40,18 +40,14 @@ define "ctms-commons" do
   desc "Zero-dependency common code for all other packages"
   define "base" do
     configure_ivy(ivy)
-    package(:bundle).tap do |bundle|
-      configure_bundle(bundle)
-    end
+    package(:bundle)
   end
 
   define "lang" do
     configure_ivy(ivy)
     interproject_dependencies << 'base'
 
-    package(:bundle).tap do |bundle|
-      configure_bundle(bundle)
-    end
+    package(:bundle)
   end
 
   define "testing" do
@@ -76,9 +72,7 @@ define "ctms-commons" do
     configure_ivy(ivy)
     interproject_dependencies << 'base' << 'lang' << 'testing:unit'
 
-    package(:bundle).tap do |bundle|
-      configure_bundle(bundle)
-    end
+    package(:bundle)
   end
 
   define "laf" do
@@ -86,18 +80,14 @@ define "ctms-commons" do
     configure_ivy(ivy)
     interproject_dependencies << 'web'
 
-    package(:bundle).tap do |bundle|
-      configure_bundle(bundle)
-    end
+    package(:bundle)
   end
 
   define "web" do
     configure_ivy(ivy)
     interproject_dependencies << 'base' << 'lang' << 'core' << 'testing:unit'
 
-    package(:bundle).tap do |bundle|
-      configure_bundle(bundle)
-    end
+    package(:bundle)
   end
 
   define "acegi" do
@@ -113,9 +103,7 @@ define "ctms-commons" do
       project.iml.group = true
       configure_ivy(ivy)
 
-      package(:bundle).tap do |bundle|
-        configure_bundle(bundle)
-      end
+      package(:bundle)
     end
 
     define "csm-test", :base_dir => _('acegi-csm-test') do
@@ -129,9 +117,7 @@ define "ctms-commons" do
       configure_ivy(ivy)
       interproject_dependencies << project.parent.project('csm')
 
-      package(:bundle).tap do |bundle|
-        configure_bundle(bundle)
-      end
+      package(:bundle)
     end
   end
 
@@ -145,9 +131,7 @@ define "ctms-commons" do
 
       test.resources.filter.using( csm_db_properties(project.parent.parent) )
 
-      package(:bundle).tap do |bundle|
-        configure_bundle(bundle)
-      end
+      package(:bundle)
 
       task "test:wipe_db" => ["#{project.name}:test:compile", "#{project.name}:testdeps"] do
         p = csm_db_properties(project.parent.parent)
