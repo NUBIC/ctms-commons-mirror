@@ -37,17 +37,22 @@ define "ctms-commons" do
     end
   end
 
-  desc "Zero-dependency common code for all other packages"
+  desc "Zero-dependency common code for all other CTMS Commons packages"
   define "base" do
     configure_ivy(ivy)
-    package(:bundle)
+    package(:bundle).tap do |bundle|
+      bundle["Bundle-Name"] = "CTMS Commons Base"
+    end
   end
 
+  desc "Low level utility functions, etc., for CTMS apps"
   define "lang" do
     configure_ivy(ivy)
     interproject_dependencies << 'base'
 
-    package(:bundle)
+    package(:bundle).tap do |bundle|
+      bundle["Bundle-Name"] = "CTMS Commons Lang"
+    end
   end
 
   define "testing" do
@@ -68,11 +73,14 @@ define "ctms-commons" do
     end
   end
 
+  desc "Domain, persistence, and other tools for CTMS apps"
   define "core" do
     configure_ivy(ivy)
     interproject_dependencies << 'base' << 'lang' << 'testing:unit'
 
-    package(:bundle)
+    package(:bundle).tap do |bundle|
+      bundle["Bundle-Name"] = "CTMS Commons Core"
+    end
   end
 
   define "laf" do
@@ -80,14 +88,19 @@ define "ctms-commons" do
     configure_ivy(ivy)
     interproject_dependencies << 'web'
 
-    package(:bundle)
+    package(:bundle).tap do |bundle|
+      bundle["Bundle-Name"] = "CTMS Commons Look-and-Feel"
+    end
   end
 
+  desc "Shared web-layer code for CTMS apps"
   define "web" do
     configure_ivy(ivy)
     interproject_dependencies << 'base' << 'lang' << 'core' << 'testing:unit'
 
-    package(:bundle)
+    package(:bundle).tap do |bundle|
+      bundle["Bundle-Name"] = "CTMS Commons Web"
+    end
   end
 
   define "acegi" do
@@ -99,11 +112,14 @@ define "ctms-commons" do
       package(:jar)
     end
 
+    desc "Acegi integration for NCI CSM"
     define "csm", :base_dir => _('acegi-csm') do
       project.iml.group = true
       configure_ivy(ivy)
 
-      package(:bundle)
+      package(:bundle).tap do |bundle|
+        bundle["Bundle-Name"] = "CTMS Commons Acegi-CSM"
+      end
     end
 
     define "csm-test", :base_dir => _('acegi-csm-test') do
@@ -112,18 +128,22 @@ define "ctms-commons" do
       interproject_dependencies << project.parent.project('csm')
     end
 
+    desc "Acegi integration for caGrid"
     define "grid", :base_dir => _('acegi-grid') do
       project.iml.group = true
       configure_ivy(ivy)
       interproject_dependencies << project.parent.project('csm')
 
-      package(:bundle)
+      package(:bundle).tap do |bundle|
+        bundle["Bundle-Name"] = "CTMS Commons Acegi-caGrid"
+      end
     end
   end
 
   define "suite" do
     project.no_iml
 
+    desc "An API and CSM extensions for common authorization across all CTMS suite apps"
     define "authorization" do
       project.iml.group = true
       configure_ivy(ivy)
@@ -131,7 +151,9 @@ define "ctms-commons" do
 
       test.resources.filter.using( csm_db_properties(project.parent.parent) )
 
-      package(:bundle)
+      package(:bundle).tap do |bundle|
+        bundle["Bundle-Name"] = "CTMS Commons Suite Authorization"
+      end
 
       task "test:wipe_db" => ["#{project.name}:test:compile", "#{project.name}:testdeps"] do
         p = csm_db_properties(project.parent.parent)

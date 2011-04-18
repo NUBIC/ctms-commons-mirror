@@ -4,6 +4,11 @@ ctms-commons history
 1.0.9
 -----
 
+### all
+
+- Improved the descriptive parts of the OSGi metadata for the modules which
+  are OSGi bundles.
+
 1.0.8
 -----
 
