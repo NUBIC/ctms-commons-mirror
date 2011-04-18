@@ -33,5 +33,6 @@
     <dependency org="org.hsqldb" name="com.springsource.org.hsqldb" rev="${lib.hsqldb.rev}" conf="unit-test->*"/>
 
     <exclude module="com.springsource.slf4j.api"/>
+    <exclude org="com.oracle.oc4j"/>
   </dependencies>
 </ivy-module>

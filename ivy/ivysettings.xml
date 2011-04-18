@@ -28,7 +28,10 @@
       <artifact pattern="http://software.cagrid.org/repository-1.2/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]"/>
       <artifact pattern="http://software.cagrid.org/repository-1.2/[organisation]/[module]/[revision]/[artifact].[ext]"/>
     </url>
-    <chain name="libraries">
+    <chain name="libraries" returnFirst="true">
+      <filesystem name="local-m2" m2compatible="true" local="true">
+        <artifact pattern="${user.home}/.m2/repository/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]"/>
+      </filesystem>
       <ibiblio name="m2" m2compatible="true"/>
     </chain>
   </resolvers>

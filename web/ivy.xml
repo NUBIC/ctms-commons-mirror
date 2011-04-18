@@ -30,5 +30,6 @@
     <dependency conf="unit-test->*" org="org.slf4j" name="slf4j-simple" rev="${lib.slf4j.rev}"/>
     <dependency conf="unit-test->*" org="org.slf4j" name="jcl-over-slf4j" rev="${lib.slf4j.rev}"/>
     <dependency org="org.springframework" name="org.springframework.test" rev="${lib.spring.rev}" conf="unit-test->*"/>
+    <exclude org="com.oracle.oc4j"/>
   </dependencies>
 </ivy-module>

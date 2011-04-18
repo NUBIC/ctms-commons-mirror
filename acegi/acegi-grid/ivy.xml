@@ -52,5 +52,6 @@
     <exclude org="cacore" module="csm"/>                                 <!-- from cagrid -->
     <exclude org="jakarta" module="commons-discovery"/>                  <!-- from cbiit/globus -->
     <exclude org="log4j"/>
+    <exclude org="com.oracle.oc4j"/>
   </dependencies>
 </ivy-module>

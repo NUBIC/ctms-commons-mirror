@@ -36,5 +36,6 @@
     <exclude org="org.springframework" module="spring" matcher="exact"/>
     <exclude module="com.springsource.slf4j.api"/>
     <exclude org="log4j"/>
+    <exclude org="com.oracle.oc4j"/>
   </dependencies>
 </ivy-module>
