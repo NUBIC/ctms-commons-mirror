@@ -1,7 +1,10 @@
 package gov.nih.nci.cabig.ctms.web;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
+import org.springframework.beans.InvalidPropertyException;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +28,8 @@ import java.util.TreeMap;
  * @author Rhett Sutphin
  */
 public class WebTools {
+    private static final Logger log = LoggerFactory.getLogger(WebTools.class);
+
     @SuppressWarnings({ "unchecked" })
     public static SortedMap<String, Object> sessionAttributesToMap(final HttpSession session) {
         if (session != null) {
@@ -54,7 +59,14 @@ public class WebTools {
         for (PropertyDescriptor descriptor : wrapped.getPropertyDescriptors()) {
             String name = descriptor.getName();
             if (!EXCLUDED_REQUEST_PROPERTIES.contains(name) && descriptor.getReadMethod() != null) {
-                map.put(name, wrapped.getPropertyValue(name));
+                Object propertyValue;
+                try {
+                    propertyValue = wrapped.getPropertyValue(name);
+                } catch (InvalidPropertyException e) {
+                    log.debug("Exception reading request property " + name, e);
+                    propertyValue = e.getMostSpecificCause();
+                }
+                map.put(name, propertyValue);
             }
         }
         return map;

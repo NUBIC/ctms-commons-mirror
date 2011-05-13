@@ -1,18 +1,20 @@
 package gov.nih.nci.cabig.ctms.web;
 
 import junit.framework.TestCase;
-
-import java.util.SortedMap;
-import java.util.Set;
-import java.util.Iterator;
-import java.util.Collection;
-import java.util.List;
-import java.util.Arrays;
-import java.util.LinkedHashSet;
-import java.util.Map;
-
+import org.easymock.EasyMock;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpSession;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.SortedMap;
+
+import static org.easymock.EasyMock.expect;
 
 /**
  * @author Rhett Sutphin
@@ -93,6 +95,17 @@ public class WebToolsTest extends TestCase {
         Map<String, Object> actual = WebTools.requestPropertiesToMap(request);
         assertEquals(request.getServerName(), actual.get("serverName"));
         assertEquals(request.getContextPath(), actual.get("contextPath"));
+    }
+
+    public void testRequestPropertiesToMapWhenAccessingPropertyThrowsExceptionSuppressesException()
+        throws Exception
+    {
+        HttpServletRequest mockRequest = EasyMock.createNiceMock(HttpServletRequest.class);
+        expect(mockRequest.getRemoteHost()).andThrow(new IllegalStateException("I forgot"));
+        EasyMock.replay(mockRequest);
+
+        Map<String, Object> actual = WebTools.requestPropertiesToMap(mockRequest);
+        assertTrue(actual.get("remoteHost") instanceof IllegalStateException);
     }
 
     public void testRequestAttributesToMap() {

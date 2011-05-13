@@ -9,6 +9,11 @@ ctms-commons history
 - Improved the descriptive parts of the OSGi metadata for the modules which
   are OSGi bundles.
 
+### web
+
+- Modified WebTools#requestPropertiesToMap to suppress exceptions from
+  property accessors.
+
 1.0.8
 -----
 
