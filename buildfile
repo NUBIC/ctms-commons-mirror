@@ -5,7 +5,7 @@ require 'buildr/ivy_extension'
 repositories.remote << "http://repo1.maven.org/maven2"
 repositories.remote << Buildr::Bnd.remote_repository
 
-CTMS_COMMONS_VERSION = "1.0.9.RELEASE"
+CTMS_COMMONS_VERSION = '1.0.10.DEV'
 CTMS_COMMONS_IVY_ORG = "gov.nih.nci.cabig.ctms"
 
 # All modules use the same ivy4r config
