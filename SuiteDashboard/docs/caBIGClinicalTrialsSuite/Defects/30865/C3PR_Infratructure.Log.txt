@@ -1,0 +1,138 @@
+2011-03-30 14:32:22,441 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Using delegated crential provider to set credentials
+2011-03-30 14:32:22,441 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Using delegated crential provider to set credentials
+2011-03-30 14:32:22,446 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Sending message to caXchange
+2011-03-30 14:37:18,518 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Using delegated crential provider to set credentials
+2011-03-30 14:37:18,518 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Using delegated crential provider to set credentials
+2011-03-30 14:37:18,523 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Sending message to caXchange
+2011-03-30 14:42:18,536 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Using delegated crential provider to set credentials
+2011-03-30 14:42:18,536 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Using delegated crential provider to set credentials
+2011-03-30 14:42:18,545 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Sending message to caXchange
+2011-03-30 14:47:18,537 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Using delegated crential provider to set credentials
+2011-03-30 14:47:18,537 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Using delegated crential provider to set credentials
+2011-03-30 14:47:18,550 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Sending message to caXchange
+2011-03-30 14:52:18,520 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Using delegated crential provider to set credentials
+2011-03-30 14:52:18,520 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Using delegated crential provider to set credentials
+2011-03-30 14:52:18,528 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Sending message to caXchange
+2011-03-30 14:57:18,529 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Using delegated crential provider to set credentials
+2011-03-30 14:57:18,529 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Using delegated crential provider to set credentials
+2011-03-30 14:57:18,537 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Sending message to caXchange
+2011-03-30 15:02:18,639 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Using delegated crential provider to set credentials
+2011-03-30 15:02:18,640 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Using delegated crential provider to set credentials
+2011-03-30 15:02:18,643 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Sending message to caXchange
+2011-03-30 15:07:18,526 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Using delegated crential provider to set credentials
+2011-03-30 15:07:18,527 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Using delegated crential provider to set credentials
+2011-03-30 15:07:18,537 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Sending message to caXchange
+2011-03-30 15:10:40,360 DEBUG [edu.duke.cabig.c3pr.infrastructure.CCTSNotificationsPersistenceListener] - LocalStudy create/update detected, getting ready to broadcast notification to caTissue and others.
+2011-03-30 15:10:40,360 INFO [edu.duke.cabig.c3pr.infrastructure.CCTSNotificationsPersistenceListener] - Getting ready to broadcast a notification for a LocalStudy with Grid Id of 9422f4bb-418e-4ff5-a8f0-aac1e21a6a8c
+2011-03-30 15:11:04,223 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Using delegated crential provider to set credentials
+2011-03-30 15:11:04,224 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Using delegated crential provider to set credentials
+2011-03-30 15:11:04,237 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Sending message to caXchange
+2011-03-30 15:15:40,506 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Using delegated crential provider to set credentials
+2011-03-30 15:15:40,507 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Using delegated crential provider to set credentials
+2011-03-30 15:15:40,511 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Sending message to caXchange
+2011-03-30 15:16:26,510 DEBUG [edu.duke.cabig.c3pr.infrastructure.CCTSNotificationsPersistenceListener] - LocalStudy create/update detected, getting ready to broadcast notification to caTissue and others.
+2011-03-30 15:16:26,510 INFO [edu.duke.cabig.c3pr.infrastructure.CCTSNotificationsPersistenceListener] - Getting ready to broadcast a notification for a LocalStudy with Grid Id of 9422f4bb-418e-4ff5-a8f0-aac1e21a6a8c
+2011-03-30 15:16:26,651 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Using delegated crential provider to set credentials
+2011-03-30 15:16:26,652 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Using delegated crential provider to set credentials
+2011-03-30 15:16:26,657 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Sending message to caXchange
+2011-03-30 15:19:26,176 DEBUG [edu.duke.cabig.c3pr.infrastructure.CCTSNotificationsPersistenceListener] - LocalStudy create/update detected, getting ready to broadcast notification to caTissue and others.
+2011-03-30 15:19:26,177 INFO [edu.duke.cabig.c3pr.infrastructure.CCTSNotificationsPersistenceListener] - Getting ready to broadcast a notification for a LocalStudy with Grid Id of 9422f4bb-418e-4ff5-a8f0-aac1e21a6a8c
+2011-03-30 15:19:26,576 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Using delegated crential provider to set credentials
+2011-03-30 15:19:26,576 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Using delegated crential provider to set credentials
+2011-03-30 15:19:26,589 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Sending message to caXchange
+----------------
+
+2011-03-30 15:24:03,871 DEBUG [edu.duke.cabig.c3pr.infrastructure.CCTSNotificationsPersistenceListener] - LocalStudy create/update detected, getting ready to broadcast notification to caTissue and others.
+2011-03-30 15:24:03,871 INFO [edu.duke.cabig.c3pr.infrastructure.CCTSNotificationsPersistenceListener] - Getting ready to broadcast a notification for a LocalStudy with Grid Id of 20b16581-a01c-4419-8d70-2fe8278a2ca4
+2011-03-30 15:24:04,152 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Using delegated crential provider to set credentials
+2011-03-30 15:24:04,152 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Using delegated crential provider to set credentials
+2011-03-30 15:24:04,160 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Sending message to caXchange
+2011-03-30 15:29:03,972 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Using delegated crential provider to set credentials
+2011-03-30 15:29:03,972 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Using delegated crential provider to set credentials
+2011-03-30 15:29:03,986 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Sending message to caXchange
+2011-03-30 15:33:37,796 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Using delegated crential provider to set credentials
+2011-03-30 15:33:37,796 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Found valid proxy. Using it for esb communication
+2011-03-30 15:33:37,796 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Using delegated crential provider to set credentials
+2011-03-30 15:33:37,835 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Sending message to caXchange
+2011-03-30 15:33:38,214 DEBUG [edu.duke.cabig.c3pr.utils.DefaultCCTSMessageWorkflowCallbackFactory] - Recording successful send for objectId20b16581-a01c-4419-8d70-2fe8278a2ca4
+2011-03-30 15:33:38,222 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - logging EPR info..
+2011-03-30 15:33:38,222 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - https://ncias-q389-v.nci.nih.gov:8445/wsrf-ihub/services/cagrid/CaXchangeResponseService
+2011-03-30 15:33:38,222 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - https://ncias-q389-v.nci.nih.gov:8445/wsrf-ihub/services/cagrid/CaXchangeResponseService
+2011-03-30 15:33:38,222 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - ncias-q389-v.nci.nih.gov
+2011-03-30 15:33:38,222 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - /wsrf-ihub/services/cagrid/CaXchangeResponseService
+2011-03-30 15:33:38,222 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] -
+2011-03-30 15:33:38,222 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] -
+2011-03-30 15:33:38,222 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] -
+2011-03-30 15:33:38,222 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - https
+2011-03-30 15:33:38,222 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - //ncias-q389-v.nci.nih.gov:8445/wsrf-ihub/services/cagrid/CaXchangeResponseService
+2011-03-30 15:33:38,222 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] -
+2011-03-30 15:33:38,222 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - 8445
+2011-03-30 15:33:38,223 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Will track response from caXchange
+2011-03-30 15:33:38,231 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Elapsed time : 0 seconds
+2011-03-30 15:33:38,231 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Checking caXchange for response
+2011-03-30 15:33:38,237 DEBUG [edu.duke.cabig.c3pr.infrastructure.CCTSNotificationsPersistenceListener] - LocalStudy create/update detected, getting ready to broadcast notification to caTissue and others.
+2011-03-30 15:33:38,237 INFO [edu.duke.cabig.c3pr.infrastructure.CCTSNotificationsPersistenceListener] - Getting ready to broadcast a notification for a LocalStudy with Grid Id of 20b16581-a01c-4419-8d70-2fe8278a2ca4
+2011-03-30 15:33:38,433 INFO [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Response not yet ready. Waiting...
+2011-03-30 15:33:38,528 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Using delegated crential provider to set credentials
+2011-03-30 15:33:38,529 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Using delegated crential provider to set credentials
+2011-03-30 15:33:38,535 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Sending message to caXchange
+2011-03-30 15:33:41,440 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Elapsed time : 3 seconds
+2011-03-30 15:33:41,440 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Checking caXchange for response
+2011-03-30 15:33:41,578 INFO [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Response not yet ready. Waiting...
+2011-03-30 15:33:47,324 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Elapsed time : 9 seconds
+2011-03-30 15:33:47,324 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Checking caXchange for response
+2011-03-30 15:33:47,518 INFO [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Response not yet ready. Waiting...
+2011-03-30 15:33:50,528 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Elapsed time : 12 seconds
+2011-03-30 15:33:50,528 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Checking caXchange for response
+
+----------------
+
+2011-03-30 15:34:16,006 INFO [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Response not yet ready. Waiting...
+2011-03-30 15:34:21,786 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Elapsed time : 43 seconds
+2011-03-30 15:34:21,788 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Checking caXchange for response
+2011-03-30 15:34:21,972 INFO [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Response not yet ready. Waiting...
+2011-03-30 15:34:24,983 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Elapsed time : 46 seconds
+2011-03-30 15:34:24,983 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Checking caXchange for response
+2011-03-30 15:34:25,408 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Received response from caXchange
+2011-03-30 15:34:25,409 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - caXchange Response follows.....
+
+2011-03-30 15:34:25,409 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - gov.nih.nci.caxchange.Response@6702658
+2011-03-30 15:34:25,409 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Received response from caXchange for externalId20b16581-a01c-4419-8d70-2fe8278a2ca4
+2011-03-30 15:34:25,409 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Setting authentication object in SecurityContext.
+2011-03-30 15:34:25,409 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Received failure from caXchange
+2011-03-30 15:34:25,409 DEBUG [edu.duke.cabig.c3pr.utils.DefaultCCTSMessageWorkflowCallbackFactory] - Recording send failed for objectId20b16581-a01c-4419-8d70-2fe8278a2ca4
+2011-03-30 15:34:25,474 DEBUG [edu.duke.cabig.c3pr.infrastructure.CCTSNotificationsPersistenceListener] - LocalStudy create/update detected, getting ready to broadcast notification to caTissue and others.
+2011-03-30 15:34:25,474 INFO [edu.duke.cabig.c3pr.infrastructure.CCTSNotificationsPersistenceListener] - Getting ready to broadcast a notification for a LocalStudy with Grid Id of 20b16581-a01c-4419-8d70-2fe8278a2ca4
+2011-03-30 15:34:25,930 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Using delegated crential provider to set credentials
+2011-03-30 15:34:25,930 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Using delegated crential provider to set credentials
+2011-03-30 15:34:25,937 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Sending message to caXchange
+2011-03-30 15:34:25,944 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - looking at caXchange error..
+2011-03-30 15:34:25,944 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - caXchange Error is null....
+2011-03-30 15:34:25,944 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - looking at aplication level error..
+2011-03-30 15:34:25,944 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - looking at aplication LabViewer..
+2011-03-30 15:34:25,944 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Found CTODS response. Processing...
+2011-03-30 15:34:25,956 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - App:CTODS
+2011-03-30 15:34:25,956 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Error is null
+2011-03-30 15:34:25,956 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - looking at aplication psc..
+2011-03-30 15:34:25,956 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Found PSC response. Processing...
+2011-03-30 15:34:25,956 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - App:PSC
+2011-03-30 15:34:25,956 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Error: org.springframework.dao.DataIntegrityViolationException: could not insert: [edu.northwestern.bioinformatics.studycalendar.domain.Study]; nested exception is org.hibernate.exception.ConstraintViolationException: could not insert: [edu.northwestern.bioinformatics.studycalendar.domain.Study]
+2011-03-30 15:34:25,956 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Found error in response : 101 : org.springframework.dao.DataIntegrityViolationException: could not insert: [edu.northwestern.bioinformatics.studycalendar.domain.Study]; nested exception is org.hibernate.exception.ConstraintViolationException: could not insert: [edu.northwestern.bioinformatics.studycalendar.domain.Study]
+2011-03-30 15:34:25,956 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - looking at aplication caAERS..
+2011-03-30 15:34:25,956 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Found caAERS response. Processing...
+2011-03-30 15:34:25,956 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - App:CAAERS
+2011-03-30 15:34:25,956 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Error is null
+2011-03-30 15:34:25,956 DEBUG [edu.duke.cabig.c3pr.utils.DefaultCCTSMessageWorkflowCallbackFactory] - Recording error for objectId20b16581-a01c-4419-8d70-2fe8278a2ca4
+2011-03-30 15:34:25,974 DEBUG [edu.duke.cabig.c3pr.utils.DefaultCCTSMessageWorkflowCallbackFactory] - Built Error String to Store : %%%%Psc||||101 : org.springframework.dao.DataIntegrityViolationException: could not insert: [edu.northwestern.bioinformatics.studycalendar.domain.Study]; nested exception is org.hibernate.exception.ConstraintViolationException: could not insert: [edu.northwestern.bioinformatics.studycalendar.domain.Study]%%%%
+2011-03-30 15:34:26,003 DEBUG [edu.duke.cabig.c3pr.infrastructure.CCTSNotificationsPersistenceListener] - LocalStudy create/update detected, getting ready to broadcast notification to caTissue and others.
+2011-03-30 15:34:26,004 INFO [edu.duke.cabig.c3pr.infrastructure.CCTSNotificationsPersistenceListener] - Getting ready to broadcast a notification for a LocalStudy with Grid Id of 20b16581-a01c-4419-8d70-2fe8278a2ca4
+2011-03-30 15:34:33,673 DEBUG [edu.duke.cabig.c3pr.esb.impl.CaXchangeMessageBroadcasterImpl] - Killing listening thread
+
+----------------
+
+
+
+
+
+
+

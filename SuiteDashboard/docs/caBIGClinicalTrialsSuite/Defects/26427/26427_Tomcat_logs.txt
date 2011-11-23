@@ -1,0 +1,1048 @@
+
+2010-02-09 11:43:48,098 DEBUG [org.jasig.cas.client.authentication.AuthenticationFilter] - removing gateway attribute from session
+2010-02-09 11:43:48,098 DEBUG [org.displaytag.filter.ResponseOverrideFilter] - Filter has been called, but PARAMETER_EXPORTING parameter has not been found.
+2010-02-09 11:43:48,098 DEBUG [org.apache.struts.util.RequestUtils] - Get module name for path /loadToCTMS.do
+2010-02-09 11:43:48,098 DEBUG [org.apache.struts.util.RequestUtils] - Module name found: default
+2010-02-09 11:43:48,098 DEBUG [org.apache.struts.action.RequestProcessor] - Processing a 'POST' for path '/loadToCTMS'
+2010-02-09 11:43:48,098 DEBUG [org.apache.struts.util.RequestUtils] -  Looking for ActionForm bean instance in scope 'session' under attribute key 'LabActivitiesSearchResultForm'
+2010-02-09 11:43:48,098 DEBUG [org.apache.struts.util.RequestUtils] -  Recycling existing ActionForm instance of class 'gov.nih.nci.caxchange.ctom.viewer.forms.LabActivitiesSearchResultForm'
+2010-02-09 11:43:48,098 DEBUG [org.apache.struts.action.RequestProcessor] -  Storing ActionForm bean instance in scope 'session' under attribute key 'LabActivitiesSearchResultForm'
+2010-02-09 11:43:48,098 DEBUG [org.apache.struts.action.RequestProcessor] -  Populating bean properties from this request
+2010-02-09 11:43:48,099 DEBUG [org.apache.struts.action.RequestProcessor] -  Validating input form properties
+2010-02-09 11:43:48,099 DEBUG [org.apache.struts.action.RequestProcessor] -  Looking for Action instance for class gov.nih.nci.caxchange.ctom.viewer.actions.LoadToCTMSAction
+2010-02-09 11:43:48,099 INFO [gov.nih.nci.caxchange.ctom.viewer.actions.LoadToCTMSAction] - The credential EPR: <ns1:DelegatedCredentialReference xmlns:ns1="http://cds.gaards.cagrid.org/CredentialDelegationService/DelegatedCredential/types">
+ <ns2:EndpointReference xmlns:ns2="http://schemas.xmlsoap.org/ws/2004/03/addressing">
+  <ns2:Address>https://cagrid-cds-stage.nci.nih.gov:8443/wsrf/services/cagrid/DelegatedCredential</ns2:Address>
+  <ns2:ReferenceProperties>
+   <ns2:DelegatedCredentialKey xmlns:ns2="http://cds.gaards.cagrid.org/CredentialDelegationService/DelegatedCredential">
+    <ns3:delegationId xmlns:ns3="http://gaards.cagrid.org/cds">3607</ns3:delegationId>
+   </ns2:DelegatedCredentialKey>
+  </ns2:ReferenceProperties>
+  <ns2:ReferenceParameters/>
+ </ns2:EndpointReference>
+</ns1:DelegatedCredentialReference>
+
+2010-02-09 11:43:48,101 INFO [gov.nih.nci.caxchange.ctom.viewer.actions.LoadToCTMSAction] - The credential : /O=caBIG/OU=caGrid/OU=Stage LOA1/OU=Dorian/CN=ccts_qa
+2010-02-09 11:43:48,137 DEBUG [org.globus.wsrf.impl.security.authentication.secureconv.SecContextHandler] - Enter: constructor
+2010-02-09 11:43:48,138 DEBUG [org.globus.wsrf.impl.security.authentication.ClientPropertiesHandler] - Descriptor file name null
+2010-02-09 11:43:48,138 DEBUG [org.globus.wsrf.impl.security.authentication.ClientPropertiesHandler] - Descriptor is null
+2010-02-09 11:43:48,138 DEBUG [org.globus.wsrf.impl.security.authentication.securemsg.X509SignHandler] - Signature not requested. null
+2010-02-09 11:43:48,138 DEBUG [org.globus.wsrf.impl.security.authentication.UsernameHandler] - User name is not set
+2010-02-09 11:43:48,138 DEBUG [org.globus.wsrf.impl.security.authentication.secureconv.SecContextHandler] - Enter: invoke
+2010-02-09 11:43:48,138 DEBUG [org.globus.wsrf.impl.security.authentication.secureconv.SecContextHandler] - Exit: invoke
+2010-02-09 11:43:48,138 DEBUG [org.globus.wsrf.impl.security.authentication.secureconv.GSSHandler] - Enter: secure
+2010-02-09 11:43:48,138 DEBUG [org.globus.wsrf.impl.security.authentication.secureconv.GSSHandler] - Request msgSecType null
+2010-02-09 11:43:48,138 DEBUG [org.globus.wsrf.impl.security.authentication.secureconv.GSSHandler] - No msg security type set.
+2010-02-09 11:43:48,139 DEBUG [org.globus.wsrf.handlers.MessageLoggingHandler] - SOAPEnvelope: <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/03/addressing"><soapenv:Header><wsa:MessageID soapenv:mustUnderstand="0">uuid:4b9188a0-159a-11df-bf00-e301835cf86a</wsa:MessageID><wsa:To soapenv:mustUnderstand="0">https://ncias-q291-v.nci.nih.gov:28443/wsrf-caxchange/services/cagrid/CaXchangeRequestProcessor</wsa:To><wsa:Action soapenv:mustUnderstand="0">http://security.introduce.cagrid.nci.nih.gov/ServiceSecurity/GetServiceSecurityMetadataRequest</wsa:Action><wsa:From soapenv:mustUnderstand="0"><wsa:Address>http://schemas.xmlsoap.org/ws/2004/03/addressing/role/anonymous</wsa:Address></wsa:From></soapenv:Header><soapenv:Body><GetServiceSecurityMetadataRequest xmlns="http://security.introduce.cagrid.nci.nih.gov/ServiceSecurity"/></soapenv:Body></soapenv:Envelope>
+2010-02-09 11:43:48,210 DEBUG [org.globus.wsrf.handlers.MessageLoggingHandler] - SOAPEnvelope: <?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/03/addressing"><soapenv:Header><wsa:MessageID soapenv:mustUnderstand="0">uuid:4b9be8e0-159a-11df-9561-81f16098a9d6</wsa:MessageID><wsa:To soapenv:mustUnderstand="0">http://schemas.xmlsoap.org/ws/2004/03/addressing/role/anonymous</wsa:To><wsa:Action soapenv:mustUnderstand="0">http://security.introduce.cagrid.nci.nih.gov/ServiceSecurity/GetServiceSecurityMetadataResponse</wsa:Action><wsa:From soapenv:mustUnderstand="0"><wsa:Address>https://ncias-q291-v.nci.nih.gov:28443/wsrf-caxchange/services/cagrid/CaXchangeRequestProcessor</wsa:Address></wsa:From><wsa:RelatesTo RelationshipType="wsa:Reply" soapenv:mustUnderstand="0">uuid:4b9188a0-159a-11df-bf00-e301835cf86a</wsa:RelatesTo></soapenv:Header><soapenv:Body><GetServiceSecurityMetadataResponse xmlns="http://security.introduce.cagrid.nci.nih.gov/ServiceSecurity"><ns1:ServiceSecurityMetadata xmlns:ns1="gme://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata.security"><ns1:defaultCommunicationMechanism anonymousPermitted="false"><ns1:GSITransport protectionLevel="privacy"/></ns1:defaultCommunicationMechanism><ns1:operations/></ns1:ServiceSecurityMetadata></GetServiceSecurityMetadataResponse></soapenv:Body></soapenv:Envelope>
+2010-02-09 11:43:48,222 DEBUG [org.globus.wsrf.impl.security.authentication.secureconv.SecContextHandler] - Enter: constructor
+2010-02-09 11:43:48,222 DEBUG [org.globus.wsrf.impl.security.authentication.ClientPropertiesHandler] - Descriptor file name null
+2010-02-09 11:43:48,222 DEBUG [org.globus.wsrf.impl.security.authentication.ClientPropertiesHandler] - Descriptor is null
+2010-02-09 11:43:48,223 DEBUG [org.globus.wsrf.impl.security.authentication.securemsg.X509SignHandler] - Signature not requested. null
+2010-02-09 11:43:48,223 DEBUG [org.globus.wsrf.impl.security.authentication.UsernameHandler] - User name is not set
+2010-02-09 11:43:48,223 DEBUG [org.globus.wsrf.impl.security.authentication.secureconv.SecContextHandler] - Enter: invoke
+2010-02-09 11:43:48,223 DEBUG [org.globus.wsrf.impl.security.authentication.secureconv.SecContextHandler] - Exit: invoke
+2010-02-09 11:43:48,223 DEBUG [org.globus.wsrf.impl.security.authentication.secureconv.GSSHandler] - Enter: secure
+2010-02-09 11:43:48,223 DEBUG [org.globus.wsrf.impl.security.authentication.secureconv.GSSHandler] - Request msgSecType null
+2010-02-09 11:43:48,223 DEBUG [org.globus.wsrf.impl.security.authentication.secureconv.GSSHandler] - No msg security type set.
+2010-02-09 11:43:48,233 DEBUG [org.globus.wsrf.handlers.MessageLoggingHandler] - SOAPEnvelope: <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/03/addressing"><soapenv:Header><wsa:MessageID soapenv:mustUnderstand="0">uuid:4b9e59e0-159a-11df-bf00-e301835cf86a</wsa:MessageID><wsa:To soapenv:mustUnderstand="0">https://ncias-q291-v.nci.nih.gov:28443/wsrf-caxchange/services/cagrid/CaXchangeRequestProcessor</wsa:To><wsa:Action soapenv:mustUnderstand="0">http://caxchange.cagrid.nci.nih.gov/CaXchangeRequestProcessor/ProcessRequestAsynchronouslyRequest</wsa:Action><wsa:From soapenv:mustUnderstand="0"><wsa:Address>http://schemas.xmlsoap.org/ws/2004/03/addressing/role/anonymous</wsa:Address></wsa:From></soapenv:Header><soapenv:Body><ProcessRequestAsynchronouslyRequest xmlns="http://caxchange.cagrid.nci.nih.gov/CaXchangeRequestProcessor"><caXchangeRequestMessage><ns1:caXchangeRequestMessage xmlns:ns1="http://caXchange.nci.nih.gov/messaging"><ns1:metadata><ns1:transactionControl xsi:nil="true"/><ns1:serviceType>LOAD_LAB_TO_CDMS</ns1:serviceType><ns1:externalIdentifier>CTODS</ns1:externalIdentifier><ns1:credentials><ns1:userName>ccts_qa</ns1:userName><ns1:delegatedCredentialReference>&lt;ns1:DelegatedCredentialReference xmlns:ns1=&quot;http://cds.gaards.cagrid.org/CredentialDelegationService/DelegatedCredential/types&quot;&gt;
+ &lt;ns2:EndpointReference xmlns:ns2=&quot;http://schemas.xmlsoap.org/ws/2004/03/addressing&quot;&gt;
+  &lt;ns2:Address&gt;https://cagrid-cds-stage.nci.nih.gov:8443/wsrf/services/cagrid/DelegatedCredential&lt;/ns2:Address&gt;
+  &lt;ns2:ReferenceProperties&gt;
+   &lt;ns2:DelegatedCredentialKey xmlns:ns2=&quot;http://cds.gaards.cagrid.org/CredentialDelegationService/DelegatedCredential&quot;&gt;
+    &lt;ns3:delegationId xmlns:ns3=&quot;http://gaards.cagrid.org/cds&quot;&gt;3607&lt;/ns3:delegationId&gt;
+   &lt;/ns2:DelegatedCredentialKey&gt;
+  &lt;/ns2:ReferenceProperties&gt;
+  &lt;ns2:ReferenceParameters/&gt;
+ &lt;/ns2:EndpointReference&gt;
+&lt;/ns1:DelegatedCredentialReference&gt;
+</ns1:delegatedCredentialReference></ns1:credentials></ns1:metadata><ns1:request><ns1:businessMessagePayload><ns1:xmlSchemaDefinition>gme://ccts.cabig/1.0/gov.nih.nci.cabig.ccts.domain.loadlabs</ns1:xmlSchemaDefinition><ns2:LoadLabsRequest xmlns:ns2="gme://ccts.cabig/1.0/gov.nih.nci.cabig.ccts.domain.loadlabs"><ns2:LabResult><ns2:comment xsi:nil="true"/><ns2:confidentiality xsi:nil="true"/><ns2:reportedDateTime>2008-04-30T02:28:00.000Z</ns2:reportedDateTime><ns2:uncertainty xsi:nil="true"/><ns2:asCollectedIndicator>false</ns2:asCollectedIndicator><ns2:numericPrecision>0</ns2:numericPrecision><ns2:numericResult>0.7</ns2:numericResult><ns2:numericUnit>mg/dL</ns2:numericUnit><ns2:referenceRangeComment xsi:nil="true"/><ns2:referenceRangeHigh>1.0</ns2:referenceRangeHigh><ns2:referenceRangeLow>0.0</ns2:referenceRangeLow><ns2:referenceTextList xsi:nil="true"/><ns2:reportedResultStatus xsi:nil="true"/><ns2:textResult xsi:nil="true"/><ns2:StudySubject><ns2:informedConsentSignatureText xsi:nil="true"/><ns2:status xsi:nil="true"/><ns2:statusEndDate xsi:nil="true"/><ns2:statusStartDate xsi:nil="true"/><ns2:studySubjectState xsi:nil="true"/><ns2:studySubjectStateDate xsi:nil="true"/><ns2:subgroup xsi:nil="true"/><ns2:PerformedActivity><ns2:category xsi:nil="true"/><ns2:name>CREATININE</ns2:name><ns2:status xsi:nil="true"/><ns2:statusEndDate xsi:nil="true"/><ns2:statusStartDate xsi:nil="true"/><ns2:performedEndDateTime xsi:nil="true"/><ns2:performedReason xsi:nil="true"/><ns2:performedStartDateTime xsi:nil="true"/><ns2:ScheduledActivity xsi:nil="true"/><ns2:scheduledActivity2 xsi:nil="true"/></ns2:PerformedActivity><ns2:PerformedStudy><ns2:documentationType xsi:nil="true"/><ns2:revision xsi:nil="true"/><ns2:title xsi:nil="true"/><ns2:Documentation><ns2:documentationType xsi:nil="true"/><ns2:revision xsi:nil="true"/><ns2:title xsi:nil="true"/><ns2:II><ns2:assigningAuthorityName>CTODS</ns2:assigningAuthorityName><ns2:displayble>false</ns2:displayble><ns2:extension>STUDY:CCTS_QA_08</ns2:extension><ns2:root>C3D</ns2:root></ns2:II></ns2:Documentation><ns2:actualAccrualNumber>0</ns2:actualAccrualNumber><ns2:PlannedStudy xsi:nil="true"/></ns2:PerformedStudy><ns2:StudySite xsi:nil="true"/><ns2:Participant><ns2:confidentialityIndicator>false</ns2:confidentialityIndicator><ns2:paymentMethod xsi:nil="true"/><ns2:II><ns2:assigningAuthorityName>CTODS</ns2:assigningAuthorityName><ns2:displayble>false</ns2:displayble><ns2:extension>MRN:12-54-54-7</ns2:extension><ns2:root>C3D</ns2:root></ns2:II></ns2:Participant><ns2:II><ns2:assigningAuthorityName>CTODS</ns2:assigningAuthorityName><ns2:displayble>false</ns2:displayble><ns2:extension>PATIENTPOSITION:12-54-54-7</ns2:extension><ns2:root>C3D</ns2:root></ns2:II></ns2:StudySubject></ns2:LabResult></ns2:LoadLabsRequest></ns1:businessMessagePayload></ns1:request></ns1:caXchangeRequestMessage></caXchangeRequestMessage></ProcessRequestAsynchronouslyRequest></soapenv:Body></soapenv:Envelope>
+2010-02-09 11:43:48,353 DEBUG [org.globus.wsrf.handlers.MessageLoggingHandler] - SOAPEnvelope: <?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/03/addressing"><soapenv:Header><wsa:MessageID soapenv:mustUnderstand="0">uuid:4bb16cb0-159a-11df-9561-81f16098a9d6</wsa:MessageID><wsa:To soapenv:mustUnderstand="0">http://schemas.xmlsoap.org/ws/2004/03/addressing/role/anonymous</wsa:To><wsa:Action soapenv:mustUnderstand="0">http://caxchange.cagrid.nci.nih.gov/CaXchangeRequestProcessor/ProcessRequestAsynchronouslyResponse</wsa:Action><wsa:From soapenv:mustUnderstand="0"><wsa:Address>https://ncias-q291-v.nci.nih.gov:28443/wsrf-caxchange/services/cagrid/CaXchangeRequestProcessor</wsa:Address></wsa:From><wsa:RelatesTo RelationshipType="wsa:Reply" soapenv:mustUnderstand="0">uuid:4b9e59e0-159a-11df-bf00-e301835cf86a</wsa:RelatesTo></soapenv:Header><soapenv:Body><ProcessRequestAsynchronouslyResponse xmlns="http://caxchange.cagrid.nci.nih.gov/CaXchangeRequestProcessor"><ns1:CaXchangeResponseServiceReference xmlns:ns1="http://caxchange.cagrid.nci.nih.gov/CaXchangeRequestProcessor/Context/types"><wsa:EndpointReference><wsa:Address>https://ncias-q291-v.nci.nih.gov:28443/wsrf-caxchange/services/cagrid/CaXchangeResponseService</wsa:Address><wsa:ReferenceProperties><ns2:CaXchangeResponseServiceResultsKey xmlns:ns2="http://caxchange.cagrid.nci.nih.gov/CaXchangeRequestProcessor/Context">4bae8680-159a-11df-9561-81f16098a9d6</ns2:CaXchangeResponseServiceResultsKey></wsa:ReferenceProperties><wsa:ReferenceParameters/></wsa:EndpointReference></ns1:CaXchangeResponseServiceReference></ProcessRequestAsynchronouslyResponse></soapenv:Body></soapenv:Envelope>
+2010-02-09 11:43:48,378 DEBUG [org.globus.wsrf.impl.security.authentication.secureconv.SecContextHandler] - Enter: constructor
+2010-02-09 11:43:48,379 DEBUG [org.globus.wsrf.impl.security.authentication.ClientPropertiesHandler] - Descriptor file name null
+2010-02-09 11:43:48,379 DEBUG [org.globus.wsrf.impl.security.authentication.ClientPropertiesHandler] - Descriptor is null
+2010-02-09 11:43:48,380 DEBUG [org.globus.wsrf.impl.security.authentication.securemsg.X509SignHandler] - Signature not requested. null
+2010-02-09 11:43:48,380 DEBUG [org.globus.wsrf.impl.security.authentication.UsernameHandler] - User name is not set
+2010-02-09 11:43:48,380 DEBUG [org.globus.wsrf.impl.security.authentication.secureconv.SecContextHandler] - Enter: invoke
+2010-02-09 11:43:48,380 DEBUG [org.globus.wsrf.impl.security.authentication.secureconv.SecContextHandler] - Exit: invoke
+2010-02-09 11:43:48,380 DEBUG [org.globus.wsrf.impl.security.authentication.secureconv.GSSHandler] - Enter: secure
+2010-02-09 11:43:48,380 DEBUG [org.globus.wsrf.impl.security.authentication.secureconv.GSSHandler] - Request msgSecType null
+2010-02-09 11:43:48,380 DEBUG [org.globus.wsrf.impl.security.authentication.secureconv.GSSHandler] - No msg security type set.
+2010-02-09 11:43:48,380 DEBUG [org.globus.wsrf.handlers.MessageLoggingHandler] - SOAPEnvelope: <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/03/addressing"><soapenv:Header><wsa:MessageID soapenv:mustUnderstand="0">uuid:4bb627a0-159a-11df-bf00-e301835cf86a</wsa:MessageID><wsa:To soapenv:mustUnderstand="0">https://ncias-q291-v.nci.nih.gov:28443/wsrf-caxchange/services/cagrid/CaXchangeResponseService</wsa:To><wsa:Action soapenv:mustUnderstand="0">http://security.introduce.cagrid.nci.nih.gov/ServiceSecurity/GetServiceSecurityMetadataRequest</wsa:Action><wsa:From soapenv:mustUnderstand="0"><wsa:Address>http://schemas.xmlsoap.org/ws/2004/03/addressing/role/anonymous</wsa:Address></wsa:From><ns2:CaXchangeResponseServiceResultsKey xmlns:ns2="http://caxchange.cagrid.nci.nih.gov/CaXchangeRequestProcessor/Context" soapenv:mustUnderstand="0">4bae8680-159a-11df-9561-81f16098a9d6</ns2:CaXchangeResponseServiceResultsKey></soapenv:Header><soapenv:Body><GetServiceSecurityMetadataRequest xmlns="http://security.introduce.cagrid.nci.nih.gov/ServiceSecurity"/></soapenv:Body></soapenv:Envelope>
+2010-02-09 11:43:48,451 DEBUG [org.globus.wsrf.handlers.MessageLoggingHandler] - SOAPEnvelope: <?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/03/addressing"><soapenv:Header><wsa:MessageID soapenv:mustUnderstand="0">uuid:4bc087e0-159a-11df-9561-81f16098a9d6</wsa:MessageID><wsa:To soapenv:mustUnderstand="0">http://schemas.xmlsoap.org/ws/2004/03/addressing/role/anonymous</wsa:To><wsa:Action soapenv:mustUnderstand="0">http://security.introduce.cagrid.nci.nih.gov/ServiceSecurity/GetServiceSecurityMetadataResponse</wsa:Action><wsa:From soapenv:mustUnderstand="0" xmlns:ns2="http://caxchange.cagrid.nci.nih.gov/CaXchangeRequestProcessor/Context"><wsa:Address>https://ncias-q291-v.nci.nih.gov:28443/wsrf-caxchange/services/cagrid/CaXchangeResponseService</wsa:Address><wsa:ReferenceProperties><ns2:CaXchangeResponseServiceResultsKey soapenv:mustUnderstand="0">4bae8680-159a-11df-9561-81f16098a9d6</ns2:CaXchangeResponseServiceResultsKey></wsa:ReferenceProperties></wsa:From><wsa:RelatesTo RelationshipType="wsa:Reply" soapenv:mustUnderstand="0">uuid:4bb627a0-159a-11df-bf00-e301835cf86a</wsa:RelatesTo></soapenv:Header><soapenv:Body><GetServiceSecurityMetadataResponse xmlns="http://security.introduce.cagrid.nci.nih.gov/ServiceSecurity"><ns1:ServiceSecurityMetadata xmlns:ns1="gme://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata.security"><ns1:defaultCommunicationMechanism anonymousPermitted="false"><ns1:GSITransport protectionLevel="privacy"/></ns1:defaultCommunicationMechanism><ns1:operations/></ns1:ServiceSecurityMetadata></GetServiceSecurityMetadataResponse></soapenv:Body></soapenv:Envelope>
+2010-02-09 11:43:48,460 DEBUG [org.globus.wsrf.impl.security.authentication.secureconv.SecContextHandler] - Enter: constructor
+2010-02-09 11:43:48,462 DEBUG [org.globus.wsrf.impl.security.authentication.ClientPropertiesHandler] - Descriptor file name null
+2010-02-09 11:43:48,462 DEBUG [org.globus.wsrf.impl.security.authentication.ClientPropertiesHandler] - Descriptor is null
+2010-02-09 11:43:48,462 DEBUG [org.globus.wsrf.impl.security.authentication.securemsg.X509SignHandler] - Signature not requested. null
+2010-02-09 11:43:48,462 DEBUG [org.globus.wsrf.impl.security.authentication.UsernameHandler] - User name is not set
+2010-02-09 11:43:48,462 DEBUG [org.globus.wsrf.impl.security.authentication.secureconv.SecContextHandler] - Enter: invoke
+2010-02-09 11:43:48,462 DEBUG [org.globus.wsrf.impl.security.authentication.secureconv.SecContextHandler] - Exit: invoke
+2010-02-09 11:43:48,462 DEBUG [org.globus.wsrf.impl.security.authentication.secureconv.GSSHandler] - Enter: secure
+2010-02-09 11:43:48,462 DEBUG [org.globus.wsrf.impl.security.authentication.secureconv.GSSHandler] - Request msgSecType null
+2010-02-09 11:43:48,462 DEBUG [org.globus.wsrf.impl.security.authentication.secureconv.GSSHandler] - No msg security type set.
+2010-02-09 11:43:48,463 DEBUG [org.globus.wsrf.handlers.MessageLoggingHandler] - SOAPEnvelope: <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/03/addressing"><soapenv:Header><wsa:MessageID soapenv:mustUnderstand="0">uuid:4bc2d1d0-159a-11df-bf00-e301835cf86a</wsa:MessageID><wsa:To soapenv:mustUnderstand="0">https://ncias-q291-v.nci.nih.gov:28443/wsrf-caxchange/services/cagrid/CaXchangeResponseService</wsa:To><wsa:Action soapenv:mustUnderstand="0">http://caxchange.cagrid.nci.nih.gov/CaXchangeRequestProcessor/Context/GetResponseRequest</wsa:Action><wsa:From soapenv:mustUnderstand="0"><wsa:Address>http://schemas.xmlsoap.org/ws/2004/03/addressing/role/anonymous</wsa:Address></wsa:From><ns2:CaXchangeResponseServiceResultsKey xmlns:ns2="http://caxchange.cagrid.nci.nih.gov/CaXchangeRequestProcessor/Context" soapenv:mustUnderstand="0">4bae8680-159a-11df-9561-81f16098a9d6</ns2:CaXchangeResponseServiceResultsKey></soapenv:Header><soapenv:Body><GetResponseRequest xmlns="http://caxchange.cagrid.nci.nih.gov/CaXchangeRequestProcessor/Context"/></soapenv:Body></soapenv:Envelope>
+2010-02-09 11:43:48,585 DEBUG [org.globus.wsrf.handlers.MessageLoggingHandler] - SOAPEnvelope: <?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/03/addressing"><soapenv:Header><wsa:MessageID soapenv:mustUnderstand="0">uuid:4bd32580-159a-11df-9561-81f16098a9d6</wsa:MessageID><wsa:Action soapenv:mustUnderstand="0">http://schemas.xmlsoap.org/ws/2004/03/addressing/fault</wsa:Action><wsa:From soapenv:mustUnderstand="0" xmlns:ns2="http://caxchange.cagrid.nci.nih.gov/CaXchangeRequestProcessor/Context"><wsa:Address>https://ncias-q291-v.nci.nih.gov:28443/wsrf-caxchange/services/cagrid/CaXchangeResponseService</wsa:Address><wsa:ReferenceProperties><ns2:CaXchangeResponseServiceResultsKey soapenv:mustUnderstand="0">4bae8680-159a-11df-9561-81f16098a9d6</ns2:CaXchangeResponseServiceResultsKey></wsa:ReferenceProperties></wsa:From><wsa:RelatesTo RelationshipType="wsa:Reply" soapenv:mustUnderstand="0">uuid:4bc2d1d0-159a-11df-bf00-e301835cf86a</wsa:RelatesTo></soapenv:Header><soapenv:Body><soapenv:Fault><faultcode>soapenv:Server.generalException</faultcode><faultstring>CaXchange response not ready.</faultstring><detail><faultData><ns1:Timestamp xmlns:ns1="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-BaseFaults-1.2-draft-01.xsd">2010-02-09T16:43:48.568Z</ns1:Timestamp><ns2:Originator xmlns:ns2="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-BaseFaults-1.2-draft-01.xsd"><ns3:Address xmlns:ns3="http://schemas.xmlsoap.org/ws/2004/03/addressing">https://ncias-q291-v.nci.nih.gov:28443/wsrf-caxchange/services/cagrid/CaXchangeResponseService</ns3:Address><ns4:ReferenceProperties xmlns:ns4="http://schemas.xmlsoap.org/ws/2004/03/addressing"><ns2:CaXchangeResponseServiceResultsKey soapenv:mustUnderstand="0" xmlns:ns2="http://caxchange.cagrid.nci.nih.gov/CaXchangeRequestProcessor/Context">4bae8680-159a-11df-9561-81f16098a9d6</ns2:CaXchangeResponseServiceResultsKey></ns4:ReferenceProperties><ns5:ReferenceParameters xmlns:ns5="http://schemas.xmlsoap.org/ws/2004/03/addressing"/></ns2:Originator></faultData><ns6:exceptionName xmlns:ns6="http://xml.apache.org/axis/">gov.nih.nci.cagrid.caxchange.context.stubs.types.CaXchangeResponseNotReadyFault</ns6:exceptionName><ns7:stackTrace xmlns:ns7="http://xml.apache.org/axis/">
+        at gov.nih.nci.cagrid.caxchange.context.service.CaXchangeResponseServiceImpl.getResponse(CaXchangeResponseServiceImpl.java:31)
+        at gov.nih.nci.cagrid.caxchange.context.service.globus.CaXchangeResponseServiceProviderImpl.getResponse(CaXchangeResponseServiceProviderImpl.java:31)
+        at sun.reflect.GeneratedMethodAccessor582.invoke(Unknown Source)
+        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+        at java.lang.reflect.Method.invoke(Method.java:585)
+        at org.apache.axis.providers.java.RPCProvider.invokeMethod(RPCProvider.java:384)
+        at org.globus.axis.providers.RPCProvider.invokeMethodSub(RPCProvider.java:107)
+        at org.globus.axis.providers.RPCProvider.invokeMethod(RPCProvider.java:90)
+        at org.apache.axis.providers.java.RPCProvider.processMessage(RPCProvider.java:281)
+        at org.apache.axis.providers.java.JavaProvider.invoke(JavaProvider.java:319)
+        at org.apache.axis.strategies.InvocationStrategy.visit(InvocationStrategy.java:32)
+        at org.apache.axis.SimpleChain.doVisiting(SimpleChain.java:118)
+        at org.apache.axis.SimpleChain.invoke(SimpleChain.java:83)
+        at org.apache.axis.handlers.soap.SOAPService.invoke(SOAPService.java:450)
+        at org.apache.axis.server.AxisServer.invoke(AxisServer.java:285)
+        at org.apache.axis.transport.http.AxisServlet.doPost(AxisServlet.java:697)
+        at javax.servlet.http.HttpServlet.service(HttpServlet.java:647)
+        at org.apache.axis.transport.http.AxisServletBase.service(AxisServletBase.java:327)
+        at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:269)
+        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:188)
+        at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:213)
+        at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:172)
+        at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+        at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:117)
+        at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:108)
+        at org.globus.tomcat.coyote.valves.HTTPSValve55.invoke(HTTPSValve55.java:45)
+        at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:174)
+        at org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:875)
+        at org.apache.coyote.http11.Http11BaseProtocol$Http11ConnectionHandler.processConnection(Http11BaseProtocol.java:665)
+        at org.apache.tomcat.util.net.PoolTcpEndpoint.processSocket(PoolTcpEndpoint.java:528)
+        at org.apache.tomcat.util.net.LeaderFollowerWorkerThread.runIt(LeaderFollowerWorkerThread.java:81)
+        at org.apache.tomcat.util.threads.ThreadPool$ControlRunnable.run(ThreadPool.java:689)
+        at java.lang.Thread.run(Thread.java:595)
+</ns7:stackTrace><ns8:hostname xmlns:ns8="http://xml.apache.org/axis/">ncias-q291-v.nci.nih.gov</ns8:hostname></detail></soapenv:Fault></soapenv:Body></soapenv:Envelope>
+2010-02-09 11:43:48,586 INFO [gov.nih.nci.caxchange.ctom.viewer.actions.LoadToCTMSAction] - No response from caxchange
+AxisFault
+ faultCode: {http://schemas.xmlsoap.org/soap/envelope/}Server.generalException
+ faultSubcode:
+ faultString: CaXchange response not ready.
+ faultActor:
+ faultNode:
+ faultDetail:
+        {}faultData:<ns1:Timestamp xmlns:ns1="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-BaseFaults-1.2-draft-01.xsd">2010-02-09T16:43:48.568Z</ns1:Timestamp><ns2:Originator xmlns:ns2="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-BaseFaults-1.2-draft-01.xsd"><ns3:Address xmlns:ns3="http://schemas.xmlsoap.org/ws/2004/03/addressing">https://ncias-q291-v.nci.nih.gov:28443/wsrf-caxchange/services/cagrid/CaXchangeResponseService</ns3:Address><ns4:ReferenceProperties xmlns:ns4="http://schemas.xmlsoap.org/ws/2004/03/addressing"><ns2:CaXchangeResponseServiceResultsKey soapenv:mustUnderstand="0" xmlns:ns2="http://caxchange.cagrid.nci.nih.gov/CaXchangeRequestProcessor/Context" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">4bae8680-159a-11df-9561-81f16098a9d6</ns2:CaXchangeResponseServiceResultsKey></ns4:ReferenceProperties><ns5:ReferenceParameters xmlns:ns5="http://schemas.xmlsoap.org/ws/2004/03/addressing"/></ns2:Originator>
+        {http://xml.apache.org/axis/}exceptionName:gov.nih.nci.cagrid.caxchange.context.stubs.types.CaXchangeResponseNotReadyFault
+        {http://xml.apache.org/axis/}stackTrace:
+        at gov.nih.nci.cagrid.caxchange.context.service.CaXchangeResponseServiceImpl.getResponse(CaXchangeResponseServiceImpl.java:31)
+        at gov.nih.nci.cagrid.caxchange.context.service.globus.CaXchangeResponseServiceProviderImpl.getResponse(CaXchangeResponseServiceProviderImpl.java:31)
+        at sun.reflect.GeneratedMethodAccessor582.invoke(Unknown Source)
+        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+        at java.lang.reflect.Method.invoke(Method.java:585)
+        at org.apache.axis.providers.java.RPCProvider.invokeMethod(RPCProvider.java:384)
+        at org.globus.axis.providers.RPCProvider.invokeMethodSub(RPCProvider.java:107)
+        at org.globus.axis.providers.RPCProvider.invokeMethod(RPCProvider.java:90)
+        at org.apache.axis.providers.java.RPCProvider.processMessage(RPCProvider.java:281)
+        at org.apache.axis.providers.java.JavaProvider.invoke(JavaProvider.java:319)
+        at org.apache.axis.strategies.InvocationStrategy.visit(InvocationStrategy.java:32)
+        at org.apache.axis.SimpleChain.doVisiting(SimpleChain.java:118)
+        at org.apache.axis.SimpleChain.invoke(SimpleChain.java:83)
+        at org.apache.axis.handlers.soap.SOAPService.invoke(SOAPService.java:450)
+        at org.apache.axis.server.AxisServer.invoke(AxisServer.java:285)
+        at org.apache.axis.transport.http.AxisServlet.doPost(AxisServlet.java:697)
+        at javax.servlet.http.HttpServlet.service(HttpServlet.java:647)
+        at org.apache.axis.transport.http.AxisServletBase.service(AxisServletBase.java:327)
+        at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:269)
+        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:188)
+        at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:213)
+        at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:172)
+        at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+        at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:117)
+        at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:108)
+        at org.globus.tomcat.coyote.valves.HTTPSValve55.invoke(HTTPSValve55.java:45)
+        at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:174)
+        at org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:875)
+        at org.apache.coyote.http11.Http11BaseProtocol$Http11ConnectionHandler.processConnection(Http11BaseProtocol.java:665)
+        at org.apache.tomcat.util.net.PoolTcpEndpoint.processSocket(PoolTcpEndpoint.java:528)
+        at org.apache.tomcat.util.net.LeaderFollowerWorkerThread.runIt(LeaderFollowerWorkerThread.java:81)
+        at org.apache.tomcat.util.threads.ThreadPool$ControlRunnable.run(ThreadPool.java:689)
+        at java.lang.Thread.run(Thread.java:595)
+
+        {http://xml.apache.org/axis/}hostname:ncias-q291-v.nci.nih.gov
+
+CaXchange response not ready.
+        at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+        at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:39)
+        at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:27)
+        at java.lang.reflect.Constructor.newInstance(Constructor.java:494)
+        at java.lang.Class.newInstance0(Class.java:350)
+        at java.lang.Class.newInstance(Class.java:303)
+        at org.apache.axis.message.SOAPFaultBuilder.createFault(SOAPFaultBuilder.java:181)
+        at org.apache.axis.message.SOAPFaultBuilder.endElement(SOAPFaultBuilder.java:128)
+        at org.apache.axis.encoding.DeserializationContext.endElement(DeserializationContext.java:1087)
+        at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.endElement(AbstractSAXParser.java:633)
+        at com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.scanEndElement(XMLNSDocumentScannerImpl.java:719)
+        at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDispatcher.dispatch(XMLDocumentFragmentScannerImpl.java:1685)
+        at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:368)
+        at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:834)
+        at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:764)
+        at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:148)
+        at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1242)
+        at javax.xml.parsers.SAXParser.parse(SAXParser.java:375)
+        at org.apache.axis.encoding.DeserializationContext.parse(DeserializationContext.java:227)
+        at org.apache.axis.SOAPPart.getAsSOAPEnvelope(SOAPPart.java:645)
+        at org.apache.axis.Message.getSOAPEnvelope(Message.java:424)
+        at org.apache.axis.message.addressing.handler.AddressingHandler.processClientResponse(AddressingHandler.java:305)
+        at org.apache.axis.message.addressing.handler.AddressingHandler.invoke(AddressingHandler.java:110)
+        at org.apache.axis.strategies.InvocationStrategy.visit(InvocationStrategy.java:32)
+        at org.apache.axis.SimpleChain.doVisiting(SimpleChain.java:118)
+        at org.apache.axis.SimpleChain.invoke(SimpleChain.java:83)
+        at org.apache.axis.client.AxisClient.invoke(AxisClient.java:190)
+        at org.apache.axis.client.Call.invokeEngine(Call.java:2727)
+        at org.apache.axis.client.Call.invoke(Call.java:2710)
+        at org.apache.axis.client.Call.invoke(Call.java:2386)
+        at org.apache.axis.client.Call.invoke(Call.java:2309)
+        at org.apache.axis.client.Call.invoke(Call.java:1766)
+        at gov.nih.nci.cagrid.caxchange.context.stubs.bindings.CaXchangeResponseServicePortTypeSOAPBindingStub.getResponse(CaXchangeResponseServicePortTypeSOAPBindingStub.java:1181)
+        at gov.nih.nci.cagrid.caxchange.context.client.CaXchangeResponseServiceClient.getResponse(CaXchangeResponseServiceClient.java:83)
+        at gov.nih.nci.caxchange.ctom.viewer.actions.LoadToCTMSAction.loadToCTMS(LoadToCTMSAction.java:448)
+        at gov.nih.nci.caxchange.ctom.viewer.actions.LoadToCTMSAction.execute(LoadToCTMSAction.java:200)
+        at org.apache.struts.action.RequestProcessor.processActionPerform(RequestProcessor.java:484)
+        at org.apache.struts.action.RequestProcessor.process(RequestProcessor.java:274)
+        at org.apache.struts.action.ActionServlet.process(ActionServlet.java:1482)
+        at org.apache.struts.action.ActionServlet.doPost(ActionServlet.java:525)
+        at javax.servlet.http.HttpServlet.service(HttpServlet.java:647)
+        at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:269)
+        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:188)
+        at org.displaytag.filter.ResponseOverrideFilter.doFilter(ResponseOverrideFilter.java:125)
+        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:215)
+        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:188)
+        at org.cagrid.websso.client.filter.CaGridWebSSODelegationLookupFilter.doFilter(CaGridWebSSODelegationLookupFilter.java:53)
+        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:215)
+        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:188)
+        at org.cagrid.websso.client.filter.CaGridWebSSOAttributeLoaderFilter.doFilter(CaGridWebSSOAttributeLoaderFilter.java:39)
+        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:215)
+        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:188)
+        at org.jasig.cas.client.util.HttpServletRequestWrapperFilter.doFilter(HttpServletRequestWrapperFilter.java:50)
+        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:215)
+        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:188)
+        at org.jasig.cas.client.validation.AbstractTicketValidationFilter.doFilter(AbstractTicketValidationFilter.java:167)
+        at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:236)
+        at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:167)
+        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:215)
+        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:188)
+        at org.jasig.cas.client.authentication.AuthenticationFilter.doFilter(AuthenticationFilter.java:111)
+        at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:236)
+        at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:167)
+        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:215)
+        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:188)
+        at org.jasig.cas.client.session.SingleSignOutFilter.doFilter(SingleSignOutFilter.java:99)
+        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:215)
+        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:188)
+        at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:213)
+        at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:172)
+        at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+        at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:117)
+        at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:108)
+        at org.globus.tomcat.coyote.valves.HTTPSValve55.invoke(HTTPSValve55.java:45)
+        at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:174)
+        at org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:875)
+        at org.apache.coyote.http11.Http11BaseProtocol$Http11ConnectionHandler.processConnection(Http11BaseProtocol.java:665)
+        at org.apache.tomcat.util.net.PoolTcpEndpoint.processSocket(PoolTcpEndpoint.java:528)
+        at org.apache.tomcat.util.net.LeaderFollowerWorkerThread.runIt(LeaderFollowerWorkerThread.java:81)
+        at org.apache.tomcat.util.threads.ThreadPool$ControlRunnable.run(ThreadPool.java:689)
+        at java.lang.Thread.run(Thread.java:595)
+2010-02-09 11:43:49,599 DEBUG [org.globus.wsrf.impl.security.authentication.ClientPropertiesHandler] - Descriptor file name null
+2010-02-09 11:43:49,599 DEBUG [org.globus.wsrf.impl.security.authentication.ClientPropertiesHandler] - Descriptor is null
+2010-02-09 11:43:49,599 DEBUG [org.globus.wsrf.impl.security.authentication.securemsg.X509SignHandler] - Signature not requested. null
+2010-02-09 11:43:49,599 DEBUG [org.globus.wsrf.impl.security.authentication.UsernameHandler] - User name is not set
+2010-02-09 11:43:49,599 DEBUG [org.globus.wsrf.impl.security.authentication.secureconv.SecContextHandler] - Enter: invoke
+2010-02-09 11:43:49,599 DEBUG [org.globus.wsrf.impl.security.authentication.secureconv.SecContextHandler] - Exit: invoke
+2010-02-09 11:43:49,599 DEBUG [org.globus.wsrf.impl.security.authentication.secureconv.GSSHandler] - Enter: secure
+2010-02-09 11:43:49,599 DEBUG [org.globus.wsrf.impl.security.authentication.secureconv.GSSHandler] - Request msgSecType null
+2010-02-09 11:43:49,599 DEBUG [org.globus.wsrf.impl.security.authentication.secureconv.GSSHandler] - No msg security type set.
+2010-02-09 11:43:49,600 DEBUG [org.globus.wsrf.handlers.MessageLoggingHandler] - SOAPEnvelope: <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/03/addressing"><soapenv:Header><wsa:MessageID soapenv:mustUnderstand="0">uuid:4c7028d0-159a-11df-bf00-e301835cf86a</wsa:MessageID><wsa:To soapenv:mustUnderstand="0">https://ncias-q291-v.nci.nih.gov:28443/wsrf-caxchange/services/cagrid/CaXchangeResponseService</wsa:To><wsa:Action soapenv:mustUnderstand="0">http://caxchange.cagrid.nci.nih.gov/CaXchangeRequestProcessor/Context/GetResponseRequest</wsa:Action><wsa:From soapenv:mustUnderstand="0"><wsa:Address>http://schemas.xmlsoap.org/ws/2004/03/addressing/role/anonymous</wsa:Address></wsa:From><ns2:CaXchangeResponseServiceResultsKey xmlns:ns2="http://caxchange.cagrid.nci.nih.gov/CaXchangeRequestProcessor/Context" soapenv:mustUnderstand="0">4bae8680-159a-11df-9561-81f16098a9d6</ns2:CaXchangeResponseServiceResultsKey></soapenv:Header><soapenv:Body><GetResponseRequest xmlns="http://caxchange.cagrid.nci.nih.gov/CaXchangeRequestProcessor/Context"/></soapenv:Body></soapenv:Envelope>
+2010-02-09 11:43:49,701 DEBUG [org.globus.wsrf.handlers.MessageLoggingHandler] - SOAPEnvelope: <?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/03/addressing"><soapenv:Header><wsa:MessageID soapenv:mustUnderstand="0">uuid:4c7eced0-159a-11df-9561-81f16098a9d6</wsa:MessageID><wsa:To soapenv:mustUnderstand="0">http://schemas.xmlsoap.org/ws/2004/03/addressing/role/anonymous</wsa:To><wsa:Action soapenv:mustUnderstand="0">http://caxchange.cagrid.nci.nih.gov/CaXchangeRequestProcessor/Context/GetResponseResponse</wsa:Action><wsa:From soapenv:mustUnderstand="0" xmlns:ns2="http://caxchange.cagrid.nci.nih.gov/CaXchangeRequestProcessor/Context"><wsa:Address>https://ncias-q291-v.nci.nih.gov:28443/wsrf-caxchange/services/cagrid/CaXchangeResponseService</wsa:Address><wsa:ReferenceProperties><ns2:CaXchangeResponseServiceResultsKey soapenv:mustUnderstand="0">4bae8680-159a-11df-9561-81f16098a9d6</ns2:CaXchangeResponseServiceResultsKey></wsa:ReferenceProperties></wsa:From><wsa:RelatesTo RelationshipType="wsa:Reply" soapenv:mustUnderstand="0">uuid:4c7028d0-159a-11df-bf00-e301835cf86a</wsa:RelatesTo></soapenv:Header><soapenv:Body><GetResponseResponse xmlns="http://caxchange.cagrid.nci.nih.gov/CaXchangeRequestProcessor/Context"><ns1:caXchangeResponseMessage xmlns:ns1="http://caXchange.nci.nih.gov/messaging"><ns1:responseMetadata><ns1:externalIdentifier>CTODS</ns1:externalIdentifier><ns1:caXchangeIdentifier>4bae8680-159a-11df-9561-81f16098a9d6</ns1:caXchangeIdentifier></ns1:responseMetadata><ns1:response><ns1:responseStatus>FAILURE</ns1:responseStatus><ns1:targetResponse><ns1:targetServiceIdentifier>C3D</ns1:targetServiceIdentifier><ns1:targetServiceOperation/><ns1:targetMessageStatus>ERROR</ns1:targetMessageStatus><ns1:targetError><ns1:errorCode>101</ns1:errorCode><ns1:errorDescription>org.globus.wsrf.security.SecurityException: [SEC]Operation name could not be determined</ns1:errorDescription></ns1:targetError></ns1:targetResponse></ns1:response></ns1:caXchangeResponseMessage></GetResponseResponse></soapenv:Body></soapenv:Envelope>
+2010-02-09 11:43:49,704 INFO [gov.nih.nci.caxchange.ctom.viewer.actions.LoadToCTMSAction] - caXchange response was FAILURE
+2010-02-09 11:43:49,704 ERROR [gov.nih.nci.caxchange.ctom.viewer.actions.LoadToCTMSAction] - Error sending labs to CDMS
+java.lang.Exception: ERROR:org.globus.wsrf.security.SecurityException: [SEC]Operation name could not be determined
+        at gov.nih.nci.caxchange.ctom.viewer.actions.LoadToCTMSAction.loadToCTMS(LoadToCTMSAction.java:492)
+        at gov.nih.nci.caxchange.ctom.viewer.actions.LoadToCTMSAction.execute(LoadToCTMSAction.java:200)
+        at org.apache.struts.action.RequestProcessor.processActionPerform(RequestProcessor.java:484)
+        at org.apache.struts.action.RequestProcessor.process(RequestProcessor.java:274)
+        at org.apache.struts.action.ActionServlet.process(ActionServlet.java:1482)
+        at org.apache.struts.action.ActionServlet.doPost(ActionServlet.java:525)
+        at javax.servlet.http.HttpServlet.service(HttpServlet.java:647)
+        at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:269)
+        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:188)
+        at org.displaytag.filter.ResponseOverrideFilter.doFilter(ResponseOverrideFilter.java:125)
+        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:215)
+        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:188)
+        at org.cagrid.websso.client.filter.CaGridWebSSODelegationLookupFilter.doFilter(CaGridWebSSODelegationLookupFilter.java:53)
+        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:215)
+        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:188)
+        at org.cagrid.websso.client.filter.CaGridWebSSOAttributeLoaderFilter.doFilter(CaGridWebSSOAttributeLoaderFilter.java:39)
+        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:215)
+        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:188)
+        at org.jasig.cas.client.util.HttpServletRequestWrapperFilter.doFilter(HttpServletRequestWrapperFilter.java:50)
+        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:215)
+        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:188)
+        at org.jasig.cas.client.validation.AbstractTicketValidationFilter.doFilter(AbstractTicketValidationFilter.java:167)
+        at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:236)
+        at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:167)
+        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:215)
+        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:188)
+        at org.jasig.cas.client.authentication.AuthenticationFilter.doFilter(AuthenticationFilter.java:111)
+        at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:236)
+        at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:167)
+        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:215)
+        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:188)
+        at org.jasig.cas.client.session.SingleSignOutFilter.doFilter(SingleSignOutFilter.java:99)
+        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:215)
+        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:188)
+        at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:213)
+        at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:172)
+        at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+        at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:117)
+        at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:108)
+        at org.globus.tomcat.coyote.valves.HTTPSValve55.invoke(HTTPSValve55.java:45)
+        at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:174)
+        at org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:875)
+        at org.apache.coyote.http11.Http11BaseProtocol$Http11ConnectionHandler.processConnection(Http11BaseProtocol.java:665)
+        at org.apache.tomcat.util.net.PoolTcpEndpoint.processSocket(PoolTcpEndpoint.java:528)
+        at org.apache.tomcat.util.net.LeaderFollowerWorkerThread.runIt(LeaderFollowerWorkerThread.java:81)
+        at org.apache.tomcat.util.threads.ThreadPool$ControlRunnable.run(ThreadPool.java:689)
+        at java.lang.Thread.run(Thread.java:595)
+2010-02-09 11:43:49,705 DEBUG [org.apache.struts.tiles.TilesRequestProcessor] - processForwardConfig(Tiles.LabActivities.Detail.Screen, false)
+2010-02-09 11:43:49,705 DEBUG [org.apache.struts.tiles.TilesRequestProcessor] - uri=/WEB-INF/jsp/layout/BaseLayout-searchRes.jsp doInclude=false
+2010-02-09 11:43:49,707 DEBUG [org.apache.struts.taglib.tiles.InsertTag] - insert page='/WEB-INF/jsp/header/OrgHeader.jsp'.
+2010-02-09 11:43:49,708 DEBUG [org.apache.struts.taglib.tiles.InsertTag] - insert page='/WEB-INF/jsp/content/detailScreen/LabActivitiesSearchScreen.jsp'.
+2010-02-09 11:43:49,709 DEBUG [org.apache.struts.util.PropertyMessageResources] - getMessage(en_US,errors.header)
+2010-02-09 11:43:49,710 DEBUG [org.apache.struts.util.PropertyMessageResources] - getMessage(en_US,errors.footer)
+2010-02-09 11:43:49,710 DEBUG [org.apache.struts.util.PropertyMessageResources] - getMessage(en_US,errors.prefix)
+2010-02-09 11:43:49,710 DEBUG [org.apache.struts.util.PropertyMessageResources] - getMessage(en_US,errors.suffix)
+2010-02-09 11:43:49,710 DEBUG [org.apache.struts.util.PropertyMessageResources] - getMessage(en_US,errors.header)
+2010-02-09 11:43:49,710 DEBUG [org.apache.struts.util.PropertyMessageResources] - getMessage(en_US,errors.prefix)
+2010-02-09 11:43:49,710 DEBUG [org.apache.struts.util.PropertyMessageResources] - getMessage(en_US,errors.suffix)
+2010-02-09 11:43:49,710 DEBUG [org.apache.struts.util.PropertyMessageResources] - getMessage(en_US,errors.footer)
+2010-02-09 11:43:49,712 DEBUG [org.displaytag.tags.TableTag] - [labtable] doStartTag called
+2010-02-09 11:43:49,713 DEBUG [org.displaytag.tags.TableTag] - [labtable] setting media [html] in this.pageContext
+2010-02-09 11:43:49,713 DEBUG [org.displaytag.tags.TableTag] - [labtable] doIteration called
+2010-02-09 11:43:49,713 DEBUG [org.displaytag.tags.TableTag] - [labtable] setting attribute "labtable" in pageContext
+2010-02-09 11:43:49,713 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=true (row number=1)
+2010-02-09 11:43:49,713 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=true (row number=1)
+2010-02-09 11:43:49,713 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=true (row number=1)
+2010-02-09 11:43:49,713 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=true (row number=1)
+2010-02-09 11:43:49,713 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=true (row number=1)
+2010-02-09 11:43:49,713 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=true (row number=1)
+2010-02-09 11:43:49,713 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=true (row number=1)
+2010-02-09 11:43:49,713 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=true (row number=1)
+2010-02-09 11:43:49,713 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=true (row number=1)
+2010-02-09 11:43:49,713 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=true (row number=1)
+2010-02-09 11:43:49,713 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=true (row number=1)
+2010-02-09 11:43:49,713 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=true (row number=1)
+2010-02-09 11:43:49,713 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=true (row number=1)
+2010-02-09 11:43:49,714 DEBUG [org.displaytag.tags.TableTag] - [labtable] addColumn HeaderCell[columnNumber=0,title=<img src='images/CheckBox.gif' alt='Select All' id='CheckGif' onclick='SelectAll();return false'/>',beanPropertyName=<null>]
+2010-02-09 11:43:49,714 DEBUG [org.displaytag.tags.ColumnTag] - columnTag.addHeaderToTable() :: first iteration - adding header HeaderCell[columnNumber=0,title=<img src='images/CheckBox.gif' alt='Select All' id='CheckGif' onclick='SelectAll();return false'/>',beanPropertyName=<null>]
+2010-02-09 11:43:49,714 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=true (row number=1)
+2010-02-09 11:43:49,714 DEBUG [org.displaytag.tags.TableTag] - [labtable] addColumn HeaderCell[columnNumber=0,title=Patient Id,beanPropertyName=patientId]
+2010-02-09 11:43:49,714 DEBUG [org.displaytag.tags.ColumnTag] - columnTag.addHeaderToTable() :: first iteration - adding header HeaderCell[columnNumber=1,title=Patient Id,beanPropertyName=patientId]
+2010-02-09 11:43:49,714 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=true (row number=1)
+2010-02-09 11:43:49,714 DEBUG [org.displaytag.tags.TableTag] - [labtable] addColumn HeaderCell[columnNumber=0,title=Site,beanPropertyName=siteId]
+2010-02-09 11:43:49,714 DEBUG [org.displaytag.tags.ColumnTag] - columnTag.addHeaderToTable() :: first iteration - adding header HeaderCell[columnNumber=2,title=Site,beanPropertyName=siteId]
+2010-02-09 11:43:49,714 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=true (row number=1)
+2010-02-09 11:43:49,714 DEBUG [org.displaytag.tags.TableTag] - [labtable] addColumn HeaderCell[columnNumber=0,title=Date / Time,beanPropertyName=date]
+2010-02-09 11:43:49,714 DEBUG [org.displaytag.tags.ColumnTag] - columnTag.addHeaderToTable() :: first iteration - adding header HeaderCell[columnNumber=3,title=Date / Time,beanPropertyName=date]
+2010-02-09 11:43:49,714 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=true (row number=1)
+2010-02-09 11:43:49,714 DEBUG [org.displaytag.tags.TableTag] - [labtable] addColumn HeaderCell[columnNumber=0,title=Lab Test,beanPropertyName=labTestId]
+2010-02-09 11:43:49,714 DEBUG [org.displaytag.tags.ColumnTag] - columnTag.addHeaderToTable() :: first iteration - adding header HeaderCell[columnNumber=4,title=Lab Test,beanPropertyName=labTestId]
+2010-02-09 11:43:49,714 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=true (row number=1)
+2010-02-09 11:43:49,714 DEBUG [org.displaytag.tags.TableTag] - [labtable] addColumn HeaderCell[columnNumber=0,title=Text Result,beanPropertyName=textResult]
+2010-02-09 11:43:49,714 DEBUG [org.displaytag.tags.ColumnTag] - columnTag.addHeaderToTable() :: first iteration - adding header HeaderCell[columnNumber=5,title=Text Result,beanPropertyName=textResult]
+2010-02-09 11:43:49,715 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=true (row number=1)
+2010-02-09 11:43:49,715 DEBUG [org.displaytag.tags.TableTag] - [labtable] addColumn HeaderCell[columnNumber=0,title=Numeric Result,beanPropertyName=numericResult]
+2010-02-09 11:43:49,715 DEBUG [org.displaytag.tags.ColumnTag] - columnTag.addHeaderToTable() :: first iteration - adding header HeaderCell[columnNumber=6,title=Numeric Result,beanPropertyName=numericResult]
+2010-02-09 11:43:49,715 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=true (row number=1)
+2010-02-09 11:43:49,715 DEBUG [org.displaytag.tags.TableTag] - [labtable] addColumn HeaderCell[columnNumber=0,title=Unit Of Measure,beanPropertyName=unitOfMeasure]
+2010-02-09 11:43:49,715 DEBUG [org.displaytag.tags.ColumnTag] - columnTag.addHeaderToTable() :: first iteration - adding header HeaderCell[columnNumber=7,title=Unit Of Measure,beanPropertyName=unitOfMeasure]
+2010-02-09 11:43:49,715 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=true (row number=1)
+2010-02-09 11:43:49,715 DEBUG [org.displaytag.tags.TableTag] - [labtable] addColumn HeaderCell[columnNumber=0,title=Lower Limit,beanPropertyName=lowRange]
+2010-02-09 11:43:49,715 DEBUG [org.displaytag.tags.ColumnTag] - columnTag.addHeaderToTable() :: first iteration - adding header HeaderCell[columnNumber=8,title=Lower Limit,beanPropertyName=lowRange]
+2010-02-09 11:43:49,715 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=true (row number=1)
+2010-02-09 11:43:49,715 DEBUG [org.displaytag.tags.TableTag] - [labtable] addColumn HeaderCell[columnNumber=0,title=Upper Limit,beanPropertyName=highRange]
+2010-02-09 11:43:49,715 DEBUG [org.displaytag.tags.ColumnTag] - columnTag.addHeaderToTable() :: first iteration - adding header HeaderCell[columnNumber=9,title=Upper Limit,beanPropertyName=highRange]
+2010-02-09 11:43:49,715 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=true (row number=1)
+2010-02-09 11:43:49,715 DEBUG [org.displaytag.tags.TableTag] - [labtable] addColumn HeaderCell[columnNumber=0,title=Sent to CDMS,beanPropertyName=labsToCDMS]
+2010-02-09 11:43:49,715 DEBUG [org.displaytag.tags.ColumnTag] - columnTag.addHeaderToTable() :: first iteration - adding header HeaderCell[columnNumber=10,title=Sent to CDMS,beanPropertyName=labsToCDMS]
+2010-02-09 11:43:49,716 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=true (row number=1)
+2010-02-09 11:43:49,716 DEBUG [org.displaytag.tags.TableTag] - [labtable] addColumn HeaderCell[columnNumber=0,title=Sent to caAERS,beanPropertyName=labsToAE]
+2010-02-09 11:43:49,716 DEBUG [org.displaytag.tags.ColumnTag] - columnTag.addHeaderToTable() :: first iteration - adding header HeaderCell[columnNumber=11,title=Sent to caAERS,beanPropertyName=labsToAE]
+2010-02-09 11:43:49,716 DEBUG [org.displaytag.tags.TableTag] - [labtable] doAfterBody called - iterating on row 1
+2010-02-09 11:43:49,716 DEBUG [org.displaytag.tags.TableTag] - [labtable] doIteration called
+2010-02-09 11:43:49,716 DEBUG [org.displaytag.model.TableModel] - [labtable] adding row Row[rowNumber=1,rowObject=gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@14ec176]
+2010-02-09 11:43:49,716 DEBUG [org.displaytag.tags.TableTag] - [labtable] setting attribute "labtable" in pageContext
+2010-02-09 11:43:49,716 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=2)
+2010-02-09 11:43:49,716 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=2)
+2010-02-09 11:43:49,716 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=2)
+2010-02-09 11:43:49,716 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=2)
+2010-02-09 11:43:49,716 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=2)
+2010-02-09 11:43:49,716 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=2)
+2010-02-09 11:43:49,716 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=2)
+2010-02-09 11:43:49,716 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=2)
+2010-02-09 11:43:49,716 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=2)
+2010-02-09 11:43:49,716 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=2)
+2010-02-09 11:43:49,716 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=2)
+2010-02-09 11:43:49,716 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=2)
+2010-02-09 11:43:49,717 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=2)
+2010-02-09 11:43:49,717 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=2)
+2010-02-09 11:43:49,717 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=2)
+2010-02-09 11:43:49,717 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=2)
+2010-02-09 11:43:49,717 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=2)
+2010-02-09 11:43:49,717 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=2)
+2010-02-09 11:43:49,717 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=2)
+2010-02-09 11:43:49,717 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=2)
+2010-02-09 11:43:49,717 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=2)
+2010-02-09 11:43:49,717 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=2)
+2010-02-09 11:43:49,717 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=2)
+2010-02-09 11:43:49,717 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=2)
+2010-02-09 11:43:49,717 DEBUG [org.displaytag.tags.TableTag] - [labtable] doAfterBody called - iterating on row 2
+2010-02-09 11:43:49,718 DEBUG [org.displaytag.tags.TableTag] - [labtable] doIteration called
+2010-02-09 11:43:49,718 DEBUG [org.displaytag.model.TableModel] - [labtable] adding row Row[rowNumber=2,rowObject=gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@17f35ee]
+2010-02-09 11:43:49,718 DEBUG [org.displaytag.tags.TableTag] - [labtable] setting attribute "labtable" in pageContext
+2010-02-09 11:43:49,718 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=3)
+2010-02-09 11:43:49,718 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=3)
+2010-02-09 11:43:49,718 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=3)
+2010-02-09 11:43:49,718 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=3)
+2010-02-09 11:43:49,718 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=3)
+2010-02-09 11:43:49,718 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=3)
+2010-02-09 11:43:49,718 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=3)
+2010-02-09 11:43:49,718 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=3)
+2010-02-09 11:43:49,718 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=3)
+2010-02-09 11:43:49,718 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=3)
+2010-02-09 11:43:49,718 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=3)
+2010-02-09 11:43:49,718 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=3)
+2010-02-09 11:43:49,718 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=3)
+2010-02-09 11:43:49,718 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=3)
+2010-02-09 11:43:49,718 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=3)
+2010-02-09 11:43:49,718 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=3)
+2010-02-09 11:43:49,718 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=3)
+2010-02-09 11:43:49,718 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=3)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=3)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=3)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=3)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=3)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=3)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=3)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] doAfterBody called - iterating on row 3
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] doIteration called
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.model.TableModel] - [labtable] adding row Row[rowNumber=3,rowObject=gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@11bec9a]
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] setting attribute "labtable" in pageContext
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=4)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=4)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=4)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=4)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=4)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=4)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=4)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=4)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=4)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=4)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=4)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=4)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=4)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=4)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=4)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=4)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=4)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=4)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=4)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=4)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=4)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=4)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=4)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=4)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] doAfterBody called - iterating on row 4
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] doIteration called
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.model.TableModel] - [labtable] adding row Row[rowNumber=4,rowObject=gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@4a7c43]
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] setting attribute "labtable" in pageContext
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=5)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=5)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=5)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=5)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=5)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=5)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=5)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=5)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=5)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=5)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=5)
+2010-02-09 11:43:49,719 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=5)
+2010-02-09 11:43:49,721 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=5)
+2010-02-09 11:43:49,721 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=5)
+2010-02-09 11:43:49,721 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=5)
+2010-02-09 11:43:49,721 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=5)
+2010-02-09 11:43:49,721 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=5)
+2010-02-09 11:43:49,721 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=5)
+2010-02-09 11:43:49,721 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=5)
+2010-02-09 11:43:49,721 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=5)
+2010-02-09 11:43:49,721 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=5)
+2010-02-09 11:43:49,721 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=5)
+2010-02-09 11:43:49,721 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=5)
+2010-02-09 11:43:49,721 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=5)
+2010-02-09 11:43:49,721 DEBUG [org.displaytag.tags.TableTag] - [labtable] doAfterBody called - iterating on row 5
+2010-02-09 11:43:49,721 DEBUG [org.displaytag.tags.TableTag] - [labtable] doIteration called
+2010-02-09 11:43:49,721 DEBUG [org.displaytag.model.TableModel] - [labtable] adding row Row[rowNumber=5,rowObject=gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@241a09]
+2010-02-09 11:43:49,721 DEBUG [org.displaytag.tags.TableTag] - [labtable] setting attribute "labtable" in pageContext
+2010-02-09 11:43:49,722 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=6)
+2010-02-09 11:43:49,722 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=6)
+2010-02-09 11:43:49,722 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=6)
+2010-02-09 11:43:49,722 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=6)
+2010-02-09 11:43:49,722 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=6)
+2010-02-09 11:43:49,722 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=6)
+2010-02-09 11:43:49,722 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=6)
+2010-02-09 11:43:49,722 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=6)
+2010-02-09 11:43:49,722 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=6)
+2010-02-09 11:43:49,722 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=6)
+2010-02-09 11:43:49,722 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=6)
+2010-02-09 11:43:49,722 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=6)
+2010-02-09 11:43:49,722 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=6)
+2010-02-09 11:43:49,722 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=6)
+2010-02-09 11:43:49,722 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=6)
+2010-02-09 11:43:49,722 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=6)
+2010-02-09 11:43:49,722 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=6)
+2010-02-09 11:43:49,722 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=6)
+2010-02-09 11:43:49,722 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=6)
+2010-02-09 11:43:49,722 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=6)
+2010-02-09 11:43:49,722 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=6)
+2010-02-09 11:43:49,722 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=6)
+2010-02-09 11:43:49,723 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=6)
+2010-02-09 11:43:49,723 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=6)
+2010-02-09 11:43:49,723 DEBUG [org.displaytag.tags.TableTag] - [labtable] doAfterBody called - iterating on row 6
+2010-02-09 11:43:49,723 DEBUG [org.displaytag.tags.TableTag] - [labtable] doIteration called
+2010-02-09 11:43:49,723 DEBUG [org.displaytag.model.TableModel] - [labtable] adding row Row[rowNumber=6,rowObject=gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@2963b7]
+2010-02-09 11:43:49,723 DEBUG [org.displaytag.tags.TableTag] - [labtable] setting attribute "labtable" in pageContext
+2010-02-09 11:43:49,723 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=7)
+2010-02-09 11:43:49,723 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=7)
+2010-02-09 11:43:49,723 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=7)
+2010-02-09 11:43:49,723 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=7)
+2010-02-09 11:43:49,723 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=7)
+2010-02-09 11:43:49,723 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=7)
+2010-02-09 11:43:49,723 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=7)
+2010-02-09 11:43:49,723 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=7)
+2010-02-09 11:43:49,723 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=7)
+2010-02-09 11:43:49,723 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=7)
+2010-02-09 11:43:49,723 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=7)
+2010-02-09 11:43:49,723 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=7)
+2010-02-09 11:43:49,723 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=7)
+2010-02-09 11:43:49,723 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=7)
+2010-02-09 11:43:49,723 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=7)
+2010-02-09 11:43:49,723 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=7)
+2010-02-09 11:43:49,723 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=7)
+2010-02-09 11:43:49,724 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=7)
+2010-02-09 11:43:49,724 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=7)
+2010-02-09 11:43:49,724 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=7)
+2010-02-09 11:43:49,724 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=7)
+2010-02-09 11:43:49,724 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=7)
+2010-02-09 11:43:49,724 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=7)
+2010-02-09 11:43:49,724 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=7)
+2010-02-09 11:43:49,724 DEBUG [org.displaytag.tags.TableTag] - [labtable] doAfterBody called - iterating on row 7
+2010-02-09 11:43:49,724 DEBUG [org.displaytag.tags.TableTag] - [labtable] doIteration called
+2010-02-09 11:43:49,724 DEBUG [org.displaytag.model.TableModel] - [labtable] adding row Row[rowNumber=7,rowObject=gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@151b7c7]
+2010-02-09 11:43:49,724 DEBUG [org.displaytag.tags.TableTag] - [labtable] setting attribute "labtable" in pageContext
+2010-02-09 11:43:49,724 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=8)
+2010-02-09 11:43:49,724 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=8)
+2010-02-09 11:43:49,724 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=8)
+2010-02-09 11:43:49,724 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=8)
+2010-02-09 11:43:49,724 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=8)
+2010-02-09 11:43:49,724 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=8)
+2010-02-09 11:43:49,724 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=8)
+2010-02-09 11:43:49,724 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=8)
+2010-02-09 11:43:49,724 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=8)
+2010-02-09 11:43:49,724 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=8)
+2010-02-09 11:43:49,724 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=8)
+2010-02-09 11:43:49,724 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=8)
+2010-02-09 11:43:49,725 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=8)
+2010-02-09 11:43:49,725 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=8)
+2010-02-09 11:43:49,725 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=8)
+2010-02-09 11:43:49,725 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=8)
+2010-02-09 11:43:49,725 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=8)
+2010-02-09 11:43:49,725 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=8)
+2010-02-09 11:43:49,725 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=8)
+2010-02-09 11:43:49,725 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=8)
+2010-02-09 11:43:49,725 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=8)
+2010-02-09 11:43:49,725 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=8)
+2010-02-09 11:43:49,725 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=8)
+2010-02-09 11:43:49,725 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=8)
+2010-02-09 11:43:49,725 DEBUG [org.displaytag.tags.TableTag] - [labtable] doAfterBody called - iterating on row 8
+2010-02-09 11:43:49,725 DEBUG [org.displaytag.tags.TableTag] - [labtable] doIteration called
+2010-02-09 11:43:49,725 DEBUG [org.displaytag.model.TableModel] - [labtable] adding row Row[rowNumber=8,rowObject=gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@1f87dfb]
+2010-02-09 11:43:49,725 DEBUG [org.displaytag.tags.TableTag] - [labtable] setting attribute "labtable" in pageContext
+2010-02-09 11:43:49,725 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=9)
+2010-02-09 11:43:49,725 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=9)
+2010-02-09 11:43:49,725 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=9)
+2010-02-09 11:43:49,725 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=9)
+2010-02-09 11:43:49,725 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=9)
+2010-02-09 11:43:49,726 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=9)
+2010-02-09 11:43:49,726 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=9)
+2010-02-09 11:43:49,726 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=9)
+2010-02-09 11:43:49,726 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=9)
+2010-02-09 11:43:49,726 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=9)
+2010-02-09 11:43:49,726 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=9)
+2010-02-09 11:43:49,726 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=9)
+2010-02-09 11:43:49,726 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=9)
+2010-02-09 11:43:49,726 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=9)
+2010-02-09 11:43:49,726 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=9)
+2010-02-09 11:43:49,726 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=9)
+2010-02-09 11:43:49,726 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=9)
+2010-02-09 11:43:49,726 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=9)
+2010-02-09 11:43:49,726 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=9)
+2010-02-09 11:43:49,726 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=9)
+2010-02-09 11:43:49,726 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=9)
+2010-02-09 11:43:49,726 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=9)
+2010-02-09 11:43:49,726 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=9)
+2010-02-09 11:43:49,726 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=9)
+2010-02-09 11:43:49,726 DEBUG [org.displaytag.tags.TableTag] - [labtable] doAfterBody called - iterating on row 9
+2010-02-09 11:43:49,726 DEBUG [org.displaytag.tags.TableTag] - [labtable] doIteration called
+2010-02-09 11:43:49,727 DEBUG [org.displaytag.model.TableModel] - [labtable] adding row Row[rowNumber=9,rowObject=gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@1171e0a]
+2010-02-09 11:43:49,727 DEBUG [org.displaytag.tags.TableTag] - [labtable] setting attribute "labtable" in pageContext
+2010-02-09 11:43:49,727 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=10)
+2010-02-09 11:43:49,727 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=10)
+2010-02-09 11:43:49,727 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=10)
+2010-02-09 11:43:49,727 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=10)
+2010-02-09 11:43:49,727 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=10)
+2010-02-09 11:43:49,727 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=10)
+2010-02-09 11:43:49,727 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=10)
+2010-02-09 11:43:49,727 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=10)
+2010-02-09 11:43:49,727 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=10)
+2010-02-09 11:43:49,727 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=10)
+2010-02-09 11:43:49,727 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=10)
+2010-02-09 11:43:49,727 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=10)
+2010-02-09 11:43:49,727 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=10)
+2010-02-09 11:43:49,727 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=10)
+2010-02-09 11:43:49,727 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=10)
+2010-02-09 11:43:49,727 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=10)
+2010-02-09 11:43:49,727 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=10)
+2010-02-09 11:43:49,727 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=10)
+2010-02-09 11:43:49,728 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=10)
+2010-02-09 11:43:49,728 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=10)
+2010-02-09 11:43:49,728 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=10)
+2010-02-09 11:43:49,728 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=10)
+2010-02-09 11:43:49,728 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=10)
+2010-02-09 11:43:49,728 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=10)
+2010-02-09 11:43:49,728 DEBUG [org.displaytag.tags.TableTag] - [labtable] doAfterBody called - iterating on row 10
+2010-02-09 11:43:49,728 DEBUG [org.displaytag.tags.TableTag] - [labtable] doIteration called
+2010-02-09 11:43:49,728 DEBUG [org.displaytag.model.TableModel] - [labtable] adding row Row[rowNumber=10,rowObject=gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@b53171]
+2010-02-09 11:43:49,728 DEBUG [org.displaytag.tags.TableTag] - [labtable] setting attribute "labtable" in pageContext
+2010-02-09 11:43:49,728 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=11)
+2010-02-09 11:43:49,728 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=11)
+2010-02-09 11:43:49,728 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=11)
+2010-02-09 11:43:49,728 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=11)
+2010-02-09 11:43:49,728 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=11)
+2010-02-09 11:43:49,728 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=11)
+2010-02-09 11:43:49,728 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=11)
+2010-02-09 11:43:49,728 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=11)
+2010-02-09 11:43:49,728 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=11)
+2010-02-09 11:43:49,728 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=11)
+2010-02-09 11:43:49,728 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=11)
+2010-02-09 11:43:49,728 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=11)
+2010-02-09 11:43:49,728 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=11)
+2010-02-09 11:43:49,728 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=11)
+2010-02-09 11:43:49,728 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=11)
+2010-02-09 11:43:49,729 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=11)
+2010-02-09 11:43:49,729 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=11)
+2010-02-09 11:43:49,729 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=11)
+2010-02-09 11:43:49,729 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=11)
+2010-02-09 11:43:49,729 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=11)
+2010-02-09 11:43:49,729 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=11)
+2010-02-09 11:43:49,729 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=11)
+2010-02-09 11:43:49,729 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=11)
+2010-02-09 11:43:49,729 DEBUG [org.displaytag.tags.TableTag] - [labtable] first iteration=false (row number=11)
+2010-02-09 11:43:49,729 DEBUG [org.displaytag.tags.TableTag] - [labtable] doAfterBody called - iterating on row 11
+2010-02-09 11:43:49,729 DEBUG [org.displaytag.tags.TableTag] - [labtable] doIteration called
+2010-02-09 11:43:49,729 DEBUG [org.displaytag.model.TableModel] - [labtable] adding row Row[rowNumber=11,rowObject=gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@3e9930]
+2010-02-09 11:43:49,729 DEBUG [org.displaytag.tags.TableTag] - [labtable] doIteration() - iterator ended after 11 rows
+2010-02-09 11:43:49,729 DEBUG [org.displaytag.tags.TableTag] - [labtable] doEndTag called
+2010-02-09 11:43:49,729 DEBUG [org.displaytag.model.TableModel] - [labtable] sorting full data
+2010-02-09 11:43:49,729 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@14ec176
+2010-02-09 11:43:49,729 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@14ec176
+2010-02-09 11:43:49,729 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@17f35ee
+2010-02-09 11:43:49,729 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@17f35ee
+2010-02-09 11:43:49,730 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@17f35ee
+2010-02-09 11:43:49,730 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@17f35ee
+2010-02-09 11:43:49,730 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@11bec9a
+2010-02-09 11:43:49,730 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@11bec9a
+2010-02-09 11:43:49,730 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@11bec9a
+2010-02-09 11:43:49,730 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@11bec9a
+2010-02-09 11:43:49,730 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@4a7c43
+2010-02-09 11:43:49,730 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@4a7c43
+2010-02-09 11:43:49,730 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@17f35ee
+2010-02-09 11:43:49,730 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@17f35ee
+2010-02-09 11:43:49,730 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@4a7c43
+2010-02-09 11:43:49,730 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@4a7c43
+2010-02-09 11:43:49,730 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@11bec9a
+2010-02-09 11:43:49,730 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@11bec9a
+2010-02-09 11:43:49,730 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@241a09
+2010-02-09 11:43:49,730 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@241a09
+2010-02-09 11:43:49,730 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@2963b7
+2010-02-09 11:43:49,730 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@2963b7
+2010-02-09 11:43:49,730 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@151b7c7
+2010-02-09 11:43:49,730 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@151b7c7
+2010-02-09 11:43:49,730 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@2963b7
+2010-02-09 11:43:49,730 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@2963b7
+2010-02-09 11:43:49,730 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@1f87dfb
+2010-02-09 11:43:49,730 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@1f87dfb
+2010-02-09 11:43:49,731 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@151b7c7
+2010-02-09 11:43:49,731 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@151b7c7
+2010-02-09 11:43:49,731 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@1f87dfb
+2010-02-09 11:43:49,731 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@1f87dfb
+2010-02-09 11:43:49,731 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@2963b7
+2010-02-09 11:43:49,731 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@2963b7
+2010-02-09 11:43:49,731 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@1171e0a
+2010-02-09 11:43:49,731 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@1171e0a
+2010-02-09 11:43:49,731 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@1f87dfb
+2010-02-09 11:43:49,731 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@1f87dfb
+2010-02-09 11:43:49,731 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@1171e0a
+2010-02-09 11:43:49,731 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@1171e0a
+2010-02-09 11:43:49,731 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@151b7c7
+2010-02-09 11:43:49,731 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@151b7c7
+2010-02-09 11:43:49,731 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@1171e0a
+2010-02-09 11:43:49,731 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@1171e0a
+2010-02-09 11:43:49,731 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@2963b7
+2010-02-09 11:43:49,731 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@2963b7
+2010-02-09 11:43:49,731 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@b53171
+2010-02-09 11:43:49,731 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@b53171
+2010-02-09 11:43:49,731 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@b53171
+2010-02-09 11:43:49,731 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@b53171
+2010-02-09 11:43:49,731 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@3e9930
+2010-02-09 11:43:49,731 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@3e9930
+2010-02-09 11:43:49,732 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@2963b7
+2010-02-09 11:43:49,732 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@2963b7
+2010-02-09 11:43:49,732 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@3e9930
+2010-02-09 11:43:49,732 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@3e9930
+2010-02-09 11:43:49,732 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@241a09
+2010-02-09 11:43:49,732 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@241a09
+2010-02-09 11:43:49,732 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@151b7c7
+2010-02-09 11:43:49,732 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@151b7c7
+2010-02-09 11:43:49,732 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@14ec176
+2010-02-09 11:43:49,732 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@14ec176
+2010-02-09 11:43:49,732 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@151b7c7
+2010-02-09 11:43:49,732 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@151b7c7
+2010-02-09 11:43:49,732 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@17f35ee
+2010-02-09 11:43:49,732 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@17f35ee
+2010-02-09 11:43:49,732 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@151b7c7
+2010-02-09 11:43:49,732 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@151b7c7
+2010-02-09 11:43:49,732 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@4a7c43
+2010-02-09 11:43:49,732 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@4a7c43
+2010-02-09 11:43:49,732 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@151b7c7
+2010-02-09 11:43:49,732 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@151b7c7
+2010-02-09 11:43:49,732 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@4a7c43
+2010-02-09 11:43:49,733 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@4a7c43
+2010-02-09 11:43:49,733 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@1171e0a
+2010-02-09 11:43:49,733 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@1171e0a
+2010-02-09 11:43:49,733 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@11bec9a
+2010-02-09 11:43:49,733 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@11bec9a
+2010-02-09 11:43:49,733 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@1171e0a
+2010-02-09 11:43:49,733 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@1171e0a
+2010-02-09 11:43:49,733 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@11bec9a
+2010-02-09 11:43:49,733 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@11bec9a
+2010-02-09 11:43:49,733 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@1f87dfb
+2010-02-09 11:43:49,733 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@1f87dfb
+2010-02-09 11:43:49,733 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@241a09
+2010-02-09 11:43:49,733 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@241a09
+2010-02-09 11:43:49,733 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@1f87dfb
+2010-02-09 11:43:49,733 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@1f87dfb
+2010-02-09 11:43:49,733 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@241a09
+2010-02-09 11:43:49,733 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@241a09
+2010-02-09 11:43:49,733 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@2963b7
+2010-02-09 11:43:49,734 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@2963b7
+2010-02-09 11:43:49,734 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@241a09
+2010-02-09 11:43:49,734 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@241a09
+2010-02-09 11:43:49,734 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@3e9930
+2010-02-09 11:43:49,734 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@3e9930
+2010-02-09 11:43:49,734 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@241a09
+2010-02-09 11:43:49,734 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@241a09
+2010-02-09 11:43:49,734 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@b53171
+2010-02-09 11:43:49,734 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@b53171
+2010-02-09 11:43:49,734 DEBUG [org.displaytag.pagination.SmartListHelper] - New SmartListHelper instantiated: list.size=[11], page size=[15], full list size=[11].
+2010-02-09 11:43:49,734 DEBUG [org.displaytag.pagination.SmartListHelper] - CurrentPage page is 1 of 1
+2010-02-09 11:43:49,734 DEBUG [org.displaytag.pagination.SmartListHelper] - Returning sublist for page 1
+2010-02-09 11:43:49,734 DEBUG [org.displaytag.render.TableWriterTemplate] - [labtable] writeTable called for table [labtable]
+2010-02-09 11:43:49,734 DEBUG [org.displaytag.render.HtmlTableWriter] - [labtable] getTableHeader called
+2010-02-09 11:43:49,735 DEBUG [org.displaytag.render.HtmlTableWriter] - [labtable] getTableHeader end
+2010-02-09 11:43:49,735 DEBUG [org.displaytag.model.RowIterator] - [labtable] rowIterator.next() row number=0
+2010-02-09 11:43:49,735 DEBUG [org.displaytag.render.TableWriterTemplate] -  creating ColumnIterator on [HeaderCell[columnNumber=0,title=<img src='images/CheckBox.gif' alt='Select All' id='CheckGif' onclick='SelectAll();return false'/>',beanPropertyName=<null>], HeaderCell[columnNumber=1,title=Patient Id,beanPropertyName=patientId], HeaderCell[columnNumber=2,title=Site,beanPropertyName=siteId], HeaderCell[columnNumber=3,title=Date / Time,beanPropertyName=date], HeaderCell[columnNumber=4,title=Lab Test,beanPropertyName=labTestId], HeaderCell[columnNumber=5,title=Text Result,beanPropertyName=textResult], HeaderCell[columnNumber=6,title=Numeric Result,beanPropertyName=numericResult], HeaderCell[columnNumber=7,title=Unit Of Measure,beanPropertyName=unitOfMeasure], HeaderCell[columnNumber=8,title=Lower Limit,beanPropertyName=lowRange], HeaderCell[columnNumber=9,title=Upper Limit,beanPropertyName=highRange], HeaderCell[columnNumber=10,title=Sent to CDMS,beanPropertyName=labsToCDMS], HeaderCell[columnNumber=11,title=Sent to caAERS,beanPropertyName=labsToAE]]
+2010-02-09 11:43:49,735 DEBUG [org.displaytag.util.LookupUtil] - getProperty [patientId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@14ec176
+2010-02-09 11:43:49,735 DEBUG [org.displaytag.util.LookupUtil] - getProperty [patientId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@14ec176
+2010-02-09 11:43:49,736 DEBUG [org.displaytag.util.LookupUtil] - getProperty [siteId] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,736 DEBUG [org.displaytag.util.LookupUtil] - getProperty [siteId] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,736 DEBUG [org.displaytag.util.LookupUtil] - getProperty [date] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@14ec176
+2010-02-09 11:43:49,736 DEBUG [org.displaytag.util.LookupUtil] - getProperty [date] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@14ec176
+2010-02-09 11:43:49,736 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@14ec176
+2010-02-09 11:43:49,736 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@14ec176
+2010-02-09 11:43:49,736 DEBUG [org.displaytag.util.LookupUtil] - getProperty [textResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,736 DEBUG [org.displaytag.util.LookupUtil] - getProperty [textResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,736 DEBUG [org.displaytag.util.LookupUtil] - getProperty [numericResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,736 DEBUG [org.displaytag.util.LookupUtil] - getProperty [numericResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,736 DEBUG [org.displaytag.util.LookupUtil] - getProperty [unitOfMeasure] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,736 DEBUG [org.displaytag.util.LookupUtil] - getProperty [unitOfMeasure] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,736 DEBUG [org.displaytag.util.LookupUtil] - getProperty [lowRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,736 DEBUG [org.displaytag.util.LookupUtil] - getProperty [lowRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,736 DEBUG [org.displaytag.util.LookupUtil] - getProperty [highRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,736 DEBUG [org.displaytag.util.LookupUtil] - getProperty [highRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,736 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToCDMS] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,736 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToCDMS] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,736 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToAE] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,736 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToAE] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,737 DEBUG [org.displaytag.model.RowIterator] - [labtable] rowIterator.next() row number=1
+2010-02-09 11:43:49,737 DEBUG [org.displaytag.render.TableWriterTemplate] -  creating ColumnIterator on [HeaderCell[columnNumber=0,title=<img src='images/CheckBox.gif' alt='Select All' id='CheckGif' onclick='SelectAll();return false'/>',beanPropertyName=<null>], HeaderCell[columnNumber=1,title=Patient Id,beanPropertyName=patientId], HeaderCell[columnNumber=2,title=Site,beanPropertyName=siteId], HeaderCell[columnNumber=3,title=Date / Time,beanPropertyName=date], HeaderCell[columnNumber=4,title=Lab Test,beanPropertyName=labTestId], HeaderCell[columnNumber=5,title=Text Result,beanPropertyName=textResult], HeaderCell[columnNumber=6,title=Numeric Result,beanPropertyName=numericResult], HeaderCell[columnNumber=7,title=Unit Of Measure,beanPropertyName=unitOfMeasure], HeaderCell[columnNumber=8,title=Lower Limit,beanPropertyName=lowRange], HeaderCell[columnNumber=9,title=Upper Limit,beanPropertyName=highRange], HeaderCell[columnNumber=10,title=Sent to CDMS,beanPropertyName=labsToCDMS], HeaderCell[columnNumber=11,title=Sent to caAERS,beanPropertyName=labsToAE]]
+2010-02-09 11:43:49,737 DEBUG [org.displaytag.util.LookupUtil] - getProperty [patientId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@17f35ee
+2010-02-09 11:43:49,737 DEBUG [org.displaytag.util.LookupUtil] - getProperty [patientId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@17f35ee
+2010-02-09 11:43:49,737 DEBUG [org.displaytag.util.LookupUtil] - getProperty [siteId] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,737 DEBUG [org.displaytag.util.LookupUtil] - getProperty [siteId] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,737 DEBUG [org.displaytag.util.LookupUtil] - getProperty [date] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@17f35ee
+2010-02-09 11:43:49,737 DEBUG [org.displaytag.util.LookupUtil] - getProperty [date] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@17f35ee
+2010-02-09 11:43:49,737 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@17f35ee
+2010-02-09 11:43:49,737 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@17f35ee
+2010-02-09 11:43:49,737 DEBUG [org.displaytag.util.LookupUtil] - getProperty [textResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,737 DEBUG [org.displaytag.util.LookupUtil] - getProperty [textResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,737 DEBUG [org.displaytag.util.LookupUtil] - getProperty [numericResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,737 DEBUG [org.displaytag.util.LookupUtil] - getProperty [numericResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,737 DEBUG [org.displaytag.util.LookupUtil] - getProperty [unitOfMeasure] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,737 DEBUG [org.displaytag.util.LookupUtil] - getProperty [unitOfMeasure] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,737 DEBUG [org.displaytag.util.LookupUtil] - getProperty [lowRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,737 DEBUG [org.displaytag.util.LookupUtil] - getProperty [lowRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,738 DEBUG [org.displaytag.util.LookupUtil] - getProperty [highRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,738 DEBUG [org.displaytag.util.LookupUtil] - getProperty [highRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,738 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToCDMS] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,738 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToCDMS] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,738 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToAE] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,738 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToAE] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,738 DEBUG [org.displaytag.model.RowIterator] - [labtable] rowIterator.next() row number=2
+2010-02-09 11:43:49,738 DEBUG [org.displaytag.render.TableWriterTemplate] -  creating ColumnIterator on [HeaderCell[columnNumber=0,title=<img src='images/CheckBox.gif' alt='Select All' id='CheckGif' onclick='SelectAll();return false'/>',beanPropertyName=<null>], HeaderCell[columnNumber=1,title=Patient Id,beanPropertyName=patientId], HeaderCell[columnNumber=2,title=Site,beanPropertyName=siteId], HeaderCell[columnNumber=3,title=Date / Time,beanPropertyName=date], HeaderCell[columnNumber=4,title=Lab Test,beanPropertyName=labTestId], HeaderCell[columnNumber=5,title=Text Result,beanPropertyName=textResult], HeaderCell[columnNumber=6,title=Numeric Result,beanPropertyName=numericResult], HeaderCell[columnNumber=7,title=Unit Of Measure,beanPropertyName=unitOfMeasure], HeaderCell[columnNumber=8,title=Lower Limit,beanPropertyName=lowRange], HeaderCell[columnNumber=9,title=Upper Limit,beanPropertyName=highRange], HeaderCell[columnNumber=10,title=Sent to CDMS,beanPropertyName=labsToCDMS], HeaderCell[columnNumber=11,title=Sent to caAERS,beanPropertyName=labsToAE]]
+2010-02-09 11:43:49,738 DEBUG [org.displaytag.util.LookupUtil] - getProperty [patientId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@151b7c7
+2010-02-09 11:43:49,738 DEBUG [org.displaytag.util.LookupUtil] - getProperty [patientId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@151b7c7
+2010-02-09 11:43:49,738 DEBUG [org.displaytag.util.LookupUtil] - getProperty [siteId] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,738 DEBUG [org.displaytag.util.LookupUtil] - getProperty [siteId] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,738 DEBUG [org.displaytag.util.LookupUtil] - getProperty [date] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@151b7c7
+2010-02-09 11:43:49,738 DEBUG [org.displaytag.util.LookupUtil] - getProperty [date] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@151b7c7
+2010-02-09 11:43:49,739 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@151b7c7
+2010-02-09 11:43:49,739 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@151b7c7
+2010-02-09 11:43:49,739 DEBUG [org.displaytag.util.LookupUtil] - getProperty [textResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,739 DEBUG [org.displaytag.util.LookupUtil] - getProperty [textResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,739 DEBUG [org.displaytag.util.LookupUtil] - getProperty [numericResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,739 DEBUG [org.displaytag.util.LookupUtil] - getProperty [numericResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,739 DEBUG [org.displaytag.util.LookupUtil] - getProperty [unitOfMeasure] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,739 DEBUG [org.displaytag.util.LookupUtil] - getProperty [unitOfMeasure] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,739 DEBUG [org.displaytag.util.LookupUtil] - getProperty [lowRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,739 DEBUG [org.displaytag.util.LookupUtil] - getProperty [lowRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,739 DEBUG [org.displaytag.util.LookupUtil] - getProperty [highRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,739 DEBUG [org.displaytag.util.LookupUtil] - getProperty [highRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,739 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToCDMS] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,739 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToCDMS] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,739 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToAE] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,739 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToAE] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,739 DEBUG [org.displaytag.model.RowIterator] - [labtable] rowIterator.next() row number=3
+2010-02-09 11:43:49,740 DEBUG [org.displaytag.render.TableWriterTemplate] -  creating ColumnIterator on [HeaderCell[columnNumber=0,title=<img src='images/CheckBox.gif' alt='Select All' id='CheckGif' onclick='SelectAll();return false'/>',beanPropertyName=<null>], HeaderCell[columnNumber=1,title=Patient Id,beanPropertyName=patientId], HeaderCell[columnNumber=2,title=Site,beanPropertyName=siteId], HeaderCell[columnNumber=3,title=Date / Time,beanPropertyName=date], HeaderCell[columnNumber=4,title=Lab Test,beanPropertyName=labTestId], HeaderCell[columnNumber=5,title=Text Result,beanPropertyName=textResult], HeaderCell[columnNumber=6,title=Numeric Result,beanPropertyName=numericResult], HeaderCell[columnNumber=7,title=Unit Of Measure,beanPropertyName=unitOfMeasure], HeaderCell[columnNumber=8,title=Lower Limit,beanPropertyName=lowRange], HeaderCell[columnNumber=9,title=Upper Limit,beanPropertyName=highRange], HeaderCell[columnNumber=10,title=Sent to CDMS,beanPropertyName=labsToCDMS], HeaderCell[columnNumber=11,title=Sent to caAERS,beanPropertyName=labsToAE]]
+2010-02-09 11:43:49,740 DEBUG [org.displaytag.util.LookupUtil] - getProperty [patientId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@4a7c43
+2010-02-09 11:43:49,740 DEBUG [org.displaytag.util.LookupUtil] - getProperty [patientId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@4a7c43
+2010-02-09 11:43:49,740 DEBUG [org.displaytag.util.LookupUtil] - getProperty [siteId] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,740 DEBUG [org.displaytag.util.LookupUtil] - getProperty [siteId] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,740 DEBUG [org.displaytag.util.LookupUtil] - getProperty [date] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@4a7c43
+2010-02-09 11:43:49,740 DEBUG [org.displaytag.util.LookupUtil] - getProperty [date] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@4a7c43
+2010-02-09 11:43:49,740 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@4a7c43
+2010-02-09 11:43:49,740 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@4a7c43
+2010-02-09 11:43:49,740 DEBUG [org.displaytag.util.LookupUtil] - getProperty [textResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,740 DEBUG [org.displaytag.util.LookupUtil] - getProperty [textResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,740 DEBUG [org.displaytag.util.LookupUtil] - getProperty [numericResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,740 DEBUG [org.displaytag.util.LookupUtil] - getProperty [numericResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,740 DEBUG [org.displaytag.util.LookupUtil] - getProperty [unitOfMeasure] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,740 DEBUG [org.displaytag.util.LookupUtil] - getProperty [unitOfMeasure] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,740 DEBUG [org.displaytag.util.LookupUtil] - getProperty [lowRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,740 DEBUG [org.displaytag.util.LookupUtil] - getProperty [lowRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,740 DEBUG [org.displaytag.util.LookupUtil] - getProperty [highRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,740 DEBUG [org.displaytag.util.LookupUtil] - getProperty [highRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,741 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToCDMS] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,741 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToCDMS] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,741 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToAE] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,741 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToAE] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,741 DEBUG [org.displaytag.model.RowIterator] - [labtable] rowIterator.next() row number=4
+2010-02-09 11:43:49,741 DEBUG [org.displaytag.render.TableWriterTemplate] -  creating ColumnIterator on [HeaderCell[columnNumber=0,title=<img src='images/CheckBox.gif' alt='Select All' id='CheckGif' onclick='SelectAll();return false'/>',beanPropertyName=<null>], HeaderCell[columnNumber=1,title=Patient Id,beanPropertyName=patientId], HeaderCell[columnNumber=2,title=Site,beanPropertyName=siteId], HeaderCell[columnNumber=3,title=Date / Time,beanPropertyName=date], HeaderCell[columnNumber=4,title=Lab Test,beanPropertyName=labTestId], HeaderCell[columnNumber=5,title=Text Result,beanPropertyName=textResult], HeaderCell[columnNumber=6,title=Numeric Result,beanPropertyName=numericResult], HeaderCell[columnNumber=7,title=Unit Of Measure,beanPropertyName=unitOfMeasure], HeaderCell[columnNumber=8,title=Lower Limit,beanPropertyName=lowRange], HeaderCell[columnNumber=9,title=Upper Limit,beanPropertyName=highRange], HeaderCell[columnNumber=10,title=Sent to CDMS,beanPropertyName=labsToCDMS], HeaderCell[columnNumber=11,title=Sent to caAERS,beanPropertyName=labsToAE]]
+2010-02-09 11:43:49,741 DEBUG [org.displaytag.util.LookupUtil] - getProperty [patientId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@1171e0a
+2010-02-09 11:43:49,741 DEBUG [org.displaytag.util.LookupUtil] - getProperty [patientId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@1171e0a
+2010-02-09 11:43:49,741 DEBUG [org.displaytag.util.LookupUtil] - getProperty [siteId] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,741 DEBUG [org.displaytag.util.LookupUtil] - getProperty [siteId] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,741 DEBUG [org.displaytag.util.LookupUtil] - getProperty [date] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@1171e0a
+2010-02-09 11:43:49,741 DEBUG [org.displaytag.util.LookupUtil] - getProperty [date] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@1171e0a
+2010-02-09 11:43:49,741 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@1171e0a
+2010-02-09 11:43:49,741 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@1171e0a
+2010-02-09 11:43:49,742 DEBUG [org.displaytag.util.LookupUtil] - getProperty [textResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,742 DEBUG [org.displaytag.util.LookupUtil] - getProperty [textResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,742 DEBUG [org.displaytag.util.LookupUtil] - getProperty [numericResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,742 DEBUG [org.displaytag.util.LookupUtil] - getProperty [numericResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,742 DEBUG [org.displaytag.util.LookupUtil] - getProperty [unitOfMeasure] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,742 DEBUG [org.displaytag.util.LookupUtil] - getProperty [unitOfMeasure] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,742 DEBUG [org.displaytag.util.LookupUtil] - getProperty [lowRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,742 DEBUG [org.displaytag.util.LookupUtil] - getProperty [lowRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,742 DEBUG [org.displaytag.util.LookupUtil] - getProperty [highRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,742 DEBUG [org.displaytag.util.LookupUtil] - getProperty [highRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,742 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToCDMS] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,742 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToCDMS] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,742 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToAE] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,742 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToAE] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,742 DEBUG [org.displaytag.model.RowIterator] - [labtable] rowIterator.next() row number=5
+2010-02-09 11:43:49,742 DEBUG [org.displaytag.render.TableWriterTemplate] -  creating ColumnIterator on [HeaderCell[columnNumber=0,title=<img src='images/CheckBox.gif' alt='Select All' id='CheckGif' onclick='SelectAll();return false'/>',beanPropertyName=<null>], HeaderCell[columnNumber=1,title=Patient Id,beanPropertyName=patientId], HeaderCell[columnNumber=2,title=Site,beanPropertyName=siteId], HeaderCell[columnNumber=3,title=Date / Time,beanPropertyName=date], HeaderCell[columnNumber=4,title=Lab Test,beanPropertyName=labTestId], HeaderCell[columnNumber=5,title=Text Result,beanPropertyName=textResult], HeaderCell[columnNumber=6,title=Numeric Result,beanPropertyName=numericResult], HeaderCell[columnNumber=7,title=Unit Of Measure,beanPropertyName=unitOfMeasure], HeaderCell[columnNumber=8,title=Lower Limit,beanPropertyName=lowRange], HeaderCell[columnNumber=9,title=Upper Limit,beanPropertyName=highRange], HeaderCell[columnNumber=10,title=Sent to CDMS,beanPropertyName=labsToCDMS], HeaderCell[columnNumber=11,title=Sent to caAERS,beanPropertyName=labsToAE]]
+2010-02-09 11:43:49,743 DEBUG [org.displaytag.util.LookupUtil] - getProperty [patientId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@11bec9a
+2010-02-09 11:43:49,743 DEBUG [org.displaytag.util.LookupUtil] - getProperty [patientId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@11bec9a
+2010-02-09 11:43:49,743 DEBUG [org.displaytag.util.LookupUtil] - getProperty [siteId] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,743 DEBUG [org.displaytag.util.LookupUtil] - getProperty [siteId] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,743 DEBUG [org.displaytag.util.LookupUtil] - getProperty [date] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@11bec9a
+2010-02-09 11:43:49,743 DEBUG [org.displaytag.util.LookupUtil] - getProperty [date] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@11bec9a
+2010-02-09 11:43:49,743 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@11bec9a
+2010-02-09 11:43:49,743 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@11bec9a
+2010-02-09 11:43:49,743 DEBUG [org.displaytag.util.LookupUtil] - getProperty [textResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,743 DEBUG [org.displaytag.util.LookupUtil] - getProperty [textResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,743 DEBUG [org.displaytag.util.LookupUtil] - getProperty [numericResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,743 DEBUG [org.displaytag.util.LookupUtil] - getProperty [numericResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,743 DEBUG [org.displaytag.util.LookupUtil] - getProperty [unitOfMeasure] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,743 DEBUG [org.displaytag.util.LookupUtil] - getProperty [unitOfMeasure] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,743 DEBUG [org.displaytag.util.LookupUtil] - getProperty [lowRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,743 DEBUG [org.displaytag.util.LookupUtil] - getProperty [lowRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,743 DEBUG [org.displaytag.util.LookupUtil] - getProperty [highRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,743 DEBUG [org.displaytag.util.LookupUtil] - getProperty [highRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,743 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToCDMS] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,744 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToCDMS] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,744 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToAE] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,744 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToAE] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,744 DEBUG [org.displaytag.model.RowIterator] - [labtable] rowIterator.next() row number=6
+2010-02-09 11:43:49,744 DEBUG [org.displaytag.render.TableWriterTemplate] -  creating ColumnIterator on [HeaderCell[columnNumber=0,title=<img src='images/CheckBox.gif' alt='Select All' id='CheckGif' onclick='SelectAll();return false'/>',beanPropertyName=<null>], HeaderCell[columnNumber=1,title=Patient Id,beanPropertyName=patientId], HeaderCell[columnNumber=2,title=Site,beanPropertyName=siteId], HeaderCell[columnNumber=3,title=Date / Time,beanPropertyName=date], HeaderCell[columnNumber=4,title=Lab Test,beanPropertyName=labTestId], HeaderCell[columnNumber=5,title=Text Result,beanPropertyName=textResult], HeaderCell[columnNumber=6,title=Numeric Result,beanPropertyName=numericResult], HeaderCell[columnNumber=7,title=Unit Of Measure,beanPropertyName=unitOfMeasure], HeaderCell[columnNumber=8,title=Lower Limit,beanPropertyName=lowRange], HeaderCell[columnNumber=9,title=Upper Limit,beanPropertyName=highRange], HeaderCell[columnNumber=10,title=Sent to CDMS,beanPropertyName=labsToCDMS], HeaderCell[columnNumber=11,title=Sent to caAERS,beanPropertyName=labsToAE]]
+2010-02-09 11:43:49,744 DEBUG [org.displaytag.util.LookupUtil] - getProperty [patientId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@1f87dfb
+2010-02-09 11:43:49,744 DEBUG [org.displaytag.util.LookupUtil] - getProperty [patientId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@1f87dfb
+2010-02-09 11:43:49,744 DEBUG [org.displaytag.util.LookupUtil] - getProperty [siteId] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,744 DEBUG [org.displaytag.util.LookupUtil] - getProperty [siteId] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,744 DEBUG [org.displaytag.util.LookupUtil] - getProperty [date] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@1f87dfb
+2010-02-09 11:43:49,744 DEBUG [org.displaytag.util.LookupUtil] - getProperty [date] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@1f87dfb
+2010-02-09 11:43:49,744 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@1f87dfb
+2010-02-09 11:43:49,744 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@1f87dfb
+2010-02-09 11:43:49,744 DEBUG [org.displaytag.util.LookupUtil] - getProperty [textResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,744 DEBUG [org.displaytag.util.LookupUtil] - getProperty [textResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,745 DEBUG [org.displaytag.util.LookupUtil] - getProperty [numericResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,745 DEBUG [org.displaytag.util.LookupUtil] - getProperty [numericResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,745 DEBUG [org.displaytag.util.LookupUtil] - getProperty [unitOfMeasure] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,745 DEBUG [org.displaytag.util.LookupUtil] - getProperty [unitOfMeasure] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,745 DEBUG [org.displaytag.util.LookupUtil] - getProperty [lowRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,745 DEBUG [org.displaytag.util.LookupUtil] - getProperty [lowRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,745 DEBUG [org.displaytag.util.LookupUtil] - getProperty [highRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,745 DEBUG [org.displaytag.util.LookupUtil] - getProperty [highRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,745 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToCDMS] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,745 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToCDMS] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,745 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToAE] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,745 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToAE] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,745 DEBUG [org.displaytag.model.RowIterator] - [labtable] rowIterator.next() row number=7
+2010-02-09 11:43:49,745 DEBUG [org.displaytag.render.TableWriterTemplate] -  creating ColumnIterator on [HeaderCell[columnNumber=0,title=<img src='images/CheckBox.gif' alt='Select All' id='CheckGif' onclick='SelectAll();return false'/>',beanPropertyName=<null>], HeaderCell[columnNumber=1,title=Patient Id,beanPropertyName=patientId], HeaderCell[columnNumber=2,title=Site,beanPropertyName=siteId], HeaderCell[columnNumber=3,title=Date / Time,beanPropertyName=date], HeaderCell[columnNumber=4,title=Lab Test,beanPropertyName=labTestId], HeaderCell[columnNumber=5,title=Text Result,beanPropertyName=textResult], HeaderCell[columnNumber=6,title=Numeric Result,beanPropertyName=numericResult], HeaderCell[columnNumber=7,title=Unit Of Measure,beanPropertyName=unitOfMeasure], HeaderCell[columnNumber=8,title=Lower Limit,beanPropertyName=lowRange], HeaderCell[columnNumber=9,title=Upper Limit,beanPropertyName=highRange], HeaderCell[columnNumber=10,title=Sent to CDMS,beanPropertyName=labsToCDMS], HeaderCell[columnNumber=11,title=Sent to caAERS,beanPropertyName=labsToAE]]
+2010-02-09 11:43:49,745 DEBUG [org.displaytag.util.LookupUtil] - getProperty [patientId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@2963b7
+2010-02-09 11:43:49,746 DEBUG [org.displaytag.util.LookupUtil] - getProperty [patientId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@2963b7
+2010-02-09 11:43:49,746 DEBUG [org.displaytag.util.LookupUtil] - getProperty [siteId] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,746 DEBUG [org.displaytag.util.LookupUtil] - getProperty [siteId] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,746 DEBUG [org.displaytag.util.LookupUtil] - getProperty [date] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@2963b7
+2010-02-09 11:43:49,746 DEBUG [org.displaytag.util.LookupUtil] - getProperty [date] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@2963b7
+2010-02-09 11:43:49,746 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@2963b7
+2010-02-09 11:43:49,746 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@2963b7
+2010-02-09 11:43:49,746 DEBUG [org.displaytag.util.LookupUtil] - getProperty [textResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,746 DEBUG [org.displaytag.util.LookupUtil] - getProperty [textResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,746 DEBUG [org.displaytag.util.LookupUtil] - getProperty [numericResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,746 DEBUG [org.displaytag.util.LookupUtil] - getProperty [numericResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,746 DEBUG [org.displaytag.util.LookupUtil] - getProperty [unitOfMeasure] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,746 DEBUG [org.displaytag.util.LookupUtil] - getProperty [unitOfMeasure] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,746 DEBUG [org.displaytag.util.LookupUtil] - getProperty [lowRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,746 DEBUG [org.displaytag.util.LookupUtil] - getProperty [lowRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,746 DEBUG [org.displaytag.util.LookupUtil] - getProperty [highRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,746 DEBUG [org.displaytag.util.LookupUtil] - getProperty [highRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,746 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToCDMS] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,746 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToCDMS] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,746 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToAE] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,746 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToAE] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,747 DEBUG [org.displaytag.model.RowIterator] - [labtable] rowIterator.next() row number=8
+2010-02-09 11:43:49,747 DEBUG [org.displaytag.render.TableWriterTemplate] -  creating ColumnIterator on [HeaderCell[columnNumber=0,title=<img src='images/CheckBox.gif' alt='Select All' id='CheckGif' onclick='SelectAll();return false'/>',beanPropertyName=<null>], HeaderCell[columnNumber=1,title=Patient Id,beanPropertyName=patientId], HeaderCell[columnNumber=2,title=Site,beanPropertyName=siteId], HeaderCell[columnNumber=3,title=Date / Time,beanPropertyName=date], HeaderCell[columnNumber=4,title=Lab Test,beanPropertyName=labTestId], HeaderCell[columnNumber=5,title=Text Result,beanPropertyName=textResult], HeaderCell[columnNumber=6,title=Numeric Result,beanPropertyName=numericResult], HeaderCell[columnNumber=7,title=Unit Of Measure,beanPropertyName=unitOfMeasure], HeaderCell[columnNumber=8,title=Lower Limit,beanPropertyName=lowRange], HeaderCell[columnNumber=9,title=Upper Limit,beanPropertyName=highRange], HeaderCell[columnNumber=10,title=Sent to CDMS,beanPropertyName=labsToCDMS], HeaderCell[columnNumber=11,title=Sent to caAERS,beanPropertyName=labsToAE]]
+2010-02-09 11:43:49,747 DEBUG [org.displaytag.util.LookupUtil] - getProperty [patientId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@3e9930
+2010-02-09 11:43:49,747 DEBUG [org.displaytag.util.LookupUtil] - getProperty [patientId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@3e9930
+2010-02-09 11:43:49,747 DEBUG [org.displaytag.util.LookupUtil] - getProperty [siteId] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,747 DEBUG [org.displaytag.util.LookupUtil] - getProperty [siteId] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,747 DEBUG [org.displaytag.util.LookupUtil] - getProperty [date] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@3e9930
+2010-02-09 11:43:49,747 DEBUG [org.displaytag.util.LookupUtil] - getProperty [date] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@3e9930
+2010-02-09 11:43:49,747 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@3e9930
+2010-02-09 11:43:49,747 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@3e9930
+2010-02-09 11:43:49,747 DEBUG [org.displaytag.util.LookupUtil] - getProperty [textResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,747 DEBUG [org.displaytag.util.LookupUtil] - getProperty [textResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,747 DEBUG [org.displaytag.util.LookupUtil] - getProperty [numericResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,747 DEBUG [org.displaytag.util.LookupUtil] - getProperty [numericResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,747 DEBUG [org.displaytag.util.LookupUtil] - getProperty [unitOfMeasure] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,747 DEBUG [org.displaytag.util.LookupUtil] - getProperty [unitOfMeasure] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,747 DEBUG [org.displaytag.util.LookupUtil] - getProperty [lowRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,748 DEBUG [org.displaytag.util.LookupUtil] - getProperty [lowRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,748 DEBUG [org.displaytag.util.LookupUtil] - getProperty [highRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,748 DEBUG [org.displaytag.util.LookupUtil] - getProperty [highRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,748 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToCDMS] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,748 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToCDMS] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,748 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToAE] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,748 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToAE] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,748 DEBUG [org.displaytag.model.RowIterator] - [labtable] rowIterator.next() row number=9
+2010-02-09 11:43:49,748 DEBUG [org.displaytag.render.TableWriterTemplate] -  creating ColumnIterator on [HeaderCell[columnNumber=0,title=<img src='images/CheckBox.gif' alt='Select All' id='CheckGif' onclick='SelectAll();return false'/>',beanPropertyName=<null>], HeaderCell[columnNumber=1,title=Patient Id,beanPropertyName=patientId], HeaderCell[columnNumber=2,title=Site,beanPropertyName=siteId], HeaderCell[columnNumber=3,title=Date / Time,beanPropertyName=date], HeaderCell[columnNumber=4,title=Lab Test,beanPropertyName=labTestId], HeaderCell[columnNumber=5,title=Text Result,beanPropertyName=textResult], HeaderCell[columnNumber=6,title=Numeric Result,beanPropertyName=numericResult], HeaderCell[columnNumber=7,title=Unit Of Measure,beanPropertyName=unitOfMeasure], HeaderCell[columnNumber=8,title=Lower Limit,beanPropertyName=lowRange], HeaderCell[columnNumber=9,title=Upper Limit,beanPropertyName=highRange], HeaderCell[columnNumber=10,title=Sent to CDMS,beanPropertyName=labsToCDMS], HeaderCell[columnNumber=11,title=Sent to caAERS,beanPropertyName=labsToAE]]
+2010-02-09 11:43:49,748 DEBUG [org.displaytag.util.LookupUtil] - getProperty [patientId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@241a09
+2010-02-09 11:43:49,748 DEBUG [org.displaytag.util.LookupUtil] - getProperty [patientId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@241a09
+2010-02-09 11:43:49,748 DEBUG [org.displaytag.util.LookupUtil] - getProperty [siteId] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,748 DEBUG [org.displaytag.util.LookupUtil] - getProperty [siteId] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,748 DEBUG [org.displaytag.util.LookupUtil] - getProperty [date] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@241a09
+2010-02-09 11:43:49,748 DEBUG [org.displaytag.util.LookupUtil] - getProperty [date] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@241a09
+2010-02-09 11:43:49,749 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@241a09
+2010-02-09 11:43:49,749 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@241a09
+2010-02-09 11:43:49,749 DEBUG [org.displaytag.util.LookupUtil] - getProperty [textResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,749 DEBUG [org.displaytag.util.LookupUtil] - getProperty [textResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,749 DEBUG [org.displaytag.util.LookupUtil] - getProperty [numericResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,749 DEBUG [org.displaytag.util.LookupUtil] - getProperty [numericResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,749 DEBUG [org.displaytag.util.LookupUtil] - getProperty [unitOfMeasure] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,749 DEBUG [org.displaytag.util.LookupUtil] - getProperty [unitOfMeasure] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,749 DEBUG [org.displaytag.util.LookupUtil] - getProperty [lowRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,749 DEBUG [org.displaytag.util.LookupUtil] - getProperty [lowRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,749 DEBUG [org.displaytag.util.LookupUtil] - getProperty [highRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,749 DEBUG [org.displaytag.util.LookupUtil] - getProperty [highRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,749 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToCDMS] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,749 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToCDMS] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,749 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToAE] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,749 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToAE] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,749 DEBUG [org.displaytag.model.RowIterator] - [labtable] rowIterator.next() row number=10
+2010-02-09 11:43:49,750 DEBUG [org.displaytag.render.TableWriterTemplate] -  creating ColumnIterator on [HeaderCell[columnNumber=0,title=<img src='images/CheckBox.gif' alt='Select All' id='CheckGif' onclick='SelectAll();return false'/>',beanPropertyName=<null>], HeaderCell[columnNumber=1,title=Patient Id,beanPropertyName=patientId], HeaderCell[columnNumber=2,title=Site,beanPropertyName=siteId], HeaderCell[columnNumber=3,title=Date / Time,beanPropertyName=date], HeaderCell[columnNumber=4,title=Lab Test,beanPropertyName=labTestId], HeaderCell[columnNumber=5,title=Text Result,beanPropertyName=textResult], HeaderCell[columnNumber=6,title=Numeric Result,beanPropertyName=numericResult], HeaderCell[columnNumber=7,title=Unit Of Measure,beanPropertyName=unitOfMeasure], HeaderCell[columnNumber=8,title=Lower Limit,beanPropertyName=lowRange], HeaderCell[columnNumber=9,title=Upper Limit,beanPropertyName=highRange], HeaderCell[columnNumber=10,title=Sent to CDMS,beanPropertyName=labsToCDMS], HeaderCell[columnNumber=11,title=Sent to caAERS,beanPropertyName=labsToAE]]
+2010-02-09 11:43:49,750 DEBUG [org.displaytag.util.LookupUtil] - getProperty [patientId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@b53171
+2010-02-09 11:43:49,750 DEBUG [org.displaytag.util.LookupUtil] - getProperty [patientId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@b53171
+2010-02-09 11:43:49,750 DEBUG [org.displaytag.util.LookupUtil] - getProperty [siteId] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,750 DEBUG [org.displaytag.util.LookupUtil] - getProperty [siteId] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,750 DEBUG [org.displaytag.util.LookupUtil] - getProperty [date] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@b53171
+2010-02-09 11:43:49,750 DEBUG [org.displaytag.util.LookupUtil] - getProperty [date] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@b53171
+2010-02-09 11:43:49,750 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@b53171
+2010-02-09 11:43:49,750 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labTestId] on bean gov.nih.nci.caxchange.ctom.viewer.viewobjects.LabActivityResult@b53171
+2010-02-09 11:43:49,750 DEBUG [org.displaytag.util.LookupUtil] - getProperty [textResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,750 DEBUG [org.displaytag.util.LookupUtil] - getProperty [textResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,750 DEBUG [org.displaytag.util.LookupUtil] - getProperty [numericResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,750 DEBUG [org.displaytag.util.LookupUtil] - getProperty [numericResult] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,750 DEBUG [org.displaytag.util.LookupUtil] - getProperty [unitOfMeasure] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,750 DEBUG [org.displaytag.util.LookupUtil] - getProperty [unitOfMeasure] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,750 DEBUG [org.displaytag.util.LookupUtil] - getProperty [lowRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,750 DEBUG [org.displaytag.util.LookupUtil] - getProperty [lowRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,750 DEBUG [org.displaytag.util.LookupUtil] - getProperty [highRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,750 DEBUG [org.displaytag.util.LookupUtil] - getProperty [highRange] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,750 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToCDMS] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,750 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToCDMS] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,750 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToAE] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,751 DEBUG [org.displaytag.util.LookupUtil] - getProperty [labsToAE] on bean gov.nih.nci.caxchange.ctom.viewer.util.LabSearchDecorator@175792c
+2010-02-09 11:43:49,752 DEBUG [org.displaytag.pagination.SmartListHelper] - Displaying pages from 1 to 1
+2010-02-09 11:43:49,752 DEBUG [org.displaytag.pagination.SmartListHelper] - adding page 1
+2010-02-09 11:43:49,752 DEBUG [org.displaytag.pagination.Pagination] - adding page 1
+2010-02-09 11:43:49,753 DEBUG [org.displaytag.render.TableWriterTemplate] - [labtable] writeTable end
+2010-02-09 11:43:49,753 DEBUG [org.displaytag.tags.TableTag] - [labtable] doEndTag - end
+2010-02-09 11:43:49,755 DEBUG [org.apache.struts.tiles.TilesRequestProcessor] -   'Tiles.LabActivities.Detail.Screen' - processed as definition
+11:44:16.121 [ContainerBackgroundProcessor[StandardEngine[Catalina]]] DEBUG o.a.catalina.session.ManagerBase - Start expire sessions StandardManager at 1265733856121 sessioncount 0
+11:44:16.121 [ContainerBackgroundProcessor[StandardEngine[Catalina]]] DEBUG o.a.catalina.session.ManagerBase - End expire sessions StandardManager processingTime 0 expired sessions: 0
+11:45:16.187 [ContainerBackgroundProcessor[StandardEngine[Catalina]]] DEBUG o.a.catalina.session.ManagerBase - Start expire sessions StandardManager at 1265733916187 sessioncount 0
+11:45:16.187 [ContainerBackgroundProcessor[StandardEngine[Catalina]]] DEBUG o.a.catalina.session.ManagerBase - End expire sessions StandardManager processingTime 0 expired sessions: 0
+

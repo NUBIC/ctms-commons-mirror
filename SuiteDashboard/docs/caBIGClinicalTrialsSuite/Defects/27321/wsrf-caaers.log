@@ -1,0 +1,37 @@
+2010-03-18 10:36:45,915 [http-28443-Processor19] DEBUG gov.nih.nci.cabig.caaers.grid.AuditInfoResponseHandler : Auditing request from <anonymous>
+2010-03-18 10:36:46,055 [http-28443-Processor23] DEBUG gov.nih.nci.cabig.caaers.grid.AuditInfoRequestHandler : Auditing request from /O=caBIG/OU=caGrid/OU=Stage LOA1/OU=Dorian/CN=tstusr02@nih.gv
+2010-03-18 10:36:46,059 [http-28443-Processor23] DEBUG gov.nih.nci.cabig.caaers.security.CaaersCSMUserDetailsService : Getting user details for tstusr02@nih.gv
+2010-03-18 10:36:46,078 [http-28443-Processor23] DEBUG gov.nih.nci.security.dao.AuthorizationDAOImpl : Authorization|||getUser|Success|Success in Getting User for Name tstusr02@nih.gv|
+2010-03-18 10:36:46,078 [http-28443-Processor23] DEBUG gov.nih.nci.cabig.caaers.security.CaaersCSMUserDetailsService : Retrieved user obj  with ID 5
+2010-03-18 10:36:46,080 [http-28443-Processor23] DEBUG gov.nih.nci.security.dao.AuthorizationDAOImpl : Authorization|||getObjectByPrimaryKey|Success|Success in retrieving object of type gov.nih.nci.security.authorization.domainobjects.User|
+2010-03-18 10:36:46,087 [http-28443-Processor23] DEBUG gov.nih.nci.security.dao.AuthorizationDAOImpl : The result size:3
+2010-03-18 10:36:46,088 [http-28443-Processor23] DEBUG gov.nih.nci.security.dao.AuthorizationDAOImpl : Authorization|||getGroups|Success|Successful in obtaining Groups for User Id 5|
+2010-03-18 10:36:46,088 [http-28443-Processor23] DEBUG gov.nih.nci.cabig.caaers.security.RunAsAuthenticationPopulator : populating authentication [userName : SYSTEM, password :ignoreme, authorities : [ROLE_caaers_super_user, ROLE_caaers_admin, ROLE_caaers_grid_user]]
+2010-03-18 10:36:46,088 [http-28443-Processor23] INFO  gov.nih.nci.cabig.caaers.grid.CaaersRegistrationConsumer : Begining of registration-register
+2010-03-18 10:36:46,090 [http-28443-Processor23] DEBUG gov.nih.nci.cabig.caaers.dao.StudyDao : ::: select s from Study s join s.identifiers as identifier WHERE lower(identifier.value) LIKE :identifier AND identifier.type LIKE :idType
+2010-03-18 10:36:46,118 [http-28443-Processor23] DEBUG gov.nih.nci.cabig.caaers.dao.ParticipantDao : ::: SELECT distinct p from Participant p join p.identifiers WHERE p.identifiers.value = :identifier order by p.id
+2010-03-18 10:36:46,127 [http-28443-Processor23] INFO  gov.nih.nci.cabig.caaers.grid.CaaersRegistrationConsumer : The participant identified by MRN :23-56-56-7, already available, so using existing participant
+2010-03-18 10:36:46,139 [http-28443-Processor23] DEBUG gov.nih.nci.cabig.caaers.accesscontrol.SiteSecurityAfterInvocationCollectionFilteringProvider : Return object is null, skipping
+2010-03-18 10:36:46,140 [http-28443-Processor23] DEBUG gov.nih.nci.cabig.caaers.accesscontrol.SiteSecurityAfterInvocationCollectionFilteringProvider : Return object is null, skipping
+2010-03-18 10:36:46,140 [http-28443-Processor23] DEBUG gov.nih.nci.cabig.caaers.accesscontrol.SiteSecurityAfterInvocationCollectionFilteringProvider : Return object is null, skipping
+2010-03-18 10:36:46,142 [http-28443-Processor23] DEBUG gov.nih.nci.cabig.caaers.accesscontrol.SiteSecurityAfterInvocationCollectionFilteringProvider : Return object is null, skipping
+2010-03-18 10:36:46,147 [http-28443-Processor23] DEBUG gov.nih.nci.cabig.caaers.accesscontrol.SiteSecurityAfterInvocationCollectionFilteringProvider : Return object is null, skipping
+2010-03-18 10:36:46,185 [http-28443-Processor23] INFO  gov.nih.nci.cabig.caaers.grid.CaaersRegistrationConsumer : End of registration-register
+2010-03-18 10:36:46,186 [http-28443-Processor23] DEBUG gov.nih.nci.cabig.caaers.grid.AuditInfoResponseHandler : Auditing request from /O=caBIG/OU=caGrid/OU=Stage LOA1/OU=Dorian/CN=tstusr02@nih.gv
+2010-03-18 10:36:47,319 [http-28443-Processor19] DEBUG gov.nih.nci.cabig.caaers.grid.AuditInfoRequestHandler : Auditing request from <anonymous>
+2010-03-18 10:36:47,320 [http-28443-Processor19] DEBUG gov.nih.nci.cabig.caaers.grid.AuditInfoResponseHandler : Auditing request from <anonymous>
+2010-03-18 10:36:47,651 [http-28443-Processor24] DEBUG gov.nih.nci.cabig.caaers.grid.AuditInfoRequestHandler : Auditing request from /O=caBIG/OU=caGrid/OU=Stage LOA1/OU=Dorian/CN=tstusr02@nih.gv
+2010-03-18 10:36:47,681 [http-28443-Processor24] DEBUG gov.nih.nci.cabig.caaers.security.CaaersCSMUserDetailsService : Getting user details for tstusr02@nih.gv
+2010-03-18 10:36:47,755 [http-28443-Processor24] DEBUG gov.nih.nci.security.dao.AuthorizationDAOImpl : Authorization|||getUser|Success|Success in Getting User for Name tstusr02@nih.gv|
+2010-03-18 10:36:47,755 [http-28443-Processor24] DEBUG gov.nih.nci.cabig.caaers.security.CaaersCSMUserDetailsService : Retrieved user obj  with ID 5
+2010-03-18 10:36:47,778 [http-28443-Processor24] DEBUG gov.nih.nci.security.dao.AuthorizationDAOImpl : Authorization|||getObjectByPrimaryKey|Success|Success in retrieving object of type gov.nih.nci.security.authorization.domainobjects.User|
+2010-03-18 10:36:47,795 [http-28443-Processor24] DEBUG gov.nih.nci.security.dao.AuthorizationDAOImpl : The result size:3
+2010-03-18 10:36:47,795 [http-28443-Processor24] DEBUG gov.nih.nci.security.dao.AuthorizationDAOImpl : Authorization|||getGroups|Success|Successful in obtaining Groups for User Id 5|
+2010-03-18 10:36:47,795 [http-28443-Processor24] DEBUG gov.nih.nci.cabig.caaers.security.RunAsAuthenticationPopulator : populating authentication [userName : SYSTEM, password :ignoreme, authorities : [ROLE_caaers_super_user, ROLE_caaers_admin, ROLE_caaers_grid_user]]
+2010-03-18 10:36:47,795 [http-28443-Processor24] INFO  gov.nih.nci.cabig.caaers.grid.CaaersRegistrationConsumer : Begining of registration-rollback
+2010-03-18 10:36:47,796 [http-28443-Processor24] DEBUG gov.nih.nci.cabig.caaers.dao.ParticipantDao : ::: SELECT distinct p from Participant p join p.identifiers WHERE p.identifiers.value = :identifier order by p.id
+2010-03-18 10:36:47,805 [http-28443-Processor24] DEBUG gov.nih.nci.cabig.ctms.audit.dao.AuditHistoryRepository : query: select distinct e from DataAuditEvent e WHERE e.reference.className=:className AND e.info.url=:url AND e.reference.id= :entityId AND e.operation=:operation
+2010-03-18 10:36:47,821 [http-28443-Processor24] INFO  gov.nih.nci.cabig.caaers.grid.CaaersRegistrationConsumer : Subject (id:12) was created by the grid service url:/wsrf-caaers/services/cagrid/RegistrationConsumer
+2010-03-18 10:36:47,822 [http-28443-Processor24] DEBUG gov.nih.nci.cabig.ctms.audit.dao.AuditHistoryRepository : query: select distinct e from DataAuditEvent e WHERE e.reference.className=:className AND e.info.time>=:startDate AND e.info.time<=:endDate AND e.reference.id= :entityId AND e.operation=:operation
+2010-03-18 10:36:47,843 [http-28443-Processor24] ERROR gov.nih.nci.cabig.caaers.grid.CaaersRegistrationConsumer : Participant was not created one minute before the current time:Thu Mar 18 10:36:47 EDT 2010 so can not rollback this registration:12
+2010-03-18 10:36:47,843 [http-28443-Processor24] DEBUG gov.nih.nci.cabig.caaers.grid.AuditInfoResponseHandler : Auditing request from /O=caBIG/OU=caGrid/OU=Stage LOA1/OU=Dorian/CN=tstusr02@nih.gv

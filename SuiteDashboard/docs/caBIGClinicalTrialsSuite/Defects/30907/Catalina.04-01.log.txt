@@ -1,0 +1,199 @@
+login as: tomcat-app
+tomcat-app@ncias-q389-v.nci.nih.gov's password:
+Last login: Thu Mar 31 16:42:26 2011 from 156.40.140.227
+********************************************************************************
+
+                              ***WARNING***
+
+You are accessing a U.S. Government information system, which includes (1) this
+computer, (2) this computer network, (3) all computers connected to this
+network, and (4) all devices and storage media attached to this network or to a
+computer on this network.  This information system is provided for U.S.
+Government-authorized use only.
+
+Unauthorized or improper use of this system may result in disciplinary action,
+as well as civil and criminal penalties.
+
+By using this information system, you understand and consent to the following:
+
+** You have no reasonable expectation of privacy regarding any communications
+or data transiting or stored on this information system.  At any time, and for
+any lawful Government purpose, the government may monitor, intercept, and search
+and seize any communication or data transiting or stored on this information
+system.
+
+** Any communication or data transiting or stored on this information system may
+be disclosed or used for any lawful Government purpose.
+
+********************************************************************************
+[tomcat-app@ncias-q389-v ~]$ pwd
+/usr/local/ccts/tomcat-app
+[tomcat-app@ncias-q389-v ~]$ ls
+ant                               certificates      logs.sh
+apache-activemq-5.3.2             certificates-old  mirth-1.8.2
+apache-activemq-5.3.2-bin.tar.gz  data              mirth-1.8.2.4472.zip
+apache-servicemix-3.3.1           deploy            propertiesfromprod
+apache-tomcat-5.5.27              environment_vars  repository
+apps                              globus            startup.sh
+c3dmessage.xml                    gridinstaller     suite_installer
+caAERSmessage.xml                 hist.txt          tdown.sh
+cagrid                            InstallCert       tomcat-5.5.27
+caGrid                            keystore          tup.sh
+cchc                              logs-and-file.sh  workspaces
+[tomcat-app@ncias-q389-v ~]$ tlogs
+[tomcat-app@ncias-q389-v logs]$ ls
+admin.2011-03-31.log         labviewer.log
+c3pr.log                     localhost.2011-03-31.log
+caaers.hibernate.log         manager.2011-03-31.log
+caaers.log                   profiler-c3pr.log
+catalina.2011-03-31.log      registration-xml-import-c3pr.log
+catalina.2011-04-01.log      studycalendar.log
+catalina.out                 studycalendar-plugins.log
+caXchange.log                study-xml-import-c3pr.log
+ctom.log                     suite-dashboard.log
+host-manager.2011-03-31.log  wsrf-caaers.log
+infrastructure-c3pr.log
+[tomcat-app@ncias-q389-v logs]$ more studycalendar-plugins.log
+11:12:58 |  |  | WARN : No configuration found. Configuring ehcache from ehcache
+-failsafe.xml  found in the classpath: bundle://534.0:1/ehcache-failsafe.xml
+11:13:16 |  |  | WARN : No configuration found. Configuring ehcache from ehcache
+-failsafe.xml  found in the classpath: bundle://534.0:1/ehcache-failsafe.xml
+11:13:16 |  |  | WARN : Creating a new instance of CacheManager using the diskSt
+orePath "/usr/local/ccts/tomcat-app/apache-tomcat-5.5.27/temp" which is already
+used by an existing CacheManager.
+The source of the configuration was classpath.
+The diskStore path for this CacheManager will be set to /usr/local/ccts/tomcat-a
+pp/apache-tomcat-5.5.27/temp/ehcache_auto_created_1301584396130.
+To avoid this warning consider using the CacheManager factory methods to create
+a singleton CacheManager or specifying a separate ehcache configuration (ehcache
+.xml) for each CacheManager instance.
+[tomcat-app@ncias-q389-v logs]$ vi studycalendar-plugins.log
+[tomcat-app@ncias-q389-v logs]$ ls
+admin.2011-03-31.log         labviewer.log
+c3pr.log                     localhost.2011-03-31.log
+caaers.hibernate.log         manager.2011-03-31.log
+caaers.log                   profiler-c3pr.log
+catalina.2011-03-31.log      registration-xml-import-c3pr.log
+catalina.2011-04-01.log      studycalendar.log
+catalina.out                 studycalendar-plugins.log
+caXchange.log                study-xml-import-c3pr.log
+ctom.log                     suite-dashboard.log
+host-manager.2011-03-31.log  wsrf-caaers.log
+infrastructure-c3pr.log
+[tomcat-app@ncias-q389-v logs]$ vi caXchange.log
+[tomcat-app@ncias-q389-v logs]$ ls
+admin.2011-03-31.log         labviewer.log
+c3pr.log                     localhost.2011-03-31.log
+caaers.hibernate.log         manager.2011-03-31.log
+caaers.log                   profiler-c3pr.log
+catalina.2011-03-31.log      registration-xml-import-c3pr.log
+catalina.2011-04-01.log      studycalendar.log
+catalina.out                 studycalendar-plugins.log
+caXchange.log                study-xml-import-c3pr.log
+ctom.log                     suite-dashboard.log
+host-manager.2011-03-31.log  wsrf-caaers.log
+infrastructure-c3pr.log
+[tomcat-app@ncias-q389-v logs]$ ls\
+>
+[tomcat-app@ncias-q389-v logs]$ ls
+admin.2011-03-31.log         labviewer.log
+c3pr.log                     localhost.2011-03-31.log
+caaers.hibernate.log         manager.2011-03-31.log
+caaers.log                   profiler-c3pr.log
+catalina.2011-03-31.log      registration-xml-import-c3pr.log
+catalina.2011-04-01.log      studycalendar.log
+catalina.out                 studycalendar-plugins.log
+caXchange.log                study-xml-import-c3pr.log
+ctom.log                     suite-dashboard.log
+host-manager.2011-03-31.log  wsrf-caaers.log
+infrastructure-c3pr.log
+[tomcat-app@ncias-q389-v logs]$ cd ..
+[tomcat-app@ncias-q389-v apache-tomcat-5.5.27]$ ls
+bin            temp
+common         tempexportedstudy_ccts_qa_002.xml
+conf           tempexportedstudy_ccts_qa_02.xml
+LICENSE        tempexportedstudy_ccts_qa_20.xml
+logs           tempexportedstudy_ccts_qa_223.xml
+NOTICE         tempexportedstudy_ccts_qa_224.xml
+RELEASE-NOTES  tempexportedstudy_ctep2.xml
+RUNNING.txt    webapps
+server         work
+shared
+[tomcat-app@ncias-q389-v apache-tomcat-5.5.27]$ tlogs
+[tomcat-app@ncias-q389-v logs]$ ls
+admin.2011-03-31.log         labviewer.log
+c3pr.log                     localhost.2011-03-31.log
+caaers.hibernate.log         manager.2011-03-31.log
+caaers.log                   profiler-c3pr.log
+catalina.2011-03-31.log      registration-xml-import-c3pr.log
+catalina.2011-04-01.log      studycalendar.log
+catalina.out                 studycalendar-plugins.log
+caXchange.log                study-xml-import-c3pr.log
+ctom.log                     suite-dashboard.log
+host-manager.2011-03-31.log  wsrf-caaers.log
+infrastructure-c3pr.log
+[tomcat-app@ncias-q389-v logs]$ tlogs
+[tomcat-app@ncias-q389-v logs]$ ls
+admin.2011-03-31.log         labviewer.log
+c3pr.log                     localhost.2011-03-31.log
+caaers.hibernate.log         manager.2011-03-31.log
+caaers.log                   profiler-c3pr.log
+catalina.2011-03-31.log      registration-xml-import-c3pr.log
+catalina.2011-04-01.log      studycalendar.log
+catalina.out                 studycalendar-plugins.log
+caXchange.log                study-xml-import-c3pr.log
+ctom.log                     suite-dashboard.log
+host-manager.2011-03-31.log  wsrf-caaers.log
+infrastructure-c3pr.log
+[tomcat-app@ncias-q389-v logs]$ vi studycalendar-plugins.log
+[tomcat-app@ncias-q389-v logs]$ ls
+admin.2011-03-31.log     catalina.out                 localhost.2011-03-31.log          study-xml-import-c3pr.log
+c3pr.log                 caXchange.log                manager.2011-03-31.log            suite-dashboard.log
+caaers.hibernate.log     ctom.log                     profiler-c3pr.log                 wsrf-caaers.log
+caaers.log               host-manager.2011-03-31.log  registration-xml-import-c3pr.log
+catalina.2011-03-31.log  infrastructure-c3pr.log      studycalendar.log
+catalina.2011-04-01.log  labviewer.log                studycalendar-plugins.log
+[tomcat-app@ncias-q389-v logs]$ vi c3pr.log
+[tomcat-app@ncias-q389-v logs]$ ls
+admin.2011-03-31.log  catalina.2011-03-31.log  host-manager.2011-03-31.log  profiler-c3pr.log                 study-xml-import-c3pr.log
+c3pr.log              catalina.2011-04-01.log  infrastructure-c3pr.log      registration-xml-import-c3pr.log  suite-dashboard.log
+c3pr.log.1            catalina.out             labviewer.log                studycalendar.2011-03-31.log.gz   wsrf-caaers.log
+caaers.hibernate.log  caXchange.log            localhost.2011-03-31.log     studycalendar.log
+caaers.log            ctom.log                 manager.2011-03-31.log       studycalendar-plugins.log
+[tomcat-app@ncias-q389-v logs]$ tlogs
+[tomcat-app@ncias-q389-v logs]$ ls
+admin.2011-03-31.log  catalina.2011-03-31.log  host-manager.2011-03-31.log  profiler-c3pr.log                 study-xml-import-c3pr.log
+c3pr.log              catalina.2011-04-01.log  infrastructure-c3pr.log      registration-xml-import-c3pr.log  suite-dashboard.log
+c3pr.log.1            catalina.out             labviewer.log                studycalendar.2011-03-31.log.gz   wsrf-caaers.log
+caaers.hibernate.log  caXchange.log            localhost.2011-03-31.log     studycalendar.log
+caaers.log            ctom.log                 manager.2011-03-31.log       studycalendar-plugins.log
+[tomcat-app@ncias-q389-v logs]$ vi studycalendar.log
+[tomcat-app@ncias-q389-v logs]$ ls
+admin.2011-03-31.log  catalina.2011-03-31.log  host-manager.2011-03-31.log  profiler-c3pr.log                 study-xml-import-c3pr.log
+c3pr.log              catalina.2011-04-01.log  infrastructure-c3pr.log      registration-xml-import-c3pr.log  suite-dashboard.log
+c3pr.log.1            catalina.out             labviewer.log                studycalendar.2011-03-31.log.gz   wsrf-caaers.log
+caaers.hibernate.log  caXchange.log            localhost.2011-03-31.log     studycalendar.log
+caaers.log            ctom.log                 manager.2011-03-31.log       studycalendar-plugins.log
+[tomcat-app@ncias-q389-v logs]$ vi catalina.2011-04-01.log
+Apr 1, 2011 11:10:51 AM org.globus.wsrf.impl.security.authorization.ServiceAuthorizationChain authorize
+INFO: Authorized "/O=caBIG/OU=caGrid/OU=Stage LOA1/OU=Dorian/CN=ccts_rz_stu_co" to invoke "{http://studyconsumer.grid.ccts.nci.nih.gov/StudyConsumer}createStudy".
+Apr 1, 2011 11:10:55 AM org.globus.wsrf.impl.security.authorization.ServiceAuthorizationChain authorize
+INFO: Authorized "/O=caBIG/OU=caGrid/OU=Stage LOA1/OU=Dorian/CN=ccts_rz_stu_co" to invoke "{http://studyconsumer.grid.ccts.nci.nih.gov/StudyConsumer}rollback".
+Apr 1, 2011 11:11:43 AM org.globus.wsrf.impl.security.authorization.ServiceAuthorizationChain authorize
+INFO: Authorized "/O=caBIG/OU=caGrid/OU=Stage LOA1/OU=Dorian/CN=ccts_rz_stu_co" to invoke "{http://studyconsumer.grid.ccts.nci.nih.gov/StudyConsumer}createStudy".
+Apr 1, 2011 11:11:46 AM org.globus.wsrf.impl.security.authorization.ServiceAuthorizationChain authorize
+INFO: Authorized "/O=caBIG/OU=caGrid/OU=Stage LOA1/OU=Dorian/CN=ccts_rz_stu_co" to invoke "{http://studyconsumer.grid.ccts.nci.nih.gov/StudyConsumer}rollback".
+Apr 1, 2011 11:11:55 AM org.globus.wsrf.impl.security.authorization.ServiceAuthorizationChain authorize
+INFO: Authorized "/O=caBIG/OU=caGrid/OU=Stage LOA1/OU=Dorian/CN=ccts_rz_stu_co" to invoke "{http://studyconsumer.grid.ccts.nci.nih.gov/StudyConsumer}createStudy".
+Apr 1, 2011 11:11:58 AM org.globus.wsrf.impl.security.authorization.ServiceAuthorizationChain authorize
+INFO: Authorized "/O=caBIG/OU=caGrid/OU=Stage LOA1/OU=Dorian/CN=ccts_rz_stu_co" to invoke "{http://studyconsumer.grid.ccts.nci.nih.gov/StudyConsumer}rollback".
+Apr 1, 2011 11:12:30 AM org.globus.wsrf.impl.security.authorization.ServiceAuthorizationChain authorize
+INFO: Authorized "/O=caBIG/OU=caGrid/OU=Stage LOA1/OU=Dorian/CN=ccts_rz_stu_co" to invoke "{http://studyconsumer.grid.ccts.nci.nih.gov/StudyConsumer}createStudy".
+Apr 1, 2011 11:12:37 AM org.globus.wsrf.impl.security.authorization.ServiceAuthorizationChain authorize
+INFO: Authorized "/O=caBIG/OU=caGrid/OU=Stage LOA1/OU=Dorian/CN=ccts_rz_stu_co" to invoke "{http://studyconsumer.grid.ccts.nci.nih.gov/StudyConsumer}rollback".
+Apr 1, 2011 11:12:44 AM org.globus.wsrf.impl.security.authorization.ServiceAuthorizationChain authorize
+INFO: Authorized "/O=caBIG/OU=caGrid/OU=Stage LOA1/OU=Dorian/CN=ccts_rz_stu_co" to invoke "{http://studyconsumer.grid.ccts.nci.nih.gov/StudyConsumer}createStudy".
+Apr 1, 2011 11:12:47 AM org.globus.wsrf.impl.security.authorization.ServiceAuthorizationChain authorize
+INFO: Authorized "/O=caBIG/OU=caGrid/OU=Stage LOA1/OU=Dorian/CN=ccts_rz_stu_co" to invoke "{http://studyconsumer.grid.ccts.nci.nih.gov/StudyConsumer}rollback".
+Apr 1, 2011 11:12:56 AM org.globus.wsrf.impl.security.authorization.ServiceAuthorizationChain authorize
+"catalina.2011-04-01.log" 74L, 9089C
