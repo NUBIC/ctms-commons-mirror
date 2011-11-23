@@ -1,6 +1,0 @@
-Mar 30, 2011 11:05:20 AM org.apache.tomcat.util.http.Parameters processParameters
-WARNING: Parameters: Invalid chunk ignored.
-Mar 30, 2011 3:33:42 PM org.globus.wsrf.impl.security.authorization.ServiceAuthorizationChain authorize
-INFO: Authorized "/O=caBIG/OU=caGrid/OU=Stage LOA1/OU=Dorian/CN=ccts_rz_stu_co" to invoke "{http://studyconsumer.grid.ccts.nci.nih.gov/StudyConsumer}createStudy".
-Mar 30, 2011 3:34:26 PM org.globus.wsrf.impl.security.authorization.ServiceAuthorizationChain authorize
-INFO: Authorized "/O=caBIG/OU=caGrid/OU=Stage LOA1/OU=Dorian/CN=ccts_rz_stu_co" to invoke "{http://studyconsumer.grid.ccts.nci.nih.gov/StudyConsumer}rollback".
