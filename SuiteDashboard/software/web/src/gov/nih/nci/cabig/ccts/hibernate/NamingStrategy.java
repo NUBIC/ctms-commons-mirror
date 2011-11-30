@@ -55,6 +55,6 @@ public class NamingStrategy extends ImprovedNamingStrategy {
     @Required
     public void setUppercaseColumnNames(String uppercaseColumnNames) {
     	this.uppercaseColumnNames = uppercaseColumnNames;
-		this.uppercaseColumns = StringUtils.split(uppercaseColumnNames, ',');
+		this.uppercaseColumns = StringUtils.split(uppercaseColumnNames, ",");
 	}
 }
