@@ -76,18 +76,20 @@
         <dependency org="opensymphony" name="sitemesh" rev="2.2.1" />
 
         <!-- ========= Spring =============== -->
-        <dependency org="org.springframework" name="spring" rev="2.5.6" force="true" />
-        <dependency org="org.springframework" name="spring-webmvc" rev="2.5.6"/>
-        <dependency org="org.springframework" name="spring-beans" rev="2.5.6"/>
-        <dependency org="org.springframework" name="spring-context" rev="2.5.6"/>
-        <dependency org="org.springframework" name="spring-jdbc" rev="2.5.6"/>
-	<dependency org="org.springframework" name="spring-core" rev="2.5.6"/>
-        <dependency org="org.springframework" name="spring-aop" rev="2.5.6"/>  
-        <dependency org="org.springframework" name="spring-aspects" rev="2.5.6"/>
-        <dependency org="org.springframework" name="spring-dao" rev="2.5.6"/>
-            
-            
-            
+        <dependency org="org.springframework" name="spring" rev="3.0.6.RELEASE" force="true" />
+        <dependency org="org.springframework" name="spring-webmvc" rev="3.0.6.RELEASE">
+            <exclude org="org.apache.axis" />
+            <exclude org="struts" />
+            <exclude org="javax.faces" />
+        </dependency>
+        <dependency org="org.springframework" name="spring-beans" rev="3.0.6.RELEASE"/>
+        <dependency org="org.springframework" name="spring-context" rev="3.0.6.RELEASE"/>
+        <dependency org="org.springframework" name="spring-jdbc" rev="3.0.6.RELEASE"/>
+	    <dependency org="org.springframework" name="spring-core" rev="3.0.6.RELEASE"/>
+        <dependency org="org.springframework" name="spring-aop" rev="3.0.6.RELEASE"/>
+        <dependency org="org.springframework" name="spring-aspects" rev="3.0.6.RELEASE"/>
+        <dependency org="org.springframework" name="spring-dao" rev="3.0.6.RELEASE"/>
+
         <dependency org="org.acegisecurity" name="acegi-security" rev="1.0.7"  force="true" />
 
         <dependency org="org.slf4j" name="slf4j-api" rev="1.5.11"  />
