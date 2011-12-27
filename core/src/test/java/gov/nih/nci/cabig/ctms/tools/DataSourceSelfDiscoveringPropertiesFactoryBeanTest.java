@@ -15,6 +15,7 @@ import static gov.nih.nci.cabig.ctms.tools.DataSourceSelfDiscoveringPropertiesFa
 public class DataSourceSelfDiscoveringPropertiesFactoryBeanTest extends TestCase {
     private DataSourceSelfDiscoveringPropertiesFactoryBean factoryBean;
     private File thisDir;
+    boolean windowsOS = false;
 
     @Override
     protected void setUp() throws Exception {
@@ -27,6 +28,7 @@ public class DataSourceSelfDiscoveringPropertiesFactoryBeanTest extends TestCase
 
         factoryBean = new TestDataSourcePropertiesFactoryBean();
         factoryBean.setDatabaseConfigurationName("empty");
+        windowsOS = System.getProperty("os.name").toLowerCase().indexOf("win") > -1;
     }
 
     public void testDefaultPropertiesFoundAndBound() throws Exception {
@@ -71,8 +73,13 @@ public class DataSourceSelfDiscoveringPropertiesFactoryBeanTest extends TestCase
         } catch (CommonsConfigurationException cce) {
             assertTrue("Wrong exception thrown: " + cce.getMessage(),
                 cce.getMessage().startsWith("Datasource configuration not found.  Looked in ["));
-            assertTrue("Wrong exception thrown: " + cce.getMessage(),
-                cce.getMessage().contains("/etc/vesuvius/empty.properties"));
+            if(windowsOS){
+                assertTrue("Wrong exception thrown: " + cce.getMessage(),
+                    cce.getMessage().contains("C:\\etc\\vesuvius\\empty.properties"));
+            }else{
+                assertTrue("Wrong exception thrown: " + cce.getMessage(),
+                        cce.getMessage().contains("/etc/vesuvius/empty.properties"));
+            }
         }
     }
 
@@ -89,8 +96,16 @@ public class DataSourceSelfDiscoveringPropertiesFactoryBeanTest extends TestCase
         
         assertNotNull("Locations not preserved", factoryBean.getSearchedLocations());
         assertEquals("Wrong number of locations", 4, factoryBean.getSearchedLocations().size());
-        assertTrue("Missing one of the expected paths",
-            factoryBean.getSearchedLocations().contains("/etc/vesuvius/empty.properties"));
+
+        if(windowsOS){
+            assertTrue("Missing one of the expected paths",
+                    factoryBean.getSearchedLocations().contains("C:\\etc\\vesuvius\\empty.properties"));
+        }else {
+            assertTrue("Missing one of the expected paths",
+                    factoryBean.getSearchedLocations().contains("/etc/vesuvius/empty.properties"));
+        }
+        
+
     }
 
     public void testCatalinaBasePreferredOverCatalinaHome() throws Exception {

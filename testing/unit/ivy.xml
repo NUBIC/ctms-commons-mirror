@@ -7,11 +7,59 @@
     <include file="../../ivy/default-configurations.xml"/>
   </configurations>
 
-  <dependencies>
-    <dependency name="ctms-commons-lang" rev="latest.integration"/>
+  <dependencies  defaultconfmapping="*->default" defaultconf="*->default" >
+      <!-- Adding common testing dependences, so that it will be easy in other modules -->
+    <dependency org="gov.nih.nci.cabig.ctms" name="ctms-commons-lang" rev="latest.integration" conf="*->runtime"/>
     <dependency org="org.slf4j" name="slf4j-api" rev="${lib.slf4j.rev}"/>
-    <dependency org="org.junit" name="com.springsource.org.junit" rev="${lib.junit.rev}"/>
-    <dependency org="org.easymock" name="easymock" rev="2.2"/>
-    <dependency org="org.easymock" name="easymockclassextension" rev="2.2.2"/>
+    <dependency  org="org.slf4j" name="slf4j-simple" rev="${lib.slf4j.rev}"/>
+    <dependency org="junit" name="junit" rev="${lib.junit.rev}"/>
+    <dependency org="org.easymock" name="easymock" rev="${lib.easymock.rev}"/>
+    <dependency org="org.easymock" name="easymockclassextension" rev="${lib.easymock-classext.rev}"/>
+    <dependency  org="org.dbunit" name="dbunit" rev="${lib.dbunit.rev}"/>
+    <dependency  org="postgresql" name="postgresql" rev="8.2-504.jdbc3"/>
+    <dependency  org="com.oracle" name="ojdbc14" rev="10.2.0.4.0"/>
+    <dependency org="org.hsqldb" name="hsqldb" rev="${lib.hsqldb.rev}" />
+    <dependency org="org.springframework" name="spring-test" rev="${lib.spring.rev}"  />
+
+      <!-- Spring Framework & Acegi and its dependencies -->
+      <dependency org="org.springframework" name="spring-orm" rev="${lib.spring.rev}" conf="compile->default">
+          <exclude org="org.hibernate"/>
+          <exclude org="javax.ejb"/>
+          <exclude org="org.slf4j" />
+          <exclude org="com.oracle"/>      <!-- Oracle was excluded previously -->
+          <exclude org="com.oracle.toplink"/>
+          <exclude  org="toplink.essentials"/>
+          <exclude  org="org.eclipse.persistence"/>  <!-- excluding as it is not available in MVN public repos -->
+      </dependency>
+      <dependency org="org.acegisecurity" name="acegi-security" rev="${lib.acegi.rev}" conf="compile->default">
+          <exclude org="org.springframework" />
+          <exclude org="log4j" />
+      </dependency>
+
+    <dependency org="commons-dbcp" name="commons-dbcp" rev="1.2.2"/>
+
+
+
+    <!-- Hibernate -->
+    <dependency org="org.hibernate" name="hibernate-core" rev="${lib.hibernate.rev}"  conf="compile->default">
+      <exclude org="cglib" />
+      <exclude org="org.slf4j" />
+      <exclude org="org.jboss.javaee" />      <!-- excluding as it is not found in any repo -->
+    </dependency>
+    <dependency org="org.hibernate" name="hibernate-commons-annotations" rev="${lib.hibernate-annotations.rev}" conf="compile->default"/>
+    <dependency org="org.hibernate" name="hibernate-validator" rev="${lib.hibernate-validator.rev}"  conf="compile->default"/>
+
+    <!-- Java Assist (for hibernate)-->
+    <dependency org="javassist" name="javassist" rev="3.12.0.GA"  conf="compile->default"/>
+
+    <!--  dependency on AspectJ -->
+    <dependency org="org.aspectj" name="aspectjrt" rev="${lib.aspectj.rev}" conf="compile->default"/>
+    <dependency org="org.aspectj" name="aspectjweaver" rev="${lib.aspectj.rev}" conf="compile->default"/>
+
+      <!-- Caching -->
+      <dependency org="net.sf.ehcache" name="ehcache-core" rev="${lib.ehcache.rev}" conf="compile->default">
+          <exclude org="org.slf4j"   />
+      </dependency>
+
   </dependencies>
 </ivy-module>

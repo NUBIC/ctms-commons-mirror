@@ -8,28 +8,26 @@
   </configurations>
 
   <dependencies>
-    <dependency name="ctms-commons-base" rev="latest.integration"/>
-    <dependency name="ctms-commons-core" rev="latest.integration"/>
-    <dependency name="ctms-commons-lang" rev="latest.integration"/>
+    <!-- Core module -->
+    <dependency name="ctms-commons-core" rev="latest.integration"  conf="compile->runtime;unit-test->*"/>
 
-    <!-- TODO: exclude this from runtime somehow -->
-    <dependency org="javax.servlet" name="com.springsource.javax.servlet" rev="${lib.servlet.rev}" />
+    <!-- Spring -->
+    <dependency org="org.springframework" name="spring-webmvc" rev="${lib.spring.rev}"  conf="compile->default" >
+      <exclude org="org.apache.axis" />
+      <exclude org="struts" />
+      <exclude org="javax.faces" />
+      <exclude org="org.slf4j" />
+      <exclude org="log4j" />
+    </dependency>
 
-    <dependency org="org.springframework" name="org.springframework.beans"        rev="${lib.spring.rev}"/>
-    <dependency org="org.springframework" name="org.springframework.context"      rev="${lib.spring.rev}"/>
-    <dependency org="org.springframework" name="org.springframework.core"         rev="${lib.spring.rev}"/>
-    <dependency org="org.springframework" name="org.springframework.web"          rev="${lib.spring.rev}"/>
-    <dependency org="org.springframework" name="org.springframework.web.servlet"  rev="${lib.spring.rev}"/>
 
-    <dependency org="org.slf4j" name="slf4j-api" rev="${lib.slf4j.rev}"/>
-    <dependency org="com.opensymphony.sitemesh" name="com.springsource.com.opensymphony.sitemesh" rev="2.4.1" />
-    <dependency org="org.apache.commons" name="com.springsource.org.apache.commons.lang" rev="${lib.jakarta-commons.lang.rev}"/>
+    <!-- Servlet & Sitemesh -->
+    <dependency org="javax.servlet" name="servlet-api" rev="${lib.servlet.rev}" conf="compile,unit-test->default"/>
+    <!--<dependency org="jspapi" name="jsp-api" rev="${lib.jsp.rev}" conf="compile,unit-test->default"/>-->
+    <dependency org="opensymphony" name="sitemesh" rev="2.2.1" conf="compile->default" />
 
-    <!-- TEST -->
-    <dependency name="ctms-commons-testing-unit" rev="latest.integration" conf="unit-test->runtime"/>
-    <dependency conf="unit-test->*" org="org.slf4j" name="slf4j-simple" rev="${lib.slf4j.rev}"/>
-    <dependency conf="unit-test->*" org="org.slf4j" name="jcl-over-slf4j" rev="${lib.slf4j.rev}"/>
-    <dependency org="org.springframework" name="org.springframework.test" rev="${lib.spring.rev}" conf="unit-test->*"/>
-    <exclude org="com.oracle.oc4j"/>
+      <!-- TEST -->
+    <dependency name="ctms-commons-testing-unit" rev="latest.integration" conf="unit-test->*"/>
+
   </dependencies>
 </ivy-module>

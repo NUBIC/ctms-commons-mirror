@@ -8,34 +8,43 @@
   </configurations>
 
   <dependencies>
-    <dependency org="gov.nih.nci.security" name="csm" rev="${lib.csm.rev}"/>
 
-    <dependency org="org.acegisecurity" name="com.springsource.org.acegisecurity" rev="${lib.acegi.rev}" />
-    <dependency org="org.aspectj" name="com.springsource.org.aspectj.runtime" rev="1.6.8.RELEASE" />
-    <dependency org="org.hibernate" name="com.springsource.org.hibernate" rev="${lib.hibernate.rev}"/>
-    <dependency org="org.slf4j" name="slf4j-api" rev="${lib.slf4j.rev}"/>
+    <!-- CSM deps -->
+    <dependency org="gov.nih.nci.security" name="csm" rev="${lib.csm.rev}" conf="compile->runtime">
+      <exclude org="org.hibernate" />
+    </dependency>
 
-    <dependency org="org.springframework" name="org.springframework.aop"         rev="${lib.spring.rev}"/>
-    <dependency org="org.springframework" name="org.springframework.beans"       rev="${lib.spring.rev}"/>
-    <dependency org="org.springframework" name="org.springframework.core"        rev="${lib.spring.rev}"/>
-    <dependency org="org.springframework" name="org.springframework.context"     rev="${lib.spring.rev}"/>
-    <dependency org="org.springframework" name="org.springframework.orm"         rev="${lib.spring.rev}" conf="*->hibernate"/>
-    <dependency org="org.springframework" name="org.springframework.transaction" rev="${lib.spring.rev}"/>
-    <dependency org="org.springframework" name="org.springframework.web"         rev="${lib.spring.rev}"/>
+    <!--  dependency on AspectJ -->
+    <dependency org="org.aspectj" name="aspectjrt" rev="${lib.aspectj.rev}" conf="compile->default"/>
+    <dependency org="org.aspectj" name="aspectjweaver" rev="${lib.aspectj.rev}" conf="compile->default"/>
 
-    <!-- TODO: exclude these from runtime somehow -->
-    <dependency org="javax.servlet" name="com.springsource.javax.servlet" rev="${lib.servlet.rev}" />
-    <dependency org="javax.servlet" name="com.springsource.javax.servlet.jsp" rev="${lib.jsp.rev}" />
+    <!-- Spring Framework & Acegi and its dependencies -->
+    <dependency org="org.springframework" name="spring-tx" rev="${lib.spring.rev}" conf="compile->default">
+      <exclude org="org.slf4j" />
+    </dependency>
+    <dependency org="org.springframework" name="spring-web" rev="${lib.spring.rev}" conf="compile->default">
+      <exclude org="org.slf4j" />
+    </dependency>
+    <dependency org="org.acegisecurity" name="acegi-security" rev="${lib.acegi.rev}" conf="compile->default">
+      <exclude org="org.springframework" />
+      <exclude org="log4j" />
+    </dependency>
+
+    <dependency org="org.jdom" name="jdom" rev="1.1" conf="compile->default"/>
+
+
+    <!-- Servlet & Sitemesh -->
+    <dependency org="javax.servlet" name="servlet-api" rev="${lib.servlet.rev}" conf="compile->default"/>
+    <dependency org="jspapi" name="jsp-api" rev="${lib.jsp.rev}" conf="compile->default"/>
+
+    <!-- Logging , making sure we override what Spring/Hibernate brings -->
+    <dependency  org="org.slf4j" name="slf4j-simple" rev="${lib.slf4j.rev}"  conf="compile->default"/>
+    <dependency org="org.slf4j" name="slf4j-api" rev="${lib.slf4j.rev}"  conf="compile->default" />
+    <dependency org="org.slf4j" name="jcl-over-slf4j" rev="${lib.slf4j.rev}"  conf="compile->default"/>
+
 
     <!-- TEST -->
-    <dependency conf="unit-test->*" org="org.slf4j" name="slf4j-simple" rev="${lib.slf4j.rev}"/>
-    <dependency conf="unit-test->*" org="org.slf4j" name="jcl-over-slf4j" rev="${lib.slf4j.rev}"/>
-    <dependency conf="unit-test->*" org="org.easymock" name="easymock" rev="2.2"/>
-    <dependency conf="unit-test->*" org="org.easymock" name="easymockclassextension" rev="2.2.2"/>
+    <dependency name="ctms-commons-testing-unit" rev="latest.integration" conf="unit-test->*"/>
 
-    <exclude org="org.springframework" module="spring" matcher="exact"/>
-    <exclude module="com.springsource.slf4j.api"/>
-    <exclude org="log4j"/>
-    <exclude org="com.oracle.oc4j"/>
   </dependencies>
 </ivy-module>

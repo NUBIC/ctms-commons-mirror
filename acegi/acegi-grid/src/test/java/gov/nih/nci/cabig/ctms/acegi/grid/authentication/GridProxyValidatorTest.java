@@ -3,10 +3,10 @@
  */
 package gov.nih.nci.cabig.ctms.acegi.grid.authentication;
 
-import gov.nih.nci.cagrid.gridca.common.CRLEntry;
-import gov.nih.nci.cagrid.gridca.common.CertUtil;
-import gov.nih.nci.cagrid.gridca.common.KeyUtil;
-import gov.nih.nci.cagrid.gridca.common.ProxyCreator;
+import org.cagrid.gaards.pki.CRLEntry;
+import org.cagrid.gaards.pki.CertUtil;
+import org.cagrid.gaards.pki.KeyUtil;
+import org.cagrid.gaards.pki.ProxyCreator;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

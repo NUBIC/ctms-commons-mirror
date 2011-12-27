@@ -8,25 +8,61 @@
   </configurations>
 
   <dependencies>
-    <dependency org="org.acegisecurity" name="com.springsource.org.acegisecurity" rev="${lib.acegi.rev}" />
-    <dependency org="net.sourceforge.ehcache" name="com.springsource.net.sf.ehcache" rev="1.5.0" />
 
-    <dependency org="org.hibernate" name="com.springsource.org.hibernate" rev="${lib.hibernate.rev}"/>
-    <dependency org="org.hibernate" name="com.springsource.org.hibernate.annotations" rev="${lib.hibernate-annotations.rev}"/>
-    <dependency org="javax.persistence" name="com.springsource.javax.persistence" rev="1.0.0" />
+      <!-- Acegi Security -->
+      <dependency org="org.acegisecurity" name="acegi-security" rev="${lib.acegi.rev}" conf="compile->default">
+          <exclude org="org.springframework" />
+          <exclude org="log4j" />
+      </dependency>
 
-    <dependency org="org.springframework" name="org.springframework.beans"           rev="${lib.spring.rev}"/>
-    <dependency org="org.springframework" name="org.springframework.core"            rev="${lib.spring.rev}"/>
-    <dependency org="org.springframework" name="org.springframework.orm"             rev="${lib.spring.rev}" conf="*->hibernate"/>
-    <dependency org="org.springframework" name="org.springframework.transaction"     rev="${lib.spring.rev}"/>
+      <!-- Spring Framework and its dependencies -->
+      <dependency org="org.springframework" name="spring-orm" rev="${lib.spring.rev}" conf="compile->default">
+          <exclude org="org.hibernate"/>
+          <exclude org="javax.ejb"/>
+          <exclude org="org.slf4j" />
+          <exclude org="com.oracle"/>      <!-- Oracle was excluded previously -->
+          <exclude org="com.oracle.toplink"/>
+          <exclude  org="toplink.essentials"/>
+          <exclude  org="org.eclipse.persistence"/>  <!-- excluding as it is not available in MVN public repos -->
+      </dependency>
+      <dependency org="org.springframework" name="spring-context-support" rev="${lib.spring.rev}" conf="compile->default">
+          <exclude org="org.hibernate"/>
+          <exclude org="javax.ejb"/>
+          <exclude org="org.slf4j" />
+      </dependency>
+
+      <!-- Hibernate -->
+      <dependency org="org.hibernate" name="hibernate-core" rev="${lib.hibernate.rev}"  conf="compile->default">
+          <exclude org="cglib" />
+          <exclude org="org.slf4j" />
+          <exclude org="org.jboss.javaee" />      <!-- excluding as it is not found in any repo -->
+      </dependency>
+      <dependency org="org.hibernate" name="hibernate-commons-annotations" rev="${lib.hibernate-annotations.rev}" conf="compile->default"/>
+      <dependency org="org.hibernate" name="hibernate-validator" rev="${lib.hibernate-validator.rev}"  conf="compile->default"/>
+
+      <!-- Java Assist (for hibernate)-->
+      <dependency org="javassist" name="javassist" rev="3.12.0.GA"  conf="compile->default"/>
+
+      <!-- Caching -->
+      <dependency org="net.sf.ehcache" name="ehcache-core" rev="${lib.ehcache.rev}" conf="compile->default">
+          <exclude org="org.slf4j"   />
+      </dependency>
+
+
+      <!--  dependency on AspectJ -->
+      <dependency org="org.aspectj" name="aspectjrt" rev="${lib.aspectj.rev}" conf="compile->default"/>
+      <dependency org="org.aspectj" name="aspectjweaver" rev="${lib.aspectj.rev}" conf="compile->default"/>
+
+      <!-- Logging , making sure we override what Spring/Hibernate brings -->
+      <dependency  org="org.slf4j" name="slf4j-simple" rev="${lib.slf4j.rev}"  conf="compile->default"/>
+      <dependency org="org.slf4j" name="slf4j-api" rev="${lib.slf4j.rev}"  conf="compile->default" />
+      <dependency org="org.slf4j" name="jcl-over-slf4j" rev="${lib.slf4j.rev}"  conf="compile->default"/>
+
+      <dependency org="org.jdom" name="jdom" rev="1.1" conf="compile->default"/>
 
     <!-- TEST -->
-    <dependency conf="unit-test->*" org="org.slf4j" name="slf4j-simple" rev="${lib.slf4j.rev}"/>
-    <dependency conf="unit-test->*" org="org.slf4j" name="jcl-over-slf4j" rev="${lib.slf4j.rev}"/>
-    <dependency conf="unit-test->*" org="org.apache.commons" name="com.springsource.org.apache.commons.dbcp" rev="${lib.jakarta-commons.dbcp.rev}"/>
-    <dependency conf="unit-test->*" org="org.hsqldb" name="com.springsource.org.hsqldb" rev="${lib.hsqldb.rev}"/>
-    <dependency conf="unit-test->*" org="org.springframework" name="org.springframework.context.support" rev="${lib.spring.rev}"/>
+    <dependency org="gov.nih.nci.cabig.ctms" name="ctms-commons-testing-unit" rev="latest.integration" conf="unit-test->*" />
 
-    <exclude module="com.springsource.slf4j.api"/>
+
   </dependencies>
 </ivy-module>

@@ -55,17 +55,22 @@
 			<dependency org="gov.nih.nci.cabig.ctms" name="ctms-commons-lang" rev="${ctms.version}" transitive="false" />
 			
         	<!--  AXIS unofficial versions -->
+			<!--cvr
         	<dependency org="axis" name="axis" rev="1.4" />
         	<dependency org="axis-unofficial" name="addressing" rev="1.0" />
-        	
+        	cvr-->
+			
         	<!--  Apache Commons -->
+			<!--cvr
         	<dependency org="commons-lang" name="commons-lang" rev="2.3" />
         	<dependency org="commons-logging" name="commons-logging" rev="1.1" />
+			cvr-->
         	
         	<!-- Spring/ Spring Modules -->
-        	<dependency org="org.springframework" name="spring" rev="2.0.2" force="true"/>
+        	<dependency org="org.springframework" name="spring" rev="${lib.spring.rev}"/>
+			<!--cvr
         	<dependency org="org.acegisecurity" name="acegi-security" rev="1.0.3" />
-        	
+        	cvr-->
 
 			<!-- caGRID related --> 			
  			<dependency org="gov.nih.nci.security" name="csmapi" rev="3.2"/>
@@ -73,6 +78,7 @@
  			<dependency org="gov.nih.nci.security" name="csmapi" rev="3.2"/>
  			
 			<!--  Globus-caGRID  -->
+			<!--cvr
 			<dependency org="org.globus" name="globus-wsrf-mds-aggregator" rev="4.0-cagrid1.0" />
 			<dependency org="org.globus" name="globus-wsrf-mds-aggregator-stubs" rev="4.0-cagrid1.0" />
 			<dependency org="org.globus" name="globus-wsrf-servicegroup" rev="4.0-cagrid1.0" />
@@ -87,19 +93,19 @@
 			<dependency org="cryptix" name="cryptix-impl" rev="3.2-cagrid1.0" />
 			<dependency org="cryptix" name="cryptix-asn1" rev="3.2-cagrid1.0" />
 			<dependency org="bouncycastle" name="bouncycastle-jce-jdk13" rev="125-cagrid1.0" />
+			cvr-->
 			
-			
-		
 			<!--  Castor -->
+			<!--cvr
 			<dependency org="castor" name="castor" rev="0.9.9"/>
-			
-			
-						
+			cvr-->
 			<!-- Test only dependencies -->
 			<dependency org="gov.nih.nci.cabig.caaers" name="caaers-core" conf="test->test(default)" rev="latest.integration" />
+			<!--cvr
 			<dependency org="dbunit" name="dbunit" rev="2.1" conf="test->default"/>
 			<dependency org="org.springframework" name="spring-mock" rev="2.0.2" force="true" conf="test->default" />
         	<dependency org="xmlunit" name="xmlunit" rev="1.0" conf="test->default" />
         	<dependency org="cobertura" name="cobertura" rev="1.8" conf="test->default(*)"/>
+			cvr-->
         </dependencies>
 </ivy-module>

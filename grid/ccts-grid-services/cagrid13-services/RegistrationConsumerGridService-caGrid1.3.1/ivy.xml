@@ -58,6 +58,7 @@
 				<artifact name="ServiceSecurityProvider-service" />
 				<artifact name="ServiceSecurityProvider-stubs" />
 			</dependency> 	
+			<!--cvr
 			<dependency org="globus" name="mds" rev="4.0.3">
 				<artifact name="globus_wsrf_servicegroup_stubs" />
 				<artifact name="globus_wsrf_servicegroup" />
@@ -66,8 +67,9 @@
 			</dependency>	
 			<dependency org="castor" name="castor" rev="0.9.9"/>
 			<dependency org="jdom" name="jdom" rev="1.0" />
+			cvr-->
 			<!-- Spring Module jars -->	
-	        	<dependency org="org.springframework" name="spring" rev="2.0.2" force="true"/>	
+	        <dependency org="org.springframework" name="spring" rev="${lib.spring.rev}" />	
         	
         </dependencies>
 </ivy-module>
