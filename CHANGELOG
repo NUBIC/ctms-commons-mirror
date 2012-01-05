@@ -24,6 +24,8 @@ ctms-commons history
 
 - Update Spring dependency to 3.0.7.
 
+- Update Hibernate dependency to 3.6.4.Final.
+
 1.0.9
 -----
 

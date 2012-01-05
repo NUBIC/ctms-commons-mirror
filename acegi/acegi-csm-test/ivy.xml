@@ -39,5 +39,6 @@
     <exclude org="aspectj"/>
     <exclude org="com.bea.wlplatform"/>
     <exclude org="log4j"/>
+    <exclude org="org.jboss.javaee"/>
   </dependencies>
 </ivy-module>

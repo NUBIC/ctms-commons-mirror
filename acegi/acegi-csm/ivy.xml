@@ -69,6 +69,7 @@
     <exclude org="org.codehaus.groovy"/>
     <exclude org="org.eclipse.persistence"/>
     <exclude org="org.jruby"/>
+    <exclude org="org.jboss.javaee"/>
     <exclude org="org.freemarker"/>
     <exclude org="org.apache.poi"/>
     <exclude org="log4j"/>

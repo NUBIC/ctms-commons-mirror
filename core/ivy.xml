@@ -12,7 +12,7 @@
     <dependency name="ctms-commons-lang" rev="latest.integration" conf="compile->runtime;%->@"/>
 
     <dependency org="org.hibernate" name="hibernate-core" rev="${lib.hibernate.rev}"/>
-    <dependency org="org.hibernate" name="hibernate-annotations" rev="${lib.hibernate-annotations.rev}"/>
+    <dependency org="org.hibernate" name="hibernate-validator" rev="${lib.hibernate-validator.rev}" conf="compile->default"/>
     <dependency org="javax.persistence" name="persistence-api" rev="1.0" />
 
     <dependency org="org.springframework" name="spring-beans"        rev="${lib.spring.rev}"/>
@@ -55,6 +55,7 @@
     <exclude org="org.beanshell"/>
     <exclude org="org.codehaus.groovy"/>
     <exclude org="org.eclipse.persistence"/>
+    <exclude org="org.jboss.javaee"/>
     <exclude org="org.jruby"/>
     <exclude org="toplink-essentials"/>
   </dependencies>
