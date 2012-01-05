@@ -69,10 +69,10 @@ public class DataSourceSelfDiscoveringPropertiesFactoryBeanTest extends TestCase
             factoryBean.getObject();
             fail("Exception not thrown");
         } catch (CommonsConfigurationException cce) {
-            assertTrue("Wrong exception thrown: " + cce.getMessage(),
+            assertTrue("Exception has wrong message: " + cce.getMessage(),
                 cce.getMessage().startsWith("Datasource configuration not found.  Looked in ["));
-            assertTrue("Wrong exception thrown: " + cce.getMessage(),
-                cce.getMessage().contains("/etc/vesuvius/empty.properties"));
+            assertTrue("Exception missing path: " + cce.getMessage(),
+                cce.getMessage().contains(new File("/etc/vesuvius/empty.properties").getAbsolutePath()));
         }
     }
 
@@ -89,8 +89,8 @@ public class DataSourceSelfDiscoveringPropertiesFactoryBeanTest extends TestCase
         
         assertNotNull("Locations not preserved", factoryBean.getSearchedLocations());
         assertEquals("Wrong number of locations", 4, factoryBean.getSearchedLocations().size());
-        assertTrue("Missing one of the expected paths",
-            factoryBean.getSearchedLocations().contains("/etc/vesuvius/empty.properties"));
+        assertTrue("Missing one of the expected paths: " + factoryBean.getSearchedLocations(),
+            factoryBean.getSearchedLocations().contains(new File("/etc/vesuvius/empty.properties").getAbsolutePath()));
     }
 
     public void testCatalinaBasePreferredOverCatalinaHome() throws Exception {
