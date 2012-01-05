@@ -32,9 +32,9 @@
 
     <dependency org="caGrid" name="authentication-service" rev="${lib.cagrid.rev}" conf="*->client"/>
     <dependency org="caGrid" name="authz"       rev="${lib.cagrid.rev}"/>
-    <dependency org="caGrid" name="core"        rev="${lib.cagrid.rev}"/>
     <dependency org="caGrid" name="dorian"      rev="${lib.cagrid.rev}" conf="*->client"/>
-    <dependency org="caGrid" name="gridca"      rev="${lib.cagrid.rev}"/>
+    <dependency org="caGrid" name="dorian-deprecated" rev="1.2"/>
+    <dependency org="caGrid" name="gaards-core" rev="${lib.cagrid.rev}"/>
     <dependency org="caGrid" name="gridgrouper" rev="${lib.cagrid.rev}" conf="*->client"/>
     <dependency org="caGrid" name="service-security-provider" rev="${lib.cagrid.rev}" conf="*->client"/>
 

@@ -3,10 +3,15 @@
  */
 package gov.nih.nci.cabig.ctms.acegi.grid.authentication;
 
-import gov.nih.nci.cagrid.gridca.common.CRLEntry;
-import gov.nih.nci.cagrid.gridca.common.CertUtil;
-import gov.nih.nci.cagrid.gridca.common.KeyUtil;
-import gov.nih.nci.cagrid.gridca.common.ProxyCreator;
+import junit.framework.TestCase;
+import org.bouncycastle.asn1.x509.CRLReason;
+import org.bouncycastle.asn1.x509.X509Name;
+import org.bouncycastle.jce.PKCS10CertificationRequest;
+import org.cagrid.gaards.pki.CRLEntry;
+import org.cagrid.gaards.pki.CertUtil;
+import org.cagrid.gaards.pki.KeyUtil;
+import org.cagrid.gaards.pki.ProxyCreator;
+import org.globus.gsi.GlobusCredential;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -17,13 +22,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
-
-import org.bouncycastle.asn1.x509.CRLReason;
-import org.bouncycastle.asn1.x509.X509Name;
-import org.bouncycastle.jce.PKCS10CertificationRequest;
-import org.globus.gsi.GlobusCredential;
-
-import junit.framework.TestCase;
 
 /**
  * @author <a href="mailto:joshua.phillips@semanticbits.com">Joshua Phillips</a>
