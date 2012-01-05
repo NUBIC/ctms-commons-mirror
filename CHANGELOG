@@ -22,6 +22,8 @@ ctms-commons history
   later. The ctms-commons version has been deprecated since at least
   ctms-commons 1.0.0.
 
+- Update Spring dependency to 3.0.7.
+
 1.0.9
 -----
 

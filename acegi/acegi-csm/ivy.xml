@@ -37,6 +37,7 @@
     <exclude org="org.springframework" module="spring" matcher="exact"/>
     <exclude org="org.springframework" module="spring-ldap" matcher="exact"/>
     <exclude org="org.hibernate" module="hibernate" matcher="exact"/>
+    <exclude org="org.hibernate" module="com.springsource.org.hibernate.validator" matcher="exact"/>
 
     <exclude org="javax.ejb"/>
     <exclude org="javax.faces"/>
@@ -49,6 +50,7 @@
     <exclude org="com.bea.wlplatform"/>
     <exclude org="com.caucho"/>
     <exclude org="com.experlog"/>
+    <exclude org="com.ibm.websphere"/>
     <exclude org="com.lowagie"/>
     <exclude org="com.jamonapi"/>
     <exclude org="com.oracle"/>
@@ -63,12 +65,17 @@
     <exclude org="org.apache.axis"/>
     <exclude org="org.apache.ibatis"/>
     <exclude org="org.apache.tiles"/>
+    <exclude org="org.beanshell"/>
+    <exclude org="org.codehaus.groovy"/>
+    <exclude org="org.eclipse.persistence"/>
+    <exclude org="org.jruby"/>
     <exclude org="org.freemarker"/>
-    <exclude org="poi"/>
+    <exclude org="org.apache.poi"/>
     <exclude org="log4j"/>
     <exclude org="servletapi"/>
     <exclude org="struts"/>
     <exclude org="velocity"/>
     <exclude org="velocity-tools"/>
+    <exclude org="toplink-essentials"/>
   </dependencies>
 </ivy-module>

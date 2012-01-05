@@ -34,6 +34,8 @@
     <dependency org="org.slf4j" name="slf4j-simple" rev="${lib.slf4j.rev}" conf="unit-test->default"/>
     <dependency org="org.hsqldb" name="hsqldb" rev="${lib.hsqldb.rev}" conf="unit-test->*"/>
 
+    <exclude module="com.springsource.org.hibernate.validator"/>
+
     <exclude org="javax.ejb"/>
     <exclude org="javax.jdo"/>
     <exclude org="javax.jms"/>
@@ -43,11 +45,17 @@
     <exclude org="commons-logging"/>
     <exclude org="com.bea.wlplatform"/>
     <exclude org="com.experlog"/>
+    <exclude org="com.ibm.websphere"/>
     <exclude org="com.oracle"/>
     <exclude org="com.oracle.oc4j"/>
     <exclude org="com.oracle.toplink"/>
     <exclude org="jotm"/>
     <exclude org="log4j"/>
     <exclude org="org.apache.ibatis"/>
+    <exclude org="org.beanshell"/>
+    <exclude org="org.codehaus.groovy"/>
+    <exclude org="org.eclipse.persistence"/>
+    <exclude org="org.jruby"/>
+    <exclude org="toplink-essentials"/>
   </dependencies>
 </ivy-module>

@@ -31,6 +31,7 @@
 
     <exclude org="org.springframework" module="spring" matcher="exact"/>
     <exclude org="ant" module="ant" matcher="exact"/>
+    <exclude org="org.hibernate" module="com.springsource.org.hibernate.validator" matcher="exact"/>
 
     <exclude org="javax.ejb"/>
     <exclude org="javax.jms"/>

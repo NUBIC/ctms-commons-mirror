@@ -39,8 +39,11 @@
     <exclude org="javax.resource"/>
     <exclude org="bouncycastle"/>
     <exclude org="com.bea.wlplatform"/>
+    <exclude org="com.bea.commonj"/>
+    <exclude org="com.ibm.websphere"/>
     <exclude org="com.oracle"/>
     <exclude org="com.oracle.toplink"/>
     <exclude org="log4j"/>
+    <exclude org="org.eclipse.persistence"/>
   </dependencies>
 </ivy-module>

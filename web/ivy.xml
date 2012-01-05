@@ -31,13 +31,17 @@
     <dependency conf="unit-test->*" org="org.slf4j" name="jcl-over-slf4j" rev="${lib.slf4j.rev}"/>
     <dependency org="org.springframework" name="spring-test" rev="${lib.spring.rev}" conf="unit-test->*"/>
 
+    <exclude module="com.springsource.org.hibernate.validator"/>
+
     <exclude org="javax.ejb"/>
     <exclude org="javax.faces"/>
     <exclude org="javax.jms"/>
     <exclude org="ant"/>
+    <exclude org="apache-taglibs"/>
     <exclude org="bouncycastle"/>
     <exclude org="com.bea.wlplatform"/>
     <exclude org="com.caucho"/>
+    <exclude org="com.ibm.websphere"/>
     <exclude org="com.lowagie"/>
     <exclude org="com.oracle.oc4j"/>
     <exclude org="commons-logging"/>
@@ -45,8 +49,12 @@
     <exclude org="jasperreports"/>
     <exclude org="log4j"/>
     <exclude org="org.apache.tiles"/>
+    <exclude org="org.beanshell"/>
+    <exclude org="org.codehaus.groovy"/>
+    <exclude org="org.eclipse.persistence"/>
     <exclude org="org.freemarker"/>
-    <exclude org="poi"/>
+    <exclude org="org.jruby"/>
+    <exclude org="org.apache.poi"/>
     <exclude org="struts"/>
     <exclude org="velocity"/>
     <exclude org="velocity-tools"/>

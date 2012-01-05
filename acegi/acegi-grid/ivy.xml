@@ -52,14 +52,18 @@
     <exclude org="springframework" module="spring" matcher="exact"/>     <!-- from cagrid -->
     <exclude org="cacore" module="csm"/>                                 <!-- from cagrid -->
     <exclude org="jakarta" module="commons-discovery"/>                  <!-- from cbiit/globus -->
+    <exclude module="com.springsource.org.hibernate.validator"/>
 
     <exclude org="javax.ejb"/>
     <exclude org="javax.faces"/>
     <exclude org="javax.jms"/>
     <exclude org="javax.resource"/>
     <exclude org="ant"/>
+    <exclude org="com.bea.commonk"/>
     <exclude org="com.bea.wlplatform"/>
+    <exclude org="com.caucho"/>
     <exclude org="com.oracle"/>
+    <exclude org="com.ibm.websphere"/>
     <exclude org="com.oracle.oc4j"/>
     <exclude org="com.oracle.toplink"/>
     <exclude org="commons-logging"/>
