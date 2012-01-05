@@ -7,6 +7,13 @@ ctms-commons history
 ### all
 
 - Update dev env to JRuby 1.6.2 and buildr 1.4.6.
+- Replace Spring EBR dependencies with standard M2 versions. While I
+  (RMS) am opposed to this, none of the other projects use OSGi
+  (yet). Since PSC uses whitelisted dependencies anyway, it only
+  benefits from ctms-commons using EBR deps insofar as it ensures that
+  ctms-commons only uses EBR-available versions of things. The
+  benefits to the other projects (which all use ivy's transitive
+  dependency support) probably outweigh PSC's concern.
 
 1.0.9
 -----

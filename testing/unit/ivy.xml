@@ -10,7 +10,7 @@
   <dependencies>
     <dependency name="ctms-commons-lang" rev="latest.integration"/>
     <dependency org="org.slf4j" name="slf4j-api" rev="${lib.slf4j.rev}"/>
-    <dependency org="org.junit" name="com.springsource.org.junit" rev="${lib.junit.rev}"/>
+    <dependency org="junit" name="junit" rev="${lib.junit.rev}"/>
     <dependency org="org.easymock" name="easymock" rev="2.2"/>
     <dependency org="org.easymock" name="easymockclassextension" rev="2.2.2"/>
   </dependencies>

@@ -8,28 +8,47 @@
   </configurations>
 
   <dependencies>
-    <dependency name="ctms-commons-base" rev="latest.integration"/>
-    <dependency name="ctms-commons-core" rev="latest.integration"/>
-    <dependency name="ctms-commons-lang" rev="latest.integration"/>
+    <dependency name="ctms-commons-base" rev="latest.integration" conf="compile->runtime;%->@"/>
+    <dependency name="ctms-commons-core" rev="latest.integration" conf="compile->runtime;%->@"/>
+    <dependency name="ctms-commons-lang" rev="latest.integration" conf="compile->runtime;%->@"/>
 
     <!-- TODO: exclude this from runtime somehow -->
-    <dependency org="javax.servlet" name="com.springsource.javax.servlet" rev="${lib.servlet.rev}" />
+    <dependency org="javax.servlet" name="servlet-api" rev="${lib.servlet.rev}" />
 
-    <dependency org="org.springframework" name="org.springframework.beans"        rev="${lib.spring.rev}"/>
-    <dependency org="org.springframework" name="org.springframework.context"      rev="${lib.spring.rev}"/>
-    <dependency org="org.springframework" name="org.springframework.core"         rev="${lib.spring.rev}"/>
-    <dependency org="org.springframework" name="org.springframework.web"          rev="${lib.spring.rev}"/>
-    <dependency org="org.springframework" name="org.springframework.web.servlet"  rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="spring-beans"        rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="spring-context"      rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="spring-core"         rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="spring-web"          rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="spring-webmvc"       rev="${lib.spring.rev}"/>
 
     <dependency org="org.slf4j" name="slf4j-api" rev="${lib.slf4j.rev}"/>
-    <dependency org="com.opensymphony.sitemesh" name="com.springsource.com.opensymphony.sitemesh" rev="2.4.1" />
-    <dependency org="org.apache.commons" name="com.springsource.org.apache.commons.lang" rev="${lib.jakarta-commons.lang.rev}"/>
+    <dependency org="opensymphony" name="sitemesh" rev="2.4.1" />
+    <dependency org="commons-lang" name="commons-lang" rev="${lib.jakarta-commons.lang.rev}"/>
 
     <!-- TEST -->
     <dependency name="ctms-commons-testing-unit" rev="latest.integration" conf="unit-test->runtime"/>
     <dependency conf="unit-test->*" org="org.slf4j" name="slf4j-simple" rev="${lib.slf4j.rev}"/>
     <dependency conf="unit-test->*" org="org.slf4j" name="jcl-over-slf4j" rev="${lib.slf4j.rev}"/>
-    <dependency org="org.springframework" name="org.springframework.test" rev="${lib.spring.rev}" conf="unit-test->*"/>
+    <dependency org="org.springframework" name="spring-test" rev="${lib.spring.rev}" conf="unit-test->*"/>
+
+    <exclude org="javax.ejb"/>
+    <exclude org="javax.faces"/>
+    <exclude org="javax.jms"/>
+    <exclude org="ant"/>
+    <exclude org="bouncycastle"/>
+    <exclude org="com.bea.wlplatform"/>
+    <exclude org="com.caucho"/>
+    <exclude org="com.lowagie"/>
     <exclude org="com.oracle.oc4j"/>
+    <exclude org="commons-logging"/>
+    <exclude org="jexcelapi"/>
+    <exclude org="jasperreports"/>
+    <exclude org="log4j"/>
+    <exclude org="org.apache.tiles"/>
+    <exclude org="org.freemarker"/>
+    <exclude org="poi"/>
+    <exclude org="struts"/>
+    <exclude org="velocity"/>
+    <exclude org="velocity-tools"/>
   </dependencies>
 </ivy-module>

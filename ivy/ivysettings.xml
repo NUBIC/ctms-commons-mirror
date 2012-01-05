@@ -9,16 +9,6 @@
       <artifact pattern="${project-repo.base}/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]"/>
       <ivy pattern="${project-repo.base}/[organisation]/[module]/[revision]/[artifact].[ext]"/>
     </filesystem>
-    <chain name="springsource">
-      <url name="springsource-release">
-        <ivy pattern="http://repository.springsource.com/ivy/bundles/release/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
-        <artifact pattern="http://repository.springsource.com/ivy/bundles/release/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
-      </url>
-      <url name="springsource-external">
-        <ivy pattern="http://repository.springsource.com/ivy/bundles/external/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
-        <artifact pattern="http://repository.springsource.com/ivy/bundles/external/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
-      </url>
-    </chain>
     <url name="nci-cbiit">
       <artifact pattern="https://ncisvn.nci.nih.gov/svn/cbiit-ivy-repo/trunk/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
       <ivy pattern="https://ncisvn.nci.nih.gov/svn/cbiit-ivy-repo/trunk/[organisation]/[module]/[revision]/ivy.xml" />
@@ -39,13 +29,8 @@
   <modules>
     <module organisation="gov.nih.nci.cabig.ctms" resolver="this-project"/>
 
-    <module organisation="com.springsource.*" resolver="springsource"/>
-    <module         name="com.springsource.*" resolver="springsource"/>
-    <module organisation="org.springframework.*" resolver="springsource"/>
-
     <module organisation="caGrid"        resolver="cagrid"/>
     <module organisation="eracom|clarkware|jgoodies|internet2" resolver="cagrid"/>
-    <module         name="commons-codec" resolver="cagrid"/>
 
     <module organisation="gov.nih.nci.*"      resolver="nci-cbiit"/>
     <module organisation="ncicb|bouncycastle" resolver="nci-cbiit"/>
