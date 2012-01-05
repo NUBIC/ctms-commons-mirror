@@ -116,6 +116,7 @@ define "ctms-commons" do
     define "csm", :base_dir => _('acegi-csm') do
       project.iml.group = true
       configure_ivy(ivy)
+      interproject_dependencies << project('testing:unit')
 
       package(:bundle).tap do |bundle|
         bundle["Bundle-Name"] = "CTMS Commons Acegi-CSM"
