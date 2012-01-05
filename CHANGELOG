@@ -7,6 +7,7 @@ ctms-commons history
 ### all
 
 - Update dev env to JRuby 1.6.2 and buildr 1.4.6.
+
 - Replace Spring EBR dependencies with standard M2 versions. While I
   (RMS) am opposed to this, none of the other projects use OSGi
   (yet). Since PSC uses whitelisted dependencies anyway, it only
@@ -14,6 +15,12 @@ ctms-commons history
   ctms-commons only uses EBR-available versions of things. The
   benefits to the other projects (which all use ivy's transitive
   dependency support) probably outweigh PSC's concern.
+
+- Remove ctms-commons' copy of Spring's
+  PropertyPlaceholderConfigurer. The feature that ctms-commons'
+  version added is available in the built in one in Spring 2.5 and
+  later. The ctms-commons version has been deprecated since at least
+  ctms-commons 1.0.0.
 
 1.0.9
 -----
