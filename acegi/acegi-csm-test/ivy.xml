@@ -10,29 +10,33 @@
   <dependencies>
     <dependency org="gov.nih.nci.security" name="csm" rev="${lib.csm.rev}"/>
 
-    <dependency org="org.junit" name="com.springsource.org.junit" rev="${lib.junit.rev}"/>
+    <dependency org="junit" name="junit" rev="${lib.junit.rev}"/>
     <dependency org="org.dbunit" name="dbunit" rev="${lib.dbunit.rev}"/>
-    <dependency org="org.hibernate" name="com.springsource.org.hibernate" rev="${lib.hibernate.rev}"/>
+    <dependency org="org.hibernate" name="hibernate-core" rev="${lib.hibernate.rev}"/>
     <dependency org="org.slf4j" name="slf4j-api" rev="${lib.slf4j.rev}"/>
 
-    <dependency org="org.springframework" name="org.springframework.beans"   rev="${lib.spring.rev}"/>
-    <dependency org="org.springframework" name="org.springframework.core"    rev="${lib.spring.rev}"/>
-    <dependency org="org.springframework" name="org.springframework.context" rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="spring-beans"   rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="spring-core"    rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="spring-context" rev="${lib.spring.rev}"/>
 
     <!-- TEST -->
     <dependency conf="unit-test->runtime" name="ctms-commons-acegi-csm" rev="latest.integration"/>
     <dependency conf="unit-test->*" org="org.slf4j" name="slf4j-simple" rev="${lib.slf4j.rev}"/>
     <dependency conf="unit-test->*" org="org.slf4j" name="log4j-over-slf4j" rev="${lib.slf4j.rev}"/>
     <dependency conf="unit-test->*" org="org.slf4j" name="jcl-over-slf4j" rev="${lib.slf4j.rev}"/>
-    <dependency conf="unit-test->*" org="org.hsqldb" name="com.springsource.org.hsqldb" rev="${lib.hsqldb.rev}"/>
+    <dependency conf="unit-test->*" org="org.hsqldb" name="hsqldb" rev="${lib.hsqldb.rev}"/>
     <!-- HACK: ivy is excluding the transient dep from csm to jdom when running the tests (for no reason I can see) -->
     <dependency conf="unit-test->*" org="jdom" name="jdom" rev="1.0"/>
+    <dependency conf="unit-test->*" org="c3p0" name="c3p0" rev="0.9.1.1"/>
 
     <exclude org="org.springframework" module="spring" matcher="exact"/>
     <exclude org="ant" module="ant" matcher="exact"/>
+
+    <exclude org="javax.ejb"/>
+    <exclude org="javax.jms"/>
+    <exclude org="javax.security"/>
+    <exclude org="aspectj"/>
+    <exclude org="com.bea.wlplatform"/>
     <exclude org="log4j"/>
-    <exclude org="org.apache.log4j" module="com.springsource.org.apache.log4j" matcher="exact"/>
-    <exclude module="com.springsource.slf4j.api"/>
-    <exclude org="com.oracle.oc4j"/>
   </dependencies>
 </ivy-module>

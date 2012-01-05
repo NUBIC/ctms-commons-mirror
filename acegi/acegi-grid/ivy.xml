@@ -13,12 +13,14 @@
     <dependency org="gov.nih.nci.security" name="csm" rev="${lib.csm.rev}"/>
 
     <dependency org="org.slf4j" name="slf4j-api" rev="${lib.slf4j.rev}"/>
-    <dependency org="org.acegisecurity" name="com.springsource.org.acegisecurity" rev="${lib.acegi.rev}" />
+    <dependency org="org.acegisecurity" name="acegi-security" rev="${lib.acegi.rev}">
+      <exclude org="org.springframework"/>
+    </dependency>
 
-    <dependency org="org.springframework" name="org.springframework.beans"       rev="${lib.spring.rev}"/>
-    <dependency org="org.springframework" name="org.springframework.context"     rev="${lib.spring.rev}"/>
-    <dependency org="org.springframework" name="org.springframework.core"        rev="${lib.spring.rev}"/>
-    <dependency org="org.springframework" name="org.springframework.transaction" rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="spring-beans"   rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="spring-context" rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="spring-core"    rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="spring-tx"      rev="${lib.spring.rev}"/>
 
     <dependency org="globus" name="axis" rev="1.2RC2"/>
     <dependency org="globus" name="jcog" rev="4.0.3" force="true"/>
@@ -36,8 +38,7 @@
     <dependency org="caGrid" name="gridgrouper" rev="${lib.cagrid.rev}" conf="*->client"/>
     <dependency org="caGrid" name="service-security-provider" rev="${lib.cagrid.rev}" conf="*->client"/>
 
-    <!-- TODO: exclude these from runtime somehow -->
-    <dependency org="javax.servlet" name="com.springsource.javax.servlet" rev="${lib.servlet.rev}" />
+    <dependency conf="compile->*" org="javax.servlet" name="servlet-api" rev="${lib.servlet.rev}" />
 
     <!-- TEST -->
     <dependency conf="unit-test->*" org="org.slf4j" name="slf4j-simple" rev="${lib.slf4j.rev}"/>
@@ -51,7 +52,18 @@
     <exclude org="springframework" module="spring" matcher="exact"/>     <!-- from cagrid -->
     <exclude org="cacore" module="csm"/>                                 <!-- from cagrid -->
     <exclude org="jakarta" module="commons-discovery"/>                  <!-- from cbiit/globus -->
-    <exclude org="log4j"/>
+
+    <exclude org="javax.ejb"/>
+    <exclude org="javax.faces"/>
+    <exclude org="javax.jms"/>
+    <exclude org="javax.resource"/>
+    <exclude org="ant"/>
+    <exclude org="com.bea.wlplatform"/>
+    <exclude org="com.oracle"/>
     <exclude org="com.oracle.oc4j"/>
+    <exclude org="com.oracle.toplink"/>
+    <exclude org="commons-logging"/>
+    <exclude org="cos"/>
+    <exclude org="log4j"/>
   </dependencies>
 </ivy-module>

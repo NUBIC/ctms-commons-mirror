@@ -10,22 +10,23 @@
   <dependencies>
     <dependency org="gov.nih.nci.security" name="csm" rev="${lib.csm.rev}"/>
 
-    <dependency org="org.acegisecurity" name="com.springsource.org.acegisecurity" rev="${lib.acegi.rev}" />
-    <dependency org="org.aspectj" name="com.springsource.org.aspectj.runtime" rev="1.6.8.RELEASE" />
-    <dependency org="org.hibernate" name="com.springsource.org.hibernate" rev="${lib.hibernate.rev}"/>
+    <dependency org="org.acegisecurity" name="acegi-security" rev="${lib.acegi.rev}" />
+    <dependency org="org.aspectj" name="aspectjrt" rev="1.6.8" />
+    <dependency org="org.hibernate" name="hibernate-core" rev="${lib.hibernate.rev}"/>
     <dependency org="org.slf4j" name="slf4j-api" rev="${lib.slf4j.rev}"/>
 
-    <dependency org="org.springframework" name="org.springframework.aop"         rev="${lib.spring.rev}"/>
-    <dependency org="org.springframework" name="org.springframework.beans"       rev="${lib.spring.rev}"/>
-    <dependency org="org.springframework" name="org.springframework.core"        rev="${lib.spring.rev}"/>
-    <dependency org="org.springframework" name="org.springframework.context"     rev="${lib.spring.rev}"/>
-    <dependency org="org.springframework" name="org.springframework.orm"         rev="${lib.spring.rev}" conf="*->hibernate"/>
-    <dependency org="org.springframework" name="org.springframework.transaction" rev="${lib.spring.rev}"/>
-    <dependency org="org.springframework" name="org.springframework.web"         rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="spring-aop"         rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="spring-beans"       rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="spring-core"        rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="spring-context"     rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="spring-orm"         rev="${lib.spring.rev}">
+      <exclude org="org.hibernate"/>
+    </dependency>
+    <dependency org="org.springframework" name="spring-tx"          rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="spring-web"         rev="${lib.spring.rev}"/>
 
-    <!-- TODO: exclude these from runtime somehow -->
-    <dependency org="javax.servlet" name="com.springsource.javax.servlet" rev="${lib.servlet.rev}" />
-    <dependency org="javax.servlet" name="com.springsource.javax.servlet.jsp" rev="${lib.jsp.rev}" />
+    <dependency org="javax.servlet" name="servlet-api" rev="${lib.servlet.rev}" conf="compile->*" />
+    <dependency org="javax.servlet" name="jsp-api"     rev="${lib.jsp.rev}"     conf="compile->*" />
 
     <!-- TEST -->
     <dependency conf="unit-test->*" org="org.slf4j" name="slf4j-simple" rev="${lib.slf4j.rev}"/>
@@ -34,8 +35,40 @@
     <dependency conf="unit-test->*" org="org.easymock" name="easymockclassextension" rev="2.2.2"/>
 
     <exclude org="org.springframework" module="spring" matcher="exact"/>
-    <exclude module="com.springsource.slf4j.api"/>
-    <exclude org="log4j"/>
+    <exclude org="org.springframework" module="spring-ldap" matcher="exact"/>
+    <exclude org="org.hibernate" module="hibernate" matcher="exact"/>
+
+    <exclude org="javax.ejb"/>
+    <exclude org="javax.faces"/>
+    <exclude org="javax.jdo"/>
+    <exclude org="javax.jms"/>
+    <exclude org="javax.resource"/>
+    <exclude org="javax.security"/>
+    <exclude org="ant"/>
+    <exclude org="aspectj"/>
+    <exclude org="com.bea.wlplatform"/>
+    <exclude org="com.caucho"/>
+    <exclude org="com.experlog"/>
+    <exclude org="com.lowagie"/>
+    <exclude org="com.jamonapi"/>
+    <exclude org="com.oracle"/>
     <exclude org="com.oracle.oc4j"/>
+    <exclude org="com.oracle.toplink"/>
+    <exclude org="commons-logging"/>
+    <exclude org="cos"/>
+    <exclude org="jexcelapi"/>
+    <exclude org="jasperreports"/>
+    <exclude org="log4j"/>
+    <exclude org="jotm"/>
+    <exclude org="org.apache.axis"/>
+    <exclude org="org.apache.ibatis"/>
+    <exclude org="org.apache.tiles"/>
+    <exclude org="org.freemarker"/>
+    <exclude org="poi"/>
+    <exclude org="log4j"/>
+    <exclude org="servletapi"/>
+    <exclude org="struts"/>
+    <exclude org="velocity"/>
+    <exclude org="velocity-tools"/>
   </dependencies>
 </ivy-module>

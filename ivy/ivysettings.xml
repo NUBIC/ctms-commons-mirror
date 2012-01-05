@@ -31,6 +31,7 @@
 
     <module organisation="caGrid"        resolver="cagrid"/>
     <module organisation="eracom|clarkware|jgoodies|internet2" resolver="cagrid"/>
+    <module organisation="apache" module="commons-codec" resolver="cagrid"/>
 
     <module organisation="gov.nih.nci.*"      resolver="nci-cbiit"/>
     <module organisation="ncicb|bouncycastle" resolver="nci-cbiit"/>

@@ -8,25 +8,39 @@
   </configurations>
 
   <dependencies>
-    <dependency org="org.acegisecurity" name="com.springsource.org.acegisecurity" rev="${lib.acegi.rev}" />
-    <dependency org="net.sourceforge.ehcache" name="com.springsource.net.sf.ehcache" rev="1.5.0" />
+    <dependency org="org.acegisecurity" name="acegi-security" rev="${lib.acegi.rev}">
+      <exclude org="org.springframework"/>
+    </dependency>
+    <dependency org="net.sf.ehcache" name="ehcache" rev="1.2.4" />
 
-    <dependency org="org.hibernate" name="com.springsource.org.hibernate" rev="${lib.hibernate.rev}"/>
-    <dependency org="org.hibernate" name="com.springsource.org.hibernate.annotations" rev="${lib.hibernate-annotations.rev}"/>
-    <dependency org="javax.persistence" name="com.springsource.javax.persistence" rev="1.0.0" />
+    <dependency org="org.hibernate" name="hibernate-core" rev="${lib.hibernate.rev}"/>
+    <dependency org="org.hibernate" name="hibernate-annotations" rev="${lib.hibernate-annotations.rev}"/>
+    <dependency org="javax.persistence" name="persistence-api" rev="1.0" />
 
-    <dependency org="org.springframework" name="org.springframework.beans"           rev="${lib.spring.rev}"/>
-    <dependency org="org.springframework" name="org.springframework.core"            rev="${lib.spring.rev}"/>
-    <dependency org="org.springframework" name="org.springframework.orm"             rev="${lib.spring.rev}" conf="*->hibernate"/>
-    <dependency org="org.springframework" name="org.springframework.transaction"     rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="spring-beans" rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="spring-core"  rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="spring-orm"   rev="${lib.spring.rev}">
+      <exclude org="org.hibernate"/>
+    </dependency>
+    <dependency org="org.springframework" name="spring-tx"    rev="${lib.spring.rev}"/>
 
     <!-- TEST -->
     <dependency conf="unit-test->*" org="org.slf4j" name="slf4j-simple" rev="${lib.slf4j.rev}"/>
     <dependency conf="unit-test->*" org="org.slf4j" name="jcl-over-slf4j" rev="${lib.slf4j.rev}"/>
-    <dependency conf="unit-test->*" org="org.apache.commons" name="com.springsource.org.apache.commons.dbcp" rev="${lib.jakarta-commons.dbcp.rev}"/>
-    <dependency conf="unit-test->*" org="org.hsqldb" name="com.springsource.org.hsqldb" rev="${lib.hsqldb.rev}"/>
-    <dependency conf="unit-test->*" org="org.springframework" name="org.springframework.context.support" rev="${lib.spring.rev}"/>
+    <dependency conf="unit-test->*" org="commons-dbcp" name="commons-dbcp" rev="${lib.jakarta-commons.dbcp.rev}"/>
+    <dependency conf="unit-test->*" org="org.hsqldb" name="hsqldb" rev="${lib.hsqldb.rev}"/>
+    <dependency conf="unit-test->*" org="org.springframework" name="spring-test" rev="${lib.spring.rev}"/>
+    <dependency conf="unit-test->*" org="org.springframework" name="spring-context-support" rev="${lib.spring.rev}"/>
 
-    <exclude module="com.springsource.slf4j.api"/>
+    <exclude org="org.springframework" module="spring-ldap" matcher="exact"/>
+    <exclude org="org.hibernate" module="hibernate" matcher="exact"/>
+
+    <exclude org="javax.security"/>
+    <exclude org="javax.resource"/>
+    <exclude org="bouncycastle"/>
+    <exclude org="com.bea.wlplatform"/>
+    <exclude org="com.oracle"/>
+    <exclude org="com.oracle.toplink"/>
+    <exclude org="log4j"/>
   </dependencies>
 </ivy-module>
