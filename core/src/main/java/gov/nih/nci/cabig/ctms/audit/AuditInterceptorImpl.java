@@ -10,8 +10,8 @@ import gov.nih.nci.cabig.ctms.audit.util.AuditUtil;
 import gov.nih.nci.cabig.ctms.lang.ComparisonTools;
 import org.hibernate.EmptyInterceptor;
 import org.hibernate.EntityMode;
-import org.hibernate.type.AbstractComponentType;
 import org.hibernate.type.CollectionType;
+import org.hibernate.type.CompositeType;
 import org.hibernate.type.EntityType;
 import org.hibernate.type.Type;
 import org.slf4j.Logger;
@@ -56,7 +56,7 @@ public class AuditInterceptorImpl extends EmptyInterceptor {
             // none
         }
         else if (propertyType.isComponentType()) {
-            values = decomposeComponent((AbstractComponentType) propertyType, propertyName, previousState, currentState);
+            values = decomposeComponent((CompositeType) propertyType, propertyName, previousState, currentState);
         }
         else {
             String prevValue = scalarAuditableValue(previousState);
@@ -104,7 +104,7 @@ public class AuditInterceptorImpl extends EmptyInterceptor {
     }
 
     // TODO: this only handles one level of components
-    private List<DataAuditEventValue> decomposeComponent(final AbstractComponentType propertyType,
+    private List<DataAuditEventValue> decomposeComponent(final CompositeType propertyType,
                                                          final String propertyName, final Object previousState, final Object currentState) {
         Object[] componentPrevState = previousState == null ? null : propertyType.getPropertyValues(previousState,
             ENTITY_MODE);
