@@ -1,5 +1,5 @@
 <configurations>
-  <conf name="compile" transitive="true" visibility="private"/>
+  <conf name="compile" transitive="false" visibility="private"/>
   <conf name="runtime"   transitive="true" extends="compile"/>
   <conf name="unit-test" transitive="true" extends="runtime"/>
 </configurations>

@@ -52,17 +52,14 @@
 			<dependency org="caGrid" name="service-security-provider" rev="1.2">
 				<artifact name="ServiceSecurityProvider-client" />
 				<artifact name="ServiceSecurityProvider-common" />
-			</dependency> 
-			
-			<!--cvr
+			</dependency> 	
 			<dependency org="globus" name="mds" rev="4.0.3">
 				<artifact name="globus_wsrf_servicegroup_stubs" />
 				<artifact name="globus_wsrf_servicegroup" />
 			</dependency>	
-			cvr-->
-			
+		
 			<!-- Spring Module jars -->	
-	        <dependency org="org.springframework" name="spring" rev="${lib.spring.rev}"/>	
+	        	<dependency org="org.springframework" name="spring" rev="2.0.2" force="true"/>	
         	
         </dependencies>
 </ivy-module>

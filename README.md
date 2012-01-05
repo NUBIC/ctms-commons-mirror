@@ -11,7 +11,7 @@ Using
 ctms-commons is distributed on the [NCI CBIIT public ivy
 repository][cbiit-ivy].  The organization is `gov.nih.nci.cabig.ctms`.
 
-It has dependencies from the public caGrid 1.2, NCI Nexus Repository and
+It has dependencies from the public caGrid 1.2, SpringSource, and
 central Maven 2 repositories.  See `ivy/ivysettings.xml` for URLs and
 patterns.
 

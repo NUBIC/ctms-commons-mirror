@@ -5,26 +5,10 @@
   <settings defaultResolver="libraries"/>
 
   <resolvers>
-	<chain name="libraries" returnFirst="true" dual="true">
-      <ibiblio name="m2" m2compatible="true"/>
-      <ibiblio name="nci-nexus-3rdparty" m2compatible="true" root="https://ncimvn.nci.nih.gov/nexus/content/repositories/thirdparty" />
-    </chain>
-	
     <filesystem name="this-project" changingPattern=".*" local="true">
       <artifact pattern="${project-repo.base}/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]"/>
       <ivy pattern="${project-repo.base}/[organisation]/[module]/[revision]/[artifact].[ext]"/>
     </filesystem>
-    <url name="cagrid">
-          <ivy pattern="http://software.cagrid.org/repository-1.3/[organisation]/[module]/ivy-[revision].xml" />
-          <artifact pattern="http://software.cagrid.org/repository-1.3/[organisation]/[module]/[revision]/[artifact].[ext]"/>
-          <artifact pattern="http://software.cagrid.org/repository-1.3/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
-    </url>
-	<url name="nci-cbiit">
-      <artifact pattern="https://ncisvn.nci.nih.gov/svn/cbiit-ivy-repo/trunk/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
-      <ivy pattern="https://ncisvn.nci.nih.gov/svn/cbiit-ivy-repo/trunk/[organisation]/[module]/[revision]/ivy.xml" />
-    </url>
-
-	<!--
     <chain name="springsource">
       <url name="springsource-release">
         <ivy pattern="http://repository.springsource.com/ivy/bundles/release/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
@@ -35,30 +19,38 @@
         <artifact pattern="http://repository.springsource.com/ivy/bundles/external/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
       </url>
     </chain>
-
+    <url name="nci-cbiit">
+      <artifact pattern="https://ncisvn.nci.nih.gov/svn/cbiit-ivy-repo/trunk/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
+      <ivy pattern="https://ncisvn.nci.nih.gov/svn/cbiit-ivy-repo/trunk/[organisation]/[module]/[revision]/ivy.xml" />
+    </url>
+    <url name="cagrid">
+      <ivy pattern="http://software.cagrid.org/repository-1.2/[organisation]/[module]/ivy-[revision].xml"/>
+      <artifact pattern="http://software.cagrid.org/repository-1.2/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]"/>
+      <artifact pattern="http://software.cagrid.org/repository-1.2/[organisation]/[module]/[revision]/[artifact].[ext]"/>
+    </url>
     <filesystem name="local-only" m2compatible="true" local="true">
       <artifact pattern="${user.home}/.m2/repository/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]"/>
     </filesystem>
-	-->
-    
+    <chain name="libraries" returnFirst="true">
+      <ibiblio name="m2" m2compatible="true"/>
+    </chain>
   </resolvers>
 
   <modules>
     <module organisation="gov.nih.nci.cabig.ctms" resolver="this-project"/>
-	<module organisation="gov.nih.nci.*"      resolver="nci-cbiit"/>
+
+    <module organisation="com.springsource.*" resolver="springsource"/>
+    <module         name="com.springsource.*" resolver="springsource"/>
+    <module organisation="org.springframework.*" resolver="springsource"/>
+
     <module organisation="caGrid"        resolver="cagrid"/>
-    <module organisation="ncicb|bouncycastle" resolver="nci-cbiit"/>
-    <module organisation="globus|jakarta"             resolver="nci-cbiit"/>
     <module organisation="eracom|clarkware|jgoodies|internet2" resolver="cagrid"/>
-         <!--
-      <module organisation="com.springsource.*" resolver="springsource"/>
-      <module         name="com.springsource.*" resolver="springsource"/>
-      <module organisation="org.springframework.*" resolver="springsource"/>
+    <module         name="commons-codec" resolver="cagrid"/>
 
+    <module organisation="gov.nih.nci.*"      resolver="nci-cbiit"/>
+    <module organisation="ncicb|bouncycastle" resolver="nci-cbiit"/>
+    <module organisation="globus"             resolver="nci-cbiit"/>
 
-
-
-      <module organisation="com.oracle"         resolver="local-only"/>
-      -->
+    <module organisation="com.oracle"         resolver="local-only"/>
   </modules>
 </ivysettings>

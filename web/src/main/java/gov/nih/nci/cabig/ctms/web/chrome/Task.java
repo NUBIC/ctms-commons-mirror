@@ -3,8 +3,6 @@ package gov.nih.nci.cabig.ctms.web.chrome;
 import gov.nih.nci.cabig.ctms.tools.spring.ControllerUrlResolver;
 import org.springframework.beans.factory.annotation.Required;
 
-import java.io.Serializable;
-
 /**
  * Object representing a link in the section tasks in the caAERS chrome.
  * The <code>linkName</code> may be one of a couple of things:
@@ -15,7 +13,7 @@ import java.io.Serializable;
  *
  * @author Rhett Sutphin
  */
-public class Task implements Serializable {
+public class Task {
     private String displayName;
     private String linkName;
     private ControllerUrlResolver urlResolver;

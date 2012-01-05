@@ -10,15 +10,14 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.core.Ordered;
 import org.springframework.web.servlet.mvc.Controller;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * @author Rhett Sutphin
  */
-public class BeanNameControllerUrlResolver implements ControllerUrlResolver, BeanFactoryPostProcessor, Ordered , Serializable {
-    private static Logger log = LoggerFactory.getLogger(BeanNameControllerUrlResolver.class);
+public class BeanNameControllerUrlResolver implements ControllerUrlResolver, BeanFactoryPostProcessor, Ordered {
+    private Logger log = LoggerFactory.getLogger(getClass());
 
     private String servletName;
     // maps bean IDs to resolved refs

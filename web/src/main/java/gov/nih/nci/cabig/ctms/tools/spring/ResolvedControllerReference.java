@@ -2,14 +2,12 @@ package gov.nih.nci.cabig.ctms.tools.spring;
 
 import org.springframework.web.servlet.mvc.Controller;
 
-import java.io.Serializable;
-
 /**
  * Encapsulates a controller's URL, both context- and servlet-relative.
  *
  * @author Rhett Sutphin
  */
-public class ResolvedControllerReference implements Serializable {
+public class ResolvedControllerReference {
     private String beanName;
     private String className;
     private String servletName;

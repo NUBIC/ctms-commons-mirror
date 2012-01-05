@@ -8,8 +8,11 @@
   </configurations>
 
   <dependencies>
-    <dependency name="ctms-commons-web" rev="latest.integration" conf="compile,runtime->runtime;unit-test->unit-test" />
-    <dependency org="commons-io" name="commons-io" rev="1.4" conf="compile->default"/>
+    <dependency name="ctms-commons-web" rev="latest.integration"/>
 
+    <!-- TODO: exclude this from runtime somehow -->
+    <dependency org="javax.servlet" name="com.springsource.javax.servlet" rev="2.5.0" />
+
+    <dependency org="org.apache.commons" name="com.springsource.org.apache.commons.io" rev="${lib.jakarta-commons.io.rev}"/>
   </dependencies>
 </ivy-module>

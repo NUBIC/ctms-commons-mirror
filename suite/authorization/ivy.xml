@@ -8,26 +8,20 @@
   </configurations>
 
   <dependencies>
+    <dependency name="ctms-commons-base" rev="latest.integration"/>
+    <dependency name="ctms-commons-core" rev="latest.integration"/>
 
-      <!-- We are pulling conf="*->*" of ctms-commons-core. -->
-     <dependency name="ctms-commons-core" rev="latest.integration" conf="compile,runtime->runtime;unit-test->unit-test"/>
+    <dependency org="gov.nih.nci.security" name="csm" rev="${lib.csm.rev}"/>
 
-     <!-- CSM deps -->
-    <dependency org="gov.nih.nci.security" name="csm" rev="${lib.csm.rev}" conf="compile->runtime">
-        <exclude org="org.hibernate" />
-    </dependency>
-
-    <!-- TEST -->
-    <!-- So, all the test dependencies of ctms-commons-core will be enough -->
-	
-	<!--cvr
     <dependency org="org.slf4j" name="slf4j-api" rev="${lib.slf4j.rev}"/>
-    <dependency org="commons-lang" name="commons-lang" rev="${lib.jakarta-commons.lang.rev}"/>
+    <dependency org="org.apache.commons" name="com.springsource.org.apache.commons.lang" rev="${lib.jakarta-commons.lang.rev}"/>
     <dependency org="net.sourceforge.collections" name="collections-generic" rev="${lib.generic-commons-collections.rev}"/>
-	cvr-->
-	
+
+    <!-- csmext deps -->
+    <dependency org="org.hibernate" name="com.springsource.org.hibernate" rev="${lib.hibernate.rev}"/>
+    <dependency org="gov.nih.nci.security" name="clm" rev="${lib.clm.rev}"/>
+
     <!-- TEST -->
-	<!--cvr
     <dependency conf="unit-test->runtime" name="ctms-commons-testing-unit" rev="latest.integration"/>
     <dependency conf="unit-test->*" org="ch.qos.logback" name="logback-classic" rev="0.9.20"/>
     <dependency conf="unit-test->*" org="org.slf4j" name="log4j-over-slf4j" rev="${lib.slf4j.rev}"/>
@@ -40,9 +34,7 @@
     <exclude org="org.apache.log4j"/>
     <exclude module="com.springsource.slf4j.*" matcher="regexp"/>
     <exclude module="slf4j-simple"/>
-    <exclude module="spring" matcher="exact"/> cvr--> 	<!-- from clm -->
-	<!--cvr
+    <exclude module="spring" matcher="exact"/> <!-- from clm -->
     <exclude org="com.oracle.oc4j"/>
-	cvr-->
   </dependencies>
 </ivy-module>

@@ -8,8 +8,6 @@
   </configurations>
 
   <dependencies>
-    <dependency name="ctms-commons-base" rev="latest.integration" conf="compile,runtime->runtime;unit-test->unit-test"/>
-    <dependency org="commons-io" name="commons-io" rev="1.4" conf="compile,runtime->default"/>
-
+    <dependency name="ctms-commons-base" rev="latest.integration"/>
   </dependencies>
 </ivy-module>

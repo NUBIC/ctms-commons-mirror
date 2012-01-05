@@ -8,9 +8,31 @@
   </configurations>
 
   <dependencies>
-    <!-- As this is a test module, there is no point in defining the direct dependencies. So,
-      taking a shortcut by promoting the old unit-test dependencies of this module to compile conf -->
-    <dependency org="gov.nih.nci.cabig.ctms" name="ctms-commons-acegi-csm" rev="latest.integration" conf="compile->runtime" />
-    <dependency name="ctms-commons-core" rev="latest.integration"  conf="compile->unit-test"/>
+    <dependency org="gov.nih.nci.security" name="csm" rev="${lib.csm.rev}"/>
+
+    <dependency org="org.junit" name="com.springsource.org.junit" rev="${lib.junit.rev}"/>
+    <dependency org="org.dbunit" name="dbunit" rev="${lib.dbunit.rev}"/>
+    <dependency org="org.hibernate" name="com.springsource.org.hibernate" rev="${lib.hibernate.rev}"/>
+    <dependency org="org.slf4j" name="slf4j-api" rev="${lib.slf4j.rev}"/>
+
+    <dependency org="org.springframework" name="org.springframework.beans"   rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="org.springframework.core"    rev="${lib.spring.rev}"/>
+    <dependency org="org.springframework" name="org.springframework.context" rev="${lib.spring.rev}"/>
+
+    <!-- TEST -->
+    <dependency conf="unit-test->runtime" name="ctms-commons-acegi-csm" rev="latest.integration"/>
+    <dependency conf="unit-test->*" org="org.slf4j" name="slf4j-simple" rev="${lib.slf4j.rev}"/>
+    <dependency conf="unit-test->*" org="org.slf4j" name="log4j-over-slf4j" rev="${lib.slf4j.rev}"/>
+    <dependency conf="unit-test->*" org="org.slf4j" name="jcl-over-slf4j" rev="${lib.slf4j.rev}"/>
+    <dependency conf="unit-test->*" org="org.hsqldb" name="com.springsource.org.hsqldb" rev="${lib.hsqldb.rev}"/>
+    <!-- HACK: ivy is excluding the transient dep from csm to jdom when running the tests (for no reason I can see) -->
+    <dependency conf="unit-test->*" org="jdom" name="jdom" rev="1.0"/>
+
+    <exclude org="org.springframework" module="spring" matcher="exact"/>
+    <exclude org="ant" module="ant" matcher="exact"/>
+    <exclude org="log4j"/>
+    <exclude org="org.apache.log4j" module="com.springsource.org.apache.log4j" matcher="exact"/>
+    <exclude module="com.springsource.slf4j.api"/>
+    <exclude org="com.oracle.oc4j"/>
   </dependencies>
 </ivy-module>

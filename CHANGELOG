@@ -3,9 +3,6 @@ ctms-commons history
 
 1.0.10
 ------
-### all
-  Technology Stack upgrade (https://tracker.nci.nih.gov/browse/SUITE-34).
-  As part of the migration, we removed the dependency on SpringSource repository.
 
 1.0.9
 -----

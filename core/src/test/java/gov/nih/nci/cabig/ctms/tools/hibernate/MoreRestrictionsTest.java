@@ -1,43 +1,17 @@
 package gov.nih.nci.cabig.ctms.tools.hibernate;
 
 import junit.framework.TestCase;
-import org.hibernate.*;
-import org.hibernate.cache.QueryCache;
-import org.hibernate.cache.Region;
-import org.hibernate.cache.UpdateTimestampsCache;
-import org.hibernate.cfg.Settings;
-import org.hibernate.classic.Session;
-import org.hibernate.connection.ConnectionProvider;
+import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.criterion.CriteriaQuery;
 import org.hibernate.criterion.Criterion;
-import org.hibernate.dialect.Dialect;
-import org.hibernate.dialect.PostgreSQLDialect;
-import org.hibernate.dialect.function.SQLFunctionRegistry;
-import org.hibernate.engine.*;
-import org.hibernate.engine.profile.FetchProfile;
-import org.hibernate.engine.query.QueryPlanCache;
-import org.hibernate.exception.SQLExceptionConverter;
-import org.hibernate.id.IdentifierGenerator;
-import org.hibernate.id.factory.IdentifierGeneratorFactory;
-import org.hibernate.impl.SessionFactoryImpl;
-import org.hibernate.metadata.ClassMetadata;
-import org.hibernate.metadata.CollectionMetadata;
-import org.hibernate.persister.collection.CollectionPersister;
-import org.hibernate.persister.entity.EntityPersister;
-import org.hibernate.proxy.EntityNotFoundDelegate;
-import org.hibernate.stat.Statistics;
-import org.hibernate.stat.StatisticsImplementor;
-import org.hibernate.type.IntegerType;
+import org.hibernate.engine.SessionFactoryImplementor;
+import org.hibernate.engine.TypedValue;
 import org.hibernate.type.Type;
-import org.hibernate.type.TypeResolver;
 
-import javax.naming.NamingException;
-import javax.naming.Reference;
-import javax.transaction.TransactionManager;
-import java.io.Serializable;
-import java.sql.Connection;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * @author Rhett Sutphin
@@ -129,267 +103,7 @@ public class MoreRestrictionsTest extends TestCase {
 
     private static class SimpleCriteriaQuery implements CriteriaQuery {
         public SessionFactoryImplementor getFactory() {
-           return new SessionFactoryImplementor(){
-               public TypeResolver getTypeResolver() {
-                   return null; 
-               }
-
-               public Properties getProperties() {
-                   return null; 
-               }
-
-               public EntityPersister getEntityPersister(String s) throws MappingException {
-                   return null; 
-               }
-
-               public CollectionPersister getCollectionPersister(String s) throws MappingException {
-                   return null; 
-               }
-
-               public Dialect getDialect() {
-                   return new PostgreSQLDialect();
-               }
-
-               public Interceptor getInterceptor() {
-                   return null; 
-               }
-
-               public QueryPlanCache getQueryPlanCache() {
-                   return null; 
-               }
-
-               public Type[] getReturnTypes(String s) throws HibernateException {
-                   return new Type[0]; 
-               }
-
-               public String[] getReturnAliases(String s) throws HibernateException {
-                   return new String[0]; 
-               }
-
-               public ConnectionProvider getConnectionProvider() {
-                   return null; 
-               }
-
-               public String[] getImplementors(String s) throws MappingException {
-                   return new String[0]; 
-               }
-
-               public String getImportedClassName(String s) {
-                   return null; 
-               }
-
-               public TransactionManager getTransactionManager() {
-                   return null; 
-               }
-
-               public QueryCache getQueryCache() {
-                   return null; 
-               }
-
-               public QueryCache getQueryCache(String s) throws HibernateException {
-                   return null; 
-               }
-
-               public UpdateTimestampsCache getUpdateTimestampsCache() {
-                   return null; 
-               }
-
-               public StatisticsImplementor getStatisticsImplementor() {
-                   return null; 
-               }
-
-               public NamedQueryDefinition getNamedQuery(String s) {
-                   return null; 
-               }
-
-               public NamedSQLQueryDefinition getNamedSQLQuery(String s) {
-                   return null; 
-               }
-
-               public ResultSetMappingDefinition getResultSetMapping(String s) {
-                   return null; 
-               }
-
-               public IdentifierGenerator getIdentifierGenerator(String s) {
-                   return null; 
-               }
-
-               public Region getSecondLevelCacheRegion(String s) {
-                   return null; 
-               }
-
-               public Map getAllSecondLevelCacheRegions() {
-                   return null; 
-               }
-
-               public SQLExceptionConverter getSQLExceptionConverter() {
-                   return null; 
-               }
-
-               public Settings getSettings() {
-                   return null; 
-               }
-
-               public Session openTemporarySession() throws HibernateException {
-                   return null; 
-               }
-
-               public Session openSession(Connection connection, boolean b, boolean b1, ConnectionReleaseMode connectionReleaseMode) throws HibernateException {
-                   return null; 
-               }
-
-               public Set<String> getCollectionRolesByEntityParticipant(String s) {
-                   return null; 
-               }
-
-               public EntityNotFoundDelegate getEntityNotFoundDelegate() {
-                   return null; 
-               }
-
-               public SQLFunctionRegistry getSqlFunctionRegistry() {
-                   return null; 
-               }
-
-               public FetchProfile getFetchProfile(String s) {
-                   return null; 
-               }
-
-               public SessionFactoryObserver getFactoryObserver() {
-                   return null; 
-               }
-
-               public IdentifierGeneratorFactory getIdentifierGeneratorFactory() {
-                   return null; 
-               }
-
-               public Type getIdentifierType(String s) throws MappingException {
-                   return null; 
-               }
-
-               public String getIdentifierPropertyName(String s) throws MappingException {
-                   return null; 
-               }
-
-               public Type getReferencedPropertyType(String s, String s1) throws MappingException {
-                   return null; 
-               }
-
-               public Session openSession() throws HibernateException {
-                   return null; 
-               }
-
-               public Session openSession(Interceptor interceptor) throws HibernateException {
-                   return null; 
-               }
-
-               public Session openSession(Connection connection) {
-                   return null; 
-               }
-
-               public Session openSession(Connection connection, Interceptor interceptor) {
-                   return null; 
-               }
-
-               public Session getCurrentSession() throws HibernateException {
-                   return null; 
-               }
-
-               public StatelessSession openStatelessSession() {
-                   return null; 
-               }
-
-               public StatelessSession openStatelessSession(Connection connection) {
-                   return null; 
-               }
-
-               public ClassMetadata getClassMetadata(Class aClass) {
-                   return null; 
-               }
-
-               public ClassMetadata getClassMetadata(String s) {
-                   return null; 
-               }
-
-               public CollectionMetadata getCollectionMetadata(String s) {
-                   return null; 
-               }
-
-               public Map<String, ClassMetadata> getAllClassMetadata() {
-                   return null; 
-               }
-
-               public Map getAllCollectionMetadata() {
-                   return null; 
-               }
-
-               public Statistics getStatistics() {
-                   return null; 
-               }
-
-               public void close() throws HibernateException {
-                  
-               }
-
-               public boolean isClosed() {
-                   return false; 
-               }
-
-               public Cache getCache() {
-                   return null; 
-               }
-
-               public void evict(Class aClass) throws HibernateException {
-                  
-               }
-
-               public void evict(Class aClass, Serializable serializable) throws HibernateException {
-                  
-               }
-
-               public void evictEntity(String s) throws HibernateException {
-                  
-               }
-
-               public void evictEntity(String s, Serializable serializable) throws HibernateException {
-                  
-               }
-
-               public void evictCollection(String s) throws HibernateException {
-                  
-               }
-
-               public void evictCollection(String s, Serializable serializable) throws HibernateException {
-                  
-               }
-
-               public void evictQueries(String s) throws HibernateException {
-                  
-               }
-
-               public void evictQueries() throws HibernateException {
-                  
-               }
-
-               public Set getDefinedFilterNames() {
-                   return null; 
-               }
-
-               public FilterDefinition getFilterDefinition(String s) throws HibernateException {
-                   return null; 
-               }
-
-               public boolean containsFetchProfileDefinition(String s) {
-                   return false; 
-               }
-
-               public TypeHelper getTypeHelper() {
-                   return null; 
-               }
-
-               public Reference getReference() throws NamingException {
-                   return null; 
-               }
-           };
+            throw new UnsupportedOperationException("getFactory not implemented");
         }
 
         public String getColumn(Criteria criteria, String propertyPath) throws HibernateException {
@@ -397,7 +111,7 @@ public class MoreRestrictionsTest extends TestCase {
         }
 
         public Type getType(Criteria criteria, String propertyPath) throws HibernateException {
-           return new IntegerType();
+            throw new UnsupportedOperationException("getType not implemented");
         }
 
         public String[] getColumnsUsingProjection(Criteria criteria, String propertyPath) throws HibernateException {
@@ -446,14 +160,6 @@ public class MoreRestrictionsTest extends TestCase {
 
         public String generateSQLAlias() {
             throw new UnsupportedOperationException("generateSQLAlias not implemented");
-        }
-
-        public String[] getColumns(String s, Criteria criteria) throws HibernateException {
-            return new String[]{s};
-        }
-
-        public String[] findColumns(String s, Criteria criteria) throws HibernateException {
-            return new String[]{s};
         }
     }
 }
