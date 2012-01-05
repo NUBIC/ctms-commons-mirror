@@ -8,17 +8,17 @@
   </configurations>
 
   <dependencies>
-    <dependency name="ctms-commons-base" rev="latest.integration"/>
-    <dependency name="ctms-commons-core" rev="latest.integration"/>
+    <dependency name="ctms-commons-base" rev="latest.integration" conf="compile->runtime;%->@"/>
+    <dependency name="ctms-commons-core" rev="latest.integration" conf="compile->runtime;%->@"/>
 
     <dependency org="gov.nih.nci.security" name="csm" rev="${lib.csm.rev}"/>
 
     <dependency org="org.slf4j" name="slf4j-api" rev="${lib.slf4j.rev}"/>
-    <dependency org="org.apache.commons" name="com.springsource.org.apache.commons.lang" rev="${lib.jakarta-commons.lang.rev}"/>
+    <dependency org="commons-lang" name="commons-lang" rev="${lib.jakarta-commons.lang.rev}"/>
     <dependency org="net.sourceforge.collections" name="collections-generic" rev="${lib.generic-commons-collections.rev}"/>
 
     <!-- csmext deps -->
-    <dependency org="org.hibernate" name="com.springsource.org.hibernate" rev="${lib.hibernate.rev}"/>
+    <dependency org="org.hibernate" name="hibernate-core" rev="${lib.hibernate.rev}"/>
     <dependency org="gov.nih.nci.security" name="clm" rev="${lib.clm.rev}"/>
 
     <!-- TEST -->
@@ -29,10 +29,10 @@
     <dependency conf="unit-test->*" org="postgresql" name="postgresql" rev="8.2-504.jdbc3"/>
     <dependency conf="unit-test->*" org="com.oracle" name="ojdbc14" rev="10.2.0.2.0"/>
 
-    <exclude module="ant"/>
-    <exclude module="log4j" matcher="exact"/>
-    <exclude org="org.apache.log4j"/>
-    <exclude module="com.springsource.slf4j.*" matcher="regexp"/>
+    <exclude org="org.hibernate" module="hibernate"/>
+    <exclude org="javax.security"/>
+    <exclude org="ant"/>
+    <exclude org="log4j"/>
     <exclude module="slf4j-simple"/>
     <exclude module="spring" matcher="exact"/> <!-- from clm -->
     <exclude org="com.oracle.oc4j"/>
