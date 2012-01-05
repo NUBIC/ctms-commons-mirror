@@ -1,8 +1,12 @@
 ctms-commons history
 ====================
 
-1.0.10
-------
+1.1.0
+-----
+
+### all
+
+- Update dev env to JRuby 1.6.2 and buildr 1.4.6.
 
 1.0.9
 -----

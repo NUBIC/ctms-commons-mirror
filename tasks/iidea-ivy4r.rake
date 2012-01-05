@@ -1,4 +1,4 @@
-require 'buildr_iidea'
+require 'buildr/ide/idea'
 require 'buildr/ivy_extension'
 
 # Ensures that the ivy deps are configured in before generating IDEA
@@ -8,7 +8,7 @@ module Ivy4rAndIidea
   include Buildr::Extension
 
   after_define do |project|
-    project.task('iidea:generate').prerequisites.each do |iml|
+    project.task('idea:generate').prerequisites.each do |iml|
       iml.enhance [ project.task('compiledeps'), project.task('testdeps') ]
     end
   end
@@ -18,47 +18,43 @@ class Buildr::Project
   include Ivy4rAndIidea
 end
 
-# Monkey-patches iidea to include jar deps which are not in the m2
-# repo (i.e., locally-cached ivy deps).  Also detects things in the
-# project repo as being intermodule deps.
-
 module Buildr
   module IntellijIdea
-    class IdeaModule < IdeaFile
-      def module_root_component
-        m2repo = Buildr::Repositories.instance.local
+    class IdeaModule
+      protected
 
-        create_component("NewModuleRootManager", "inherit-compiler-output" => "false") do |xml|
-          generate_compile_output(xml)
-          generate_content(xml)
-          generate_initial_order_entries(xml)
+      alias :test_dependency_details_without_ivy :test_dependency_details
 
-          # Note: Use the test classpath since IDEA compiles both "main" and "test" classes using the same classpath
-          self.test_dependencies.each do |dependency_path|
-            export = self.main_dependencies.include?(dependency_path)
-            project_for_dependency = Buildr.projects.detect do |project|
-              project.packages.detect { |pkg| File.basename(pkg.to_s) == File.basename(dependency_path) }
-            end
-            if project_for_dependency
-              if project_for_dependency.iml?
-                generate_project_dependency( xml, project_for_dependency.iml.name, export )
-              end
-            elsif dependency_path.to_s.index(m2repo) == 0
-              entry_path = dependency_path
-              unless self.local_repository_env_override.nil?
-                entry_path = entry_path.sub(m2repo, "$#{self.local_repository_env_override}$")
-              end
-              generate_module_lib(xml, "jar://#{entry_path}!/", export )
-            elsif dependency_path.to_s =~ /jar$/
-              generate_module_lib(xml, "jar://#{dependency_path}!/", export)
+      # Monkey-patched to find ivy sources
+      def test_dependency_details
+        test_dependency_details_without_ivy.collect do |dependency_path, export, source_path|
+          if !source_path && dependency_path =~ %r{ivy/home}
+            possible_source_path = dependency_path.
+              sub(%r{/jars/}, '/sources/').sub(%r{\.jar$}, '-sources.jar')
+            if File.exist?(possible_source_path)
+              source_path = possible_source_path
             end
           end
+          [dependency_path, export, source_path]
+        end
+      end
 
-          self.resources.each do |resource|
-            generate_module_lib(xml, "#{MODULE_DIR_URL}/#{relative(resource.to_s)}", true)
+      # Monkey-patched to detect interproject deps
+      def generate_lib(xml, dependency_path, export, source_path, project_dependencies)
+        project_for_dependency = Buildr.projects.find do |project|
+          project.packages.detect do |pkg|
+            File.basename(pkg.to_s) == File.basename(dependency_path.to_s)
           end
-
-          xml.orderEntryProperties
+        end
+        if project_for_dependency
+          if project_for_dependency.iml? &&
+            !project_dependencies.include?(project_for_dependency) &&
+            project_for_dependency != self.buildr_project
+            generate_project_dependency(xml, project_for_dependency.iml.name, export, !export)
+          end
+          project_dependencies << project_for_dependency
+        else
+          generate_module_lib(xml, url_for_path(dependency_path), export, (source_path ? url_for_path(source_path) : nil), !export)
         end
       end
     end

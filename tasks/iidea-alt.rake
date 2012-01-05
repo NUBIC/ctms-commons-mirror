@@ -1,4 +1,4 @@
-require 'buildr_iidea'
+require 'buildr/ide/idea'
 
 # Subshells to create IDEA files.  This is necessary due to an
 # incomprehensibly-introduced circular dependency issue in some
@@ -29,6 +29,6 @@ task 'iidea' do
     info "- #{filename}"
   end
   if fns.empty?
-    warn "No artifacts created -- you might want to do iidea:clean first."
+    warn "No artifacts created -- you might want to do idea:clean first."
   end
 end

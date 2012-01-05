@@ -1,4 +1,4 @@
-require 'buildr_iidea'
+require 'buildr/ide/idea'
 require 'buildr_bnd'
 require 'buildr/ivy_extension'
 

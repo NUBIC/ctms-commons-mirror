@@ -28,7 +28,7 @@ associated entry in the changelog.
 ### Building
 
 This library is built with buildr.  As of this writing, it works with
-buildr 1.4.4 on jruby 1.5.6.  It uses ivy4r for ivy integration.
+buildr 1.4.6 on jruby 1.6.2.  It uses ivy4r for ivy integration.
 
 To set up a new development environment, install jruby and then use
 jruby to run `install_gems.rb` in the root of the project.
