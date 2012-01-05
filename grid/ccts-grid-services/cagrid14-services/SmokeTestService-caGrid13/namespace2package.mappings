@@ -1,0 +1,10 @@
+http\://smoketest.grid.ccts.nci.nih.gov/SmokeTestService=gov.nih.nci.ccts.grid.smoketest.stubs
+http\://smoketest.grid.ccts.nci.nih.gov/SmokeTestService/bindings=gov.nih.nci.ccts.grid.smoketest.stubs.bindings
+http\://smoketest.grid.ccts.nci.nih.gov/SmokeTestService/service=gov.nih.nci.ccts.grid.smoketest.stubs.service
+http\://security.introduce.cagrid.nci.nih.gov/ServiceSecurity=gov.nih.nci.cagrid.introduce.security.stubs
+http\://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.wsdl=org.oasis.wsrf.properties
+http\://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.wsdl=org.oasis.wsrf.properties
+http\://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.wsdl=org.oasis.wsrf.properties
+
+http\://smoketest.grid.ccts.nci.nih.gov/SmokeTestService/types=gov.nih.nci.ccts.grid.smoketest.stubs.types
+gme\://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata.security=gov.nih.nci.cagrid.metadata.security
