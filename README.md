@@ -35,9 +35,9 @@ jruby to run `install_gems.rb` in the root of the project.
 
 #### CI
 
-The CI build is at https://ctms-ci.nubic.northwestern.edu/hudson/job/ctms-commons/ .
+The CI build is at https://public-ci.nubic.northwestern.edu/job/ctms-commons/ .
 
-Javadoc snapshots are at https://ctms-ci.nubic.northwestern.edu/hudson/job/ctms-commons%20javadoc/javadoc/ .
+Javadoc snapshots are at https://public-ci.nubic.northwestern.edu/job/ctms-commons%20javadoc/javadoc/ .
 
 ### Testing
 
