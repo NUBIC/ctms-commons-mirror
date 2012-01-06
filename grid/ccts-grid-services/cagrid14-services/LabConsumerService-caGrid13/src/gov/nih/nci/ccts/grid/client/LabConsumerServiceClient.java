@@ -21,15 +21,12 @@ import gov.nih.nci.ccts.grid.stubs.service.LabConsumerServiceAddressingLocator;
 import gov.nih.nci.ccts.grid.common.LabConsumerServiceI;
 import gov.nih.nci.cagrid.introduce.security.client.ServiceSecurityClient;
 
-
 import gov.nih.nci.cabig.ccts.domain.loadlabs.Acknowledgement;
 import gov.nih.nci.cabig.ccts.domain.loadlabs.LoadLabsRequest;
 import gov.nih.nci.cabig.ccts.domain.loadlabs.WsError;
 
-
 import java.io.FileInputStream;
 import java.rmi.RemoteException;
-
 
 import org.globus.wsrf.encoding.ObjectDeserializer;
 import org.xml.sax.InputSource;

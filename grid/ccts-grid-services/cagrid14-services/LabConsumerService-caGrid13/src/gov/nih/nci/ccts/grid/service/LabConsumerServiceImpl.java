@@ -37,9 +37,7 @@ public class LabConsumerServiceImpl extends LabConsumerServiceImplBase {
 		super();
 	}
 
-	public gov.nih.nci.cabig.ccts.domain.loadlabs.Acknowledgement loadLabs(
-			gov.nih.nci.cabig.ccts.domain.loadlabs.LoadLabsRequest loadLabsRequest)
-			throws RemoteException {
+  public gov.nih.nci.cabig.ccts.domain.loadlabs.Acknowledgement loadLabs(gov.nih.nci.cabig.ccts.domain.loadlabs.LoadLabsRequest loadLabsRequest) throws RemoteException {
 		initialize();
 		return consumer.loadLabs(loadLabsRequest);
 	}

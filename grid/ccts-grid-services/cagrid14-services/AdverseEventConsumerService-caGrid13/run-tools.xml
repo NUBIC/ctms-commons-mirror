@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project name="run-tools file" basedir="." default="runClient">
-     <target name="runClient" depends="checkGlobus, defineClasspaths" description="Run the sample Client">
-        <property name="service.url" value="http://localhost:8080/wsrf/services/cagrid/AdverseEventConsumer"/>
-        <property name="runclasspath" refid="run.classpath"/>
+     <target name="runClient" depends="init" description="Run the sample Client">
+        <property name="service.url" value="http://localhost:8080/wsrf/services/cagrid/AdverseEventConsumer" />
         <echo message="Connecting to service: ${service.url}" />
         <java failonerror="true" classname="gov.nih.nci.cabig.ctms.grid.ae.client.AdverseEventConsumerClient" classpathref="run.classpath" fork="yes">
             <jvmarg value="-DGLOBUS_LOCATION=${ext.globus.dir}" />
