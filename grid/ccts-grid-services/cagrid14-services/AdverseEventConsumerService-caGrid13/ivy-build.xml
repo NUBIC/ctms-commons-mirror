@@ -1,7 +1,7 @@
 <project name="AdverseEventConsumerService" basedir=".">
     <property name="antfile.dir" value="${basedir}/../../antfiles" />
     <property file="${antfile.dir}/build.properties" />
-    <property file="${basedir}/service.properties" />
+    <property file="${basedir}/local-build.properties" />
     <import file="${antfile.dir}/common.xml"/>
 
     <target name="publish-local" depends="clean,resolve, external-build, publish-local-external-jar" description="-->Will build and deploy the AdverseEventConsumer">

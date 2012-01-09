@@ -5,9 +5,17 @@
       <none />
     </auth-method>
   </method>
+  <authz value="adverseeventconsumer:gov.nih.nci.ccts.grid.service.pdp.AuthenticationRequiredPDP adverseeventconsumer:gov.nih.nci.cabig.ctms.grid.ae.service.globus.AdverseEventConsumerAuthorization" />
   <auth-method>
-    <none />
+    <GSITransport>
+      <protection-level>
+        <privacy />
+      </protection-level>
+    </GSITransport>
   </auth-method>
+  <run-as>
+    <system-identity />
+  </run-as>
   <authz value="none" />
   <method name="getMultipleResourceProperties">
     <auth-method>

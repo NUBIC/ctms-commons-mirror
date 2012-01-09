@@ -37,25 +37,17 @@ public class RegistrationConsumerImpl extends RegistrationConsumerImplBase {
 	public RegistrationConsumerImpl() throws RemoteException {
 	}
 
-	public void rollback(gov.nih.nci.cabig.ccts.domain.Registration registration)
-			throws RemoteException,
-			gov.nih.nci.ccts.grid.stubs.types.InvalidRegistrationException {
+  public void rollback(gov.nih.nci.cabig.ccts.domain.Registration registration) throws RemoteException, gov.nih.nci.ccts.grid.stubs.types.InvalidRegistrationException {
 		initialize();
 		this.consumer.rollback(registration);
 	}
 
-	public void commit(gov.nih.nci.cabig.ccts.domain.Registration registration)
-			throws RemoteException,
-			gov.nih.nci.ccts.grid.stubs.types.InvalidRegistrationException {
+  public void commit(gov.nih.nci.cabig.ccts.domain.Registration registration) throws RemoteException, gov.nih.nci.ccts.grid.stubs.types.InvalidRegistrationException {
 		initialize();
 		this.consumer.rollback(registration);
 	}
 
-	public gov.nih.nci.cabig.ccts.domain.Registration register(
-			gov.nih.nci.cabig.ccts.domain.Registration registration)
-			throws RemoteException,
-			gov.nih.nci.ccts.grid.stubs.types.InvalidRegistrationException,
-			gov.nih.nci.ccts.grid.stubs.types.RegistrationConsumptionException {
+  public gov.nih.nci.cabig.ccts.domain.Registration register(gov.nih.nci.cabig.ccts.domain.Registration registration) throws RemoteException, gov.nih.nci.ccts.grid.stubs.types.InvalidRegistrationException, gov.nih.nci.ccts.grid.stubs.types.RegistrationConsumptionException {
 		initialize();
 		return this.consumer.register(registration);
 	}

@@ -5,6 +5,7 @@
       <none />
     </auth-method>
   </method>
+  <authz value="studyconsumer:gov.nih.nci.ccts.grid.service.pdp.AuthenticationRequiredPDP studyconsumer:gov.nih.nci.ccts.grid.studyconsumer.service.globus.StudyConsumerAuthorization" />
   <auth-method>
     <GSITransport>
       <protection-level>
@@ -15,8 +16,7 @@
   <run-as>
     <system-identity />
   </run-as>
-  <authz value="studyconsumer:gov.nih.nci.ccts.grid.service.pdp.AuthenticationRequiredPDP studyconsumer:gov.nih.nci.ccts.grid.studyconsumer.service.globus.StudyConsumerAuthorization" />
-  
+  <authz value="none" />
   <method name="getMultipleResourceProperties">
     <auth-method>
       <none />
@@ -33,5 +33,4 @@
     </auth-method>
   </method>
 </securityConfig>
-
 

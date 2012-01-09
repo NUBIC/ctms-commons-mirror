@@ -6,6 +6,6 @@ http\://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01
 http\://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.wsdl=org.oasis.wsrf.properties
 http\://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.wsdl=org.oasis.wsrf.properties
 
-gme\://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata.security=gov.nih.nci.cagrid.metadata.security
-http\://grid.ccts.nci.nih.gov/RegistrationConsumer/types=gov.nih.nci.ccts.grid.stubs.types
 gme\://ccts.cabig/1.0/gov.nih.nci.cabig.ccts.domain=gov.nih.nci.cabig.ccts.domain
+http\://grid.ccts.nci.nih.gov/RegistrationConsumer/types=gov.nih.nci.ccts.grid.stubs.types
+gme\://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata.security=gov.nih.nci.cagrid.metadata.security

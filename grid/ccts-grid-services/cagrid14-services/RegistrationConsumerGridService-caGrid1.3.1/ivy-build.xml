@@ -1,7 +1,7 @@
 <project name="RegistrationConsumerService" basedir=".">
 
-	<import file="${basedir}/../antfiles/common.xml"/>
-	<property file="${basedir}/../antfiles/build.properties" />
+	<import file="${basedir}/../../antfiles/common.xml"/>
+	<property file="${basedir}/../../antfiles/build.properties" />
 	<property file="${basedir}/local-build.properties" />
 	
 	<target name="publish-local" depends="clean,resolve, external-build, publish-local-external-jar" description="-->Will build and deploy the AdverseEventConsumer">

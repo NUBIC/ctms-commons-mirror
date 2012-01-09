@@ -16,7 +16,7 @@
     <system-identity />
   </run-as>
    <authz value="registrationconsumer:gov.nih.nci.ccts.grid.service.pdp.AuthenticationRequiredPDP registrationconsumer:gov.nih.nci.ccts.grid.service.globus.RegistrationConsumerAuthorization" />
- 
+
   <method name="getMultipleResourceProperties">
     <auth-method>
       <none />
@@ -33,5 +33,4 @@
     </auth-method>
   </method>
 </securityConfig>
-
 

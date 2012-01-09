@@ -141,7 +141,9 @@
     <ns15:RunAsMode xsi:type="ns15:RunAsMode">System</ns15:RunAsMode>
     <ns15:AnonymousClients xsi:type="ns15:AnonymousCommunication">No</ns15:AnonymousClients>
     <ns15:ServiceAuthorization xsi:type="ns15:ServiceAuthorization">
-     <ns15:NoAuthorization xsi:type="ns15:NoAuthorization"/>
+     <ns15:CustomPDPChainAuthorization xsi:type="ns15:CustomPDPChainAuthorization">
+      <ns15:PDPChain xsi:type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema">labconsumer:gov.nih.nci.ccts.grid.service.pdp.AuthenticationRequiredPDP labconsumer:gov.nih.nci.ccts.grid.service.globus.LabConsumerServiceAuthorization</ns15:PDPChain>
+     </ns15:CustomPDPChainAuthorization>
     </ns15:ServiceAuthorization>
    </ns15:ServiceSecurity>
    <ns3:description xsi:type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"></ns3:description>
@@ -150,7 +152,8 @@
     <ns3:Identifiable xsi:type="ns3:Identifiable"/>
     <ns3:ResourcePropertyManagement xsi:type="ns3:ResourcePropertyManagement"/>
    </ns3:ResourceFrameworkOptions>
+   <ns16:Extensions xsi:type="ns16:ExtensionsType" xmlns:ns16="gme://gov.nih.nci.cagrid.introduce/1/Extension"/>
   </ns3:Service>
  </ns3:Services>
- <ns16:Extensions xsi:type="ns16:ExtensionsType" xmlns:ns16="gme://gov.nih.nci.cagrid.introduce/1/Extension" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+ <ns17:Extensions xsi:type="ns17:ExtensionsType" xmlns:ns17="gme://gov.nih.nci.cagrid.introduce/1/Extension" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
 </ns1:ServiceDescription>

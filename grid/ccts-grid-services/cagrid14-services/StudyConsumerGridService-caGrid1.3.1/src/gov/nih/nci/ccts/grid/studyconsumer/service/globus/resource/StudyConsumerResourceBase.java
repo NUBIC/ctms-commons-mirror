@@ -85,7 +85,7 @@ import org.oasis.wsrf.lifetime.TerminationNotification;
  * of these resource as well as code for registering any properties selected
  * to the index service.
  * 
- * @created by Introduce Toolkit version 1.3
+ * @created by Introduce Toolkit version 1.4
  * 
  */
 public abstract class StudyConsumerResourceBase extends ReflectionResource implements Resource
@@ -201,7 +201,7 @@ public abstract class StudyConsumerResourceBase extends ReflectionResource imple
                 + getConfiguration().getRegistrationTemplateFile());
 
             if (registrationFile.exists() && registrationFile.canRead()) {
-                logger.debug("Loading registration argumentsrmation from:" + registrationFile);
+                logger.debug("Loading registration arguments from:" + registrationFile);
 
                 try {
                     params = ServiceGroupRegistrationClient.readParams(registrationFile.getAbsolutePath());

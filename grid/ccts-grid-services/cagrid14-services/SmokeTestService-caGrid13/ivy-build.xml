@@ -1,4 +1,4 @@
-<project name="LabConsumerService" basedir=".">
+<project name="SmokeTestService" basedir=".">
     <property name="antfile.dir" value="${basedir}/../../antfiles" />
     <property file="${antfile.dir}/build.properties" />
     <property file="${basedir}/local-build.properties" />

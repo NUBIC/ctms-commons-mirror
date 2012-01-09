@@ -5,6 +5,7 @@
       <none />
     </auth-method>
   </method>
+  <authz value="labconsumer:gov.nih.nci.ccts.grid.service.pdp.AuthenticationRequiredPDP labconsumer:gov.nih.nci.ccts.grid.service.globus.LabConsumerServiceAuthorization" />
   <auth-method>
     <GSITransport>
       <protection-level>
