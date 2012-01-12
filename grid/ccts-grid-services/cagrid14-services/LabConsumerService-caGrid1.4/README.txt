@@ -14,7 +14,7 @@ Globus 4.0.3 installed and GLOBUS_LOCATION env defined
 
 To Build:
 =======================================
-"ant all" will build 
-"ant deployGlobus" will deploy to "GLOBUS_LOCATION"
-"ant deployTomcat" will deploy to "CATALINA_HOME"
+"ant -f ivy-build.xml all" will build
+"ant -f ivy-build.xml deployGlobus" will deploy to "GLOBUS_LOCATION"
+"ant -f ivy-build.xml deployTomcat" will deploy to "CATALINA_HOME"
 

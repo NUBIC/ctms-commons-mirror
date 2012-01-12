@@ -11,6 +11,30 @@
 
     </target>
 
+    <target name="all" depends="publish-local" description="Will build the whole module. Internally will call build.xml all target">
+
+    </target>
+    <!-- Will deploy to GLOBUS_LOCATION -->
+    <target name="deployGlobus" depends="clean,resolve" description="Will deploy to GLOBUS_LOCATION.Internally calls build.xml deployGlobus">
+        <ant antfile="${basedir}/build.xml" target="deployGlobus" inheritall="false" inheritrefs="true" dir="${basedir}"/>
+    </target>
+    <!-- Will deploy to CATALINA_HOME -->
+    <target name="deployTomcat" depends="clean,resolve" description="Will deploy to CATALINA_HOME.Internally calls build.xml deployTomcat">
+        <ant antfile="${basedir}/build.xml" target="deployTomcat" inheritall="false" inheritrefs="true" dir="${basedir}"/>
+    </target>
+    <target name="help" description="Prints usage information.">
+        <echo message="================================================================================" />
+        <echo message="          Service: ${ant.project.name}" />
+        <echo message="--------------------------------------------------------------------------------" />
+        <echo message="|  USAGE:                                                                      |" />
+        <echo message="|    Type 'ant -h' for general help with Ant                                   |" />
+        <echo message="|    Type 'ant -p' for a description of this service's build targets.          |" />
+        <echo message="|    Type 'ant -f ivy-build.xml all' To build and publish the services.        |" />
+        <echo message="|    Type 'ant -f ivy-build.xml deployTomcat' To deploy to CATALINA_HOME.      |" />
+        <echo message="|    Type 'ant -f ivy-build.xml deployGlobus' To deploy to GLOBUS_LOCATION.    |" />
+        <echo message="================================================================================" />
+    </target>
+
     <target name="external-build" description="Will build the grid service using introduce generated build file">
         <!-- I am not sure, whether deployTomcat is the right target -->
         <ant antfile="${basedir}/build.xml" target="all" inheritall="false" inheritrefs="true" dir="${basedir}"/>

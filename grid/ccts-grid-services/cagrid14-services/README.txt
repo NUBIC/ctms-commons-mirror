@@ -1,0 +1,1 @@
+To build and deploy the artifacts, please refer to README.txt files in individual projects.
