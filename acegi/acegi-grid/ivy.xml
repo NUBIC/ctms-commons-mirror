@@ -8,7 +8,7 @@
   </configurations>
 
   <dependencies defaultconfmapping="compile->default(*)">
-    <dependency name="ctms-commons-acegi-csm" rev="latest.integration" conf="*->runtime;%->@"/>
+    <dependency name="ctms-commons-acegi-csm" rev="latest.integration" conf="co->runtime;%->@"/>
 
     <dependency org="gov.nih.nci.security" name="csm" rev="${lib.csm.rev}"/>
 
