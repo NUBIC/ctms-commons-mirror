@@ -7,7 +7,7 @@
     <include file="../../ivy/default-configurations.xml"/>
   </configurations>
 
-  <dependencies>
+  <dependencies defaultconfmapping="compile->default(*)">
     <dependency org="org.acegisecurity" name="acegi-security" rev="${lib.acegi.rev}">
       <exclude org="org.springframework"/>
     </dependency>

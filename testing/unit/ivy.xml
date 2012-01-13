@@ -7,8 +7,8 @@
     <include file="../../ivy/default-configurations.xml"/>
   </configurations>
 
-  <dependencies>
-    <dependency name="ctms-commons-lang" rev="latest.integration"/>
+  <dependencies defaultconfmapping="compile->default(*)">
+    <dependency name="ctms-commons-lang" rev="latest.integration" conf="compile->runtime;%->@"/>
     <dependency org="org.slf4j" name="slf4j-api" rev="${lib.slf4j.rev}"/>
     <dependency org="junit" name="junit" rev="${lib.junit.rev}"/>
     <dependency org="org.easymock" name="easymock" rev="2.5.2"/>

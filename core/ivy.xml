@@ -7,7 +7,7 @@
     <include file="../ivy/default-configurations.xml"/>
   </configurations>
 
-  <dependencies>
+  <dependencies defaultconfmapping="compile->default(*)">
     <dependency name="ctms-commons-base" rev="latest.integration" conf="compile->runtime;%->@"/>
     <dependency name="ctms-commons-lang" rev="latest.integration" conf="compile->runtime;%->@"/>
 

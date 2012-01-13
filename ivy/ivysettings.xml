@@ -23,6 +23,10 @@
     </filesystem>
     <chain name="libraries" returnFirst="true">
       <ibiblio name="m2" m2compatible="true"/>
+      <!-- Nexus NCI -->
+      <ibiblio name="maven2-NCI-3rdparty" m2compatible="true"
+               root="https://ncimvn.nci.nih.gov/nexus/content/repositories/thirdparty"
+               changingPattern="SNAPSHOT"/>
     </chain>
   </resolvers>
 

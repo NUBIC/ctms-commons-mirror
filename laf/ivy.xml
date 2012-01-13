@@ -7,7 +7,7 @@
     <include file="../ivy/default-configurations.xml"/>
   </configurations>
 
-  <dependencies>
+  <dependencies defaultconfmapping="compile->default(*)">
     <dependency name="ctms-commons-web" rev="latest.integration" conf="compile->runtime;%->@"/>
 
     <!-- TODO: exclude this from runtime somehow -->

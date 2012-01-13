@@ -7,7 +7,7 @@
     <include file="../../ivy/default-configurations.xml"/>
   </configurations>
 
-  <dependencies>
+  <dependencies defaultconfmapping="compile->default(*)">
     <dependency name="ctms-commons-base" rev="latest.integration" conf="compile->runtime;%->@"/>
     <dependency name="ctms-commons-core" rev="latest.integration" conf="compile->runtime;%->@"/>
 
@@ -27,7 +27,7 @@
     <dependency conf="unit-test->*" org="org.slf4j" name="log4j-over-slf4j" rev="${lib.slf4j.rev}"/>
     <dependency conf="unit-test->*" org="org.dbunit" name="dbunit" rev="${lib.dbunit.rev}"/>
     <dependency conf="unit-test->*" org="postgresql" name="postgresql" rev="8.2-504.jdbc3"/>
-    <dependency conf="unit-test->*" org="com.oracle" name="ojdbc14" rev="10.2.0.2.0"/>
+    <dependency conf="unit-test->*" org="oracle" name="ojdbc14" rev="10.2.0.2"/>
 
     <exclude org="org.hibernate" module="hibernate"/>
     <exclude org="javax.security"/>
