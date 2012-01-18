@@ -1,6 +1,8 @@
 # Supports using ivy4r in a multimodule project
 
 require 'fileutils'
+require 'digest/md5'
+require 'digest/sha1'
 
 # Ivy's home.dir must be absolute, so this is necessary
 IVY_HOME = File.expand_path("../../ivy/home", __FILE__)
@@ -41,6 +43,35 @@ module ProjectIvyRepo
           # invoking the publish task doesn't work, but directly
           # invoking this method does work.
           proj.ivy.__publish__
+
+          # Generate POM from delivered ivy.xml
+          published_dir = File.join(
+            PROJECT_REPO_ROOT, proj.group, proj.name.gsub(':', '-'), proj.version)
+          pom = File.join(published_dir, "pom.xml")
+          proj.ivy.ivy4r.makepom(
+            :ivyfile => File.join(published_dir, "ivy.xml"),
+            :pomfile => pom,
+            :description => proj.full_comment,
+            :conf => 'compile,runtime,unit-test',
+            :nested => [
+              [:mapping, { :conf => 'compile', :scope => 'compile' }],
+              [:mapping, { :conf => 'runtime', :scope => 'runtime' }],
+              [:mapping, { :conf => 'unit-test', :scope => 'test' }]
+            ])
+          # makepom makes any dependency without an explicit conf
+          # optional. Replace those with 'compile', since that's how
+          # the default conf is used in this project.
+          pomcontents = File.read(pom)
+          File.open(pom, 'w') do |f|
+            f.write(pomcontents.gsub('<optional>true</optional>', '<scope>compile</scope>'))
+          end
+          pomcontents = File.read(pom)
+          File.open(pom + '.sha1', 'w') do |f|
+            f.write(Digest::SHA1.hexdigest(pomcontents))
+          end
+          File.open(pom + '.md5', 'w') do |f|
+            f.write(Digest::MD5.hexdigest(pomcontents))
+          end
         end
       end
     end
