@@ -1,11 +1,11 @@
-# Tasks for publishing from the local project repo to CBIIT
+# Tasks for preparing a publication package for the NCI's Nexus repo.
 
 namespace :publish do
-  PROJECT_PUBLICATION_LOCAL_ROOT = File.expand_path("../../publish-repo", __FILE__)
+  PROJECT_PUBLICATION_LOCAL_ROOT = File.expand_path("../../nexus-staging", __FILE__)
 
   task :version_check do
     projects.each do |p|
-      unless p.version =~ /^\d+\.\d+.\d+\.RELEASE$/
+      unless p.version =~ /^\d+\.\d+.\d+\.RELEASE$/ || ENV['TEST_RELEASE']
         fail "#{p} has a non-release version.\nPlease set it to x.y.z.RELEASE (according to the policy in the README) and commit before attempting to release."
       end
     end
@@ -23,12 +23,14 @@ namespace :publish do
   end
 
   task :vcs_check do
-    case which_vcs
-    when :git
+    case
+    when ENV['TEST_RELEASE']
+      # pass
+    when which_vcs == :git
       unless `git status -s`.empty?
         fail "Outstanding changes in the working directory.  Please resolve them before releasing."
       end
-    when :svn
+    when which_vcs == :svn
       unless `svn status`.empty?
         fail "Outstanding changes in the working directory.  Please resolve them before releasing."
       end
@@ -49,110 +51,102 @@ namespace :publish do
     fail "Tagging failed" unless $? == 0
   end
 
-  task :url do |t|
-    class << t; attr_accessor :value; end
-    t.value = "https://ncisvn.nci.nih.gov/svn/cbiit-ivy-repo/trunk/#{CTMS_COMMONS_IVY_ORG}"
-  end
-
-  task :repo => :url do |t|
-    class << t; attr_accessor :path; end
-    mkdir_p PROJECT_PUBLICATION_LOCAL_ROOT
-    FileUtils.cd PROJECT_PUBLICATION_LOCAL_ROOT do
-      if File.directory?(File.join(CTMS_COMMONS_IVY_ORG, '.svn'))
-        info "Updating publish repo checkout at #{File.expand_path('.')}"
-        system("svn update #{CTMS_COMMONS_IVY_ORG}")
-        unless $? == 0
-          fail "Update failed.  Please check the subversion output for clues."
-        end
-      else
-        url = task("publish:url").value
-        info "Checking out publish repo"
-        info "  from #{url}"
-        info "    to #{File.expand_path('.')}"
-        system("svn checkout #{task("publish:url").value}")
-        unless $? == 0
-          fail "Checkout failed.  Please check the subversion output for clues."
-        end
-      end
-    end
-    t.path = File.join(PROJECT_PUBLICATION_LOCAL_ROOT, CTMS_COMMONS_IVY_ORG)
-  end
-
-  task :check_clean_repo => :repo do |t|
-    repo = task("publish:repo").path
-    statuses = repo_status.collect { |st, path| st }.uniq
-    unless statuses.empty?
-      fail "The local copy of the publish repo is dirty (#{statuses.inspect}).  Please clean it up before proceeding."
-    end
-  end
-
   task :build => ["rake:clean", "rake:package"]
 
-  task :copy => [:check_clean_repo, :repo] do
-    publish_repo = task("publish:repo").path
+  directory PROJECT_PUBLICATION_LOCAL_ROOT
+
+  task :clean => PROJECT_PUBLICATION_LOCAL_ROOT do |t|
+    rm_rf Dir[File.join(PROJECT_PUBLICATION_LOCAL_ROOT, '*')].sort_by { |fn| fn.size }
+  end
+
+  task :copy => [PROJECT_PUBLICATION_LOCAL_ROOT, :clean] do
     project_repo = ProjectIvyRepo::PROJECT_REPO_ROOT
     prefix = File.join(project_repo, CTMS_COMMONS_IVY_ORG) + "/"
-    artifacts = projects.collect { |p| p.version }.uniq.
-      collect { |version| Dir[File.join(prefix, "*", version, "**/*")] }.flatten
-    artifacts.each do |artifact|
-      target = File.join(publish_repo, artifact.sub(prefix, ''))
-      FileUtils.mkdir_p File.dirname(target)
-      FileUtils.cp artifact, target
-      system("svn add --parents #{target}")
+    artifact_index = projects.collect { |p| p.version }.uniq.
+      inject({}) { |h, version| h[version] = Dir[File.join(prefix, "*", version, "**/*")]; h }
+    artifact_index.each_pair do |version, artifacts|
+      artifacts.each do |artifact|
+        target = File.join(
+          PROJECT_PUBLICATION_LOCAL_ROOT, artifact.sub(prefix, '').sub(version + '/', ''))
+        mkdir_p File.dirname(target)
+        cp artifact, target
+      end
     end
-    info "Copied #{artifacts.size} artifacts to the local publish repo."
+    ct = artifact_index.inject(0) { |sum, (version, as)| sum + as.size }
+    info "Copied #{ct} artifacts to the publish staging directory."
   end
 
   desc "Does a sanity check on the prepared artifacts"
-  task :sanity => :repo do
-    problems = repo_status.collect { |st, path|
-      if path =~ /ivy.xml$/
+  task :sanity => PROJECT_PUBLICATION_LOCAL_ROOT do
+    problems = prepared_artifacts.collect { |st, path|
+      if path =~ /ivy.xml$/ || path =~ /pom.xml$/
         if File.read(path) =~ /\.DEV/
           "#{path} contains a dependency on a development artifact."
         end
       end
     }.compact
     unless problems.empty?
-      fail "There are problems with the soon-to-be-published artifacts.  " <<
-        "Please fix them before committing.\n- #{problems.join("\n- ")}"
+      msg = "There are problems with the soon-to-be-published artifacts.  " <<
+        "Please fix them before publishing.\n- #{problems.join("\n- ")}"
+      if ENV['TEST_RELEASE']
+        puts msg
+        puts 'Continuing because this is a test run'
+      else
+        fail msg
+      end
     end
   end
 
   desc "Prepare the project artifacts for publication"
-  task :prepare => [:check, :build, :copy, :sanity] do
-    info "The local checkout of the target repo now contains the artifacts for #{CTMS_COMMONS_VERSION}."
-    info "Please verify they are correct, then run `buildr publish:commit`."
-    info "(The local checkout is in #{task("publish:repo").path}.)"
+  task :prepare => [:check, :build, :copy, :index, :sanity] do
+    info "#{PROJECT_PUBLICATION_LOCAL_ROOT} now contains the artifacts for #{CTMS_COMMONS_VERSION}."
+    info "Please verify they are correct, then run `buildr publish:zip`."
   end
 
-  desc "Commit the prepared artifacts"
-  task :commit => [:repo, :sanity] do
-    all_statuses = repo_status.collect { |st, path| st }.uniq
-    unless all_statuses == %w(A)
-      fail "You can only publish adds, not changes: #{all_statuses.join(' ')}"
+  desc 'Create the index spreadsheet required by NCICB'
+  task :index do
+    fn = File.join(PROJECT_PUBLICATION_LOCAL_ROOT, "artifacts-#{CTMS_COMMONS_VERSION}.csv")
+    cd PROJECT_PUBLICATION_LOCAL_ROOT do
+      File.open(fn, 'w') do |f|
+        projects.each do |p|
+          gav = [CTMS_COMMONS_IVY_ORG, p.id, p.version].join('/')
+          [
+            "#{p.id}-#{p.version}.jar",
+            "pom.xml",
+            "ivy.xml"
+          ].collect { |b| File.join(p.id, b) }.each do |artifact|
+            next unless File.exist? artifact
+            type = case artifact
+                   when /jar$/; 'jar';
+                   when /pom/; 'pom';
+                   when /ivy/; 'ivy';
+                   else fail "Could not determine type for #{artifact.inspect}"
+                   end
+            f.puts [
+              artifact, File.read("#{artifact}.sha1"), gav, type, ('yes' if type == 'jar')
+            ].join(',')
+          end
+        end
+      end
     end
-    info "Committing #{repo_status.size} changes."
-    system("svn commit #{task("publish:repo").path} -m 'Publishing #{CTMS_COMMONS_VERSION}'")
-    info "If the commit succeeded, please run `buildr publish:tag`."
-    info "Then update the version in the buildfile to the next development version and commit."
   end
 
-  desc "Remove all pre-publish artifacts from the local copy of the publish repo"
-  task :clean => :repo do
-    repo = task("publish:repo").path
-    system("svn revert --recursive #{repo}")
-    repo_status.select { |st, path| st == '?' }.collect { |st, path| path }.
-      each { |file| FileUtils.rm_rf file }
+  task :zip do
+    fn = projects.first.path_to(
+      :target, "ctms-commons-#{projects.first.version}-nexus-artifacts.zip")
+    mkdir_p File.dirname(fn)
+    rm_rf fn
+    cd PROJECT_PUBLICATION_LOCAL_ROOT do
+      Dir['**/*'].each do |artifact|
+        Zip::ZipFile.open(fn, Zip::ZipFile::CREATE) do |zf|
+          zf.add(artifact, artifact)
+        end
+      end
+    end
+    puts "The release artifacts are packaged in #{fn}."
   end
 
-  desc "Remove all changes to already-published artifacts from the local copy of the publish repo"
-  task :unmodify => :repo do
-    repo = task("publish:repo").path
-    paths = repo_status.select { |st, path| st == 'M' }.collect { |st, path| "'#{path}'" }.join(' ')
-    system("svn revert #{paths}")
-  end
-
-  def repo_status
-    `svn status #{task("publish:repo").path}`.split("\n").collect { |line| line.split(/\s+/, 2) }
+  def prepared_artifacts
+    Dir[File.join(PROJECT_PUBLICATION_LOCAL_ROOT, '**', '*')]
   end
 end

@@ -1,6 +1,6 @@
 target
 reports
-publish-repo
+nexus-staging
 
 *.ipr
 *.iml

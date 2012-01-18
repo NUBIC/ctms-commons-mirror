@@ -80,10 +80,11 @@ database:
 
 ### Releasing
 
-In order to release ctms-commons, you have to have been granted access
-[per the BDA team's directions][bda-ivy].
+In order to release ctms-commons, you have to build a release package
+and submit it to CBIIT. They will review it and include it in the
+[Nexus][] release repository.
 
-[bda-ivy]: https://wiki.nci.nih.gov/display/BuildandDeploymentAutomation/Ivy-+How+to+add+files+to+Repo
+[Nexus]: https://wiki.nci.nih.gov/display/sysdeploy/Sonatype+Nexus+Maven+Repository+Manager+%28CBIIT%29
 
 #### Versions
 
@@ -108,19 +109,24 @@ alternative to publishing snapshot builds.
 
 #### Steps to release
 
-0) Ensure that everything you want to go into the release has been
-   committed into trunk.  Ensure that the CHANGELOG is up to date.
-1) Set the version number in the buildfile to the appropriate release
-   version.  E.g., 3.9.4.RELEASE.
-2) Commit.
-3) Run `buildr publish:prepare`.  This will do a clean build, check
-   out the CBIIT repo, and ready the ivy artifacts for publication.
-4) Check that the new artifacts (under publish-repo) are as you expect.
-5) Run `buildr publish:commit`.
-6) Run `buildr publish:tag`.
-7) Update the version number in the buildfile to the next development
-   version.  E.g., 3.9.5.DEV.
-8) Commit.
+ 0) Ensure that everything you want to go into the release has been
+    committed into trunk.  Ensure that the CHANGELOG is up to date.
+ 1) Set the version number in the buildfile to the appropriate release
+    version.  E.g., 3.9.4.RELEASE.
+ 2) Commit.
+ 3) Run `buildr publish:prepare`.  This will do a clean build, and
+    stage the artifacts for publication.
+ 4) Check that the new artifacts (under nexus-staging) are as you
+    expect.
+ 5) Run `buildr publish:zip`.
+ 6) Upload the resulting ZIP file to any NCI server.
+ 7) E-mail the application support desk to with the location where you
+    uploaded the new release artifacts and request they be added to
+    Nexus.
+ 8) Run `buildr publish:tag`.
+ 9) Update the version number in the buildfile to the next development
+    version.  E.g., 3.9.5.DEV.
+10) Commit.
 
 (Note that buildr provides a release process, but we aren't using it
-because it doesn't support CBIIT's ivy repo setup.)
+because CBIIT doesn't allow us direct access to the release repo.)
