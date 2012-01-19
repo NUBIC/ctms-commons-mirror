@@ -41,7 +41,7 @@
         <dependency org="globus" name="mds" rev="4.0.3-bigindex" conf="*->jars" />
 
         <!-- Spring framework -->
-        <dependency org="org.springframework" name="spring-context" rev="3.0.6.RELEASE" conf="build->default"/>
+        <dependency org="org.springframework" name="spring-context" rev="3.0.7.RELEASE" conf="build->default"/>
 
         <!-- Castor -->
         <dependency org="castor" name="castor" rev="0.9.9"/>
