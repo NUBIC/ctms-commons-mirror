@@ -31,7 +31,7 @@
     <dependency org="internet2" name="subject" rev="0.2.1"/>
 
     <dependency org="caGrid" name="authentication-service" rev="${lib.cagrid.rev}" conf="*->client"/>
-    <dependency org="caGrid" name="authz"       rev="${lib.cagrid.rev}"/>
+    <dependency org="caGrid" name="authz"       rev="${lib.cagrid.old.rev}" transitive="false" />
     <dependency org="caGrid" name="dorian"      rev="${lib.cagrid.rev}" conf="*->client"/>
     <dependency org="caGrid" name="dorian-deprecated" rev="1.2" conf="*->stubs(*)"/>
     <dependency org="caGrid" name="gaards-core" rev="${lib.cagrid.rev}"/>
