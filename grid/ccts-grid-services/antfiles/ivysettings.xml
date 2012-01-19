@@ -40,17 +40,16 @@
                      changingPattern=".*SNAPSHOT" />
 
             <!--  SemanticBits shared repository [using sftp] -->
-            <sftp name="semanticbits-repo-sftp" user="caaers" userPassword="caaers" host="10.10.10.2">
-                <ivy pattern="/usr/local/tomcats/caaers/demo/tomcat-caaers-demo-8030/webapps/ivy-repo/[organisation]/[module]/[revision]/ivy.xml"/>
-                <artifact pattern="/usr/local/tomcats/caaers/demo/tomcat-caaers-demo-8030/webapps/ivy-repo/[organisation]/[module]/[revision]/[artifact].[ext]"/>
+            <sftp name="semanticbits-repo-sftp" user="userivy" userPassword="userivy" host="10.10.10.21">
+                <ivy pattern="/usr/local/tomcats/apache-tomcat-5.5.23-8090/webapps/ivy-repo/[organisation]/[module]/[revision]/ivy.xml"/>
+                <artifact pattern="/usr/local/tomcats/apache-tomcat-5.5.23-8090/webapps/ivy-repo/[organisation]/[module]/[revision]/[artifact].[ext]"/>
             </sftp>
 
             <!--  SemanticBits shared repository [using sftp] -->
-            <sftp name="semanticbits-grid-repo-sftp" user="caaers" userPassword="caaers" host="10.10.10.2">
-                <ivy pattern="/usr/local/tomcats/caaers/demo/tomcat-caaers-demo-8030/webapps/ivy-repo/caGRID/[organisation]/[module]/[revision]/ivy.xml"/>
-                <artifact pattern="/usr/local/tomcats/caaers/demo/tomcat-caaers-demo-8030/webapps/ivy-repo/caGRID/[organisation]/[module]/[revision]/[artifact].[ext]"/>
+            <sftp name="semanticbits-grid-repo-sftp" user="userivy" userPassword="userivy" host="10.10.10.21">
+                <ivy pattern="/usr/local/tomcats/apache-tomcat-5.5.23-8090/webapps/ivy-repo/caGRID/[organisation]/[module]/[revision]/ivy.xml"/>
+                <artifact pattern="/usr/local/tomcats/apache-tomcat-5.5.23-8090/webapps/ivy-repo/caGRID/[organisation]/[module]/[revision]/[artifact].[ext]"/>
             </sftp>
-
         </chain>
 
     </resolvers>

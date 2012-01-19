@@ -60,7 +60,7 @@
 			<format property="now" pattern="yyyyMMddHHmmss"/>
 		</tstamp>
 		<ivyPublish artifactspattern="${basedir}/build/lib/[artifact].[ext]" 
-				    		resolver="semanticbits-grid-repo-sftp"
+				    		resolver="semanticbits-repo-sftp"
 				    		pubrevision="${project.version}" 
 				    		status="release"
 				    		/>
