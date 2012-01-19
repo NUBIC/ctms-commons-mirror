@@ -18,13 +18,6 @@
                 <artifact pattern="${user.home}/.ivy2/ccts-cache/[organisation]/[module]/[type]s/[artifact]-[revision].[ext]"/>
             </filesystem>
 
-            <!-- NCI IVY repository -->
-            <url name="nci-ivy-repo" >
-                <ivy pattern="https://ncisvn.nci.nih.gov/svn/cbiit-ivy-repo/trunk/[organisation]/[module]/[revision]/ivy.xml" />
-                <artifact pattern="https://ncisvn.nci.nih.gov/svn/cbiit-ivy-repo/trunk/[organisation]/[module]/[revision]/[module]-[revision].[ext]" />
-                <artifact pattern="https://ncisvn.nci.nih.gov/svn/cbiit-ivy-repo/trunk/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
-            </url>
-
             <!-- caGrid 1.4 repository -->
             <url name="nci-cagrid-repo">
                 <ivy pattern="http://software.cagrid.org/repository-1.4/[organisation]/[module]/ivy-[revision].xml" />
