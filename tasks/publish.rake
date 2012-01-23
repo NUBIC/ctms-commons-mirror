@@ -62,18 +62,17 @@ namespace :publish do
   task :copy => [PROJECT_PUBLICATION_LOCAL_ROOT, :clean] do
     project_repo = ProjectIvyRepo::PROJECT_REPO_ROOT
     prefix = File.join(project_repo, CTMS_COMMONS_IVY_ORG) + "/"
-    artifact_index = projects.collect { |p| p.version }.uniq.
-      inject({}) { |h, version| h[version] = Dir[File.join(prefix, "*", version, "**/*")]; h }
-    artifact_index.each_pair do |version, artifacts|
-      artifacts.each do |artifact|
-        target = File.join(
-          PROJECT_PUBLICATION_LOCAL_ROOT, artifact.sub(prefix, '').sub(version + '/', ''))
-        mkdir_p File.dirname(target)
-        cp artifact, target
-      end
+    jars = Dir[File.join(prefix, "**/*.jar")]
+
+    mkdir_p PROJECT_PUBLICATION_LOCAL_ROOT
+    jars.each do |jar|
+      target_jar = File.join(PROJECT_PUBLICATION_LOCAL_ROOT, File.basename(jar))
+      target_pom = target_jar.sub(/jar$/, 'pom')
+      cp jar, target_jar
+      cp File.join(File.dirname(jar), 'pom.xml'), target_pom
     end
-    ct = artifact_index.inject(0) { |sum, (version, as)| sum + as.size }
-    info "Copied #{ct} artifacts to the publish staging directory."
+
+    info "Copied #{jars.size * 2} artifacts to the publish staging directory."
   end
 
   desc "Does a sanity check on the prepared artifacts"
@@ -110,22 +109,15 @@ namespace :publish do
       File.open(fn, 'w') do |f|
         projects.each do |p|
           gav = [CTMS_COMMONS_IVY_ORG, p.id, p.version].join('/')
-          [
-            "#{p.id}-#{p.version}.jar",
-            "pom.xml",
-            "ivy.xml"
-          ].collect { |b| File.join(p.id, b) }.each do |artifact|
-            next unless File.exist? artifact
-            type = case artifact
-                   when /jar$/; 'jar';
-                   when /pom/; 'pom';
-                   when /ivy/; 'ivy';
-                   else fail "Could not determine type for #{artifact.inspect}"
-                   end
-            f.puts [
-              artifact, File.read("#{artifact}.sha1"), gav, type, ('yes' if type == 'jar')
-            ].join(',')
-          end
+          artifact = "#{p.id}-#{p.version}.jar"
+          next unless File.exist? artifact
+          f.puts [
+            artifact,
+            Digest::SHA1.hexdigest(File.read(artifact)),
+            gav,
+            'jar',
+            'yes'
+          ].join(',')
         end
       end
     end
