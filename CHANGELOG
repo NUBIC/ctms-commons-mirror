@@ -9,6 +9,8 @@ ctms-commons history
 - Update publish infrastructure to build artifacts for the new NCI
   Nexus repo & release process.
 
+- Update caGrid dependencies to 1.4.
+
 1.1.0
 -----
 
