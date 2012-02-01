@@ -10,6 +10,10 @@ ctms-commons history
   used in contexts where the suite auth description classes
   (SuiteRole, SuiteRoleMembership, etc.) are used without CSM.
 
+- Add `#forAll(ScopeType)`, `#forIdentifiers(ScopeType, String...)`,
+  `#addIdentifier(ScopeType, String)`, `#removeIdentifier(ScopeType,
+  String)` parameterized update methods on SuiteRoleMembership.
+
 1.1.1
 -----
 

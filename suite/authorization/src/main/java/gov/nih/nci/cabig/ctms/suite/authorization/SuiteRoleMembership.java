@@ -192,6 +192,30 @@ public class SuiteRoleMembership implements Cloneable {
         return removeScopeObjectOrIdentifier(ScopeType.STUDY, study);
     }
 
+    /**
+     * Scope this membership to the specified identifiers using the specified scope type.
+     */
+    public SuiteRoleMembership forIdentifiers(ScopeType scope, String... idents) {
+        setIdentifiers(scope, Arrays.asList(idents));
+        return this;
+    }
+
+    /**
+     * Expand the memberships' scope to include another identifier of the specified scope.
+     * @return this (for chaining)
+     */
+    public SuiteRoleMembership addIdentifier(ScopeType scope, String identifier) {
+        return addScopeObjectOrIdentifier(scope, identifier);
+    }
+
+    /**
+     * Contract the membership's scope by removing the specified identifier of the specified scope.
+     * @return this (for chaining)
+     */
+    public SuiteRoleMembership removeIdentifier(ScopeType scope, String identifier) {
+        return removeScopeObjectOrIdentifier(scope, identifier);
+    }
+
     // n.b.: add is always done in terms of identifiers.  We assume that most of the time
     // when you are doing an add, the application objects won't be loaded.  No point in loading
     // them just to add one.
@@ -278,7 +302,10 @@ public class SuiteRoleMembership implements Cloneable {
         return forAll(ScopeType.STUDY);
     }
 
-    private SuiteRoleMembership forAll(ScopeType scope) {
+    /**
+     * Flags this membership as having the special "all" scope for the given scope type.
+     */
+    public SuiteRoleMembership forAll(ScopeType scope) {
         clear(scope);
         this.forAll.put(scope, true);
         return this;
@@ -302,7 +329,7 @@ public class SuiteRoleMembership implements Cloneable {
         return notForAll(ScopeType.STUDY);
     }
 
-    private SuiteRoleMembership notForAll(ScopeType scope) {
+    public SuiteRoleMembership notForAll(ScopeType scope) {
         this.forAll.put(scope, false);
         return this;
     }

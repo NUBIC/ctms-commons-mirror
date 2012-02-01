@@ -204,6 +204,25 @@ public class SuiteRoleMembershipTest extends TestCase {
         assertEquals("Wrong study won", "A", ((TestStudy) m.getStudies().get(0)).getIdent());
     }
 
+    ////// forIdentifiers
+
+    public void testAddingSitesByIdentifiersAndScopeType() throws Exception {
+        SuiteRoleMembership m =
+            createMembership(SuiteRole.DATA_READER).forIdentifiers(ScopeType.SITE, "A", "B", "C");
+        assertEquals("Wrong number of sites", 3, m.getSiteIdentifiers().size());
+        assertEquals("Wrong 1st site", "A", m.getSiteIdentifiers().get(0));
+        assertEquals("Wrong 2nd site", "B", m.getSiteIdentifiers().get(1));
+        assertEquals("Wrong 3rd site", "C", m.getSiteIdentifiers().get(2));
+    }
+
+    public void testAddingStudiesByIdentifiersAndScopeType() throws Exception {
+        SuiteRoleMembership m =
+            createMembership(SuiteRole.DATA_READER).forIdentifiers(ScopeType.STUDY, "C6", "C3");
+        assertEquals("Wrong number of studies", 2, m.getStudyIdentifiers().size());
+        assertEquals("Wrong 1st study", "C6", m.getStudyIdentifiers().get(0));
+        assertEquals("Wrong 2nd study", "C3", m.getStudyIdentifiers().get(1));
+    }
+
     ////// all scope objects
 
     public void testForAllSites() throws Exception {
@@ -282,6 +301,16 @@ public class SuiteRoleMembershipTest extends TestCase {
                 "This Data Analyst has access to every study.  You can't list study instances for it.", 
                 aae.getMessage());
         }
+    }
+
+    public void testForAllStudiesByScopeType() throws Exception {
+        SuiteRoleMembership m = createMembership(SuiteRole.AE_REPORTER).forAll(ScopeType.STUDY);
+        assertTrue("Should be for all studies", m.isAllStudies());
+    }
+
+    public void testForAllSitesByScopeType() throws Exception {
+        SuiteRoleMembership m = createMembership(SuiteRole.USER_ADMINISTRATOR).forAll(ScopeType.SITE);
+        assertTrue("Should be for all sites", m.isAllSites());
     }
 
     ////// adding and removing
@@ -376,6 +405,20 @@ public class SuiteRoleMembershipTest extends TestCase {
         }
     }
 
+    public void testAddSiteByScopeType() throws Exception {
+        SuiteRoleMembership m = createMembership(SuiteRole.DATA_ANALYST).
+            addIdentifier(ScopeType.SITE, "F");
+        assertEquals("Wrong number of sites", 1, m.getSiteIdentifiers().size());
+        assertEquals("Wrong 1st site", "F", m.getSiteIdentifiers().get(0));
+    }
+
+    public void testAddStudyByScopeType() throws Exception {
+        SuiteRoleMembership m = createMembership(SuiteRole.DATA_ANALYST).
+            addIdentifier(ScopeType.STUDY, "L09");
+        assertEquals("Wrong number of studies", 1, m.getStudyIdentifiers().size());
+        assertEquals("Wrong 1st study", "L09", m.getStudyIdentifiers().get(0));
+    }
+
     public void testRemoveNonExistentSiteDoesNothing() throws Exception {
         SuiteRoleMembership m = createMembership(SuiteRole.DATA_ANALYST).forSites("F", "I").removeSite("B");
         assertEquals("Wrong number of sites", 2, m.getSiteIdentifiers().size());
@@ -436,6 +479,20 @@ public class SuiteRoleMembershipTest extends TestCase {
         SuiteRoleMembership m = createMembership(SuiteRole.DATA_ANALYST).forAllStudies().notForAllStudies();
         assertFalse("Should not be for all studies", m.isAllStudies());
         assertTrue("Should have no specific studies either", m.getStudyIdentifiers().isEmpty());
+    }
+
+    public void testRemoveSiteByScopeTypeWorks() throws Exception {
+        SuiteRoleMembership m = createMembership(SuiteRole.DATA_ANALYST).forSites("B", "I").
+            removeIdentifier(ScopeType.SITE, "B");
+        assertEquals("Wrong number of sites", 1, m.getSiteIdentifiers().size());
+        assertEquals("Wrong 1st site", "I", m.getSiteIdentifiers().get(0));
+    }
+
+    public void testRemoveStudyByScopeTypeWorks() throws Exception {
+        SuiteRoleMembership m = createMembership(SuiteRole.DATA_READER).forStudies("B", "I").
+            removeIdentifier(ScopeType.STUDY, "I");
+        assertEquals("Wrong number of studies", 1, m.getStudyIdentifiers().size());
+        assertEquals("Wrong 1st study", "B", m.getStudyIdentifiers().get(0));
     }
 
     ////// validation
