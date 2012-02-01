@@ -4,6 +4,12 @@ ctms-commons history
 1.1.2
 -----
 
+### suite-authorization
+
+- Improve code separation and OSGi metadata to allow the bundle to be
+  used in contexts where the suite auth description classes
+  (SuiteRole, SuiteRoleMembership, etc.) are used without CSM.
+
 1.1.1
 -----
 

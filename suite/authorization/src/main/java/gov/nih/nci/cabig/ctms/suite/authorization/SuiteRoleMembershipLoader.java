@@ -3,7 +3,9 @@ package gov.nih.nci.cabig.ctms.suite.authorization;
 import gov.nih.nci.security.AuthorizationManager;
 import gov.nih.nci.security.authorization.domainobjects.Group;
 import gov.nih.nci.security.authorization.domainobjects.Privilege;
+import gov.nih.nci.security.authorization.domainobjects.ProtectionElement;
 import gov.nih.nci.security.authorization.domainobjects.ProtectionElementPrivilegeContext;
+import gov.nih.nci.security.authorization.domainobjects.ProtectionGroup;
 import gov.nih.nci.security.exceptions.CSObjectNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +24,18 @@ public class SuiteRoleMembershipLoader {
     private AuthorizationManager authorizationManager;
     private SiteMapping siteMapping;
     private StudyMapping studyMapping;
+
+    // This method is here rather than in ScopeDescription so that SuiteRoleMembership
+    // and all its dependencies have no dependency on CSM.
+    public static ScopeDescription createScopeDescription(ProtectionElement pe) {
+        return ScopeDescription.createFromCsmName(pe.getProtectionElementName());
+    }
+
+    // This method is here rather than in ScopeDescription so that SuiteRoleMembership
+    // and all its dependencies have no dependency on CSM.
+    public static ScopeDescription createScopeDescription(ProtectionGroup pg) {
+        return ScopeDescription.createFromCsmName(pg.getProtectionGroupName());
+    }
 
     /**
      * Returns all the complete {@link SuiteRoleMembership}s for a user, indexed by {@link SuiteRole}.
@@ -94,7 +108,7 @@ public class SuiteRoleMembershipLoader {
                 "Failed to load protection elements / privileges for user %s", e, userId);
         }
         for (ProtectionElementPrivilegeContext context : contexts) {
-            ScopeDescription sd = ScopeDescription.createFrom(context.getProtectionElement());
+            ScopeDescription sd = createScopeDescription(context.getProtectionElement());
             for (Object p : context.getPrivileges()) {
                 SuiteRole role = SuiteRole.getByCsmName(((Privilege) p).getName());
                 if (!memberships.containsKey(role)) {

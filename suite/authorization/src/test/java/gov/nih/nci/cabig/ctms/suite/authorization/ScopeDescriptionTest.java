@@ -1,7 +1,5 @@
 package gov.nih.nci.cabig.ctms.suite.authorization;
 
-import gov.nih.nci.security.authorization.domainobjects.ProtectionElement;
-import gov.nih.nci.security.authorization.domainobjects.ProtectionGroup;
 import junit.framework.TestCase;
 
 /**
@@ -30,22 +28,6 @@ public class ScopeDescriptionTest extends TestCase {
         } catch (IllegalArgumentException iae) {
             assertEquals("An identifier is required", iae.getMessage());
         }
-    }
-
-    public void testCreateScopeFromProtectionElement() {
-        ProtectionElement elt = new ProtectionElement();
-        elt.setProtectionElementName("HealthcareSite.NCI009");
-        ScopeDescription created = ScopeDescription.createFrom(elt);
-        assertEquals("Wrong ident", "NCI009", created.getIdentifier());
-        assertEquals("Wrong scope", ScopeType.SITE, created.getScope());
-    }
-
-    public void testCreateScopeFromProtectionGroup() {
-        ProtectionGroup pg = new ProtectionGroup();
-        pg.setProtectionGroupName("Study.YN");
-        ScopeDescription created = ScopeDescription.createFrom(pg);
-        assertEquals("Wrong ident", "YN", created.getIdentifier());
-        assertEquals("Wrong scope", ScopeType.STUDY, created.getScope());
     }
 
     public void testCreateScopeFromSingleSiteProtectionElementName() throws Exception {

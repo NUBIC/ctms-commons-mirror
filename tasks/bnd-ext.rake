@@ -29,6 +29,6 @@ class Buildr::Project
   end
 
   def bnd_import_package
-    "gov.nih.nci.*, *;resolution:=optional"
+    "gov.nih.nci.cabig.ctms.*, *;resolution:=optional"
   end
 end

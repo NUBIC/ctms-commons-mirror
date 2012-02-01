@@ -1,5 +1,8 @@
 package gov.nih.nci.cabig.ctms.suite.authorization;
 
+import gov.nih.nci.security.authorization.domainobjects.ProtectionElement;
+import gov.nih.nci.security.authorization.domainobjects.ProtectionGroup;
+
 import java.util.Map;
 
 /**
@@ -59,5 +62,21 @@ public class SuiteRoleMembershipLoaderIntegratedTest extends IntegratedTestCase 
         assertTrue(actual.isAllStudies());
         assertEquals(1, actual.getSiteIdentifiers().size());
         assertEquals("MI001", actual.getSiteIdentifiers().get(0));
+    }
+
+    public void testCreateScopeFromProtectionElement() {
+        ProtectionElement elt = new ProtectionElement();
+        elt.setProtectionElementName("HealthcareSite.NCI009");
+        ScopeDescription created = SuiteRoleMembershipLoader.createScopeDescription(elt);
+        assertEquals("Wrong ident", "NCI009", created.getIdentifier());
+        assertEquals("Wrong scope", ScopeType.SITE, created.getScope());
+    }
+
+    public void testCreateScopeFromProtectionGroup() {
+        ProtectionGroup pg = new ProtectionGroup();
+        pg.setProtectionGroupName("Study.YN");
+        ScopeDescription created = SuiteRoleMembershipLoader.createScopeDescription(pg);
+        assertEquals("Wrong ident", "YN", created.getIdentifier());
+        assertEquals("Wrong scope", ScopeType.STUDY, created.getScope());
     }
 }

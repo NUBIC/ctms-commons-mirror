@@ -1,13 +1,10 @@
 package gov.nih.nci.cabig.ctms.suite.authorization;
 
-import gov.nih.nci.security.authorization.domainobjects.ProtectionElement;
-import gov.nih.nci.security.authorization.domainobjects.ProtectionGroup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * A logical representation of a single scoping element.  Includes conversion from PG/PEs.
- * Immutable.
+ * A logical representation of a single scoping element. Immutable.
  *
  * @author Rhett Sutphin
  */
@@ -39,14 +36,6 @@ public class ScopeDescription {
         } else {
             throw new IllegalArgumentException("An identifier is required");
         }
-    }
-
-    public static ScopeDescription createFrom(ProtectionElement pe) {
-        return createFromCsmName(pe.getProtectionElementName());
-    }
-
-    public static ScopeDescription createFrom(ProtectionGroup pg) {
-        return createFromCsmName(pg.getProtectionGroupName());
     }
 
     public static ScopeDescription createFromCsmName(String csmName) {
