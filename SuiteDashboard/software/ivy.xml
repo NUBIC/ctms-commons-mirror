@@ -21,12 +21,12 @@
 
     <dependencies defaultconfmapping="build->default(*);runtime->runtime(*),master(*); dist->default(*);distGrid->default(*)" >
 
+        <dependency org="javax.servlet" name="servlet-api" rev="2.5" />
 
         <!-- exclusion based on class loading and other conflicts -->
         <exclude org="net.sf.hibernate" />
         <exclude org="cglib" module="cglib" />
         <exclude conf="runtime,dist,distGrid" name="logkit"  />
-        <exclude conf="runtime,dist,distGrid" name="servlet-api"  />
         <exclude conf="*" org="springframework" />
         <exclude conf="*" org="spring" />
  	    <exclude conf="*" org="ehcache" rev="1.1"/>
@@ -54,7 +54,6 @@
         <exclude conf="dist,distGrid" module="subject" />
 
         <!-- Build only dependency -->
-        <dependency org="javax.servlet" name="servlet-api" rev="2.3" conf="build->default(*);test->default(*)"/>
         <dependency org="javax.servlet.jsp" name="jsp-api" rev="2.0" conf="build->default(*);test->default(*)"/>
         <dependency org="commons-el" name="commons-el" rev="1.0" transitive="true" />
         <dependency org="taglibs" name="standard" rev="1.1.2" />
@@ -126,7 +125,13 @@
         <dependency org="asm" name="asm-attrs" rev="2.2" force="true"/>
         <dependency org="cglib" name="cglib-nodep" rev="2.1_3" force="true"/>
 
+
+        <dependency org="caGrid" name="cds" rev="1.4" >
+            <artifact name="caGrid-cds-client" conf="*->client" />
+        </dependency>
+
         <!-- ========== caGrid Dependencies =====================-->
+<!--
         <dependency org="caGrid" name="authentication-service" rev="1.2" conf="*->client"/>
         <dependency org="caGrid" name="authz" rev="1.2"/>
         <dependency org="caGrid" name="core" rev="1.2"/>
@@ -139,6 +144,8 @@
         <dependency org="gov.nih.nci.cagrid" name="cagrid-cds-common" rev="1.2"/>
         <dependency org="gov.nih.nci.cagrid" name="cagrid-cds-stubs" rev="1.2"/>
         <dependency org="gov.nih.nci.cagrid" name="cagrid-casclient" rev="2.0.11"/>
+-->
+        <dependency org="cas" name="casclient" rev="2.0.11"/>
 
         <!-- ================= Globus =====================-->
         <dependency org="org.globus" name="cog-jglobus" rev="1.2" conf="build;runtime;dist" />
@@ -174,5 +181,6 @@
         <dependency org="cobertura" name="cobertura" rev="1.8" conf="test->default(*)"/>
         <dependency org="org.springframework" name="spring-mock" rev="2.5.6" conf="test->default(*)" />
         <dependency org="org.springframework" name="spring-test" rev="2.5.6" force="true" conf="test->default" />
+
     </dependencies>
 </ivy-module>

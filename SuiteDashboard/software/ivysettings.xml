@@ -21,16 +21,27 @@
         </filesystem>
 
                 <!-- NCI IVY repository -->
+<!--
         <url name="nci-ivy-repo" >
           <ivy pattern="https://ncisvn.nci.nih.gov/svn/cbiit-ivy-repo/trunk/[organisation]/[module]/[revision]/ivy.xml" />
           <artifact pattern="https://ncisvn.nci.nih.gov/svn/cbiit-ivy-repo/trunk/[organisation]/[module]/[revision]/[module]-[revision].[ext]" />
           <artifact pattern="https://ncisvn.nci.nih.gov/svn/cbiit-ivy-repo/trunk/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
         </url>
+-->
 
         <!-- caGrid 1.3 repository -->
+<!--
         <url name="nci-cagrid-repo">
             <ivy pattern="http://software.cagrid.org/repository-1.3/[organisation]/[module]/ivy-[revision].xml" />
             <artifact pattern="http://software.cagrid.org/repository-1.3/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
+        </url>
+-->
+
+        <!-- caGrid 1.4 repository -->
+        <url name="nci-cagrid14-repo">
+            <ivy pattern="http://software.cagrid.org/repository-1.4/[organisation]/[module]/ivy-[revision].xml" />
+            <artifact pattern="http://software.cagrid.org/repository-1.4/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
+            <artifact pattern="http://software.cagrid.org/repository-1.4/[organisation]/[module]/[revision]/[artifact].[ext]" />
         </url>
 
 		<!--  Semanticbits shared repository [using http] -->
@@ -48,12 +59,29 @@
 
 		<!-- Maven 2 -->	
 		<ibiblio name="maven2" m2compatible="true"/>
-	    
-	    <!--  Northwestern RHLCCC Bioinformatics  -->
+
+
+            <!-- Nexus NCI -->
+            <ibiblio name="maven2-NCI-3rdparty" m2compatible="true"
+                     root="https://ncimvn.nci.nih.gov/nexus/content/repositories/thirdparty"
+                     changingPattern="SNAPSHOT"/>
+            <ibiblio name="maven2-NCI-m2central" m2compatible="true"
+                     root="https://ncimvn.nci.nih.gov/nexus/content/repositories/central"
+                     changingPattern="SNAPSHOT"/>
+            <ibiblio name="maven2-NCI-jboss" m2compatible="true"
+                     root="https://ncimvn.nci.nih.gov/nexus/content/repositories/jboss"
+                     changingPattern="SNAPSHOT"/>
+            <ibiblio name="maven2-NCI-releases" m2compatible="true"
+                     root="https://ncimvn.nci.nih.gov/nexus/content/repositories/releases"
+                     changingPattern="SNAPSHOT"/>
+
+
+            <!--  Northwestern RHLCCC Bioinformatics  -->
+        <!--
 		<ibiblio name="maven2-northwestern" m2compatible="true"
 				root="http://download.bioinformatics.northwestern.edu/download/maven2"
 				changingPattern=".*SNAPSHOT" />
-
+        -->
 				
 		             
 			<!--  SemanticBits shared repository [using sftp] -->
