@@ -30,13 +30,17 @@ This file is the is the settings file used by IVY.  It is a good starting point 
 				<!-- local enterprise repository checkout, best used when working remote or network disconnected -->
 				<artifact pattern="${ivy.local-enterprise.repo}/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
 				<ivy pattern="${ivy.local-enterprise.repo}/[organisation]/[module]/[revision]/ivy.xml" />
-			</filesystem>           
-			<url name="ncicb-ivy-repo">
-				<!-- remote enterprise repository -->
-				<artifact pattern="http://gforge.nci.nih.gov/svnroot/commonlibrary/trunk/ivy-repo/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
-				<ivy pattern="http://gforge.nci.nih.gov/svnroot/commonlibrary/trunk/ivy-repo/[organisation]/[module]/[revision]/ivy.xml" />
-			</url>  
-			<!-- this is where you can publish to, either your own code or for testing new thirdparty files -->
+			</filesystem>
+
+            <url name="ncicb-ivy-repo">
+                <!-- remote enterprise repository -->
+                <artifact pattern="http://repo.semanticbits.com/ivy-repo/bda/[organisation]/[module]/jars/[artifact]-[revision].[ext]" />
+                <artifact pattern="http://repo.semanticbits.com/ivy-repo/bda/[organisation]/[module]/zips/[artifact]-[revision].[ext]" />
+                <artifact pattern="http://repo.semanticbits.com/ivy-repo/bda/[organisation]/[module]/xmls/[artifact]-[revision].[ext]" />
+                <artifact pattern="http://repo.semanticbits.com/ivy-repo/bda/[organisation]/[module]/ivy-[revision].xml" />
+                <ivy pattern="http://repo.semanticbits.com/ivy-repo/bda/[organisation]/[module]/ivy-[revision].xml" />
+            </url>
+
 		</chain>
 	</resolvers>
 </ivysettings>
