@@ -181,6 +181,7 @@
         <dependency org="cobertura" name="cobertura" rev="1.8" conf="test->default(*)"/>
         <dependency org="org.springframework" name="spring-mock" rev="2.5.6" conf="test->default(*)" />
         <dependency org="org.springframework" name="spring-test" rev="2.5.6" force="true" conf="test->default" />
+        <dependency org="javax.transaction" name="jta" rev="1.1"/>
 
     </dependencies>
 </ivy-module>
